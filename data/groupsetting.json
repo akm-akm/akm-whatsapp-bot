@@ -1,10 +1,47 @@
 {
 	"a998722834a": {
-		"stickergroup": 1,
-		"allowabuse": 1,
 		"prefix": "x",
+		"allowabuse": 1,
+		"whocanusebot": 1,
 		"autosticker": 0,
-		"cryptogroup": 0,
-		"marketgroup": 0
+		"stickergroup": 1,
+		"marketgroup": 0,
+		"isnewgroup": 1
+	},
+	"97677577566@g.us": {
+		"prefix": "x",
+		"allowabuse": 1,
+		"whocanusebot": 1,
+		"autosticker": 0,
+		"stickergroup": 1,
+		"marketgroup": 0,
+		"isnewgroup": 1
+	},
+	"91124567890@g.us": {
+		"prefix": "x",
+		"allowabuse": 1,
+		"whocanusebot": 1,
+		"autosticker": 0,
+		"stickergroup": 1,
+		"marketgroup": 0,
+		"isnewgroup": 1
+	},
+	"976775775656656@g.us": {
+		"prefix": "x",
+		"allowabuse": 1,
+		"whocanusebot": 1,
+		"autosticker": 0,
+		"stickergroup": 1,
+		"marketgroup": 0,
+		"isnewgroup": 1
+	},
+	"976775656@g.us": {
+		"prefix": "x",
+		"allowabuse": 1,
+		"whocanusebot": 1,
+		"autosticker": 0,
+		"stickergroup": 1,
+		"marketgroup": 0,
+		"isnewgroup": 1
 	}
 }
