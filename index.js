@@ -5,6 +5,8 @@ const {
   Mimetype,
   GroupSettingChange,
 } = require("@adiwajshing/baileys");
+const path = require("path");
+
 const fs = require("fs");
 console.clear()
 const { auth } = require("./events/authentication");
@@ -19,4 +21,4 @@ async function main() {
 }
 
 main();
-module.exports = client;
+

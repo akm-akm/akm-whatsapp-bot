@@ -1,9 +1,12 @@
+const path = require("path");
+
 const { WAConnection, MessageType } = require("@adiwajshing/baileys");
 const settingread = require(path.join(__dirname,"../snippets/settingcheck"));
+const switchcase = require(path.join(__dirname,"../snippets/case"));
 
 const client = new WAConnection();
 
-async function chat_update(prefix) {
+async function chat_update() {
   client.on("chat-update", async (xxx) => {
     try {
       if (!xxx.hasNewMessage) return;
@@ -58,7 +61,7 @@ async function chat_update(prefix) {
           quoted: xxx,
         });
       }
-      function sendMess(to, msg, type) {
+      function sm(to, msg, type) {
         client.sendMessage(to, msg, type, {
           quoted: xxx,
         });
@@ -77,9 +80,35 @@ async function chat_update(prefix) {
               },
             });
       }
+
+      switchcase()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     } catch (error) {
       console.log(error);
     }
   });
 }
+
+chat_update()
 module.exports.chat_update = chat_update;

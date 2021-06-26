@@ -1,26 +1,13 @@
-const { crypto }= require(path.join(__dirname,'../plugins/crypto'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
-const { crypto }= require(path.join(__dirname,'../plugins/'));
+const path = require("path");
 
+const { crypto }= require(path.join(__dirname,'../plugins/crypto'));
 
 
 function switchcase(arg){
     command=arg[0]
 switch (command) {
     case crypto:
-        
+        crypto(arg)
         break;
     case crypto:
         
