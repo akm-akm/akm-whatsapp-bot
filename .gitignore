@@ -2,5 +2,3 @@ node_modules
 package-lock.json
 data/auth.json
 data/api.json
-data/limit.json
-data/groupsetting.json
