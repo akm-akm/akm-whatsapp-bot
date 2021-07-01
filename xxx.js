@@ -128,8 +128,8 @@ async function main() {
       };
       arg = infor.arg;
       console.log("MESSAGE RECEIVED");
-     // console.log(xxx);
-     // console.log(infor);
+      //console.log(xxx);
+      console.log(infor);
       const botNumber = client.user.jid;
       const ownerNumber = [`${settings.ownerNumber}@s.whatsapp.net`];
      

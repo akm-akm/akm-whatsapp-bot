@@ -32,7 +32,7 @@ function settingread(arg, from, sender,groupname) {
           obj = JSON.parse(data);
           obj[from] = {
             Name:groupname,
-            prefix: settings.prefixchoice.charAt(Math.floor(Math.random() * 12)),
+            prefix_assigned: settings.prefixchoice.charAt(Math.floor(Math.random() * 12)),
             allowabuse: 1,
             membercanusebot: 1,
             autosticker: 0,
@@ -88,7 +88,7 @@ function settingread(arg, from, sender,groupname) {
       ? arg
           .replace(/\s+/g, " ")
           .toLowerCase()
-          .startsWith(groupsetting[from].prefix)
+          .startsWith(groupsetting[from].prefix_assigned)
         ? arg=(arg.slice(1).replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://")?xa:xa.toLowerCase())
         :  arg=[]
       :  
