@@ -1,17 +1,22 @@
-var axios = require("axios").default;
-var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=WGWACLRRMBB4KG7A';
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
 
-var options = {
-  method: 'GET',
-    url: url,
-    json: true,
-    headers: {'User-Agent': 'request'}
-  
-  
-};
+var url = 'https://pin.it/6Ei5UsE'
+console.clear()
+var request = require('request')
 
-axios.request(options).then(function (response) {
-	console.log(response.data);
-}).catch(function (error) {
-	console.error(error);
-});
+var a
+
+
+request({uri: url,followRedirect: false,},(err, httpResponse) =>{
+    if (err)  return console.error(err)
+    console.log(httpResponse.headers.location || uri)
+    a= httpResponse.headers.location || uri
+
+    
+  }
+)
+
+
+console.log(a)

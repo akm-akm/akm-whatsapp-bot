@@ -15,14 +15,11 @@ const noofmessage = JSON.parse(
 const settings = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/settings.json"))
 );
-x = abuse.abuse;
 
-function settingread(arg, from, sender) {
-  function isabuse(aarg) {
-    return x.forEach((element) => {
-      if (aarg.includes(element)) return 1;
-    });
-  }
+
+function settingread(arg, from, sender,groupname) {
+  try {
+    
 
   if (from.endsWith("@g.us") && groupsetting[from] == undefined) {
     fs.readFile(
@@ -34,13 +31,15 @@ function settingread(arg, from, sender) {
         } else {
           obj = JSON.parse(data);
           obj[from] = {
-            prefix: "x",
+            Name:groupname,
+            prefix: settings.prefixchoice.charAt(Math.floor(Math.random() * 12)),
             allowabuse: 1,
-            whocanusebot: 1,
+            membercanusebot: 1,
             autosticker: 0,
             stickergroup: 1,
             marketgroup: 0,
             isnewgroup: 1,
+            blockedmembers:[]
           };
           fs.writeFile(
             path.join(__dirname, "../data/groupsetting.json"),
@@ -55,6 +54,9 @@ function settingread(arg, from, sender) {
     return 0;
   }
 
+} catch (error) {
+    console.log(error)
+}
   from.endsWith("@g.us")
     ? (number = sender.split("@")[0])
     : (number = from.split("@")[0]);
@@ -81,26 +83,24 @@ function settingread(arg, from, sender) {
     );
   }
   return (data = {
+    from:from,
     arg: from.endsWith("@g.us")
       ? arg
           .replace(/\s+/g, " ")
           .toLowerCase()
-          .split(" ")[0]
           .startsWith(groupsetting[from].prefix)
-        ? (arg = arg.slice(1).replace(/\s+/g, " ").toLowerCase().split(" "))
-        : 0
-      : arg
-          .replace(/\s+/g, " ")
-          .toLowerCase()
-          .split(" ")[0]
-          .startsWith(settings.prefix)
-      ? (arg = arg.slice(1).replace(/\s+/g, " ").toLowerCase().split(" "))
-      : 0,
+        ? arg=(arg.slice(1).replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://")?xa:xa.toLowerCase())
+        :  arg=[]
+      :  
+      arg =( arg.replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://")?xa:xa.toLowerCase()),
+      
     noofmsgtoday: noofmessage[number],
-    abusepresent: isabuse(arg),
-    isnumberblocked: blocked.blocked.includes(number) ? 1 : 0,
+    abusepresent:from.endsWith("@g.us")?groupsetting[from].allowabuse==0? abuse.abuse.filter(e => arg.indexOf(e) !== -1):[]:abuse.abuse.filter(e => arg.indexOf(e) !== -1),
+    isnumberblockedingroup:from.endsWith("@g.us")? groupsetting[from].blockedmembers.includes(number) ? 1 : 0:0,
     groupdata: groupsetting[from] || 0,
   });
 }
-function settingwrite(from) {}
+
+
 module.exports.settingread = settingread;
+

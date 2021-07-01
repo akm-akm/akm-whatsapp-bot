@@ -1,10 +1,7 @@
-const { WAConnection } = require("@adiwajshing/baileys");
-const { client } = require("../e");
-//import client from '../index'
 const fs = require("fs");
-//const client = new WAConnection();
 
 async function auth() {
+const {client}= require( '../index');
 
   client.logger.level = "warn";
   client.on("qr", (qr) => {

@@ -36,7 +36,7 @@ function crypto(arg) {
                     c = element.quote.USD;
                     return (message =
                         "\n*" +
-                        arg[0].toUpperCase() +
+                        arg[1].toUpperCase() +
                         "* " +
                         "/" +
                         " " +
@@ -66,31 +66,15 @@ function crypto(arg) {
                         c.last_updated.split("T")[1].split(".")[0] +
                         "\n");
 
-                    console.log(message);
+                  
                 }
             });
-            // console.log(c)
+          
         })
         .catch(function (error) {
             console.log(error);
         });
 }
 
-///x= crypto(["btc"]);
-console.log();
 
-
-
-function xnxx(arg){
-    return axios(requestOptions)
-}
-
-
-
-
-
-
-(async () => {
-    console.log(await xnxx(["btc","bctc"]))
-  })()
 module.exports.crypto = crypto;

@@ -1,5 +1,12 @@
 const path = require("path");
 const axios = require("axios");
+const {
+  xreply
+} = require(path.join(__dirname, "../xxx"));
+
+function stripTags(string) {
+  return string.replace(/<(.|\n)*?>/g, '').trim();
+}
 
 function searchTransformer(isIndex) {
   var matcher = '';
@@ -22,35 +29,8 @@ function searchTransformer(isIndex) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-arg=["status","stocks","tcks"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+async function market(arg,infor,xxxx){
+from=infor.from
 
 switch (arg[1]) {
   case "status":
@@ -61,13 +41,12 @@ switch (arg[1]) {
         console.log("err")
         } else {
           var msg ="Market status : ```" + response.data.NormalMktStatus + "```";
-          console.log(msg)
-        }
+          xreply(from,msg,xxxx)        }
       }).catch(err=>{
         console.log(err)
       })
     break;
-
+    case "gainer":
   case "gainers":
     axios
       .get(
@@ -100,14 +79,14 @@ switch (arg[1]) {
               element.previousPrice +
               "```";
           });
-          console.log(msg)
+          xreply(from,msg,xxxx)
         }
       }).catch(err=>{
         console.log(err)
       })
 
     break;
-
+    case "stock":
   case "stocks":
     axios
       .get(
@@ -142,10 +121,10 @@ switch (arg[1]) {
               element.ltP +
               "```";
           });
-          console.log(msg)
+          xreply(from,msg,xxxx)
         }
       }).catch(err=>{
-        console.log("ererrerrerrerrerrerrerrerrerrerrerrr")
+        console.log("err")
         console.log(err)
       })
 
@@ -182,7 +161,7 @@ switch (arg[1]) {
               "```\n"; +
             "```turnoverInLakhs : " + element.turnoverInLakhs + "```";
           });
-          console.log(msg)
+          xreply(from,msg,xxxx)
         }
       }).catch(err=>{
         console.log(err)
@@ -204,14 +183,13 @@ switch (arg[1]) {
         }
       )
       .then((response) => {
-         msg = "*Search Result* 🔎\n";
        
         if (response.error) {
           console.log("err")
         } else {
-          console.log(response.data)
+          console.log(response)
           response.data.forEach((element) => {
-            msg +=
+            msg ="*Search Result* 🔎\n"+
               "\n\n📈 " +
               "*" +
               element.symbol +
@@ -224,10 +202,10 @@ switch (arg[1]) {
               "```";
           });
 
-          console.log(msg)
+          xreply(from,msg,xxxx)
         }
       }).catch(err=>{
-        console.log(err)
+        console.log("err")
       })
     break;
 
@@ -316,8 +294,7 @@ switch (arg[1]) {
             response.data.lastUpdateTime.split(" ")[1] +
             "```";
 
-            console.log(msg)
-        }
+            xreply(from,msg,xxxx)     }
       }).catch(err=>{
         console.log(err)
       })
@@ -342,5 +319,21 @@ switch (arg[1]) {
       "details  [stock symbol]: " +
       " ```Get the data of the symbol from NSE```\n\n";
 
-      console.log(msg)
-}
+     }
+
+
+
+
+
+};
+
+
+/*
+(async () => {
+   response =await xxx(["market", "status"])
+console.log( "Market status : ```" + response.data.NormalMktStatus + "```")
+})();
+
+*/
+//market(["market","search","tatja"])
+module.exports.market=market;
