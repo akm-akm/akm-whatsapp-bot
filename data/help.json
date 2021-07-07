@@ -1,181 +1,199 @@
 {
     "crypto": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "crypto coinsymbol",
+        "desc": "```Fetches the price of given crypto currency from coinmarketcap using its API.```",
+        "eg": "crypto btc\ncrypto xrp\ncrypto eth"
     },
 
     "market": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "market <arguments>",
+        "desc": "```Fetches the information of given symbol from NSE.```",
+        "eg": "market status\nmarket search tata\nmarket details tcs\nmarket losers\nmarket gainers"
     },
 
     "sticker": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "sticker <arguments>",
+        "desc": "```Converts the image, tagged image or video with length less than 11 seconds to sticker.```",
+        "eg": "sticker crop nodata\nsticker crop pack cheems sticker author doge\nsticker nodata"
     },
 
     "ytvideo": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "ytvideo <link>",
+        "desc": "```Downloads video from give youtube link.```",
+        "eg": "ytvideo https://youtu.be/tH9s\nytvideo https://youtu.be/yhs4"
     },
 
     "ytaudio": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "ytaudio <link>",
+        "desc": "```Downloads audio from give youtube link.```",
+        "eg": "ytaudio https://youtu.be/tH9s\nytaudio https://youtu.be/isjr"
+    },
+
+    "gaana": {
+        "usage": "gaana <link>",
+        "desc": "```Downloads songs of gaana.com from its url.```",
+        "eg": "gaana "
+    },
+
+    "pin": {
+        "usage": "pin <link>",
+        "desc": "```Downloads the pinterest video from its url.```",
+        "eg": "pin https://pin.it/1f1m\npin https://pin.it/dd4f"
     },
 
     "tagall": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "tagall <text>",
+        "desc": "```Tags all the members in the group.```",
+        "eg": "tagall class at 7am\ntagall holiday today"
     },
 
     "adminlist": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "adminlist",
+        "desc": "```Tags all the admins in the group.```",
+        "eg": "adminlist"
     },
 
-    "agroupinfo": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+    "groupinfo": {
+        "usage": "groupinfo",
+        "desc": "```Provides all the information of group.```",
+        "eg": "groupinfo"
+    },
+
+    "purge": {
+        "usage": "purge confirm",
+        "desc": "```Removes all the members from the group.```",
+        "eg": "purge confirm"
     },
 
     "grouplink": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "grouplink",
+        "desc": "```Creates a group invite link for the group.```",
+        "eg": "grouplink"
     },
 
     "changedesc": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "changedesc <text>",
+        "desc": "```Changes the description of the group.```",
+        "eg": "changedesc New bot in the group.\nchangedesc cricket group."
     },
 
-    "exit": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+    "botleave": {
+        "usage": "botleave",
+        "desc": "```The bot will leave the group.```",
+        "eg": "botleave"
     },
 
     "join": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "join <link>",
+        "desc": "```The bot will join the group with the invite link.```",
+        "eg": "join "
     },
 
     "keerthy": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "keerthy",
+        "desc": "```The bot will send a keerthy suresh sticker.```",
+        "eg": "keerthy"
     },
 
     "promote": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "promote <tag member>",
+        "desc": "```Promotes the tagged member as an admin.```",
+        "eg": "promote @ankit\npromote @dibyam"
     },
 
     "demote": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "demote <tag member>",
+        "desc": "```Demotes the tagged member from admin.```",
+        "eg": "demote @ankit\ndemote @dibyam"
     },
 
     "remove": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "remove <tag member>",
+        "desc": "```Removes the tagged member from the group.```",
+        "eg": "remove @ankit\nremove @dibyam"
     },
 
     "open": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "open",
+        "desc": "```Changes the setting so that only admins can message.```",
+        "eg": "open"
     },
 
     "close": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "close",
+        "desc": "```Changes the setting so that members can message.```",
+        "eg": "close"
     },
 
     "rashmika": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "rashmika",
+        "desc": "```The bot will send a Rashmika sticker.```♥️",
+        "eg": "rashmika"
     },
 
     "rs": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "rs",
+        "desc": "```The bot will send a random sticker.```",
+        "eg": "rs"
     },
 
     "meme": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "meme",
+        "desc": "```The bot will send a meme from reddit.```",
+        "eg": "meme"
     },
 
     "sourcecode": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "sourcecode",
+        "desc": "```Provids the link to the source code of the bot.```",
+        "eg": "sourcecode"
     },
 
     "changedp": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "changedp",
+        "desc": "```Sets the tagged media as profile picture of the group.```",
+        "eg": "changedp"
     },
 
     "changeprefix": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "changeprefix <letter>",
+        "desc": "```Changes prefix for this group.```",
+        "eg": "changeprefix a\nchangeprefix i\nchangeprefix f"
     },
 
     "unban": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "unban <tag member>",
+        "desc": "```Allow a banned member to use th bot in the group again.```",
+        "eg": "unban @ankit\nunban @dibyam"
     },
 
-    "credit": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
-    },
-
-    "tweet": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+    "shorturl": {
+        "usage": "shorturl <link>",
+        "desc": "```Generates a short url uf the given link using lenk.cf API.```",
+        "eg": "shorturl "
     },
 
     "add": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "add <number>",
+        "desc": "```Adds the given number to the group.```",
+        "eg": "add 9876543210\nadd 9012345678"
     },
 
     "lyrics": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "lyrics <song name>",
+        "desc": "```Provides the lyrics of the given song.```",
+        "eg": "lyrics Brown munde\nlyrics Baby"
     },
 
     "ban": {
-        "usage": "",
-        "desc": "",
-        "eg": ""
+        "usage": "ban <tag member>",
+        "desc": "```Bans the tagged member from using the bot in this group.```",
+        "eg": "ban @ankit\nban @dibyam"
+    },
+
+    "banlist": {
+        "usage": "banlist",
+        "desc": "```Displays the list of members banned from using the bot in this  group.```",
+        "eg": "banlist"
     }
 }

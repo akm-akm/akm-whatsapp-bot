@@ -1,8 +1,23 @@
 const WSF = require("wa-sticker-formatter");
-const ffmpeg = require("fluent-ffmpeg");
+const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+const ffmpeg = require('fluent-ffmpeg');
+ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
 
-function sticker(arg,info) {
+
+const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) => {
+
+ //async function z() {
+  const content = JSON.stringify(xxx.message);
+  const from = xxx.key.remoteJid;
+  const type = Object.keys(xxx.message)[0];
+  const isMedia = type === "imageMessage" || type === "videoMessage";
+  const isQuotedImage =type === "extendedTextMessage" && content.includes("imageMessage");
+  const isQuotedVideo =type === "extendedTextMessage" && content.includes("videoMessage");
+  const isQuotedSticker = type === "extendedTextMessage" && content.includes("stickerMessage");
+  const isGroup = from.endsWith("@g.us");
+  
+
   const getRandom = (ext) => {
     return `${Math.floor(Math.random() * 10000)}${ext}`;
   };
@@ -13,49 +28,47 @@ function sticker(arg,info) {
   if (args.includes("pack") == true) {
     packNameDataCollection = false;
     for (let i = 0; i < args.length; i++) {
-      // Enables data collection when keyword found in index!
+      
       if (args[i].includes("pack") == true) {
         packNameDataCollection = true;
       }
       if (args[i].includes("author") == true) {
         packNameDataCollection = false;
       }
-      // If data collection is enabled and args length is more then one it will start appending!
+    
       if (packNameDataCollection == true) {
         packName = packName + args[i] + " ";
       }
     }
-    // Check if variable contain unnecessary startup word!
+   
     if (packName.startsWith("pack ")) {
       packName = `${packName.split("pack ")[1]}`;
     }
   }
 
-  // Check if author keyword is found in args!
+  
   if (args.includes("author") == true) {
     authorNameDataCollection = false;
     for (let i = 0; i < args.length; i++) {
-      // Enables data collection when keyword found in index!
+      console.log(i);
       if (args[i].includes("author") == true) {
         authorNameDataCollection = true;
       }
-      // If data collection is enabled and args length is more then one it will start appending!
+      
       if (authorNameDataCollection == true) {
         authorName = authorName + args[i] + " ";
       }
-      // Check if variable contain unnecessary startup word!
       if (authorName.startsWith("author ")) {
         authorName = `${authorName.split("author ")[1]}`;
       }
     }
   }
 
-  // Check if packName and authorName is empty it will pass default values!
   if (packName == "") {
-    packName = "akm";
+    packName = "xXx";
   }
   if (authorName == "") {
-    authorName = "bot";
+    authorName = "BOT";
   }
 
   outputOptions = [
@@ -99,7 +112,7 @@ function sticker(arg,info) {
       .on("error", function (err) {
         fs.unlinkSync(media);
         console.log(`Error : ${err}`);
-        reply("🤖 ```failed to convert image into sticker!```");
+        resolve("🤖 ```failed to convert image into sticker!```");
       })
       .on("end", function () {
         buildSticker();
@@ -110,24 +123,24 @@ function sticker(arg,info) {
 
     async function buildSticker() {
       if (args.includes("nodata") == true) {
-        client.sendMessage(from, fs.readFileSync(ran), sticker, {
-          quoted: xxx,
-        });
+        console.log(ran);
+        resolve(ran )
+        
 
         fs.unlinkSync(media);
-        fs.unlinkSync(ran);
+       // fs.unlinkSync(ran);
       } else {
         const webpWithMetadata = await WSF.setMetadata(
           packName,
           authorName,
           ran
         );
-        client.sendMessage(from, webpWithMetadata, MessageType.sticker, {
-          quoted: xxx,
-        });
+        console.log(webpWithMetadata);
+        resolve(webpWithMetadata)
+
 
         fs.unlinkSync(media);
-        fs.unlinkSync(ran);
+        // fs.unlinkSync(ran);
       }
     }
   } else if (
@@ -137,7 +150,7 @@ function sticker(arg,info) {
         .seconds < 11)
   ) {
     const encmedia = isQuotedVideo
-      ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
+      ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "xxx")).message
           .extendedTextMessage.contextInfo
       : xxx;
     const media = await client.downloadAndSaveMediaMessage(encmedia);
@@ -148,7 +161,7 @@ function sticker(arg,info) {
       .on("error", function (err) {
         fs.unlinkSync(media);
         mediaType = media.endsWith(".mp4") ? "video" : "gif";
-        reply("🤖```ERROR: Failed to convert to sticker!```");
+        reject("🤖```ERROR: Failed to convert to sticker!```");
       })
       .on("end", function () {
         buildSticker();
@@ -159,27 +172,22 @@ function sticker(arg,info) {
 
     async function buildSticker() {
       if (args.includes("nodata") == true) {
-        client.sendMessage(from, fs.readFileSync(ran), sticker, {
-          quoted: xxx,
-        });
-        
+        resolve(ran)
         fs.unlinkSync(media);
-        fs.unlinkSync(ran);
+      //   fs.unlinkSync(ran);
       } else {
         const webpWithMetadata = await WSF.setMetadata(
           packName,
           authorName,
           ran
         );
-        client.sendMessage(from, webpWithMetadata, MessageType.sticker, {
-          quoted: xxx,
-        });
-
+        resolve(webpWithMetadata)
         fs.unlinkSync(media);
-        fs.unlinkSync(ran);
+       //  fs.unlinkSync(ran);
       }
     }
   }
-}
-
-module.exports.sticker = sticker;
+//}
+//z(args,xxx,client)
+});
+module.exports.stickermaker = stickermaker;

@@ -1,52 +1,11 @@
-const {
-  WAConnection,
-  MessageType,
-  Presence,
-  Mimetype,
-  GroupSettingChange,
-} = require("@adiwajshing/baileys");
-const fs = require("fs");
-
-const client = new WAConnection();
-async function auth() {
-  client.logger.level = "warn";
-
-  client.on("qr", (qr) => {
-    console.log("scan the qr above");
-  });
-  client.on("connecting", () => {
-    console.log("connecting");
-  });
-  client.on("open", () => {
-    console.log("connected");
-
-    fs.writeFileSync(
-      "./data/auth.json",
-      JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
-    );
-    console.log(`credentials updated!`);
-  });
-
-  fs.existsSync("./data/auth.json") && client.loadAuthInfo("./data/auth.json");
-
-  await client.connect({
-    timeoutMs: 30 * 1000,
-  });
-  console.log("Hello " + client.user.name);
-
-  fs.writeFileSync(
-    "./data/auth.json",
-    JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
-  );
-}
-async function main() {
-  console.log("started");
-  await auth();
-  client.on("chat-update", async (xxx) => {
-    console.log("xxx");
-    if (!xxx.hasNewMessage) return;
-    console.log(JSON.stringify(xxx.message.conversation));
-  });
-}
-
-main();
+const path = require('path');
+const sql = require(path.join(__dirname, "./snippets/ps"));
+from ='918222015789-1606030315@g.us'
+ban='7867868768769'
+sql.query(`SELECT banned_users FROM groupdata WHERE groupid = '${from}';`).then((result) =>{
+ console.log(result.rows[0].banned_users)
+ sql.query(`UPDATE groupdata SET banned_users = array_append(banned_users, '${ban}') where groupid = '${from}';`);
+});
+//console.log(result.rows[0].banned_users.includes('10000'));
+//sql.query(`UPDATE groupdata SET banned_users = array_append(ARRAY${} `
+sql.query(`UPDATE groupdata SET banned_users = array_remove(banned_users, '${ban}') where groupid = '${from}';`);

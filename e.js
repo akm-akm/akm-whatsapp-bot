@@ -1,22 +1,19 @@
-const axios = require("axios");
-const fs = require("fs");
 const path = require("path");
+const settingread = require(path.join(__dirname, "./c"));
+async function s() {
+  x = await settingread(
+    "arg",
+    "ja917661863718-1622669890@g.us",
+    "917661863817@gr",
+    "gyuudr uclsg"
+  );
+  
 
-var url = 'https://pin.it/6Ei5UsE'
-console.clear()
-var request = require('request')
+  console.log(x);
+}
 
-var a
+console.log("hello");
+console.log("------------------------------");
 
+s()
 
-request({uri: url,followRedirect: false,},(err, httpResponse) =>{
-    if (err)  return console.error(err)
-    console.log(httpResponse.headers.location || uri)
-    a= httpResponse.headers.location || uri
-
-    
-  }
-)
-
-
-console.log(a)
