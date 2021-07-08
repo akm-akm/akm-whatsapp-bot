@@ -6,19 +6,22 @@ const data = JSON.parse(
 const help = (arg, prefix) =>
   new Promise( (resolve, reject) => {
     var msg;
-    if (arg.length < 2) {
+    
+    if (arg.length ==1) {
+    c=  prefix==undefined? "```Not needed in inbox```" : prefix 
+    if(prefix==undefined) prefix='✨'
       msg =
-        "🤖 *AKM-BOT Command List* 🤖\n\n🎀 *Prefix:*  " +
-        prefix +
-        "\n\n📗 *General*\n ```help, groupinfo, invite, adminlist```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist```\n\n📱 *Media*\n```sticker, rs, ytaudio, ytvideo, shorturl, crypto, meme, pin, rashmika```\n\n🙂 *For detailed info*\n\n```help <command>```\n\n🎹 *Example*\n```help crypto```\n```help shorturl```";
+        "🤖 *AKM-BOT Command List* 🤖\n\n🎀 *Prefix:* " 
+        +c+
+        "\n\n📗 *General*\n ```help, groupinfo, invite, adminlist```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytaudio, ytvideo, shorturl, crypto, meme, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n"+prefix+"help crypto\n"+prefix+"help shorturl\n"+prefix+"help sticker\n";
       resolve(msg);
     }
     try {
       msg =
-        "🏷️ *Description* :\n" +
+        "\n🏀 *Description* :\n" +
         data[arg[1]].desc +
         "\n\n" +
-        "🎃 *Usage* :\n" +
+        "🏀 *Usage* :\n" +
         "```" +
         data[arg[1]].usage +
         "```" +
@@ -30,7 +33,7 @@ const help = (arg, prefix) =>
         "\n";
       resolve(msg);
     } catch (e) {
-      reject("```command``` " + arg[1] + " ```not found.```");
+      reject("```Command``` " + "```"+arg[1] + "```"+ " ```not found.```");
     }
   });
 module.exports.help = help;

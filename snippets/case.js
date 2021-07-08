@@ -1,75 +1,39 @@
 const path = require("path");
 const fs = require("fs");
-const {
-  count
-} = require(path.join(__dirname, "./count"));
-const {
-  newgroup
-} = require(path.join(__dirname, "./newgroup"));
-
-const {
-  read
-} = require(path.join(__dirname, "./read"));
-
-const {
-  crypto
-} = require(path.join(__dirname, "../plugins/crypto"));
-const {
-  shorturl
-} = require(path.join(__dirname, "../plugins/shorturl"));
-const {
-  savedsticker
-} = require(path.join(__dirname, "../plugins/savedsticker"));
-const {
-  stickermaker
-} = require(path.join(__dirname, "../plugins/sticker"));
-const {
-  pinterest
-} = require(path.join(__dirname, "../plugins/pinterest"));
-const {
-  grp
-} = require(path.join(__dirname, "../plugins/groupsettings"));
-const {
-  market
-} = require(path.join(__dirname, "../plugins/market"));
-//const newgroup = require(path.join(__dirname, "./newgroup"));
-
+const { count } = require(path.join(__dirname, "./count"));
+const { read } = require(path.join(__dirname, "./read"));
+const { crypto } = require(path.join(__dirname, "../plugins/crypto"));
+const { shorturl } = require(path.join(__dirname, "../plugins/shorturl"));
+const { savedsticker } = require(path.join( __dirname, "../plugins/savedsticker"));
+const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
+const { pinterest } = require(path.join(__dirname, "../plugins/pinterest"));
+const { grp } = require(path.join(__dirname, "../plugins/groupsettings"));
+const { market } = require(path.join(__dirname, "../plugins/market"));
+const { newgroup } = require(path.join(__dirname, "./newgroup"));
 //const { saavn } = require(path.join(__dirname, "../plugins/saavn"));
 const { help } = require(path.join(__dirname, "../plugins/help"));
 //const { meme } = require(path.join(__dirname, "../plugins/meme"));
+const { MessageType } = require("@adiwajshing/baileys");
+const { text, extendedtext, image, video, sticker, audio } = MessageType;
 
-
-const {
-  MessageType
-} = require("@adiwajshing/baileys");
-const {
-  text,
-  extendedtext,
-  image,
-  video,
-  sticker,
-  audio
-} = MessageType;
-
-function switchcase(client,xxx,sender,infor) {
- number=infor.number;
- arg=infor.arg;
- from=infor.from
-  switch ( arg[0]) {
-   
+function switchcase(client, xxx, sender, infor) {
+  number = infor.number;
+  arg = infor.arg;
+  from = infor.from;
+  switch (arg[0]) {
     case "crypto":
       crypto(arg)
         .then((resolve) => {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
           });
-          count(infor).then(() => console.log(number +"+1"));
+          count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           client.sendMessage(from, error, text, {
             quoted: xxx,
           });
-        }); 
+        });
 
       break;
     case "shorturl":
@@ -78,7 +42,7 @@ function switchcase(client,xxx,sender,infor) {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
           });
-          count(infor).then(() => console.log(number +"+1"));
+          count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           client.sendMessage(from, error, text, {
@@ -104,14 +68,11 @@ function switchcase(client,xxx,sender,infor) {
 
       break;
 
-    case "st":
+    case "sticker":
       stickermaker(arg, xxx, client)
         .then((resolve) => {
-          console.log(resolve);
-          client.sendMessage(from, fs.readFileSync(resolve), sticker, {
-            quoted: xxx,
-          });
-          count(infor).then(() => console.log(number +"+1"));
+          console.log("sent");
+          count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           console.log("error");
@@ -122,28 +83,26 @@ function switchcase(client,xxx,sender,infor) {
 
       break;
 
-
-      case "rs":
-      case "keerthy":
-      case "rashmika":
-        savedsticker(arg, xxx, client)
-          .then((resolve) => {
-            console.log(resolve);
-            client.sendMessage(from, fs.readFileSync(resolve), sticker, {
-              quoted: xxx,
-            });
-            count(infor).then(() => console.log(number +"+1"));
-          })
-          .catch((error) => {
-          
-            client.sendMessage(from, error, text, {
-              quoted: xxx,
-            }); 
-             console.log("error");
+    case "rs":
+    case "keerthy":
+    case "rashmika":
+      savedsticker(arg, xxx, client)
+        .then((resolve) => {
+          console.log(resolve);
+          client.sendMessage(from, fs.readFileSync(resolve), sticker, {
+            quoted: xxx,
           });
-  
-        break;
-  
+          count(infor).then(() => console.log(number + "+1"));
+        })
+        .catch((error) => {
+          client.sendMessage(from, error, text, {
+            quoted: xxx,
+          });
+          console.log("error");
+        });
+
+      break;
+
     case "pin":
       pinterest(arg, xxx)
         .then((resolve, reject) => {
@@ -151,7 +110,7 @@ function switchcase(client,xxx,sender,infor) {
           client.sendMessage(from, fs.readFileSync(resolve), video, {
             quoted: xxx,
           });
-          count(infor).then(() => console.log(number +"+1"));
+          count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           console.log(error);
@@ -186,19 +145,18 @@ function switchcase(client,xxx,sender,infor) {
           client.sendMessage(from, error, text, {
             quoted: xxx,
           });
-          count(number).then(() => console.log(number+" +1"));
+          count(number).then(() => console.log(number + " +1"));
         });
 
       break;
 
-
     case "help":
-      help(arg,infor.groupdata.prefix)
+      help(arg, infor.groupdata.prefix)
         .then((resolve) => {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
           });
-          count(infor).then(() => console.log(number +"+1"));
+          count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           client.sendMessage(from, error, text, {
@@ -213,7 +171,7 @@ function switchcase(client,xxx,sender,infor) {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
           });
-          count(infor).then(() => console.log(number +"+1"));
+          count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           client.sendMessage(from, error, text, {
@@ -222,12 +180,16 @@ function switchcase(client,xxx,sender,infor) {
         });
       break;
 
-
     case "limit":
-      x="```Message balance left with you is``` "+"```"+50-infor.noofmsgtoday+"``` "
-          client.sendMessage(from, x, text, {
-            quoted: xxx,
-          });
+      x =
+        "```Message balance left with you is``` " +
+        "```" +
+        50 -
+        infor.noofmsgtoday +
+        "``` ";
+      client.sendMessage(from, x, text, {
+        quoted: xxx,
+      });
 
       break;
 
@@ -237,7 +199,7 @@ function switchcase(client,xxx,sender,infor) {
           client.sendMessage(from, resolve, audio, {
             quoted: xxx,
           });
-          count(infor).then(() => console.log(number +"+1"));
+          count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           client.sendMessage(from, error, text, {
@@ -252,7 +214,7 @@ function switchcase(client,xxx,sender,infor) {
           client.sendMessage(from, resolve, video, {
             quoted: xxx,
           });
-          count(infor).then(() => console.log(number +"+1"));
+          count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           client.sendMessage(from, error, text, {
@@ -261,32 +223,34 @@ function switchcase(client,xxx,sender,infor) {
         });
       break;
 
-    case "sticker":
-      client.sendMessage(from, "```Bot down.```", text, {
-        quoted: xxx,
-      });
-      count(infor).then(() => console.log(number +"+1"));
+    case "xxx":
+      client.sendMessage(
+        from,
+        "```Bot down. New features being added.```",
+        text,
+        {
+          quoted: xxx,
+        }
+      );
+      count(infor).then(() => console.log(number + "+1"));
       break;
 
+    case "new":
+      newgroup(client, infor);
+      break;
 
+    case "hello":
+    case "hi":
+    case "hey":
+      client.sendMessage(from, "```Hello```", text, {
+        quoted: xxx,
+      });
+      count(infor).then(() => console.log(number + "+1"));
+      break;
 
-      case "new":
-        newgroup(client, infor)
-        break;
-
-      case "hello":
-        case "hi":
-        case "hey":
-          client.sendMessage(from, "```Hello```", text, {
-            quoted: xxx,
-          });
-          count(infor).then(() => console.log(number +"+1"));
-          break;
-
-
-          case"xrestartx":
-          process.exit(0);
-          break
+    case "xrestartx":
+      process.exit(0);
+      break;
 
     default:
       break;

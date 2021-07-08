@@ -3,11 +3,16 @@ const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const ffmpeg = require('fluent-ffmpeg');
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
-
+const {
+  MessageType
+} = require("@adiwajshing/baileys");
+const {
+  sticker
+} = MessageType;
 
 const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) => {
 
- //async function z() {
+ 
   const content = JSON.stringify(xxx.message);
   const from = xxx.key.remoteJid;
   const type = Object.keys(xxx.message)[0];
@@ -22,10 +27,11 @@ const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) =>
     return `${Math.floor(Math.random() * 10000)}${ext}`;
   };
 
-  var packName = "";
-  var authorName = "";
+  var packName = isGroup ? groupName : "xXx";
+  var authorName = "BOT";
 
   if (args.includes("pack") == true) {
+    packName=''
     packNameDataCollection = false;
     for (let i = 0; i < args.length; i++) {
       
@@ -48,6 +54,7 @@ const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) =>
 
   
   if (args.includes("author") == true) {
+    authorName=''
     authorNameDataCollection = false;
     for (let i = 0; i < args.length; i++) {
       console.log(i);
@@ -64,19 +71,7 @@ const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) =>
     }
   }
 
-  if (packName == "") {
-    packName = "xXx";
-  }
-  if (authorName == "") {
-    authorName = "BOT";
-  }
 
-  outputOptions = [
-    `-vcodec`,
-    `libwebp`,
-    `-vf`,
-    `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`,
-  ];
   if (args.includes("crop") == true) {
     outputOptions = [
       `-vcodec`,
@@ -99,6 +94,15 @@ const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) =>
     ];
   }
 
+  outputOptions = [
+    `-vcodec`,
+    `libwebp`,
+    `-vf`,
+    `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`,
+  ];
+
+  
+///////////////image//////////////////
   if ((isMedia && !xxx.message.videoMessage) || isQuotedImage) {
     const encmedia = isQuotedImage
       ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
@@ -107,12 +111,12 @@ const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) =>
     const media = await client.downloadAndSaveMediaMessage(encmedia);
     ran = getRandom(".webp");
 
-    await ffmpeg(`./${media}`)
+     ffmpeg(`./${media}`)
       .input(media)
       .on("error", function (err) {
         fs.unlinkSync(media);
         console.log(`Error : ${err}`);
-        resolve("🤖 ```failed to convert image into sticker!```");
+        reject("🤖 ```failed to convert image into sticker!```");
       })
       .on("end", function () {
         buildSticker();
@@ -123,26 +127,40 @@ const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) =>
 
     async function buildSticker() {
       if (args.includes("nodata") == true) {
-        console.log(ran);
-        resolve(ran )
-        
-
+        client.sendMessage(from, fs.readFileSync(ran), sticker, {
+          quoted: xxx,
+        });
+        resolve()
         fs.unlinkSync(media);
-       // fs.unlinkSync(ran);
-      } else {
+      fs.unlinkSync(ran);
+    } else {
+
         const webpWithMetadata = await WSF.setMetadata(
           packName,
           authorName,
           ran
         );
-        console.log(webpWithMetadata);
-        resolve(webpWithMetadata)
-
-
+       client.sendMessage(from,webpWithMetadata, sticker, {
+          quoted: xxx,
+        })
+       
+        resolve()
         fs.unlinkSync(media);
-        // fs.unlinkSync(ran);
+      fs.unlinkSync(ran);
       }
     }
+
+
+
+    ///////////////image//////////////////
+
+
+
+
+
+
+    ///////////////video//////////////////
+
   } else if (
     (isMedia && xxx.message.videoMessage.seconds < 11) ||
     (isQuotedVideo &&
@@ -150,13 +168,13 @@ const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) =>
         .seconds < 11)
   ) {
     const encmedia = isQuotedVideo
-      ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "xxx")).message
+      ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
           .extendedTextMessage.contextInfo
       : xxx;
     const media = await client.downloadAndSaveMediaMessage(encmedia);
     ran = getRandom(".webp");
 
-    await ffmpeg(`./${media}`)
+     ffmpeg(`./${media}`)
       .inputFormat(media.split(".")[1])
       .on("error", function (err) {
         fs.unlinkSync(media);
@@ -172,22 +190,28 @@ const stickermaker = (args,xxx,client) => new Promise(async (resolve, reject) =>
 
     async function buildSticker() {
       if (args.includes("nodata") == true) {
-        resolve(ran)
+       client.sendMessage(from,fs.readFileSync(ran), sticker, {
+          quoted: xxx,
+        })
+        resolve()
         fs.unlinkSync(media);
-      //   fs.unlinkSync(ran);
+      fs.unlinkSync(ran);
       } else {
         const webpWithMetadata = await WSF.setMetadata(
           packName,
           authorName,
           ran
         );
-        resolve(webpWithMetadata)
+    client.sendMessage(from,webpWithMetadata, sticker, {
+          quoted: xxx,
+        })
+        resolve()
         fs.unlinkSync(media);
-       //  fs.unlinkSync(ran);
+      fs.unlinkSync(ran);
       }
     }
   }
-//}
-//z(args,xxx,client)
+    ///////////////video//////////////////
+
 });
 module.exports.stickermaker = stickermaker;

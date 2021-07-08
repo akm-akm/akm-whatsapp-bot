@@ -29,46 +29,48 @@ const crypto = (arg) =>
     var c = 0;
 
     if (!coins.includes(arg[1].toUpperCase())) {
-       message = "Not listed in coinmarketcap";
-       resolve(message)
+      message = "Not listed in coinmarketcap";
+      resolve(message);
     } else {
       axios(requestOptions)
         .then(function (response) {
           response.data.data.forEach((element) => {
             if (element.symbol == arg[1].toUpperCase()) {
               c = element.quote.USD;
-               message =
-               "*" + arg[1].toUpperCase() +
+              message =
+                "*" +
+                arg[1].toUpperCase() +
                 "* " +
                 "/" +
                 " " +
                 "*USDT*" +
                 " 💹" +
                 "\n\n" +
-                "```price      : ```" +
-                c.price.slice(0, 2+c.price.indexOf('.'))
+                "```Buy price  : ```" +
+                c.price.toFixed(2) +
                 "\n" +
-                "```1h change  : ```" +c.percent_change_1h.slice(0,2+c.percent_change_1h.indexOf('.')) + "```%```" + "\n" +
+                "```1h change  : ```" +
+                c.percent_change_1h.toFixed(2) +
+                " ```%```" +
+                "\n" +
                 "```24h change : ```" +
-                c.percent_change_24h.slice(0,2+c.percent_change_24h.indexOf('.')) +
-                "```%```" +
+                c.percent_change_24h.toFixed(2) +
+                " ```%```" +
                 "\n" +
                 "```market cap : ```" +
-                c.market_cap.slice(0,2+c.market_cap.indexOf('.')) 
-                +
+                c.market_cap.toFixed(2) +
                 "\n\n" +
                 "```CoinMarketCap API```" +
                 "\n";
-               resolve(message)
+              resolve(message);
             }
           });
         })
         .catch(function (error) {
           console.log(error);
-           message = "Error";
-           resolve(message)
+          message = "Error";
+          resolve(message);
         });
-      
     }
   });
 module.exports.crypto = crypto;

@@ -21,10 +21,10 @@ const newgroup = (client, infor) =>
     var newmsg = `\n💮 Title: ${groupMetadata.subject}\n\n🏊 Participiants: ${groupMetadata.participants.length}\n\n🏅 Admins: ${groupAdmins.length}\n\n`+
    "🚨🚨 *VERSION UPDATE 2.0*\n\n"+
       "🚨🚨 ```This group has been assigned a prefix of``` " +
-      "```" +
+      "*" +
       infor.groupdata.prefix +
-      "```" +
-      " ```So, every time the bot has to be called, the sentence must start with this prefix.```\n\n" +
+      "*." +
+      "\n```So, every time the bot has to be called, the sentence must start with this prefix.```\n\n" +
 
       "🚨🚨 ```Type``` "+"```"+infor.groupdata.prefix+"```"+"```help to see the list of commands bot can follow.```\n\n\n"+
       "🎀 ```Example :```\n\n"+
