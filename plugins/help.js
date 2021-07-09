@@ -3,8 +3,10 @@ const path = require("path");
 const data = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/help.json"))
 )
-const help = (arg, prefix) =>
+const help = (infor) =>
   new Promise( (resolve, reject) => {
+    arg     = infor.arg
+    prefix=infor.groupdata.prefix
     var msg;
     
     if (arg.length ==1) {

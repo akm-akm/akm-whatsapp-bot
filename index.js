@@ -1,4 +1,4 @@
-const { WAConnection, ReconnectMode } = require("@adiwajshing/baileys");
+const { WAConnection, ReconnectMode ,MessageType} = require("@adiwajshing/baileys");
 const node_cron =require("node-cron");
 const client = new WAConnection();
 const path = require("path");
@@ -23,7 +23,7 @@ if (process.env.CRON) {
 
 async function main() {
   console.clear();
-  client.logger.level = "warn";
+  client.logger.level = "debug";
   client.on("qr", () => console.log("scan the qr above "));
   client.on("connecting", () => {
     console.clear();
@@ -32,8 +32,6 @@ async function main() {
   client.on("open", () => {
     console.clear();
     console.log("connected");
-    //client.sendMessage(`${setting.ownerNumber}@s.whatsapp.net`, "```connected```", MimeType.text)
-
     fs.writeFileSync(
       "./data/auth.json",
       JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
@@ -52,7 +50,10 @@ async function main() {
     "./data/auth.json",
     JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
   );
+
+
   //client.on("CB:Call");
+  
 
   client.on("chat-update", async (xxx) => {
     try {
@@ -80,17 +81,16 @@ async function main() {
       const infor = await settingread(body, from, sender, groupName);
       //   console.log(infor);
       if (
-        infor.noofmsgtoday > 50 ||
-        (infor.banned_users != null &&
+        infor.noofmsgtoday > 30 ||
+        (infor.banned_users != undefined &&
           infor.banned_users.includes(infor.number)) ||
-        infor.arg == null ||
-        infor.arg.length == 0
-      )
-        return;
+        infor.arg == null || 
+        infor.arg.length == 0 ||infor.number!='919709094733'
+      ) return;
 
       console.log(infor);
-
-      switchcase(client, xxx, sender, infor);
+      console.log(infor.banned_users);
+      switchcase(infor);
     } catch (error) {
       console.log(error);
     }

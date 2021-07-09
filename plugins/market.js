@@ -26,9 +26,10 @@ function searchTransformer(isIndex) {
   };
 }
 
-const market = (arg) =>
+const market = (infor) =>
   new Promise((resolve, reject) => {
-   
+    arg     = infor.arg
+
       switch (arg[1]) {
         case "status":
           axios

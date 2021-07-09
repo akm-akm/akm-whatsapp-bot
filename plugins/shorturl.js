@@ -1,20 +1,25 @@
 const axios = require("axios");
+const { MessageType } = require("@adiwajshing/baileys");
+const { text, extendedtext, image, video, sticker, audio } = MessageType;
 
-const shorturl = (arg) =>
+const shorturl = (infor) =>
     new Promise((resolve, reject) => {
+        arg     = infor.arg
+
         axios({
                 method: "POST",
                 url: "https://lenk.cf/p/" + encodeURIComponent(arg[1])
             })
             .then((response) => {
-                link ="```short url is```" + "\n" +
+                if(response.data=='Invalid URL') resolve("```Wrong URL```")
+                msg ="```short url is```" + "\n" +
                     "```https://lenk.cf/```" +
                     "```" +
                     response.data +
                     "```" +
                     "\n\n" +
                     "```API by lenk.cf```";
-                resolve(link);
+                resolve(msg);
             })
             .catch(() => reject("```server busy```"));
     });

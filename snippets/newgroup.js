@@ -14,12 +14,13 @@ const getGroupAdmins = (participants) => {
 };
 const newgroup = (client, infor) =>
   new Promise(async (resolve, reject) => {
+    client=infor.client
     from =infor.from;
     const groupMetadata = await client.groupMetadata(from);
     const groupMembers = groupMetadata.participants;
     const groupAdmins = getGroupAdmins(groupMembers);
     var newmsg = `\n💮 Title: ${groupMetadata.subject}\n\n🏊 Participiants: ${groupMetadata.participants.length}\n\n🏅 Admins: ${groupAdmins.length}\n\n`+
-   "🚨🚨 *VERSION UPDATE 2.0*\n\n"+
+   "🚨🚨 *VERSION UPDATE BETA 2.0*\n\n"+
       "🚨🚨 ```This group has been assigned a prefix of``` " +
       "*" +
       infor.groupdata.prefix +

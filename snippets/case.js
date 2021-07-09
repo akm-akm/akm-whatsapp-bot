@@ -12,17 +12,32 @@ const { market } = require(path.join(__dirname, "../plugins/market"));
 const { newgroup } = require(path.join(__dirname, "./newgroup"));
 //const { saavn } = require(path.join(__dirname, "../plugins/saavn"));
 const { help } = require(path.join(__dirname, "../plugins/help"));
+const { youtube } = require(path.join(__dirname, "../plugins/yt"));
 //const { meme } = require(path.join(__dirname, "../plugins/meme"));
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, extendedtext, image, video, sticker, audio } = MessageType;
 
-function switchcase(client, xxx, sender, infor) {
+function switchcase(infor) {
+
+  client=infor.client;
+  xxx=infor.xxx;
   number = infor.number;
   arg = infor.arg;
-  from = infor.from;
+  d = infor.from;
+  from=d
+
+  if(infor.abusepresent.length!=0)
+  {  
+     client.sendMessage(from, infor.abusepresent[0],text, {quoted: xxx,});
+     count(infor).then(() => console.log(number + "+1"));
+      return 
+  }
+
   switch (arg[0]) {
+
+
     case "crypto":
-      crypto(arg)
+      crypto(infor)
         .then((resolve) => {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
@@ -37,7 +52,7 @@ function switchcase(client, xxx, sender, infor) {
 
       break;
     case "shorturl":
-      shorturl(arg)
+      shorturl(infor)
         .then((resolve) => {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
@@ -53,7 +68,7 @@ function switchcase(client, xxx, sender, infor) {
       break;
 
     case "market":
-      market(arg)
+      market(infor)
         .then((resolve) => {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
@@ -69,7 +84,7 @@ function switchcase(client, xxx, sender, infor) {
       break;
 
     case "sticker":
-      stickermaker(arg, xxx, client)
+      stickermaker(infor)
         .then((resolve) => {
           console.log("sent");
           count(infor).then(() => console.log(number + "+1"));
@@ -86,7 +101,7 @@ function switchcase(client, xxx, sender, infor) {
     case "rs":
     case "keerthy":
     case "rashmika":
-      savedsticker(arg, xxx, client)
+      savedsticker(infor)
         .then((resolve) => {
           console.log(resolve);
           client.sendMessage(from, fs.readFileSync(resolve), sticker, {
@@ -104,7 +119,7 @@ function switchcase(client, xxx, sender, infor) {
       break;
 
     case "pin":
-      pinterest(arg, xxx)
+      pinterest(infor)
         .then((resolve, reject) => {
           console.log(resolve);
           client.sendMessage(from, fs.readFileSync(resolve), video, {
@@ -135,7 +150,10 @@ function switchcase(client, xxx, sender, infor) {
     case "ban":
     case "unban":
     case "banlist":
-      grp(arg, xxx, client, from, sender)
+    case "allowabuse":
+    case "denyabuse":
+    
+      grp(infor)
         .then((resolve) => {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
@@ -151,7 +169,11 @@ function switchcase(client, xxx, sender, infor) {
       break;
 
     case "help":
-      help(arg, infor.groupdata.prefix)
+    case "bot":
+    case "menu":
+    case "command":
+    case "commands":
+      help(infor)
         .then((resolve) => {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
@@ -166,7 +188,7 @@ function switchcase(client, xxx, sender, infor) {
       break;
 
     case "meme":
-      meme(arg, xxx, client, from, sender)
+      meme(infor)
         .then((resolve) => {
           client.sendMessage(from, resolve, text, {
             quoted: xxx,
@@ -193,27 +215,11 @@ function switchcase(client, xxx, sender, infor) {
 
       break;
 
-    case "ytaudio":
-      ytaudio(arg, xxx, client, from, sender)
-        .then((resolve) => {
-          client.sendMessage(from, resolve, audio, {
-            quoted: xxx,
-          });
-          count(infor).then(() => console.log(number + "+1"));
-        })
-        .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
-        });
-      break;
 
-    case "ytvideo":
-      ytvideo(arg, xxx, client, from, sender)
+    case "ytv":
+      ytvideo(infor)
         .then((resolve) => {
-          client.sendMessage(from, resolve, video, {
-            quoted: xxx,
-          });
+          
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {

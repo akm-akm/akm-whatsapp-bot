@@ -23,8 +23,13 @@ const getGroupAdmins = (participants) => {
   return admins;
 };
 
-const grp = (arg, xxx, client, from, sender) =>
+const grp = (infor) =>
   new Promise(async (resolve, reject) => {
+    arg     = infor.arg
+    xxx    = infor.xxx
+    client = infor.client
+    from   = infor.from
+    sender = infor.sender
     const isGroup = from.endsWith("@g.us");
     const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
     const groupMembers = isGroup ? groupMetadata.participants : "";
@@ -74,7 +79,6 @@ const grp = (arg, xxx, client, from, sender) =>
 
       case "changedp":
         if (!isBotGroupAdmins) reject(mess.only.Badmin);
-
         const isMedia = type === "imageMessage" || type === "videoMessage";
         const isQuotedImage =
           type === "extendedTextMessage" && content.includes("imageMessage");
@@ -84,9 +88,8 @@ const grp = (arg, xxx, client, from, sender) =>
           JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
           .extendedTextMessage.contextInfo :
           xxx;
-        const media = client.downloadAndSaveMediaMessage(encmedia);
-        const img = fs.readFileSync(media);
-        await client.updateProfilePicture(from, img);
+        const media =await client.downloadAndSaveMediaMessage(encmedia);
+        await client.updateProfilePicture(from, media);
         resolve("```success```");
         break;
 
@@ -188,7 +191,7 @@ const grp = (arg, xxx, client, from, sender) =>
           `SELECT banned_users FROM groupdata WHERE groupid = '${from}' ;`
         );
         if (banlist.rowcount == 0) resolve("```No members banned.```");
-        msg = "```Members baanned -```\n\n";
+        msg = "```Members banned -```\n\n";
         banlist.rows[0].banned_users.forEach((currentItem) => {
           msg += "🥲 ```" + currentItem + "```\n";
         });

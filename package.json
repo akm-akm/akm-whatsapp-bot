@@ -22,6 +22,7 @@
     "pg": "^8.6.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "wa-sticker-formatter": "^3.6.0"
+    "wa-sticker-formatter": "^3.6.0",
+    "ytdl-core": "^4.8.3"
   }
 }

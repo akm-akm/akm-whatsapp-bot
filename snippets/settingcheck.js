@@ -8,10 +8,10 @@ const abuse = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/abuse.json"))
 );
 
-const newgroup = require(path.join(__dirname, "./newgroup"));
+const {newgroup} = require(path.join(__dirname, "./newgroup"));
 
 
-module.exports = async function settingread(arg, from, sender, groupname) {
+module.exports = async function settingread(arg, from, sender, groupname, xxx, client) {
  
   random=settings.prefixchoice.charAt(
     Math.floor(Math.random() * 12))
@@ -25,7 +25,7 @@ module.exports = async function settingread(arg, from, sender, groupname) {
 
     data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
     if (data1.rows.length == 0) {
-      console.log("Entering data for group -  " + groupname);
+      console.log("Entering data for group -  "+from +"  " + groupname);
       console.log("------------------------------");
      // newgroup(client, infor)
       await  sql.query(
@@ -54,6 +54,8 @@ module.exports = async function settingread(arg, from, sender, groupname) {
 
 
   return  (data = {
+    client:client,
+    xxx:xxx,
       from:from,
       arg: from.endsWith("@g.us")
         ? arg
@@ -69,6 +71,7 @@ module.exports = async function settingread(arg, from, sender, groupname) {
       abusepresent:from.endsWith("@g.us")?data1.rows[0].allowabuse==0? abuse.abuse.filter(e => arg.indexOf(e) !== -1):[]:abuse.abuse.filter(e => arg.indexOf(e) !== -1),
      // isnumberblockedingroup:from.endsWith("@g.us")? data1.rows[0].banned_users.includes(number) ? 1 : 0:0,
       groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,
+      sender:sender
     })
 
 

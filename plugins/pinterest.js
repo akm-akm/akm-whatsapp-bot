@@ -7,8 +7,10 @@ const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}.${ext}`;
 };
 
-const pinterest = (arg) =>
+const pinterest = (infor) =>
   new Promise((resolve, reject) => {
+    arg     = infor.arg
+
     ran = getRandom("mp4");
 
     var c;

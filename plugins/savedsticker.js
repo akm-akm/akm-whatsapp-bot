@@ -1,6 +1,8 @@
 const path = require("path");
 
-const savedsticker= (arg) => new Promise((resolve, reject) => {
+const savedsticker= (infor) => new Promise((resolve, reject) => {
+    arg     = infor.arg
+
 var random;
     if(arg[0]=="rashmika"){
         random = Math.floor(Math.random() * 304 + 1);

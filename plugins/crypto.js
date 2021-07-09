@@ -24,10 +24,10 @@ const requestOptions = {
 
 var message;
 
-const crypto = (arg) =>
+const crypto = (infor) =>
   new Promise((resolve, reject) => {
     var c = 0;
-
+    arg=infor.arg;
     if (!coins.includes(arg[1].toUpperCase())) {
       message = "Not listed in coinmarketcap";
       resolve(message);

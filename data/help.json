@@ -4,10 +4,20 @@
         "desc": "```Fetches the price of given crypto currency from coinmarketcap using its API.```",
         "eg": "crypto btc\ncrypto xrp\ncrypto eth"
     },
+    "allowabuse": {
+        "usage": "allowabuse",
+        "desc": "```The bot will reply even if it is abused.```",
+        "eg": "allowabuse"
+    },
+    "denyabuse": {
+        "usage": "denyabuse",
+        "desc": "```The bot will not reply if the command conatains any cuss word. Also, it will abuse back.```",
+        "eg": "denyabuse"
+    },
 
     "market": {
         "usage": "market <arguments>",
-        "desc": "```Fetches the information of given symbol from NSE.```",
+        "desc": "```Fetches the information of given symbol from NSE. Arguments it can take are,\n\n🧿 status - It will give the status of the market.\n🧿 search <name> - It will search all the companies with this name.\n🧿 details <key> - It will give all the details of the stock from NSE.\n🧿 losers - It will give top 10 loosers of NSE.\n🧿 gainers - It will give top 10 gainers of NSE.```",
         "eg": "market status\nmarket search tata\nmarket details tcs\nmarket losers\nmarket gainers"
     },
 
@@ -170,7 +180,7 @@
     "shorturl": {
         "usage": "shorturl <link>",
         "desc": "```Generates a short url uf the given link using lenk.cf API.```",
-        "eg": "shorturl "
+        "eg": "shorturl https://www.hindustantimes.com/world-news/microsoft-asks-windows-users-to-immediately-install-security-update-for-printnightmare-101625676872300-amp.html"
     },
 
     "add": {
