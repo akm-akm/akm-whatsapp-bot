@@ -85,7 +85,7 @@ async function main() {
         (infor.banned_users != undefined &&
           infor.banned_users.includes(infor.number)) ||
         infor.arg == null || 
-        infor.arg.length == 0 ||infor.number!='919709094733'
+        infor.arg.length == 0
       ) return;
 
       console.log(infor);
