@@ -11,7 +11,7 @@ const abuse = JSON.parse(
 const {newgroup} = require(path.join(__dirname, "./newgroup"));
 
 
-module.exports = async function settingread(arg, from, sender, groupname, xxx, client) {
+module.exports = async function settingread(arg, from, sender, groupname,client) {
  
   random=settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))

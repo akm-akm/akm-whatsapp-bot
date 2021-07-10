@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const sql = require(path.join(__dirname, "./snippets/ps"));
 console.clear()
-const {main,logout} =require(path.join(__dirname,"./index.js"))
+const {main,logout,connect,stop} =require(path.join(__dirname,"./index.js"))
 server.listen(port, () => {
   console.clear();
   console.log("\nRunnning on http://localhost:"+port);
@@ -38,6 +38,16 @@ server.get("/logout", async (req, res) => {
   
 
   logout()
+
+
+  })
+  
+
+
+server.get("/stop", async (req, res) => {
+  
+
+  stop()
 
 
   })

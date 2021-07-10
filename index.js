@@ -18,43 +18,46 @@ if (process.env.CRON) {
   });
 }
 
-async function main() {
-  try {
+async function connect() {
+  client.on("qr", (qr) => {
+    qri.image(qr, { type: "png" }).pipe(fs.createWriteStream("qr.png"));
+    console.log("scan the qr above ");
+  });
+  client.on("connecting", () => {
     console.clear();
-    client.logger.level = "fatal";
-    client.on("qr", (qr) => {
-      qri.image(qr, { type: "png" }).pipe(fs.createWriteStream("qr.png"));
-      console.log("scan the qr above ");
-    });
-    client.on("connecting", () => {
-      console.clear();
-      console.log("connecting...");
-    });
-    client.on("open", () => {
-      console.clear();
-      console.log("connected");
+    console.log("connecting...");
+  });
+  client.on("open", () => {
+    console.clear();
+    console.log("connected");
 
-      fs.writeFileSync(
-        "./data/authentication.json",
-        JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
-      );
-      console.log(`credentials updated!`);
-    //  fs.unlink("qr.png", () => {});
-    });
-    fs.existsSync("./data/authentication.json") &&
-      client.loadAuthInfo("./data/authentication.json");
-    await client.connect({
-      timeoutMs: 30 * 1000,
-    });
-    console.clear();
-    client.autoReconnect = ReconnectMode.onConnectionLost;
-    client.connectOptions.maxRetries = 100;
-    console.log("Hello " + client.user.name);
     fs.writeFileSync(
       "./data/authentication.json",
       JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
     );
+    console.log(`credentials updated!`);
+    //  fs.unlink("qr.png", () => {});
+  });
+  fs.existsSync("./data/authentication.json") &&
+    client.loadAuthInfo("./data/authentication.json");
+  await client.connect({
+    timeoutMs: 30 * 1000,
+  });
+  console.clear();
+  client.autoReconnect = ReconnectMode.onConnectionLost;
+  client.connectOptions.maxRetries = 100;
+  console.log("Hello " + client.user.name);
+  fs.writeFileSync(
+    "./data/authentication.json",
+    JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
+  );
+}
 
+async function main() {
+  try {
+    console.clear();
+    client.logger.level = "fatal";
+    connect();
     //client.on("CB:Call");
     client.on("CB:Call", (jsons) => {
       const isOffer = jsons[1]["type"] == "offer";
@@ -114,7 +117,7 @@ async function main() {
         const sender = isGroup ? xxx.participant : xxx.key.remoteJid;
         const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
         const groupName = isGroup ? groupMetadata.subject : "";
-        const infor = await settingread(body, from, sender, groupName);
+        const infor = await settingread(body, from, sender, groupName, client);
 
         if (
           infor.noofmsgtoday > 30 ||
@@ -134,16 +137,26 @@ async function main() {
       }
     });
   } catch (err) {
-    throw err;
-
     console.log("ErRoR-------------" + err);
   }
 }
 
+async function stop() {
+  client.close();
+  console.clear();
+  console.log("Stopped");
+}
 
 async function logout() {
-  client.close()
+  client.clearAuthInfo();
+  fs.existsSync("./data/authentication.json") &&
+    fs.unlinkSync("./data/authentication.json");
+  client.close();
+  console.clear();
+  console.log("Logged out");
 }
-main();
-module.exports.main=main;
-module.exports.logout=logout;
+
+//main();
+module.exports.main = main;
+module.exports.logout = logout;
+module.exports.stop = stop;

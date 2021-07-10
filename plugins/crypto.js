@@ -7,9 +7,6 @@ const {
 const {
   text
 } = MessageType
-const api = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/api.json"))
-);
 const coins = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/coins.json"))
 );
@@ -22,7 +19,7 @@ const requestOptions = {
     convert: "USD",
   },
   headers: {
-    "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY || api.API_KEY,
+    "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY ,
   },
   json: true,
   gzip: true,
