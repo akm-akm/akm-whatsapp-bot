@@ -3,9 +3,19 @@ const path = require("path");
 const data = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/help.json"))
 )
-const help = (infor) =>
+const {
+  MessageType
+} = require("@adiwajshing/baileys");
+const {
+  text
+} = MessageType;
+
+const help = (infor,client,xxx) =>
   new Promise( (resolve, reject) => {
-    arg     = infor.arg
+    arg = infor.arg
+    from=infor.from;
+   
+
     prefix=infor.groupdata.prefix
     var msg;
     
@@ -15,9 +25,13 @@ const help = (infor) =>
       msg =
         "🤖 *AKM-BOT Command List* 🤖\n\n🎀 *Prefix:* " 
         +c+
-        "\n\n📗 *General*\n ```help, groupinfo, invite, adminlist```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytaudio, ytvideo, shorturl, crypto, meme, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n"+prefix+"help crypto\n"+prefix+"help shorturl\n"+prefix+"help sticker\n";
-      resolve(msg);
-    }
+        "\n\n📗 *General*\n ```help, groupinfo, invite, adminlist```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, meme, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n"+prefix+"help crypto\n"+prefix+"help shorturl\n"+prefix+"help sticker\n";
+     
+      client.sendMessage(from,msg , text, {
+        quoted: xxx,
+      });
+       resolve();
+    }else{
     try {
       msg =
         "\n🏀 *Description* :\n" +
@@ -33,9 +47,15 @@ const help = (infor) =>
         data[arg[1]].eg +
         "```" +
         "\n";
-      resolve(msg);
+        client.sendMessage(from,msg , text, {
+          quoted: xxx,
+        });
+      resolve();
     } catch (e) {
-      reject("```Command``` " + "```"+arg[1] + "```"+ " ```not found.```");
-    }
+      client.sendMessage(from,"```Command``` " + "```"+arg[1] + "```"+ " ```not found.```" , text, {
+        quoted: xxx,
+      });
+      reject()
+    }}
   });
 module.exports.help = help;

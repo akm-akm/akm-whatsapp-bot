@@ -5,6 +5,7 @@ const { text, extendedtext, image, video, sticker, audio } = MessageType;
 const shorturl = (infor) =>
     new Promise((resolve, reject) => {
         arg     = infor.arg
+        if (arg.length==1     )reject("```Argument required```")
 
         axios({
                 method: "POST",

@@ -1,6 +1,12 @@
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
+const {
+  MessageType
+} = require("@adiwajshing/baileys");
+const {
+  text
+} = MessageType
 const api = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/api.json"))
 );
@@ -24,13 +30,24 @@ const requestOptions = {
 
 var message;
 
-const crypto = (infor) =>
+const crypto = (infor,client,xxx) =>
   new Promise((resolve, reject) => {
     var c = 0;
     arg=infor.arg;
+    from=infor.from;
+
+    if (arg.length==1     ){
+      client.sendMessage(from, "```Argument required```", text, {
+        quoted: xxx,
+      });
+      reject()
+    return}
     if (!coins.includes(arg[1].toUpperCase())) {
-      message = "Not listed in coinmarketcap";
-      resolve(message);
+   
+      client.sendMessage(from,  "```Not listed in coinmarketcap```", text, {
+        quoted: xxx,
+      });
+      resolve();
     } else {
       axios(requestOptions)
         .then(function (response) {
@@ -62,14 +79,20 @@ const crypto = (infor) =>
                 "\n\n" +
                 "```CoinMarketCap API```" +
                 "\n";
-              resolve(message);
+            
+              client.sendMessage(from,message, text, {
+                quoted: xxx,
+              });  
+              resolve();
             }
           });
         })
         .catch(function (error) {
           console.log(error);
-          message = "Error";
-          resolve(message);
+          client.sendMessage(from,"```Error```", text, {
+            quoted: xxx,
+          }); 
+          reject();
         });
     }
   });

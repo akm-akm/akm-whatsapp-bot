@@ -1,8 +1,11 @@
 const path = require("path");
+const fs = require("fs");
+const { MessageType } = require("@adiwajshing/baileys");
+const { sticker } = MessageType;
 
-const savedsticker= (infor) => new Promise((resolve, reject) => {
-    arg     = infor.arg
-
+const savedsticker= (infor,client,xxx) => new Promise((resolve, reject) => {
+    arg = infor.arg
+    from=infor.from;
 var random;
     if(arg[0]=="rashmika"){
         random = Math.floor(Math.random() * 304 + 1);
@@ -19,6 +22,9 @@ var random;
         ran = path.join(__dirname, "../media/stickers/allsticker/s (") + random + ").webp";
           
     }
-    resolve(ran);
+    client.sendMessage(from, fs.readFileSync(ran), sticker, {
+        quoted: xxx,
+      });
+    resolve();
 });
 module.exports.savedsticker = savedsticker;

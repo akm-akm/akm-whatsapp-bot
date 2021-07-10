@@ -15,12 +15,12 @@ async function auth() {
     console.clear();
     console.log("connected");
     fs.writeFileSync(
-      "./data/auth.json",
+      "./data/authentication.json",
       JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
     );
     console.log(`credentials updated!`);
   });
-  fs.existsSync("./data/auth.json") && client.loadAuthInfo("./data/auth.json");
+  fs.existsSync("./data/authentication.json") && client.loadAuthInfo("./data/authentication.json");
   await client.connect({
     timeoutMs: 30 * 1000,
   });
@@ -28,7 +28,7 @@ async function auth() {
   
 
   fs.writeFileSync(
-    "./data/auth.json",
+    "./data/authentication.json",
     JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
   );
 }

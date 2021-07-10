@@ -13,14 +13,13 @@ const { newgroup } = require(path.join(__dirname, "./newgroup"));
 //const { saavn } = require(path.join(__dirname, "../plugins/saavn"));
 const { help } = require(path.join(__dirname, "../plugins/help"));
 const { youtube } = require(path.join(__dirname, "../plugins/yt"));
-//const { meme } = require(path.join(__dirname, "../plugins/meme"));
+const { faqs } = require(path.join(__dirname, "../plugins/faq"));
 const { MessageType } = require("@adiwajshing/baileys");
-const { text, extendedtext, image, video, sticker, audio } = MessageType;
+const { text} = MessageType;
 
-function switchcase(infor) {
+function switchcase(infor,client,xxx) {
 
-  client=infor.client;
-  xxx=infor.xxx;
+ 
   number = infor.number;
   arg = infor.arg;
   d = infor.from;
@@ -37,63 +36,52 @@ function switchcase(infor) {
 
 
     case "crypto":
-      crypto(infor)
+      crypto(infor,client,xxx)
         .then((resolve) => {
-          client.sendMessage(from, resolve, text, {
-            quoted: xxx,
-          });
+          
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+          console.log("error");
+
         });
 
       break;
     case "shorturl":
-      shorturl(infor)
+      shorturl(infor,client,xxx)
         .then((resolve) => {
-          client.sendMessage(from, resolve, text, {
-            quoted: xxx,
-          });
+         
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+          console.log("error");
+
         });
 
       break;
 
     case "market":
-      market(infor)
-        .then((resolve) => {
-          client.sendMessage(from, resolve, text, {
-            quoted: xxx,
-          });
+      market(infor,client,xxx)
+        .then(() => {
+         
           count(number).then(() => console.log("number +1"));
         })
         .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+          console.log("Error");
+
         });
 
       break;
 
     case "sticker":
-      stickermaker(infor)
-        .then((resolve) => {
+      stickermaker(infor,client,xxx)
+        .then(() => {
           console.log("sent");
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           console.log("error");
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+         
         });
 
       break;
@@ -101,37 +89,29 @@ function switchcase(infor) {
     case "rs":
     case "keerthy":
     case "rashmika":
-      savedsticker(infor)
+      savedsticker(infor,client,xxx)
         .then((resolve) => {
           console.log(resolve);
-          client.sendMessage(from, fs.readFileSync(resolve), sticker, {
-            quoted: xxx,
-          });
+         
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+         
           console.log("error");
         });
 
       break;
 
     case "pin":
-      pinterest(infor)
-        .then((resolve, reject) => {
-          console.log(resolve);
-          client.sendMessage(from, fs.readFileSync(resolve), video, {
-            quoted: xxx,
-          });
+      pinterest(infor,client,xxx)
+        .then(() => {
+         
+        
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
           console.log(error);
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+         
         });
 
       break;
@@ -153,17 +133,13 @@ function switchcase(infor) {
     case "allowabuse":
     case "denyabuse":
     
-      grp(infor)
-        .then((resolve) => {
-          client.sendMessage(from, resolve, text, {
-            quoted: xxx,
-          });
+      grp(infor,client,xxx)
+        .then(() => {
+        count(number).then(() => console.log(number + " +1"));
+
         })
         .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
-          count(number).then(() => console.log(number + " +1"));
+         console.log(error);
         });
 
       break;
@@ -173,32 +149,26 @@ function switchcase(infor) {
     case "menu":
     case "command":
     case "commands":
-      help(infor)
-        .then((resolve) => {
-          client.sendMessage(from, resolve, text, {
-            quoted: xxx,
-          });
+      help(infor,client,xxx)
+        .then(() => {
+         
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+          console.log(error);
+
         });
       break;
 
     case "meme":
-      meme(infor)
-        .then((resolve) => {
-          client.sendMessage(from, resolve, text, {
-            quoted: xxx,
-          });
+      meme(infor,client,xxx)
+        .then(() => {
+       
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+          console.log(error);
+
         });
       break;
 
@@ -206,7 +176,7 @@ function switchcase(infor) {
       x =
         "```Message balance left with you is``` " +
         "```" +
-        50 -
+        30  -
         infor.noofmsgtoday +
         "``` ";
       client.sendMessage(from, x, text, {
@@ -217,15 +187,27 @@ function switchcase(infor) {
 
 
     case "ytv":
-      ytvideo(infor)
+      youtube(infor,client,xxx)
         .then((resolve) => {
           
           count(infor).then(() => console.log(number + "+1"));
         })
         .catch((error) => {
-          client.sendMessage(from, error, text, {
-            quoted: xxx,
-          });
+          console.log(error);
+          
+        });
+      break;
+
+
+    case "faq":
+      faqs(client,xxx)
+        .then((resolve) => {
+          
+          count(infor).then(() => console.log(number + "+1"));
+        })
+        .catch((error) => {
+          console.log(error);
+          
         });
       break;
 

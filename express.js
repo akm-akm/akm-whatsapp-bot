@@ -1,53 +1,66 @@
 const express = require("express");
-const { auth } = require("./events/authentication");
-const { WAConnection } = require("@adiwajshing/baileys");
-var QRCode = require('qrcode')
-const client = new WAConnection();
 const server = new express();
-const port = 3000;
+const port =process.env.PORT|| 3000;
 const fs = require("fs");
 const path = require("path");
+const sql = require(path.join(__dirname, "./snippets/ps"));
+console.clear()
+const {main,logout} =require(path.join(__dirname,"./index.js"))
 server.listen(port, () => {
   console.clear();
-  console.log("\nrunnning on http://localhost:8000\n");
+  console.log("\nRunnning on http://localhost:"+port);
 });
-console.clear()
+server.use(
+  express.urlencoded({
+      extended: true,
+  })
+);
+
+
+
 
 server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/site/index.html"));
 });
+
+
+
+
 server.get("/login", async (req, res) => {
-  
- 
-  client.logger.level = "warn";
-  client.on("qr", (zzz) => {
-    console.log(zzz);
-    res.send(zzz);
-  });
-  fs.existsSync("./data/auth.json") && client.loadAuthInfo("./data/auth.json");
-  await client.connect({
-    timeoutMs: 30 * 1000,
-  });
-  fs.writeFileSync(
-    "./data/auth.json",
-    JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
-  );
-  res.send(aa);
+  main()
+
 });
 
 
 
 
 server.get("/logout", async (req, res) => {
-  client.close(
-    fs.unlink("./data/auth.json",()=>{})
-    )
-    console.log("logged out")
+  
+
+  logout()
+
+
   })
   
 
 
+
+
+
+  server.post("/sql",async (req,res)=>{
+    console.log(req.body.query);
+
+    sql.query(req.body.query).then((result) => {
+      res.send(result)
+    }).catch((err) => {
+      res.send(err)
+    });
+
+
+  })
+
 server.get("/restart", async (req, res) => {
-  console.clear()
+ 
   process.exit(0)
 })
+

@@ -6,11 +6,10 @@ const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
 const { sticker } = MessageType;
 
-const stickermaker = (infor) =>
+const stickermaker = (infor,client,xxx) =>
   new Promise(async (resolve, reject) => {
     arg = infor.arg;
-    xxx = infor.xxx;
-    client = infor.client;
+  
 
     const content = JSON.stringify(xxx.message);
     const from = xxx.key.remoteJid;

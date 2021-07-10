@@ -4,47 +4,71 @@ const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}${ext}`;
 };
 const { MessageType } = require("@adiwajshing/baileys");
-const { text, extendedtext, image, video, sticker, audio } = MessageType;
+const { text,video } = MessageType;
 
-const youtube = (infor) =>
+const youtube = (infor, client, xxx) =>
   new Promise(async (resolve, reject) => {
-    url = infor.arg[1]
-    ytdl.validateURL(url) ? 2 : reject("```Wrong url```")
+    try{
+    arg = infor.arg;
+    url = arg[1];
+    if (infor.arg.length == 1) {
+      client.sendMessage(from,"```Argument required```", text, {
+        quoted: xxx,
+      });
+      resolve();
+      return;
+    }
+
+    if (ytdl.validateURL(url)) {
+      client.sendMessage(from, "```Wrong url```", text, {
+        quoted: xxx,
+      });
+      resolve();
+      return;
+    }
 
     let info = await ytdl.getInfo(ytdl.getURLVideoID(url));
-    vid = getRandom('.mp4')
+    vid = getRandom(".mp4");
 
     msg =
-      "🎞️ *Title: * " +
+      "\n🎞️ *Title:*  " +
       "```" +
       info.videoDetails.title +
       "```\n\n" +
-      "🍚 *Author:* " +
+      "🍚 *Author:*  " +
       "```" +
       info.videoDetails.author.name +
       "```\n\n" +
-      "🎥 *Views:* " +
+      "🎥 *Views:*  " +
       "```" +
       info.videoDetails.viewCount +
       "```\n\n" +
-      "👍 *Likes:* " +
+      "👍 *Likes:*  " +
       "```" +
       info.videoDetails.likes +
       "```\n\n" +
-      "👎 *Disikes:* " +
+      "👎 *Disikes:*  " +
       "```" +
       info.videoDetails.dislikes +
       "```\n\n";
-    ytdl(url).pipe(fs.createWriteStream(vid)).on("finish", () => {
-      infor.client.sendMessage(from, fs.readFileSync(vid), video, {
-        quoted: infor.xxx,
-        caption:msg
+    ytdl(url)
+      .pipe(fs.createWriteStream(vid))
+      .on("finish", () => {
+     client.sendMessage(from, fs.readFileSync(vid), video, {
+          quoted: xxx,
+          caption: msg,
+        });
       });
-    })
 
-    resolve()
+    resolve();
+      fs.unlinkSync(vid)
+    }catch(err){
+      client.sendMessage(from,"🔪", text, {
+        quoted: xxx,
+      });
+      console.log(err);
+      resolve()
+    }
   });
 
 module.exports.youtube = youtube;
-
-youtube();

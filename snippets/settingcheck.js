@@ -14,7 +14,7 @@ const {newgroup} = require(path.join(__dirname, "./newgroup"));
 module.exports = async function settingread(arg, from, sender, groupname, xxx, client) {
  
   random=settings.prefixchoice.charAt(
-    Math.floor(Math.random() * 12))
+    Math.floor(Math.random() * settings.prefixchoice.length))
   try {
 
 
@@ -54,8 +54,7 @@ module.exports = async function settingread(arg, from, sender, groupname, xxx, c
 
 
   return  (data = {
-    client:client,
-    xxx:xxx,
+  
       from:from,
       arg: from.endsWith("@g.us")
         ? arg

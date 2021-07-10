@@ -1,0 +1,39 @@
+[
+   
+        {
+            "question":"How many replies will the bot give back?",
+            "answer":"Every number has a imit of 30 replies. That means when the bot has given 30 succesful reply to any number, it will not respond  to that number anymore."
+        },
+        {
+            "question":"When is the bot active?",
+            "answer":"The bot is active from anywhere between 10AM to 3AM. Since it is hosted on heroku, it needs to sleep."
+        },
+        {
+            "question":"Why is the bot bot not replying to someone?",
+            "answer":"The number may have used its daily limit of 30 replies or the bot may be down due to heavy traffic."
+        },
+        {
+            "question":"What happens to my private data?",
+            "answer":"The bot doesn't collect any data from the groups, except the errors it encounterd in the group while running."
+        },
+        {
+            "question":"How does the bot work?",
+            "answer":"Javascript❤️nodejs❤️postgresql"
+        },
+        {
+            "question":"Can I get the source code?",
+            "answer":"The source code will be available for everyone to use, once the stable version is released."
+        },
+        {
+            "question":"How does the bot detect abuse?",
+            "answer":"It searches for the abuse in it database containing 500 words."
+        },
+        {
+            "question":"The bot has a bug, how do I report it?",
+            "answer":"you can use reportabug command followed by the description of the bug."
+        },
+        {
+            "question":"How many groups uses this bot?",
+            "answer":"This bot is present in almost 1000 group."
+        }
+    ]

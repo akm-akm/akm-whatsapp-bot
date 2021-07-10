@@ -27,17 +27,12 @@
         "eg": "sticker crop nodata\nsticker crop pack cheems sticker author doge\nsticker nodata"
     },
 
-    "ytvideo": {
-        "usage": "ytvideo <link>",
+    "ytv": {
+        "usage": "ytv <link>",
         "desc": "```Downloads video from give youtube link.```",
-        "eg": "ytvideo https://youtu.be/tH9s\nytvideo https://youtu.be/yhs4"
+        "eg": "ytv https://youtu.be/JJWE3QH-Q6s"
     },
 
-    "ytaudio": {
-        "usage": "ytaudio <link>",
-        "desc": "```Downloads audio from give youtube link.```",
-        "eg": "ytaudio https://youtu.be/tH9s\nytaudio https://youtu.be/isjr"
-    },
 
     "gaana": {
         "usage": "gaana <link>",

@@ -2,6 +2,13 @@ const fs = require("fs");
 const axios = require("axios");
 const request = require("request");
 const http = require("https");
+const {
+  MessageType
+} = require("@adiwajshing/baileys");
+const {
+  text,video
+  
+} = MessageType;
 
 const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}.${ext}`;
@@ -9,12 +16,16 @@ const getRandom = (ext) => {
 
 const pinterest = (infor) =>
   new Promise((resolve, reject) => {
-    arg     = infor.arg
+    arg  = infor.arg
+    if (arg.length==1){
+      client.sendMessage(from,"```Argument required```", text, {
+        quoted: xxx,
+      }); 
+      reject()
+    return}
 
     ran = getRandom("mp4");
-
     var c;
-
     request(
       {
         uri: arg[1],
@@ -23,7 +34,10 @@ const pinterest = (infor) =>
       (err, httpResponse) => {
         if (err) {
           console.error(err);
-          reject("Error");
+          client.sendMessage(from,"```Error```", text, {
+            quoted: xxx,
+          }); 
+          reject();
         } else {
           c = httpResponse.headers.location || arg[1];
           console.log(httpResponse.headers.location || arg[1]);
@@ -41,14 +55,21 @@ const pinterest = (infor) =>
                 file.on("finish", function () {
                   file.close(() => {
                     console.log("filesaved");
-                    resolve(ran);
+                    client.sendMessage(from, fs.readFileSync(ran), video, {
+                      quoted: xxx,
+                    });
+                    resolve();
+
                   });
                 });
               });
             })
             .catch((err) => {
-              console.log("error");
-              reject("wrong url");
+              console.log(err);
+              client.sendMessage(from,"```Error```", text, {
+                quoted: xxx,
+              }); 
+              reject();
             });
         }
       }

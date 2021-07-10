@@ -1,5 +1,11 @@
 const axios = require("axios");
 var msg ='';
+const {
+  MessageType
+} = require("@adiwajshing/baileys");
+const {
+  text
+} = MessageType;
 
 function stripTags(string) {
   return string.replace(/<(.|\n)*?>/g, "").trim();
@@ -26,10 +32,17 @@ function searchTransformer(isIndex) {
   };
 }
 
-const market = (infor) =>
+const market = (infor,client,xxx) =>
   new Promise((resolve, reject) => {
-    arg     = infor.arg
+    arg = infor.arg
+    from=infor.from;
 
+    if (arg.length==1){
+      client.sendMessage(from,"```Argument required```", text, {
+        quoted: xxx,
+      }); 
+       reject()
+      return}
       switch (arg[1]) {
         case "status":
           axios
@@ -39,16 +52,21 @@ const market = (infor) =>
             .then((response) => {
               if (response.error) {
                 console.log("err");
+                reject("```Error```");
+               
               } else {
                 var msg =
                   "Market status : ```" + response.data.NormalMktStatus + "```";
                 resolve(msg);
-                reject("```Error```");
+               
               }
             })
             .catch((err) => {
               console.log(err);
-              reject("```Error```");
+              client.sendMessage(from,"```Error```", text, {
+                quoted: xxx,
+              }); 
+              reject();
             });
           break;
         case "gainer":
@@ -62,6 +80,10 @@ const market = (infor) =>
 
               if (response.error) {
                 console.log("err");
+                client.sendMessage(from,"```Error```", text, {
+                  quoted: xxx,
+                }); 
+                reject();
               } else {
                 response.data.data.forEach((element) => {
                   msg +=
@@ -84,12 +106,18 @@ const market = (infor) =>
                     element.previousPrice +
                     "```";
                 });
-                resolve(msg);
+                client.sendMessage(from,msg, text, {
+                  quoted: xxx,
+                }); 
+                resolve();
               }
             })
             .catch((err) => {
               console.log(err);
-              reject("```Error```");
+              client.sendMessage(from,"```Error```", text, {
+                quoted: xxx,
+              }); 
+              reject();
             });
 
           break;
@@ -128,13 +156,20 @@ const market = (infor) =>
                     element.ltP +
                     "```";
                 });
-                resolve(msg);
+                client.sendMessage(from,msg, text, {
+                  quoted: xxx,
+                }); 
+                resolve();
               }
             })
             .catch((err) => {
               
               console.log(err);
-              reject("```Error```");
+              client.sendMessage(from,"```Error```", text, {
+                quoted: xxx,
+              }); 
+              reject();
+
             });
 
           break;
@@ -170,12 +205,18 @@ const market = (infor) =>
                     "```\n"; +
                   "```turnoverInLakhs : " + element.turnoverInLakhs + "```";
                 });
-                resolve(msg);
+                client.sendMessage(from,msg, text, {
+                  quoted: xxx,
+                }); 
+                resolve();
               }
             })
             .catch((err) => {
               console.log(err);
-              reject("```Error```");
+              client.sendMessage(from,"```Error```", text, {
+                quoted: xxx,
+              }); 
+              reject();
             });
 
           break;
@@ -214,13 +255,18 @@ const market = (infor) =>
                     element.symbol +
                     "```";
                 });
-
-                resolve(msg);
+                client.sendMessage(from,msg, text, {
+                  quoted: xxx,
+                }); 
+                resolve();
               }
             })
             .catch((err) => {
-              console.log("err");
-              reject("```Error```");
+              console.log(err);
+              client.sendMessage(from,"```Error```", text, {
+                quoted: xxx,
+              }); 
+              reject();
             });
           break;
 
@@ -310,13 +356,18 @@ const market = (infor) =>
                   "```Update Time   : " +
                   response.data.lastUpdateTime.split(" ")[1] +
                   "```";
-
-                resolve(msg);
+                  client.sendMessage(from,msg, text, {
+                    quoted: xxx,
+                  }); 
+                resolve();
               }
             })
             .catch((err) => {
               console.log(err);
-              reject("```Error```");
+              client.sendMessage(from,"```Error```", text, {
+                quoted: xxx,
+              }); 
+              reject();
             });
           break;
 
