@@ -12,10 +12,12 @@
             padding: 0;
             margin: 0;
         }
-        body{
+
+        body {
             min-height: 100vh;
 
         }
+
         .aa {
             justify-content: right;
             background-color: rgb(255, 255, 255);
@@ -39,7 +41,7 @@
 
         }
 
-        
+
 
         .contbody {
             background-color: black;
@@ -58,6 +60,15 @@
             font-weight: 500;
 
         }
+
+
+        .postgres {
+
+            margin: auto;
+            width: 50%;
+            border: 3px solid green;
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -72,23 +83,23 @@
             <button class="aa"><a href="/restart">Restart</button>
             <button class="aa"><a href="/stop">stop</button>
             <button class="aa"><a href="/postgres">Postgres</button>
-                
+
         </div>
     </div>
     <div class="contbody">
-      <div class="postgres">
-          <form action="/sql" method="post">
-        <input placeholder="query"  type="text" name="query" id="sql"required>
-        <button type="submit">Run</button>
-        </form>
-      </div>
-      <div class="login">
+        <div class="postgres">
+            <form action="/sql" method="post">
+                <input placeholder="query" type="text" name="query" id="sql" required>
+                <button type="submit">Run</button>
+            </form>
+        </div>
+        <div class="login">
 
-      </div>
-      <div class="home">
+        </div>
+        <div class="home">
 
-      </div>
-     
+        </div>
+
     </div>
 </body>
 

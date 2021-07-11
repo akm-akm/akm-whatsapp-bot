@@ -1,22 +1,10 @@
 const { WAConnection, ReconnectMode } = require("@adiwajshing/baileys");
-const node_cron = require("node-cron");
 const client = new WAConnection();
 const path = require("path");
 const fs = require("fs");
-const settingread = require(path.join(__dirname, "./snippets/settingcheck"));
-const { switchcase } = require(path.join(__dirname, "./snippets/case"));
+const settingread = require(path.join(__dirname, "../snippets/settingcheck"));
+const { switchcase } = require(path.join(__dirname, "../snippets/case"));
 var qri = require("qr-image");
-
-if (process.env.CRON) {
-  if (!node_cron.default.validate(process.env.CRON))
-    return console.log(`Invalid Cron String: ${process.env.CRON}`);
-  console.log(`Cron Job for clearing all chats is set for ${process.env.CRON}`);
-  node_cron.default.schedule(process.env.CRON, () => {
-    console.log("Clearing All Chats...");
-    client.modifyAllChats("clear");
-    console.log("Cleared all Chats!");
-  });
-}
 
 async function connect() {
   client.on("qr", (qr) => {

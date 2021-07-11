@@ -15,12 +15,12 @@ server.use(
       extended: true,
   })
 );
-
+const pass ="akm21"
 
 
 
 server.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/site/index.html"));
+  res.sendFile(path.join(__dirname, "/site/authenticate.html"));
 });
 
 
@@ -46,9 +46,8 @@ server.get("/logout", async (req, res) => {
 
 server.get("/stop", async (req, res) => {
   
-
+  console.log("stop");
   stop()
-
 
   })
   
@@ -69,6 +68,18 @@ server.get("/stop", async (req, res) => {
 
   })
 
+
+
+  server.post("/auth",async (req,res)=>{
+
+      if(req.body.pass!=pass) {   console.log(false);
+        res.send("false")}
+      else{  console.log(true);
+        res.send("true")
+        console.log("sent");}
+
+    });
+    
 server.get("/restart", async (req, res) => {
  
   process.exit(0)

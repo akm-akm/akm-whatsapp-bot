@@ -237,13 +237,12 @@ const grp = (infor, client, xxx) =>
           numbers.push(element.jid);
         });
         client.groupRemove(from, numbers);
-        resolve("🙂");
+        resolve();
         break;
 
       case "tagall":
         memberslist = [];
-        msg = arg.length > 1 ? arg.shift().join(" ") : "```Tagged members```";
-        msg += "\n\n";
+        msg = arg.length > 1 ? arg.shift().join(" ") : "```Tagged members```\n\n";
         for (let member of groupMembers) {
           msg += `🤖 @${member.jid.split("@")[0]}\n`;
           memberslist.push(member.jid);

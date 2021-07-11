@@ -25,7 +25,7 @@ const help = (infor,client,xxx) =>
       msg =
         "🤖 *AKM-BOT Command List* 🤖\n\n🎀 *Prefix:* " 
         +c+
-        "\n\n📗 *General*\n ```help, groupinfo, invite, adminlist```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, meme, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n"+prefix+"help crypto\n"+prefix+"help shorturl\n"+prefix+"help sticker\n";
+        "\n\n📗 *General*\n ```help, groupinfo, invite, data```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, meme, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n"+prefix+"help crypto\n"+prefix+"help shorturl\n"+prefix+"help sticker\n";
      
       client.sendMessage(from,msg , text, {
         quoted: xxx,

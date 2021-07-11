@@ -172,11 +172,10 @@ function switchcase(infor,client,xxx) {
         });
       break;
 
-    case "limit":
+    case "data":
       x =
-        "```Message balance left with you is``` " +
+        "```Number of times bot has responded to you today is :``` " +
         "```" +
-        30  -
         infor.noofmsgtoday +
         "``` ";
       client.sendMessage(from, x, text, {
