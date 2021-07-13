@@ -33,6 +33,12 @@
         "eg": "ytv https://youtu.be/JJWE3QH-Q6s"
     },
 
+    "limit": {
+        "usage": "limit",
+        "desc": "```This command will give the number of message sent by bot to that person.```",
+        "eg": "limit"
+    },
+
 
     "gaana": {
         "usage": "gaana <link>",

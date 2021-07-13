@@ -5,10 +5,12 @@ const fs = require("fs");
 const settingread = require(path.join(__dirname, "../snippets/settingcheck"));
 const { switchcase } = require(path.join(__dirname, "../snippets/case"));
 var qri = require("qr-image");
+const sql = require(path.join(__dirname, "../snippets/ps"));
+const node_cron = require("node-cron");
 
 async function connect() {
   client.on("qr", (qr) => {
-    qri.image(qr, { type: "png" }).pipe(fs.createWriteStream("qr.png"));
+    qri.image(qr, { type: "png" }).pipe(fs.createWriteStream("./public/qr.png"));
     console.log("scan the qr above ");
   });
   client.on("connecting", () => {
@@ -20,14 +22,14 @@ async function connect() {
     console.log("connected");
 
     fs.writeFileSync(
-      "./data/authentication.json",
+      path.join(__dirname,"../data/authentication.json"),
       JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
     );
     console.log(`credentials updated!`);
-    //  fs.unlink("qr.png", () => {});
+     fs.unlink("./public/qr.png", () => {});
   });
-  fs.existsSync("./data/authentication.json") &&
-    client.loadAuthInfo("./data/authentication.json");
+  fs.existsSync(path.join(__dirname,"../data/authentication.json")) &&
+    client.loadAuthInfo(path.join(__dirname,"../data/authentication.json"));
   await client.connect({
     timeoutMs: 30 * 1000,
   });
@@ -42,46 +44,18 @@ async function connect() {
 }
 
 async function main() {
+
   try {
     console.clear();
     client.logger.level = "fatal";
     connect();
-    //client.on("CB:Call");
-    client.on("CB:Call", (jsons) => {
-      const isOffer = jsons[1]["type"] == "offer";
-      const number = `${jsons[1]["from"].split("@")[0]}@s.whatsapp.net`;
-      call_id = jsons[1].id;
-
-      if (isOffer) {
-        const tag = client.generateMessageTag();
-        const json = [
-          "action",
-          "call",
-          [
-            "call",
-            {
-              from: client.user.jid,
-              to: number,
-              id: tag,
-            },
-            [
-              [
-                "reject",
-                {
-                  "call-id": call_id,
-                  "call-creator": number,
-                  count: "0",
-                },
-                null,
-              ],
-            ],
-          ],
-        ];
-
-        // client.sendWA(`${tag},${JSON.stringify(json)}`);
-      }
+    node_cron.schedule(process.env.CRON, () => {
+      sql.query( `UPDATE messagecount set totalmsgtoday='0';`);
+      console.log("Clearing All Chats...");
+      client.modifyAllChats("clear");
+      console.log("Cleared all Chats!");
     });
-
+  
     client.on("chat-update", async (xxx) => {
       try {
         if (!xxx.hasNewMessage) return;
@@ -106,18 +80,16 @@ async function main() {
         const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
         const groupName = isGroup ? groupMetadata.subject : "";
         const infor = await settingread(body, from, sender, groupName, client);
-
+       
         if (
           infor.noofmsgtoday > 30 ||
-          (infor.banned_users != undefined &&
-            infor.banned_users.includes(infor.number)) ||
+          infor.isnumberblockedingroup||
           infor.arg == null ||
-          infor.arg.length == 0 ||
-          infor.number != "919709094733"
+          infor.arg.length == 0
         )
           return;
-
-        console.log(infor);
+       console.log(infor);
+    
 
         switchcase(infor, client, xxx);
       } catch (error) {
@@ -134,17 +106,26 @@ async function stop() {
   console.clear();
   console.log("Stopped");
 }
-
+async function isconnected() {
+ return client.state
+  }
 async function logout() {
   client.clearAuthInfo();
-  fs.existsSync("./data/authentication.json") &&
-    fs.unlinkSync("./data/authentication.json");
+  fs.existsSync(path.join(__dirname,"../data/authentication.json")) &&
+    fs.unlinkSync(path.join(__dirname,"../data/authentication.json"));
   client.close();
   console.clear();
   console.log("Logged out");
 }
+async function isauthenticationfilepresent() {
 
-//main();
+  return fs.existsSync(path.join(__dirname,"../data/authentication.json")) ?  "present" :  "absent"
+   
+}
+
+main();
 module.exports.main = main;
 module.exports.logout = logout;
 module.exports.stop = stop;
+module.exports.isconnected = isconnected;
+module.exports.isauthenticationfilepresent = isauthenticationfilepresent;

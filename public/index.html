@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xxx bot</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="container1" id="container1">
+      <div class="form-container1 sign-in-container1">
+        <form autocomplete="off">
+          <h1 class="tit">Authenticate</h1>
+          <input
+            type="text"
+            placeholder="password"
+            id="session"
+            name="password"
+            required
+          />
+          <button id="submitauth">Login</button>
+        </form>
+      </div>
+      <div class="overlay1-container1">
+        <div class="overlay1">
+          <div class="overlay1-panel overlay1-right">
+            <h1>xXx BOT</h1>
+            <p>Enter your password to Authenticate!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container1 container2 hidden" id="container2">
+      <div class="form-container1 sign-in-container1">
+        <form autocomplete="off">
+          <button id="login">Start Bot</button>
+          <button id="restart">Restart Dyno</button>
+          <button id="stop">Stop Bot</button>
+          <button id="database">Database</button>
+          <button id="logout">Log Out</button>
+        </form>
+      </div>
+      <div class="overlay1-container1">
+        <div class="overlay1">
+          <div class="overlay1-panel overlay1-right">
+            <img id="qrcode" src="" alt="">
+         
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="postgres" class="w-full hidden">
+      <section class="text-gray-600 body-font relative">
+        <div class="container px-5 py-24  mx-auto">
+            
+            <div class="flex flex-col text-center w-full mb-12">
+            <button class="
+            m-16	
+            flex
+            mx-auto
+            text-white
+            bg-indigo-500
+            border-0
+            py-2
+            px-8
+            focus:outline-none
+            hover:bg-indigo-600
+            rounded
+            text-lg
+          " id="back">Back</button>    <h1
+              class="
+                sm:text-3xl
+                text-2xl
+                font-medium
+                title-font
+                mb-4
+                text-gray-900
+              "
+            >
+              Postgres
+            </h1>
+          </div>
+          <div class="lg:w-1/2 md:w-2/3 mx-auto">
+            <div class="flex flex-wrap -m-2">
+              <div class="p-2 w-full">
+                <div class="relative">
+                  <input
+                    placeholder="QUERY HERE"
+                    type="text"
+                    id="query"
+                    name="query"
+                    class="
+                      w-full
+                      bg-gray-100 bg-opacity-50
+                      rounded
+                      border border-gray-300
+                      focus:border-indigo-500
+                      focus:bg-white
+                      focus:ring-2
+                      focus:ring-indigo-200
+                      text-base
+                      outline-none
+                      text-gray-700
+                      py-1
+                      px-3
+                      leading-8
+                      transition-colors
+                      duration-200
+                      ease-in-out
+                    "
+                  />
+                </div>
+              </div>
+              <div class="p-2 w-full">
+                <button
+                  id="submit"
+                  class="
+                    flex
+                    mx-auto
+                    text-white
+                    bg-indigo-500
+                    border-0
+                    py-2
+                    px-8
+                    focus:outline-none
+                    hover:bg-indigo-600
+                    rounded
+                    text-lg
+                  "
+                >
+                  Run Query
+                </button>
+              </div>
+              <div class="p-2 w-full">
+                <div class="relative">
+                  <textarea
+                    placeholder="OUTPUT HERE"
+                    style="height: 1000px"
+                    disabled
+                    id="output"
+                    name="output"
+                    class="
+                      w-full
+                      bg-gray-100 bg-opacity-50
+                      rounded
+                      border border-gray-300
+                      focus:border-indigo-500
+                      focus:bg-white
+                      focus:ring-2
+                      focus:ring-indigo-200
+                      h-32
+                      text-base
+                      outline-none
+                      text-gray-700
+                      py-1
+                      px-3
+                      resize-none
+                      leading-6
+                      transition-colors
+                      duration-200
+                      ease-in-out
+                    "
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+<script src="./script.js"></script>
+  </body>
+</html>

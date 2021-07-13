@@ -12,9 +12,9 @@ const getGroupAdmins = (participants) => {
   }
   return admins;
 };
-const newgroup = (client, infor) =>
+const newgroup = (infor,client,xxx) =>
   new Promise(async (resolve, reject) => {
-    client=infor.client
+    
     from =infor.from;
     const groupMetadata = await client.groupMetadata(from);
     const groupMembers = groupMetadata.participants;

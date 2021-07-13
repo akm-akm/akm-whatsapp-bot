@@ -29,7 +29,7 @@ module.exports = async function settingread(arg, from, sender, groupname,client)
       console.log("------------------------------");
      // newgroup(client, infor)
       await  sql.query(
-        `INSERT INTO groupdata VALUES ('${from}','${random}','true','true', '{}');`
+        `INSERT INTO groupdata VALUES ('${from}','${random}','true','true', '{''}');`
       );
       return settingread(arg, from, sender, groupname)
     }
@@ -68,7 +68,7 @@ module.exports = async function settingread(arg, from, sender, groupname,client)
       number:number,  
       noofmsgtoday: data2.rows[0].totalmsgtoday,
       abusepresent:from.endsWith("@g.us")?data1.rows[0].allowabuse==0? abuse.abuse.filter(e => arg.indexOf(e) !== -1):[]:abuse.abuse.filter(e => arg.indexOf(e) !== -1),
-     // isnumberblockedingroup:from.endsWith("@g.us")? data1.rows[0].banned_users.includes(number) ? 1 : 0:0,
+      isnumberblockedingroup:from.endsWith("@g.us")? data1.rows[0].banned_users.includes(number) ? 1 : 0:0,
       groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,
       sender:sender
     })

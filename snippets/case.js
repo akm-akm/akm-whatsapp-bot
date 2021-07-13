@@ -172,7 +172,7 @@ function switchcase(infor,client,xxx) {
         });
       break;
 
-    case "data":
+    case "limit":
       x =
         "```Number of times bot has responded to you today is :``` " +
         "```" +
@@ -223,7 +223,7 @@ function switchcase(infor,client,xxx) {
       break;
 
     case "new":
-      newgroup(client, infor);
+      newgroup(infor,client,xxx);
       break;
 
     case "hello":
