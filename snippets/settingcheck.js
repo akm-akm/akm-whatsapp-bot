@@ -25,10 +25,10 @@ module.exports = async function settingread(arg, from, sender, groupname,client,
 
     data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
     if (data1.rows.length == 0) {
-    //if (groupMetadata.participants.length<30) { await client.sendMessage(from,"```Get atleast 30 members.```",Messagetye.text);  client.groupLeave(from); return }
+    if (groupMetadata.participants.length<30) { await client.sendMessage(from,"```Get atleast 10 members.```",Messagetye.text);  client.groupLeave(from); return }
       console.log("Entering data for group -  "+from +"  " + groupname);
       console.log("------------------------------");
-     // newgroup(client, infor)
+      newgroup(infor,client)
       await  sql.query(
         `INSERT INTO groupdata VALUES ('${from}','${random}','false','true', '{''}');`
       );

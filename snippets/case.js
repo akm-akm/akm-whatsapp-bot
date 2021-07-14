@@ -199,7 +199,7 @@ function switchcase(infor, client, xxx) {
       break;
 
     case "new":
-      newgroup(infor, client, xxx);
+      newgroup(infor, client);
       break;
 
     case "hello":
