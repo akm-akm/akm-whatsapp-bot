@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r dotenv/config app.js"
+    "start": "forever start --minUptime 1000 --spinSleepTime 1000 app.js"
   },
   "keywords": [],
   "author": "",
