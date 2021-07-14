@@ -118,10 +118,10 @@
         "eg": "demote @ankit\ndemote @dibyam"
     },
 
-    "remove": {
-        "usage": "remove <tag member>",
+    "kick": {
+        "usage": "kick <tag member>",
         "desc": "```Removes the tagged member from the group.```",
-        "eg": "remove @ankit\nremove @dibyam"
+        "eg": "kick @ankit\nkick @dibyam"
     },
 
     "open": {

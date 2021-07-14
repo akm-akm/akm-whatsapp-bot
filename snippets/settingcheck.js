@@ -31,7 +31,7 @@ module.exports = async function settingread(arg, from, sender, groupname,client,
 
     data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
     if (data1.rows.length == 0) {
-    if (groupMetadata.participants.length<30) { await client.sendMessage(from,"```Get atleast 10 members.```",text);  client.groupLeave(from); return }
+    if (groupMetadata.participants.length<30) { await client.sendMessage(from,"```Get atleast 15 members.```",text);  client.groupLeave(from); return }
       console.log("Entering data for group -  "+from +"  " + groupname);
       console.log("------------------------------");
       newgroup(from,client,random).then((resolve)=>console.log("new update sent"));
