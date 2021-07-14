@@ -12,10 +12,9 @@ const getGroupAdmins = (participants) => {
   }
   return admins;
 };
-const newgroup = (infor,client) =>
+const newgroup = (from,client,random) =>
   new Promise(async (resolve, reject) => {
     
-    from =infor.from;
     const groupMetadata = await client.groupMetadata(from);
     const groupMembers = groupMetadata.participants;
     const groupAdmins = getGroupAdmins(groupMembers);
@@ -23,16 +22,16 @@ const newgroup = (infor,client) =>
    "🚨🚨 *VERSION UPDATE BETA 2.0*\n\n"+
       "🚨🚨 ```This group has been assigned a prefix of``` " +
       "*" +
-      infor.groupdata.prefix +
+      random +
       "\n```So, every time the bot has to be called, the sentence must start with this prefix.```\n\n" +
 
-      "🚨🚨 ```Type``` "+"```"+infor.groupdata.prefix+"```"+"```help to see the list of commands bot can follow.```\n\n\n"+
+      "🚨🚨 ```Type``` "+"```"+random+"```"+"```help to see the list of commands bot can follow.```\n\n\n"+
       "🎀 ```Example :```\n\n"+
-      "🎡 ```"+infor.groupdata.prefix+"```"+"```sticker crop```\n"+
-      "🎪 ```"+infor.groupdata.prefix+"```"+"```meme```\n"+
-      "🎢 ```"+infor.groupdata.prefix+"```"+"```crypto btc```\n"+
-      "🎫 ```"+infor.groupdata.prefix+"```"+"```groupinfo```\n"+
-      "🎠 ```"+infor.groupdata.prefix+"```"+"```market details tcs```\n\n\n";
+      "🎡 ```"+random+"```"+"```sticker crop```\n"+
+      "🎪 ```"+random+"```"+"```meme```\n"+
+      "🎢 ```"+random+"```"+"```crypto btc```\n"+
+      "🎫 ```"+random+"```"+"```groupinfo```\n"+
+      "🎠 ```"+random+"```"+"```market details tcs```\n\n\n";
       index = 0;
       for (let admin of groupAdmins) {
         index += 1;
