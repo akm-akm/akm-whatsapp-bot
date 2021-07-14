@@ -79,7 +79,7 @@ async function main() {
         const sender = isGroup ? xxx.participant : xxx.key.remoteJid;
         const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
         const groupName = isGroup ? groupMetadata.subject : "";
-        const infor = await settingread(body, from, sender, groupName, client);
+        const infor = await settingread(body, from, sender, groupName, client,groupMetadata);
        
         if (
           infor.noofmsgtoday > 30 ||
@@ -90,7 +90,7 @@ async function main() {
           return;
        console.log(infor);
     
-
+     
         switchcase(infor, client, xxx);
       } catch (error) {
         console.log(error);
@@ -123,7 +123,7 @@ async function isauthenticationfilepresent() {
    
 }
 
-main();
+//main();
 module.exports.main = main;
 module.exports.logout = logout;
 module.exports.stop = stop;

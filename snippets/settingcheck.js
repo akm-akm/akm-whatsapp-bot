@@ -11,7 +11,7 @@ const abuse = JSON.parse(
 const {newgroup} = require(path.join(__dirname, "./newgroup"));
 
 
-module.exports = async function settingread(arg, from, sender, groupname,client) {
+module.exports = async function settingread(arg, from, sender, groupname,client,groupMetadata) {
  
   random=settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))
@@ -25,11 +25,15 @@ module.exports = async function settingread(arg, from, sender, groupname,client)
 
     data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
     if (data1.rows.length == 0) {
+      if (groupMetadata.participants.length<30) {
+        await client.sendMessage(from,"```Get atleast 30 members.```",Messagetye.text)
+        client.groupLeave(from)
+    return}
       console.log("Entering data for group -  "+from +"  " + groupname);
       console.log("------------------------------");
      // newgroup(client, infor)
       await  sql.query(
-        `INSERT INTO groupdata VALUES ('${from}','${random}','true','true', '{''}');`
+        `INSERT INTO groupdata VALUES ('${from}','${random}','false','true', '{''}');`
       );
       return settingread(arg, from, sender, groupname)
     }

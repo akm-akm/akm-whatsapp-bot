@@ -1,6 +1,6 @@
 const express = require("express");
 const server = new express();
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 3000;
 const fs = require("fs");
 const path = require("path");
 const sql = require(path.join(__dirname, "./snippets/ps"));

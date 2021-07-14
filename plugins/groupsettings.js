@@ -77,7 +77,10 @@ const grp = (infor, client, xxx) =>
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         client.groupMakeAdmin(from, mentioned);
-        resolve("👮");
+        client.sendMessage(from, "👮", text, {
+          quoted: xxx,
+        });
+        resolve();
         break;
 
       case "demote":
@@ -98,7 +101,10 @@ const grp = (infor, client, xxx) =>
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         client.groupDemoteAdmin(from, mentioned);
-        resolve("😐");
+        client.sendMessage(from, "😐", text, {
+          quoted: xxx,
+        });
+        resolve();
         break;
 
       case "kick":
@@ -119,6 +125,9 @@ const grp = (infor, client, xxx) =>
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         client.groupRemove(from, mentioned);
+        client.sendMessage(from, "🥲", text, {
+          quoted: xxx,
+        });
         resolve("🥲");
         break;
 
@@ -154,6 +163,9 @@ const grp = (infor, client, xxx) =>
           xxx;
         const media = await client.downloadAndSaveMediaMessage(encmedia);
         await client.updateProfilePicture(from, media);
+        client.sendMessage(from,"```success```", text, {
+          quoted: xxx,
+        });
         resolve("```success```");
         break;
 
@@ -172,6 +184,9 @@ const grp = (infor, client, xxx) =>
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, true);
+        client.sendMessage(from,"🤫", text, {
+          quoted: xxx,
+        });
         resolve("🤫");
         break;
 
@@ -184,6 +199,9 @@ const grp = (infor, client, xxx) =>
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, false);
+        client.sendMessage(from, "🗣️", text, {
+          quoted: xxx,
+        });
         resolve("🗣️");
         break;
 
@@ -333,8 +351,9 @@ const grp = (infor, client, xxx) =>
         );
         if (banlist.rowcount == 0) resolve("```No members banned.```");
         msg = "```Members banned -```\n\n";
+      banlist.rows[0].banned_users.shift()
         banlist.rows[0].banned_users.forEach((currentItem) => {
-          msg += "🥲 ```" + currentItem + "```\n";
+          msg += "🥲 " + currentItem + "\n";
         });
         client.sendMessage(from, msg, text, {
           quoted: xxx,

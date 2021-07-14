@@ -150,7 +150,7 @@
 
     "meme": {
         "usage": "meme",
-        "desc": "```The bot will send a meme from reddit.```",
+        "desc": "```The bot will send a random meme.```",
         "eg": "meme"
     },
 

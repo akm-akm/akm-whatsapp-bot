@@ -9,23 +9,22 @@ const {
 const {
   text
 } = MessageType;
-
+zz="\n💻 *Running since:* "
++ Math.floor((process.uptime()))
++ " ```seconds```"
 const help = (infor,client,xxx) =>
   new Promise( (resolve, reject) => {
     arg = infor.arg
     from=infor.from;
-   
-
     prefix=infor.groupdata.prefix
     var msg;
-    
     if (arg.length ==1) {
     c=  prefix==undefined? "```Not needed in inbox```" : prefix 
     if(prefix==undefined) prefix='✨'
       msg =
-        "🤖 *AKM-BOT Command List* 🤖\n\n🎀 *Prefix:* " 
+        "🤖 *XXX-BOT Command List* 🤖\n\n🎀 *Prefix:* " 
         +c+
-        "\n\n📗 *General*\n ```help, groupinfo, limit```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, meme, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n"+prefix+"help crypto\n"+prefix+"help shorturl\n"+prefix+"help sticker\n";
+        "\n\n📗 *General*\n ```help, limit```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, meme, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n"+prefix+"help crypto\n"+prefix+"help shorturl\n"+prefix+"help sticker\n";
      
       client.sendMessage(from,msg , text, {
         quoted: xxx,
