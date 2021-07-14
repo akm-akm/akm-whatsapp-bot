@@ -62,7 +62,7 @@ module.exports = async function settingread(arg, from, sender, groupname,client,
             .replace(/\s+/g, " ")
             .toLowerCase()
             .startsWith(data1.rows[0].prefix)
-          ? arg=(arg.slice(1).replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://"||"http://"||"www.")?xa:xa.toLowerCase())
+          ? arg=(arg.slice(1).replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://"||"http://"||"www.")||xa.endsWith(".com"||".in"||".org"||".uk")?xa:xa.toLowerCase())
           :  arg=[]
         :  
         arg =( arg.replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://"||"http://"||"www.")?xa:xa.toLowerCase()),
