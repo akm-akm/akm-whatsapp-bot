@@ -58,8 +58,9 @@ $("#submit").click(function (e) {
     method: "post",
     success: function final(res) {
       console.log(res);
-      $("#output").text(JSON.stringify(res));
       $("#submit").prop('disabled', false);
+      $("#submit").text("Run Query");
+      $("#output").text(JSON.stringify(res));
 
     },
     data: {

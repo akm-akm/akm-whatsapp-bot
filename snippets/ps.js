@@ -4,7 +4,15 @@ const heroku = {
   connectionString: process.env.DATABASE_URL,
   ssl: {rejectUnauthorized: false}
 };
-const config = {
+const local = {
+ 
+  user: "postgres",
+  password: "root",
+  host: "localhost",
+  port: "5432",
+  database:"bottest"
+};
+const qovery = {
  
   user: "postgres",
   password: "root",
