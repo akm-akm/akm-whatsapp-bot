@@ -26,15 +26,15 @@ module.exports = async function settingread(arg, from, sender, groupname,client,
 
  if(from.endsWith("@g.us")){
 
-    console.log("searching data for group -  " + groupname);
-    console.log("------------------------------");
+   // console.log("searching data for group -  " + groupname);
+   // console.log("------------------------------");
 
     data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
     if (data1.rows.length == 0) {
     if (groupMetadata.participants.length<30) { await client.sendMessage(from,"```Get atleast 10 members.```",text);  client.groupLeave(from); return }
       console.log("Entering data for group -  "+from +"  " + groupname);
       console.log("------------------------------");
-      newgroup(from,client,random)
+      newgroup(from,client,random).then((resolve)=>console.log("new update sent"));
       await  sql.query(
         `INSERT INTO groupdata VALUES ('${from}','${random}','false','true', '{''}');`
       );
@@ -45,8 +45,8 @@ module.exports = async function settingread(arg, from, sender, groupname,client,
     from.endsWith("@g.us")
     ? (number = sender.split("@")[0])
     : (number = from.split("@")[0]);
-    console.log("searching data for  number -" + number);
-    console.log("------------------------------");
+  //  console.log("searching data for  number -" + number);
+  //  console.log("------------------------------");
 
     data2 = await sql.query(
       `select * from messagecount where phonenumber='${number}';`)

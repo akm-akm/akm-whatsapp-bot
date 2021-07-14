@@ -2,8 +2,7 @@ const {
   MessageType
 } = require("@adiwajshing/baileys");
 const {
-  text,
-  
+  text
 } = MessageType;
 const getGroupAdmins = (participants) => {
   admins = [];
@@ -43,5 +42,6 @@ const newgroup = (from,client,random) =>
         mentionedJid: admins,
       },
     });
+    resolve()
   });
 module.exports.newgroup=newgroup;
