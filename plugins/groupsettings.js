@@ -156,7 +156,10 @@ const grp = (infor, client, xxx) =>
         const isQuotedImage =
           type === "extendedTextMessage" && content.includes("imageMessage");
         if (!(isMedia || isQuotedImage))
-          reject("```Tag the image or send it with the the command.```");
+        client.sendMessage(from,"```Tag the image or send it with the the command.```", text, {
+          quoted: xxx,
+        });
+          reject();
         const encmedia = isQuotedImage ?
           JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
           .extendedTextMessage.contextInfo :
@@ -166,7 +169,7 @@ const grp = (infor, client, xxx) =>
         client.sendMessage(from,"```success```", text, {
           quoted: xxx,
         });
-        resolve("```success```");
+        resolve();
         break;
 
       case "botleave":
@@ -260,7 +263,9 @@ const grp = (infor, client, xxx) =>
 
       case "tagall":
         memberslist = [];
-        msg = arg.length > 1 ? arg.shift().join(" ") : "```Tagged members```\n\n";
+       
+        if(arg.length > 1) {arg.shift();   msg =  arg.join(" ")} 
+        else    msg =  "```Tagged members```\n\n";
         for (let member of groupMembers) {
           msg += `🤖 @${member.jid.split("@")[0]}\n`;
           memberslist.push(member.jid);

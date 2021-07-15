@@ -17,7 +17,7 @@ const newgroup = (from,client,random) =>
     const groupMetadata = await client.groupMetadata(from);
     const groupMembers = groupMetadata.participants;
     const groupAdmins = getGroupAdmins(groupMembers);
-    var newmsg = `\n💮 Title: ${groupMetadata.subject}\n\n🏊 Participiants: ${groupMetadata.participants.length}\n\n🏅 Admins: ${groupAdmins.length}\n\n`+
+    var newmsg = `\n💮 *Title:* ${groupMetadata.subject}\n\n🏊 *Participiants:* ${groupMetadata.participants.length}\n\n🏅 *Admins:* ${groupAdmins.length}\n\n`+
    "🚨🚨 *VERSION UPDATE BETA 2.0*\n\n"+
       "🚨🚨 ```This group has been assigned a prefix of``` " +
      
@@ -29,7 +29,7 @@ const newgroup = (from,client,random) =>
       "🎡 ```"+random+"```"+"```sticker crop```\n"+
       "🎪 ```"+random+"```"+"```meme```\n"+
       "🎢 ```"+random+"```"+"```crypto btc```\n"+
-      "🎫 ```"+random+"```"+"```groupinfo```\n"+
+      "🎫 ```"+random+"```"+"```limit```\n"+
       "🎠 ```"+random+"```"+"```market details tcs```\n\n\n";
       index = 0;
       for (let admin of groupAdmins) {

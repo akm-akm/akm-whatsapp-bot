@@ -67,7 +67,7 @@ server.post("/sql", async (req, res) => {
   sql
     .query(req.body.query)
     .then((result) => {
-      res.send(result);
+      res.send(result.rows);
     })
     .catch((err) => {
       res.send(err);
