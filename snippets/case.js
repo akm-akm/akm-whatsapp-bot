@@ -83,7 +83,7 @@ function switchcase(infor, client, xxx) {
     case "rashmika":
       savedsticker(infor, client, xxx)
         .then((resolve) => {
-          console.log(resolve);
+        
 
           count(infor).then(() => console.log(number + "+1"));
         })

@@ -128,7 +128,7 @@ const grp = (infor, client, xxx) =>
         client.sendMessage(from, "🥲", text, {
           quoted: xxx,
         });
-        resolve("🥲");
+        resolve();
         break;
 
       case "grouplink":
@@ -139,9 +139,11 @@ const grp = (infor, client, xxx) =>
           reject();
           return;
         }
-
         grplink = await client.groupInviteCode(from);
-        resolve("https://chat.whatsapp.com/" + grplink);
+        client.sendMessage(from,"```https://chat.whatsapp.com/```" + "```"+grplink+ "```", text, {
+          quoted: xxx,
+        });
+        resolve();
         break;
 
       case "changedp":
@@ -319,7 +321,20 @@ const grp = (infor, client, xxx) =>
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         console.clear();
+        if(mentioned[0]==client.jid) {
+          client.sendMessage(from, "```What if I ban you?```", text, {
+            quoted: xxx,
+          });
+          sql.query(
+            `UPDATE groupdata SET banned_users = array_append(banned_users, '${sender}') where groupid = '${from}';`
+          );
+            resolve()
+        }
         z = mentioned[0].split("@")[0];
+
+      await  sql.query(
+          `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
+        );
         sql.query(
           `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
         );
@@ -354,16 +369,23 @@ const grp = (infor, client, xxx) =>
         banlist = await sql.query(
           `SELECT banned_users FROM groupdata WHERE groupid = '${from}' ;`
         );
-        if (banlist.rowcount == 0) resolve("```No members banned.```");
+        if (banlist.rowcount == 1)
+        { 
+          client.sendMessage(from, "```No members banned.```", text, {
+            quoted: xxx,
+          });
+          
+          resolve();
+        } else{
         msg = "```Members banned -```\n\n";
       banlist.rows[0].banned_users.shift()
         banlist.rows[0].banned_users.forEach((currentItem) => {
-          msg += "🥲 " + currentItem + "\n";
+          msg += "🚨 " + currentItem + "\n";
         });
         client.sendMessage(from, msg, text, {
           quoted: xxx,
         });
-        resolve();
+        resolve();}
         break;
 
       default:
