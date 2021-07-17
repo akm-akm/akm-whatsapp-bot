@@ -3,9 +3,11 @@
 * {
   box-sizing: border-box;
 }
-
+.hidden{
+  display: none;
+}
 body {
-  background: #f6f5f7;
+  background: #1d1d1d;
   display: flex;
   justify-content: center;
   align-items: center;

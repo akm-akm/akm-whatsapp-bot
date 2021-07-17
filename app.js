@@ -1,6 +1,6 @@
 const express = require("express");
 const server = new express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const fs = require("fs");
 const path = require("path");
 const sql = require(path.join(__dirname, "./snippets/ps"));
@@ -9,7 +9,7 @@ const {
   main,
   logout,
   stop,
-  isconnected,isauthenticationfilepresent
+  isconnected,
 } = require(path.join(
   __dirname,
   "./events/events.js"
@@ -31,10 +31,11 @@ server.get("/", (req, res) => {
 
 server.get("/login", async (req, res) => {
   main();
-   let q= await isauthenticationfilepresent()
+  qqr= await sql.query("SELECT to_regclass('auth');")
+
    
-  console.log("server is sending isauthenticationfilepresent - "+ q);
-  if(q=="present") res.send("present")
+  console.log("server is sending isauthenticationfilepresent - "+qqr.rows[0].to_regclass);
+  if(qqr.rows[0].to_regclass=="auth") res.send("present")
  else res.send("absent")
   
 });
@@ -101,9 +102,16 @@ else if(state=="open") res.send("open")
 
 
 server.get("/isauthenticationfilepresent", async (req, res) => {
- let q= await isauthenticationfilepresent()
- console.log("server is sending isauthenticationfilepresent - "+ q);
- if(q=="present") res.send("present")
-else res.send("absent")
+  qq= await sql.query("SELECT to_regclass('auth');")
+  console.log(qq.rows[0].to_regclass);
+  if(qq.rows[0].to_regclass==null) {res.send("absent")
+ console.log("server is sending isauthenticationfilepresent - absent");
+}
+else {res.send("present")
+console.log("server is sending isauthenticationfilepresent - present");
+}
 });
 
+process.on('uncaughtException', function (err) {
+  console.log(err);
+});

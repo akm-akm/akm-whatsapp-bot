@@ -34,6 +34,10 @@ function switchcase(infor, client, xxx) {
   }
 
   switch (arg[0]) {
+
+    case "sourcecode":
+      client.sendMessage(from, '```https://github.com/akm-akm/xxx```', text, { quoted: xxx });
+      break;
     case "crypto":
       crypto(infor, client, xxx)
         .then((resolve) => {
@@ -104,16 +108,16 @@ function switchcase(infor, client, xxx) {
 
       break;
 
-    case "promote":
-    case "demote":
-    case "kick":
-    case "grouplink":
-    case "changedp":
+ //   case "promote":
+ //   case "demote":
+ //   case "kick":
+ //   case "grouplink":
+ //   case "changedp":
     case "botleave":
-    case "close":
-    case "open":
-    case "add":
-    case "purge":
+ //   case "close":
+  //  case "open":
+   // case "add":
+   // case "purge":
     case "tagall":
     case "ban":
     case "unban":

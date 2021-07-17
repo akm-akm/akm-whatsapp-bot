@@ -3,13 +3,89 @@ const client = new WAConnection();
 const path = require("path");
 const fs = require("fs");
 const settingread = require(path.join(__dirname, "../snippets/settingcheck"));
-const fetchauth = require(path.join(__dirname, "./authentication"));
 const { switchcase } = require(path.join(__dirname, "../snippets/case"));
 var qri = require("qr-image");
 const sql = require(path.join(__dirname, "../snippets/ps"));
 const node_cron = require("node-cron");
 
+
+
+
 async function connect() {
+
+  try{
+  auth_result = await sql.query('select * from auth;');
+  console.log('Fetching login data...')
+  auth_row_count = await auth_result.rowCount;
+  if (auth_row_count == 0) {
+      console.log('No login data found!')
+  } else {
+      console.log('Login data found!')
+      auth_obj = {
+          clientID: auth_result.rows[0].clientid,
+          serverToken: auth_result.rows[0].servertoken,
+          clientToken: auth_result.rows[0].clienttoken,
+          encKey: auth_result.rows[0].enckey,
+          macKey: auth_result.rows[0].mackey
+      }
+     client.loadAuthInfo(auth_obj)
+      
+    }
+
+    
+  client.on("qr", (qr) => {
+    qri
+      .image(qr, { type: "png" })
+      .pipe(fs.createWriteStream("./public/qr.png"));
+    console.log("scan the qr above ");
+  });
+  client.on("connecting", () => {
+    console.clear();
+    console.log("connecting...");
+  });
+    await client.connect({timeoutMs: 30 * 1000})
+    client.on("open", () => {
+      console.clear();
+      console.log("connected");
+  
+     
+    
+      console.log(`credentials updated!`);
+      fs.unlink("./public/qr.png", () => {});
+    });
+    const authInfo = client.base64EncodedAuthInfo();
+    load_clientID = authInfo.clientID;
+    load_serverToken = authInfo.serverToken;
+    load_clientToken = authInfo.clientToken;
+    load_encKey = authInfo.encKey;
+    load_macKey = authInfo.macKey;
+  
+    if (auth_row_count == 0) {
+      console.log('Inserting login data...')
+      sql.query('INSERT INTO auth VALUES($1,$2,$3,$4,$5);',[load_clientID,load_serverToken,load_clientToken,load_encKey,load_macKey])
+      console.log('New login data inserted!')
+  } else {
+      console.log('Updating login data....')
+      sql.query('UPDATE auth SET clientid = $1, servertoken = $2, clienttoken = $3, enckey = $4, mackey = $5;',[load_clientID,load_serverToken,load_clientToken,load_encKey,load_macKey])
+      sql.query('commit;')
+      console.log('Login data updated!')
+  }
+   
+
+  } catch {
+      console.log('Creating database...')
+      await sql.query('CREATE TABLE IF NOT EXISTS auth(clientID text, serverToken text, clientToken text, encKey text, macKey text);');
+      await connect();
+  }
+
+}
+
+async function connectx() {
+
+
+  try {
+    
+
   client.on("qr", (qr) => {
     qri
       .image(qr, { type: "png" })
@@ -24,95 +100,50 @@ async function connect() {
     console.clear();
     console.log("connected");
 
-    fs.writeFileSync(
-      path.join(__dirname, "../data/authentication.json"),
-      JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
-    );
-    console.log(`credentials updated!`);
-    fs.unlink("./public/qr.png", () => {});
-  });
-  fs.existsSync(path.join(__dirname, "../data/authentication.json")) &&
-    client.loadAuthInfo(path.join(__dirname, "../data/authentication.json"));
-  await client.connect({
-    timeoutMs: 30 * 1000,
-  });
-  console.clear();
-  client.autoReconnect = ReconnectMode.onConnectionLost;
-  client.connectOptions.maxRetries = 100;
-  console.log("Hello " + client.user.name);
-  fs.writeFileSync(
-    "./data/authentication.json",
-    JSON.stringify(client.base64EncodedAuthInfo(), null, "\t")
-  );
-}
-
-async function auth() {
-  client.on("qr", (qr) => {
-    qri
-      .image(qr, { type: "png" })
-      .pipe(fs.createWriteStream("./public/qr.png"));
-    console.log("scan the qr above ");
-  });
-  da = await fetchauth();
-  console.log("da=" + da);
-  if (da[auth_row_count] == 1) {
-    client.loadAuthInfo(da[auth_obj]);
-  }
-  client.on("connecting", () => {
-    console.log("Connecting...");
-  });
-  client.on("open", () => {
-    console.clear();
-    console.log("Connected!");
-  });
-  await client.connect({ timeoutMs: 30 * 1000 });
-
-  client.on("open", () => {
-    console.clear();
-    console.log("connected");
-
-    console.log(`credentials updated!`);
-    fs.unlink("./public/qr.png", () => {});
-  });
-
-  const authInfo = client.base64EncodedAuthInfo();
-  load_clientID = authInfo.clientID;
-  load_serverToken = authInfo.serverToken;
-  load_clientToken = authInfo.clientToken;
-  load_encKey = authInfo.encKey;
-  load_macKey = authInfo.macKey;
-
-  if (da[auth_row_count] == 0) {
-    console.log("Inserting login data...");
-    sql.query("INSERT INTO auth VALUES($1,$2,$3,$4,$5);", [
+    const authInfo = client.base64EncodedAuthInfo();
+    load_clientID = authInfo.clientID;
+    load_serverToken = authInfo.serverToken;
+    load_clientToken = authInfo.clientToken;
+    load_encKey = authInfo.encKey;
+    load_macKey = authInfo.macKey;
+    sql.query( "UPDATE auth SET clientid = $1, servertoken = $2, clienttoken = $3, enckey = $4, mackey = $5;", [
       load_clientID,
       load_serverToken,
       load_clientToken,
       load_encKey,
       load_macKey,
     ]);
-    sql.query("commit;");
-    console.log("New login data inserted!");
-  } else {
-    console.log("Updating login data....");
-    sql.query(
-      "UPDATE auth SET clientid = $1, servertoken = $2, clienttoken = $3, enckey = $4, mackey = $5;",
-      [
-        load_clientID,
-        load_serverToken,
-        load_clientToken,
-        load_encKey,
-        load_macKey,
-      ]
-    );
-    sql.query("commit;");
-    console.log("Login data updated!");
-  }
+
+   
+    console.log(`credentials updated!`);
+    fs.unlink("./public/qr.png", () => {});
+  });
+
+  await sql.query('CREATE TABLE auth(clientID text, serverToken text, clientToken text, encKey text, macKey text);');
+
+  fs.existsSync(path.join(__dirname, "../data/authentication.json")) &&
+    client.loadAuthInfo(path.join(__dirname, "../data/authentication.json"));
+
+
+  await client.connect({
+    timeoutMs: 30 * 1000,
+  });
+  
+
+
+} catch (error) {
+  await sql.query('CREATE TABLE auth(clientID text, serverToken text, clientToken text, encKey text, macKey text);');
+  connect();
 }
+}
+
+
+
+
 
 async function main() {
   try {
-    // console.clear();
+    console.clear();
     client.logger.level = "fatal";
     await connect();
     console.clear();
@@ -188,21 +219,14 @@ async function isconnected() {
 }
 async function logout() {
   client.clearAuthInfo();
-  fs.existsSync(path.join(__dirname, "../data/authentication.json")) &&
-    fs.unlinkSync(path.join(__dirname, "../data/authentication.json"));
+  sql.query("truncate TABLE auth;")
   client.close();
   console.clear();
   console.log("Logged out");
 }
-async function isauthenticationfilepresent() {
-  return fs.existsSync(path.join(__dirname, "../data/authentication.json"))
-    ? "present"
-    : "absent";
-}
 
-//main();
+ main();
 module.exports.main = main;
 module.exports.logout = logout;
 module.exports.stop = stop;
 module.exports.isconnected = isconnected;
-module.exports.isauthenticationfilepresent = isauthenticationfilepresent;

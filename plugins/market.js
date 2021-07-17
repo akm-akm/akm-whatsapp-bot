@@ -238,7 +238,7 @@ const market = (infor,client,xxx) =>
               if (response.error) {
                 console.log("err");
               } else {
-                console.log(response);
+              
                 msg =
                 "*Search Result* 🔎\n" 
                 response.data.forEach((element) => {
@@ -288,7 +288,7 @@ const market = (infor,client,xxx) =>
                 console.log("err");
               } else if (response.data.data.length == 0) {
                 msg = "```Not Found```";
-                console.log(msg);
+               
               } else {
                 element = response.data.data[0];
 
