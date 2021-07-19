@@ -14,7 +14,7 @@ const {
   __dirname,
   "./events/events.js"
 ));
-var autoconnect;
+var autoconnect=false;
 
 
 server.use(express.static(path.join(__dirname, "./public")));
