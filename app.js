@@ -18,15 +18,6 @@ var autoconnect=false;
 
 
 server.use(express.static(path.join(__dirname, "./public")));
-setInterval(async () => {
-  if(autoconnect){
-    let state= await isconnected()
-    if(state=="close") {main()}
-   else if(state=="connecting") {}
-   else if(state=="open") {console.log("already connected");}
-   
-    main();}
-}, 60000*5);
 
 
 server.listen(port, () => {
