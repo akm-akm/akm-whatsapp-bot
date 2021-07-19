@@ -173,7 +173,7 @@ async function logout() {
   console.log("Logged out");
 }
 
-main();
+//main();
 module.exports.main = main;
 module.exports.logout = logout;
 module.exports.stop = stop;
