@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config()
 const server = new express();
 const port = process.env.PORT || 5000;
 const fs = require("fs");
@@ -15,6 +16,9 @@ const {
   "./events/events.js"
 ));
 var autoconnect=false;
+node_cron.schedule(process.env.CRON, async () => {
+  sql.query(`UPDATE messagecount set totalmsgtoday=0;`);
+});
 
 
 server.use(express.static(path.join(__dirname, "./public")));

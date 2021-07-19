@@ -22,7 +22,7 @@ const pinterest = (infor,client,xxx) =>
     ran = getRandom("mp4");   
     axios
       .get(
-        `https://keepsaveit.com/api?api_key=${process.env.keepsaveit}&url=` + encodeURIComponent(arg[1])
+        `https://KEEPSAVEIT_API.com/api?api_key=${process.env.KEEPSAVEIT_API}&url=` + encodeURIComponent(arg[1])
       )
       .then((response) => {
         if (response.error) console.log("err");
