@@ -4,7 +4,7 @@ const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
-const { sticker } = MessageType;
+const { text,sticker } = MessageType;
 
 const stickermaker = (infor,client,xxx) =>
   new Promise(async (resolve, reject) => {
@@ -198,6 +198,6 @@ const stickermaker = (infor,client,xxx) =>
         }
       }
     }
-    ///////////////video//////////////////
+    client.sendMessage(from, "```Tag the media or send it with the command.```", text, {quoted: xxx});
   });
 module.exports.stickermaker = stickermaker;

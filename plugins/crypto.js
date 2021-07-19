@@ -34,14 +34,14 @@ const crypto = (infor,client,xxx) =>
     from=infor.from;
 
     if (arg.length==1     ){
-      client.sendMessage(from, "```Argument required```", text, {
+      client.sendMessage(from, "```Enter coin symbol.```", text, {
         quoted: xxx,
       });
       reject()
     return}
     if (!coins.includes(arg[1].toUpperCase())) {
    
-      client.sendMessage(from,  "```Not listed in coinmarketcap```", text, {
+      client.sendMessage(from,  "```Not listed in coinmarketcap.```", text, {
         quoted: xxx,
       });
       resolve();

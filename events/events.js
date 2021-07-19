@@ -145,7 +145,7 @@ async function main() {
           infor.arg.length == 0
         )
           return;
-        console.table(infor);
+        console.log(infor);
 
         switchcase(infor, client, xxx);
       } catch (error) {

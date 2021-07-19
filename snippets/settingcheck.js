@@ -31,7 +31,7 @@ module.exports = async function settingread(arg, from, sender, groupname,client,
 
     data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
     if (data1.rows.length == 0) {
-    //if (groupMetadata.participants.length<30) { await client.sendMessage(from,"```Get atleast 15 members.```",text);  client.groupLeave(from); return }
+    //if (groupMetadata.participants.length<30) { await client.sendMessage(from,"```Get atleast 30 members.```",text);  client.groupLeave(from); return }
       console.log("Entering data for group -  "+from +"  " + groupname);
       console.log("------------------------------");
       newgroup(from,client,random).then((resolve)=>console.log("new update sent"));
@@ -68,10 +68,10 @@ module.exports = async function settingread(arg, from, sender, groupname,client,
             .replace(/\s+/g, " ")
             .toLowerCase()
             .startsWith(data1.rows[0].prefix)
-          ? arg=(arg.slice(1).replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://"||"http://"||"www.")||xa.endsWith(".com"||".in"||".org"||".uk")?xa:xa.toLowerCase())
+          ? arg=(arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").slice(1).replace(/^\s+|\s+$/g, "").split(" ")).map(xa => xa.startsWith("https://"||"http://"||"www.")||xa.endsWith(".com"||".in"||".org"||".uk")?xa:xa.toLowerCase())
           :  arg=[]
         :  
-        arg =( arg.replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://"||"http://"||"www.")?xa:xa.toLowerCase()),
+        arg =( arg.replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://"||"http://"||"www.")||xa.endsWith(".com"||".in"||".org"||".uk")?xa:xa.toLowerCase()),
       number:number,  
       noofmsgtoday: data2.rows[0].totalmsgtoday,
       abusepresent:from.endsWith("@g.us")?data1.rows[0].allowabuse==0? abuse.abuse.filter(e => arg.indexOf(e) !== -1):[]:abuse.abuse.filter(e => arg.indexOf(e) !== -1),

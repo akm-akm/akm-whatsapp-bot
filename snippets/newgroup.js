@@ -26,7 +26,7 @@ const newgroup = (from,client,random) =>
       "🚨🚨 ```Type``` "+"```"+random+"```"+"```help to see the list of commands bot can follow.```\n\n\n"+
       "🎀 ```Example :```\n\n"+
       "🎡 ```"+random+"```"+"```sticker crop```\n"+
-      "🎪 ```"+random+"```"+"```meme```\n"+
+      "🎪 ```"+random+"```"+"```rs```\n"+
       "🎢 ```"+random+"```"+"```crypto btc```\n"+
       "🎫 ```"+random+"```"+"```limit```\n"+
       "🎠 ```"+random+"```"+"```market details tcs```\n\n\n";
