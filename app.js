@@ -20,7 +20,7 @@ var autoconnect;
 server.use(express.static(path.join(__dirname, "./public")));
 setInterval(() => {
   if(autoconnect){
-    login();}
+    main();}
 }, 60000*5);
 
 
