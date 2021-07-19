@@ -21,10 +21,6 @@
         "answer":"Javascript❤️nodejs❤️postgresql"
     },
     {
-        "question":"Can I get the source code?",
-        "answer":"The source code will be available for everyone to use, once the stable version is released."
-    },
-    {
         "question":"How does the bot detect abuse?",
         "answer":"It searches for the abuse in its database containing 500 words."
     },

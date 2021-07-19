@@ -14,6 +14,16 @@ const {
   __dirname,
   "./events/events.js"
 ));
+var autoconnect;
+
+
+server.use(express.static(path.join(__dirname, "./public")));
+setInterval(() => {
+  if(autoconnect){
+    login();}
+}, 60000*5);
+
+
 server.listen(port, () => {
   console.clear();
   console.log("\nRunnning on http://localhost:" + port);
@@ -23,17 +33,16 @@ server.use(
     extended: true,
   })
 );
-const pass = "akm21";
-server.use(express.static('public'))
+
+
 server.get("/", (req, res) => {
   res.sendFile("index.html");
 });
 
 server.get("/login", async (req, res) => {
   main();
+  autoconnect=true;
   qqr= await sql.query("SELECT to_regclass('auth');")
-
-   
   console.log("server is sending isauthenticationfilepresent - "+qqr.rows[0].to_regclass);
   if(qqr.rows[0].to_regclass=="auth") res.send("present")
  else res.send("absent")
@@ -42,11 +51,13 @@ server.get("/login", async (req, res) => {
 
 server.get("/logout", async (req, res) => {
   logout();
+  autoconnect=false;
   res.send("1")
 });
 
 server.get("/stop", async (req, res) => {
   console.log("stop");
+  autoconnect=false;
   stop();
   res.send("1")
 });

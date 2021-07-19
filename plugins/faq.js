@@ -6,20 +6,20 @@ const {
 const faq = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/faq.json"))
 );
-msg = "🤖 *XXX-BOT FAQs* 🤖\n\n";
+msgl = "🤖 *XXX-BOT FAQs* 🤖\n\n";
 const faqs = (infor, client, xxx) =>
   new Promise((resolve, reject) => {
     faq.forEach((element) => {
      
-      msg +=
-        "🤔 ```" +
+      msgl +=
+        "🤔 *" +
         element.question +
-        "```\n\n" +
+        "*\n" +
         "😐 ```" +
         element.answer +
         "```\n\n\n";
     });
-    client.sendMessage(infor.from, msg, MessageType.text, {
+    client.sendMessage(infor.from, msgl, MessageType.text, {
       quoted: xxx,
     });
     resolve();
