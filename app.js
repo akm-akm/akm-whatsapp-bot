@@ -18,7 +18,7 @@ var autoconnect;
 
 
 server.use(express.static(path.join(__dirname, "./public")));
-setInterval(() => {
+setInterval(async () => {
   if(autoconnect){
     let state= await isconnected()
     if(state=="close") {main()}
