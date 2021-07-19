@@ -80,63 +80,6 @@ async function connect() {
 
 }
 
-async function connectx() {
-
-
-  try {
-    
-
-  client.on("qr", (qr) => {
-    qri
-      .image(qr, { type: "png" })
-      .pipe(fs.createWriteStream("./public/qr.png"));
-    console.log("scan the qr above ");
-  });
-  client.on("connecting", () => {
-    console.clear();
-    console.log("connecting...");
-  });
-  client.on("open", () => {
-    console.clear();
-    console.log("connected");
-
-    const authInfo = client.base64EncodedAuthInfo();
-    load_clientID = authInfo.clientID;
-    load_serverToken = authInfo.serverToken;
-    load_clientToken = authInfo.clientToken;
-    load_encKey = authInfo.encKey;
-    load_macKey = authInfo.macKey;
-    sql.query( "UPDATE auth SET clientid = $1, servertoken = $2, clienttoken = $3, enckey = $4, mackey = $5;", [
-      load_clientID,
-      load_serverToken,
-      load_clientToken,
-      load_encKey,
-      load_macKey,
-    ]);
-
-   
-    console.log(`credentials updated!`);
-    fs.unlink("./public/qr.png", () => {});
-  });
-
-  await sql.query('CREATE TABLE auth(clientID text, serverToken text, clientToken text, encKey text, macKey text);');
-
-  fs.existsSync(path.join(__dirname, "../data/authentication.json")) &&
-    client.loadAuthInfo(path.join(__dirname, "../data/authentication.json"));
-
-
-  await client.connect({
-    timeoutMs: 30 * 1000,
-  });
-  
-
-
-} catch (error) {
-  await sql.query('CREATE TABLE auth(clientID text, serverToken text, clientToken text, encKey text, macKey text);');
-  connect();
-}
-}
-
 
 
 

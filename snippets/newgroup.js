@@ -18,7 +18,6 @@ const newgroup = (from,client,random) =>
     const groupMembers = groupMetadata.participants;
     const groupAdmins = getGroupAdmins(groupMembers);
     var newmsg = `\n💮 *Title:* ${groupMetadata.subject}\n\n🏊 *Participiants:* ${groupMetadata.participants.length}\n\n🏅 *Admins:* ${groupAdmins.length}\n\n`+
-   "🚨🚨 *VERSION UPDATE BETA 2.0*\n\n"+
       "🚨🚨 ```This group has been assigned a prefix of``` " +
      
       random +
