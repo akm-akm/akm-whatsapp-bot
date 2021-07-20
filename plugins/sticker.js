@@ -198,6 +198,6 @@ const stickermaker = (infor,client,xxx) =>
         }
       }
     }
-    client.sendMessage(from, "```Tag the media or send it with the command.```", text, {quoted: xxx});
+  else  client.sendMessage(from, "```Tag the media or send it with the command.```", text, {quoted: xxx});
   });
 module.exports.stickermaker = stickermaker;
