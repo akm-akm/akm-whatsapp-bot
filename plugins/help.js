@@ -16,7 +16,7 @@ const help = (infor, client, xxx) =>
       c = prefix == undefined ? "```Not needed in inbox```" : prefix;
       if (prefix == undefined) prefix = "✨";
       msg =
-        "🤖 *XXX-BOT Command List* 🤖\n\n💡 *Prefix*  " +
+        "🤖 *XXX-BOT Command List* 🤖\n\n💡 *Prefix:*  " +
         c +
         "\n\n📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n" +
         prefix +

@@ -1,0 +1,19 @@
+{
+	"jid": "919709094733-1626697947@g.us",
+	"t": 1626982271,
+	"hasNewMessage": true,
+	"messages": [
+		{
+			"key": {
+				"remoteJid": "919709094733-1626697947@g.us",
+				"fromMe": true,
+				"id": "11E6EBCD60B284FAE13193F1A328191B"
+			},
+			"message": {
+				"conversation": "hi"
+			},
+			"messageTimestamp": "1626982271",
+			"status": "ERROR"
+		}
+	]
+}
