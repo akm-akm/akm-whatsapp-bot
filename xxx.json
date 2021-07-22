@@ -1,19 +1,29 @@
 {
 	"jid": "919709094733-1626697947@g.us",
-	"t": 1626982271,
+	"t": 1626983408,
 	"hasNewMessage": true,
 	"messages": [
 		{
 			"key": {
 				"remoteJid": "919709094733-1626697947@g.us",
 				"fromMe": true,
-				"id": "11E6EBCD60B284FAE13193F1A328191B"
+				"id": "3EB0F30FAF59"
 			},
 			"message": {
-				"conversation": "hi"
+				"extendedTextMessage": {
+					"text": "```Hello```",
+					"contextInfo": {
+						"stanzaId": "366583FF906EB806BEA10F771523BF65",
+						"participant": "15635264301@s.whatsapp.net",
+						"quotedMessage": {
+							"conversation": "-hi"
+						}
+					}
+				}
 			},
-			"messageTimestamp": "1626982271",
-			"status": "ERROR"
+			"messageTimestamp": "1626983408",
+			"status": "SERVER_ACK",
+			"participant": "17122205956@s.whatsapp.net"
 		}
 	]
 }
