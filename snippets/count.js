@@ -8,6 +8,3 @@ const count= (infor) =>new Promise((resolve, reject) => {
 });
 module.exports.count = count;
 
-
-
-//

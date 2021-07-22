@@ -21,7 +21,7 @@ const qovery = {
   database:"bottest"
 };
 
-const sql = new Pool(heroku);
+const sql = new Pool(local);
 module.exports = {
     query: (text, params) => sql.query(text, params)
 }

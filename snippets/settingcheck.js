@@ -17,7 +17,7 @@ const {
   
 } = MessageType;
 
-module.exports = async function settingread(arg, from, sender, groupname,client,groupMetadata) {
+module.exports = async function settingread(arg, from, sender, groupname,client,groupMetadata,stanzaId) {
  
   random=settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))
@@ -77,7 +77,8 @@ module.exports = async function settingread(arg, from, sender, groupname,client,
       abusepresent:from.endsWith("@g.us")?data1.rows[0].allowabuse==0? abuse.abuse.filter(e => arg.indexOf(e) !== -1):[]:abuse.abuse.filter(e => arg.indexOf(e) !== -1),
       isnumberblockedingroup:from.endsWith("@g.us")? data1.rows[0].banned_users.includes(number) ? 1 : 0:0,
       groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,
-      sender:sender
+      sender:sender,
+      stanzaId:stanzaId
     })
 
 

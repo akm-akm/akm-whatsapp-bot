@@ -9,6 +9,11 @@
         "desc": "```The bot will reply even if it is abused.```",
         "eg": "allowabuse"
     },
+    "delete": {
+        "usage": "delete",
+        "desc": "```The bot will delete its message that is tagged.```",
+        "eg": "delete"
+    },
     "denyabuse": {
         "usage": "denyabuse",
         "desc": "```The bot will not reply if the command conatains any cuss word. Also, it will abuse back.```",

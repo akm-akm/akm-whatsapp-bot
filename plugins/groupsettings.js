@@ -339,7 +339,7 @@ const grp = (infor, client, xxx) =>
           `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
         );
 
-        client.sendMessage(from, "🥲", text, {
+        client.sendMessage(from, "🥲 ```Done```", text, {
           quoted: xxx,
         });
         resolve();
@@ -359,7 +359,7 @@ const grp = (infor, client, xxx) =>
         sql.query(
           `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
         );
-        client.sendMessage(from, "🙂", text, {
+        client.sendMessage(from, "🙂 ```Done```", text, {
           quoted: xxx,
         });
         resolve();
@@ -368,7 +368,7 @@ const grp = (infor, client, xxx) =>
       case "banlist":
         banlist = await sql.query(
           `SELECT banned_users FROM groupdata WHERE groupid = '${from}' ;`
-        );
+        );console.log("vvvvvvvvvvvvv"+banlist.rows[0]);
         if (banlist.rowcount == 1)
         { 
           client.sendMessage(from, "```No members banned.```", text, {

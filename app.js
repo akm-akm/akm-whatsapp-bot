@@ -18,9 +18,14 @@ const {
   "./events/events.js"
 ));
 var autoconnect=false;
-node_cron.schedule(process.env.CRON, async () => {
+node_cron.schedule('0 0 * * * * *', async () => {
   sql.query(`UPDATE messagecount set totalmsgtoday=0;`);
 });
+
+
+
+
+
 
 
 server.use(express.static(path.join(__dirname, "./public")));
@@ -125,6 +130,4 @@ console.log("server is sending isauthenticationfilepresent - present");
 }
 });
 
-process.on('uncaughtException', function (err) {
-  console.log(err);
-});
+process.on('uncaughtException',err=>console.log(err));

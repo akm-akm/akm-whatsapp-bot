@@ -97,24 +97,28 @@ async function main() {
 
     console.log("Hello " + client.user.name);
     node_cron.schedule(process.env.CRON, async () => {
-   
       console.log("Clearing All Chats");
       for (let { jid } of client.chats.all()) {
-        await client.modifyChat(jid, "delete");
-        await client.modifyChat(jid, "clear", {});
+        await client.modifyChat(jid, ChatModification.delete);
         console.log("Cleared all Chats!");
       }
     });
 
-    client.on("chat-update", async (xxx) => {
+    client.on("chat-update", async (xxxx) => {
       try {
-        if (!xxx.hasNewMessage) return;
-        xxx = xxx.messages.all()[0];
+        if (!xxxx.hasNewMessage) return;
+        fs.writeFileSync("./xxx.json", JSON.stringify(xxxx, null, "\t"));
+        xxx = xxxx.messages.all()[0];
         if (!xxx.message) return;
         if (xxx.key && xxx.key.remoteJid == "status@broadcast") return;
         if (xxx.key.fromMe) return;
         const from = xxx.key.remoteJid;
         const type = Object.keys(xxx.message)[0];
+        stanzaId =
+        type == "extendedTextMessage"
+          ? xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
+              .stanzaId || null
+          : 0;
         body =
           type === "conversation"
             ? xxx.message.conversation
@@ -125,28 +129,30 @@ async function main() {
             : type == "extendedTextMessage"
             ? xxx.message.extendedTextMessage.text
             : "";
+
         const isGroup = from.endsWith("@g.us");
         const sender = isGroup ? xxx.participant : xxx.key.remoteJid;
         const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
         const groupName = isGroup ? groupMetadata.subject : "";
         const infor = await settingread(
           body,
+
           from,
           sender,
           groupName,
           client,
-          groupMetadata
+          groupMetadata,
+          stanzaId
         );
 
         if (
-          infor.noofmsgtoday > 30 ||
+          infor.noofmsgtoday > process.env.daily_limit ||
           infor.isnumberblockedingroup ||
           infor.arg == null ||
           infor.arg.length == 0
         )
           return;
-        console.log(infor);
-
+          console.log(infor);
         switchcase(infor, client, xxx);
       } catch (error) {
         console.log(error);
@@ -173,7 +179,7 @@ async function logout() {
   console.log("Logged out");
 }
 
-//main();
+main();
 module.exports.main = main;
 module.exports.logout = logout;
 module.exports.stop = stop;
