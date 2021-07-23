@@ -22,7 +22,7 @@ node_cron.schedule('0 0 * * * * *', async () => {
   sql.query(`UPDATE messagecount set totalmsgtoday=0;`);
 });
 
-
+/*
 setInterval(async () => {
   try {
     let state = await isconnected()
@@ -40,7 +40,7 @@ setInterval(async () => {
   }
 }, 1000*60*10);
 
-
+*/
 
 
 server.use(express.static(path.join(__dirname, "./public")));

@@ -13,12 +13,7 @@ const local = {
   database:"bottest"
 };
 const qovery = {
- 
-  user: "postgres",
-  password: "root",
-  host: "localhost",
-  port: "5432",
-  database:"bottest"
+  connectionString: process.env.QOVERY_DATABASE_MY_DB_CONNECTION_URI,
 };
 
 const sql = new Pool(heroku);
