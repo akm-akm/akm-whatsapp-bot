@@ -1,3 +1,474 @@
-{
-	
-}
+[
+  {
+    "groupid": "917802098922-1611417922@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919877246318-1606656887@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919687984953-1605855821@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917987967899-1606918329@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917042768005-1616008858@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919014218064-1609347395@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919993006716-1580796634@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919354578187-1616052917@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "601136012748-1595410653@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "916383805874-1568129037@g.us",
+    "prefix": "#",
+    "allowabuse": true,
+    "membercanusebot": true,
+    "banned_users": [
+      "'",
+      "917542030126",
+      "918446136570",
+      "917979945216",
+      "917098105026"
+    ]
+  },
+  {
+    "groupid": "917545837146-1512465467@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917903952384-1592467386@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919540593456-1610468516@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917905301917-1618556810@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919646170170-1612728546@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917389283811-1577375970@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917558525641-1606135527@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917620261907-1605857124@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918595619557-1605630686@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917350101670-1550336729@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918800104906-1622959614@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917350101670-1523170047@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919560953519-1569771979@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919917257969-1623771167@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919307395138-1626293844@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918222015789-1606030315@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918448616134-1624390040@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917003018603-1602759288@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917906571676-1626951026@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919910994282-1602959237@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919006583673-1619448541@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919709094733-1626697947@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919304546033-1627038993@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919304546033-1627038993@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919304546033-1627038993@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917906571676-1627041667@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919891483984-1581011548@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919483084510-1569206915@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917906571676-1627041667@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918968892200-1604222082@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919304546033-1627041658@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919304546033-1627041658@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918081040660-1604908108@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918858882038-1563950429@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918800104906-1622959614@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919119225030-1585240946@g.us",
+    "prefix": "#",
+    "allowabuse": true,
+    "membercanusebot": true,
+    "banned_users": ["'", "918507674445"]
+  },
+  {
+    "groupid": "916201452935-1624808624@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918800104906-1622959614@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918239291325-1614265471@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918239291325-1614265471@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918239291325-1614265471@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918239291325-1614265471@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918506018830-1609513976@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919465291500-1617085812@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919013722149-1604682527@g.us",
+    "prefix": ".",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": [
+      "'",
+      "919034586646",
+      "919034586646",
+      "917503796231",
+      "918287547079",
+      "919417500396",
+      "919417500396",
+      "919417500396",
+      "919417500396",
+      "919417500396"
+    ]
+  },
+  {
+    "groupid": "918709803505-1613648611@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "918709803505-1613648611@g.us",
+    "prefix": "#",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "917903959739-1621066000@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919709094733-1625408681@g.us",
+    "prefix": "!",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919773722596-1565109318@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919773722596-1565109318@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919773722596-1565109318@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919773722596-1565109318@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919773722596-1565109318@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  },
+  {
+    "groupid": "919773722596-1565109318@g.us",
+    "prefix": "-",
+    "allowabuse": false,
+    "membercanusebot": true,
+    "banned_users": ["'"]
+  }
+]

@@ -17,9 +17,7 @@ const newgroup = (from,client,random) =>
     const groupMetadata = await client.groupMetadata(from);
     const groupMembers = groupMetadata.participants;
     const groupAdmins = getGroupAdmins(groupMembers);
-    var newmsg = `\n💮 *Title:* ${groupMetadata.subject}\n\n🏊 *Participiants:* ${groupMetadata.participants.length}\n\n🏅 *Admins:* ${groupAdmins.length}\n\n`+
-      "🚨🚨 ```This group has been assigned a prefix of``` " +
-     
+    var newmsg = "🚨🚨 ```This group has been assigned a prefix of``` " +
       random +
       "\n```So, every time the bot has to be called, the sentence must start with this prefix.```\n\n" +
 

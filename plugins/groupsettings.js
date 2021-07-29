@@ -39,7 +39,7 @@ const grp = (infor, client, xxx) =>
     const type = Object.keys(xxx.message)[0];
     const content = JSON.stringify(xxx.message);
     const botNumber = client.user.jid;
-    const ownerNumber = [`${setting.ownerNumber}@s.whatsapp.net`];
+    const ownerNumber = [`${process.env.ownerNumber}@s.whatsapp.net`];
     const isBotGroupAdmins = groupAdmins.includes(botNumber) || false;
     const isOwner = ownerNumber.includes(sender);
     if (!isGroup) {
@@ -68,7 +68,7 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg.length == 1) {
-          client.sendMessage(from, "```Argument required```", text, {
+          client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
           reject();
@@ -77,7 +77,7 @@ const grp = (infor, client, xxx) =>
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         client.groupMakeAdmin(from, mentioned);
-        client.sendMessage(from, "👮", text, {
+        client.sendMessage(from, "👮 ```Promoted```", text, {
           quoted: xxx,
         });
         resolve();
@@ -92,7 +92,7 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg.length == 1) {
-          client.sendMessage(from, "```Argument required```", text, {
+          client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
           reject();
@@ -101,7 +101,7 @@ const grp = (infor, client, xxx) =>
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         client.groupDemoteAdmin(from, mentioned);
-        client.sendMessage(from, "😐", text, {
+        client.sendMessage(from, "😐 ```Demoted```", text, {
           quoted: xxx,
         });
         resolve();
@@ -116,7 +116,7 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg.length == 1) {
-          client.sendMessage(from, "```Argument required```", text, {
+          client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
           reject();
@@ -140,7 +140,7 @@ const grp = (infor, client, xxx) =>
           return;
         }
         grplink = await client.groupInviteCode(from);
-        client.sendMessage(from,"```https://chat.whatsapp.com/```" + "```"+grplink+ "```", text, {
+        client.sendMessage(from, "```https://chat.whatsapp.com/```" + "```" + grplink + "```", text, {
           quoted: xxx,
         });
         resolve();
@@ -158,24 +158,24 @@ const grp = (infor, client, xxx) =>
         const isQuotedImage =
           type === "extendedTextMessage" && content.includes("imageMessage");
         if (!(isMedia || isQuotedImage))
-        client.sendMessage(from,"```Tag the image or send it with the the command.```", text, {
-          quoted: xxx,
-        });
-          reject();
+          client.sendMessage(from, "```Tag the image or send it with the the command.```", text, {
+            quoted: xxx,
+          });
+        reject();
         const encmedia = isQuotedImage ?
           JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
           .extendedTextMessage.contextInfo :
           xxx;
         const media = await client.downloadAndSaveMediaMessage(encmedia);
         await client.updateProfilePicture(from, media);
-        client.sendMessage(from,"```success```", text, {
+        client.sendMessage(from, "```success```", text, {
           quoted: xxx,
         });
         resolve();
         break;
 
       case "botleave":
-        await client.sendMessage(from, "```Bye, Miss you all ```🤧", text);
+        await client.sendMessage(from, "🤧 ```Bye, Miss you all ```", text);
         client.groupLeave(from);
         resolve();
         break;
@@ -189,10 +189,10 @@ const grp = (infor, client, xxx) =>
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, true);
-        client.sendMessage(from,"🤫", text, {
+        client.sendMessage(from, "🤫", text, {
           quoted: xxx,
         });
-        resolve("🤫");
+        resolve();
         break;
 
       case "open":
@@ -207,7 +207,7 @@ const grp = (infor, client, xxx) =>
         client.sendMessage(from, "🗣️", text, {
           quoted: xxx,
         });
-        resolve("🗣️");
+        resolve();
         break;
 
       case "add":
@@ -249,7 +249,7 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg[1] != "confirm") {
-          client.sendMessage(from, "```Type confirm after purge```", text, {
+          client.sendMessage(from, "```Type confirm after purge.```", text, {
             quoted: xxx,
           });
           reject();
@@ -265,11 +265,13 @@ const grp = (infor, client, xxx) =>
 
       case "tagall":
         memberslist = [];
-       
-        if(arg.length > 1) {arg.shift();   msg =  arg.join(" ")} 
-        else    msg =  "```Tagged members```\n\n";
+
+        if (arg.length > 1) {
+          arg.shift();
+          msg = arg.join(" ")
+        } else msg = "```Hello 👋```\n\n";
         for (let member of groupMembers) {
-          msg += `🤖 @${member.jid.split("@")[0]}\n`;
+          msg += `\n🤖 @${member.jid.split("@")[0]}\n`;
           memberslist.push(member.jid);
         }
         client.sendMessage(from, msg, extendedText, {
@@ -286,7 +288,7 @@ const grp = (infor, client, xxx) =>
           `UPDATE groupdata SET allowabuse = 'true' WHERE groupid = '${from}';`
         );
 
-        client.sendMessage(from, "🤬", text, {
+        client.sendMessage(from, "🤬 Now the bot will not abuse back if it is abused!", text, {
           quoted: xxx,
         });
         reject();
@@ -300,7 +302,7 @@ const grp = (infor, client, xxx) =>
           `UPDATE groupdata SET allowabuse = 'false' WHERE groupid = '${from}';`
         );
 
-        client.sendMessage(from, "🙏", text, {
+        client.sendMessage(from, "🙏 Now the bot will abuse back if it is abused!", text, {
           quoted: xxx,
         });
         reject();
@@ -311,7 +313,7 @@ const grp = (infor, client, xxx) =>
 
       case "ban":
         if (arg.length == 1) {
-          client.sendMessage(from, "```Argument required```", text, {
+          client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
 
@@ -321,25 +323,25 @@ const grp = (infor, client, xxx) =>
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         console.clear();
-        if(mentioned[0]==client.jid) {
-          client.sendMessage(from, "```What if I ban you?```", text, {
+        if (mentioned[0] == client.jid) {
+          client.sendMessage(from, "```What if I ban you?\nThere you go!```", text, {
             quoted: xxx,
           });
           sql.query(
             `UPDATE groupdata SET banned_users = array_append(banned_users, '${sender}') where groupid = '${from}';`
           );
-            resolve()
+          resolve()
         }
         z = mentioned[0].split("@")[0];
 
-      await  sql.query(
+        await sql.query(
           `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
         );
         sql.query(
           `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
         );
 
-        client.sendMessage(from, "🥲 ```Done```", text, {
+        client.sendMessage(from, "🥲 ```Banned```", text, {
           quoted: xxx,
         });
         resolve();
@@ -347,7 +349,7 @@ const grp = (infor, client, xxx) =>
 
       case "unban":
         if (arg.length == 1) {
-          client.sendMessage(from, "```Argument required```", text, {
+          client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
           reject();
@@ -359,7 +361,7 @@ const grp = (infor, client, xxx) =>
         sql.query(
           `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
         );
-        client.sendMessage(from, "🙂 ```Done```", text, {
+        client.sendMessage(from, "🙂 ```Unbanned```", text, {
           quoted: xxx,
         });
         resolve();
@@ -368,24 +370,24 @@ const grp = (infor, client, xxx) =>
       case "banlist":
         banlist = await sql.query(
           `SELECT banned_users FROM groupdata WHERE groupid = '${from}' ;`
-        );console.log("vvvvvvvvvvvvv"+banlist.rows[0]);
-        if (banlist.rowcount == 1)
-        { 
-          client.sendMessage(from, "```No members banned.```", text, {
+        );
+        if (banlist.rows[0].banned_users.length == 1) {
+          client.sendMessage(from, "🤔 ```No members banned.```", text, {
             quoted: xxx,
           });
-          
+
           resolve();
-        } else{
-        msg = "```Members banned -```\n\n";
-      banlist.rows[0].banned_users.shift()
-        banlist.rows[0].banned_users.forEach((currentItem) => {
-          msg += "🚨 " + currentItem + "\n";
-        });
-        client.sendMessage(from, msg, text, {
-          quoted: xxx,
-        });
-        resolve();}
+        } else {
+          msg = "🤣 ```Members banned -```\n\n";
+          banlist.rows[0].banned_users.shift()
+          banlist.rows[0].banned_users.forEach((currentItem) => {
+            msg += "🚨 " + currentItem + "\n";
+          });
+          client.sendMessage(from, msg, text, {
+            quoted: xxx,
+          });
+          resolve();
+        }
         break;
 
       default:

@@ -18,7 +18,13 @@ const help = (infor, client, xxx) =>
       msg =
         "🤖 *XXX-BOT Command List* 🤖\n\n💡 *Prefix:*  " +
         c +
-        "\n\n📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, pin, rashmika```\n\n🔗 *For detailed info*\n```help <command>```\n\n🎲 *Example*\n" +
+        "\n\n📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n" +
+        "👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n" +
+        "📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, pin, rashmika```\n\n" +
+        "🔗 *For detailed info*\n" +
+        prefix +
+        "```help <command>```\n\n" +
+        "🎲 *Example*\n" +
         prefix +
         "help crypto\n" +
         prefix +
@@ -33,15 +39,15 @@ const help = (infor, client, xxx) =>
     } else {
       try {
         msg =
-          "\n🏀 *Description* :\n" +
+          "\n🔖 *Description* :\n" +
           data[arg[1]].desc +
           "\n\n" +
-          "🏀 *Usage* :\n" +
+          "📕 *Usage* :\n" +
           "```" +
           data[arg[1]].usage +
           "```" +
           "\n\n" +
-          "🏀 *Example* :\n" +
+          "📚 *Example* :\n" +
           "```" +
           data[arg[1]].eg +
           "```" +

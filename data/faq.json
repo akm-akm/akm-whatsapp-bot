@@ -2,7 +2,7 @@
    
     {
         "question": "How many replies will the bot give back?",
-        "answer": "Every number has a limit of 30 replies. That means when the bot has given 30 successful replies to any number, it will not respond  to that number anymore."
+        "answer": "Every number has a limit of x replies. That means when the bot has given x successful replies to any number, it will not respond  to that number anymore."
     },
     {
         "question": "When is the bot active?",
@@ -18,7 +18,7 @@
     },
     {
         "question":"How does the bot work?",
-        "answer":"Javascript❤️nodejs❤️postgresql"
+        "answer":"Javascript❤️ nodejs❤️ postgresql❤️"
     },
     {
         "question":"How does the bot detect abuse?",

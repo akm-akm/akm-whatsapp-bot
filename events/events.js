@@ -1,12 +1,22 @@
-const { WAConnection, ReconnectMode } = require("@adiwajshing/baileys");
+const {
+  WAConnection,
+  ReconnectMode,
+  MessageType
+} = require("@adiwajshing/baileys");
+const {
+  text
+} = MessageType;
 const client = new WAConnection();
 const path = require("path");
 const fs = require("fs");
 const settingread = require(path.join(__dirname, "../snippets/settingcheck"));
-const { switchcase } = require(path.join(__dirname, "../snippets/case"));
+const {
+  switchcase
+} = require(path.join(__dirname, "../snippets/case"));
 var qri = require("qr-image");
 const sql = require(path.join(__dirname, "../snippets/ps"));
 const node_cron = require("node-cron");
+const { count } = require(path.join(__dirname, "../snippets/count"));
 
 async function connect() {
   try {
@@ -29,7 +39,9 @@ async function connect() {
 
     client.on("qr", (qr) => {
       qri
-        .image(qr, { type: "png" })
+        .image(qr, {
+          type: "png"
+        })
         .pipe(fs.createWriteStream("./public/qr.png"));
       console.log("scan the qr above ");
     });
@@ -37,7 +49,9 @@ async function connect() {
       console.clear();
       console.log("connecting...");
     });
-    await client.connect({ timeoutMs: 30 * 1000 });
+    await client.connect({
+      timeoutMs: 30 * 1000
+    });
     client.on("open", () => {
       console.clear();
       console.log("connected");
@@ -98,7 +112,9 @@ async function main() {
     console.log("Hello " + client.user.name);
     node_cron.schedule(process.env.CRON, async () => {
       console.log("Clearing All Chats");
-      for (let { jid } of client.chats.all()) {
+      for (let {
+          jid
+        } of client.chats.all()) {
         await client.modifyChat(jid, ChatModification.delete);
         console.log("Cleared all Chats!");
       }
@@ -107,7 +123,6 @@ async function main() {
     client.on("chat-update", async (xxxx) => {
       try {
         if (!xxxx.hasNewMessage) return;
-        fs.writeFileSync("./xxx.json", JSON.stringify(xxxx, null, "\t"));
         xxx = xxxx.messages.all()[0];
         if (!xxx.message) return;
         if (xxx.key && xxx.key.remoteJid == "status@broadcast") return;
@@ -115,20 +130,20 @@ async function main() {
         const from = xxx.key.remoteJid;
         const type = Object.keys(xxx.message)[0];
         stanzaId =
-        type == "extendedTextMessage"
-          ? xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
-              .stanzaId || null
-          : 0;
+          type == "extendedTextMessage" ?
+          xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
+          .stanzaId || null :
+          0;
         body =
-          type === "conversation"
-            ? xxx.message.conversation
-            : type === "imageMessage"
-            ? xxx.message.imageMessage.caption
-            : type === "videoMessage"
-            ? xxx.message.videoMessage.caption
-            : type == "extendedTextMessage"
-            ? xxx.message.extendedTextMessage.text
-            : "";
+          type === "conversation" ?
+          xxx.message.conversation :
+          type === "imageMessage" ?
+          xxx.message.imageMessage.caption :
+          type === "videoMessage" ?
+          xxx.message.videoMessage.caption :
+          type == "extendedTextMessage" ?
+          xxx.message.extendedTextMessage.text :
+          "";
 
         const isGroup = from.endsWith("@g.us");
         const sender = isGroup ? xxx.participant : xxx.key.remoteJid;
@@ -144,15 +159,21 @@ async function main() {
           groupMetadata,
           stanzaId
         );
-
+        if (infor.noofmsgtoday == process.env.DAILY_LIMIT) {
+          client.sendMessage(from, "🤖 ```You have exhausted your daily limit.```", text,{
+       quoted: xxx,
+       });
+          count(infor)
+          return
+        }
         if (
-          infor.noofmsgtoday > process.env.daily_limit ||
+          infor.noofmsgtoday > process.env.DAILY_LIMIT ||
           infor.isnumberblockedingroup ||
           infor.arg == null ||
           infor.arg.length == 0
         )
           return;
-          console.log(infor);
+        console.log(infor);
         switchcase(infor, client, xxx);
       } catch (error) {
         console.log(error);
@@ -173,13 +194,12 @@ async function isconnected() {
 }
 async function logout() {
   client.clearAuthInfo();
-  sql.query("truncate TABLE auth;");
+  sql.query("DROP TABLE auth;");
   client.close();
   console.clear();
   console.log("Logged out");
 }
-
-//main();
+if (process.env.NODE_ENV === "development") main();
 module.exports.main = main;
 module.exports.logout = logout;
 module.exports.stop = stop;
