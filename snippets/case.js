@@ -217,7 +217,7 @@ async function switchcase(infor, client, xxx) {
 
     case "xrestartx":
       process.exit(0);
-      break;
+     
 
     default:
       break;

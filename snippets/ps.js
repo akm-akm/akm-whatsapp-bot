@@ -1,17 +1,31 @@
 const { Pool } = require("pg");
 
-var credentials = {
-  connectionString: process.env.DATABASE_URL || process.env.QOVERY_DATABASE_MY_DB_CONNECTION_URI,
-  ssl: {rejectUnauthorized: false}
-};
-if (process.env.NODE_ENV === "development") credentials = {
-  user: "postgres",
-  password: "root",
-  host: "localhost",
-  port: "5432",
-  database:"bottest"
-};
+var credentials = {};
+if (process.env.NODE_ENV === "development") {
+  credentials = {
+    user: "postgres",
+    password: "root",
+    host: "localhost",
+    port: "5432",
+    database: "bottest"
 
+  };
+
+} else if (process.env.HOSTING_PLATFORM === "heroku") {
+  credentials = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+  };
+
+}
+
+else if (process.env.HOSTING_PLATFORM === "qovery") {
+  credentials = {
+    connectionString:  process.env.QOVERY_DATABASE_MY_DB_CONNECTION_URI
+  };
+  
+}
+console.log(credentials);
 const sql = new Pool(credentials);
 
 module.exports = {
