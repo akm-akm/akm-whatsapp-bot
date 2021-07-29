@@ -12,22 +12,21 @@ const youtube = (infor, client, xxx) =>
     arg = infor.arg;
     url = arg[1];
     if (infor.arg.length == 1) {
-      client.sendMessage(from,"```Argument required```", text, { quoted: xxx,});
+      client.sendMessage(from,"```Yotube link required.```", text, { quoted: xxx,});
       resolve();
       return;
     }
-/*
+
     if (ytdl.validateURL(url)) {
-      client.sendMessage(from, "```Wrong url```", text, {quoted: xxx, });
+      client.sendMessage(from, "🔪 ```Wrong url```", text, {quoted: xxx, });
       resolve();
       return;
     }
-*/
+
     let info = await ytdl.getInfo(ytdl.getURLVideoID(url));
     vid = getRandom(".mp4");
-
     msg =
-      "\n🎞️ *Title:*  " +
+      "🎞️ *Title:*  " +
       "```" +
       info.videoDetails.title +
       "```\n\n" +
@@ -46,18 +45,19 @@ const youtube = (infor, client, xxx) =>
       "👎 *Disikes:*  " +
       "```" +
       info.videoDetails.dislikes +
-      "```\n\n";
+      "```";
     ytdl(url)
       .pipe(fs.createWriteStream(vid))
-      .on("finish", () => {
-     client.sendMessage(from, fs.readFileSync(vid), video, {quoted: xxx, caption: msg,  });
+      .on("finish", async() => {
+        await client.sendMessage(from, fs.readFileSync(vid), video, { quoted: xxx, caption: msg });
+        fs.unlinkSync(vid)
       });
 
     resolve();
-     fs.unlinkSync(vid)
+     
     }catch(err){
-      console.log(err);
-      client.sendMessage(from,"🔪", text, {
+     
+      client.sendMessage(from,"🔪 ```Yotube link required.```", text, {
         quoted: xxx,
       });
       resolve()

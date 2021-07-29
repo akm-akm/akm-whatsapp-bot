@@ -42,18 +42,19 @@ const grp = (infor, client, xxx) =>
     const ownerNumber = [`${process.env.ownerNumber}@s.whatsapp.net`];
     const isBotGroupAdmins = groupAdmins.includes(botNumber) || false;
     const isOwner = ownerNumber.includes(sender);
+    const isSuperAdmin = `${groupMetadata.owner}`.split('@') === sender.split('@');
     if (!isGroup) {
       client.sendMessage(from, mess.only.group, text, {
         quoted: xxx,
       });
-      reject();
+      resolve();
       return;
     }
     if (!isGroupAdmins || isOwner) {
       client.sendMessage(from, mess.only.admin, text, {
         quoted: xxx,
       });
-      reject();
+      resolve();
       return;
     }
 
@@ -64,14 +65,14 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         if (arg.length == 1) {
           client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
 
@@ -88,18 +89,24 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         if (arg.length == 1) {
           client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
+        if (mentioned.split("@") === groupMetadata.owner.split("@")) {
+          client.sendMessage(from, "```You can't demote group creator.```", text, {
+            quoted: xxx,
+          })
+          return
+        }
         client.groupDemoteAdmin(from, mentioned);
         client.sendMessage(from, "😐 ```Demoted```", text, {
           quoted: xxx,
@@ -112,18 +119,26 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
+        
         if (arg.length == 1) {
           client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
+        if (mentioned.split("@") === groupMetadata.owner.split("@")) {
+          client.sendMessage(from, "```You can't kick group creator.```", text, {
+            quoted: xxx,
+          })
+          resolve();
+          return
+        }
         client.groupRemove(from, mentioned);
         client.sendMessage(from, "🥲", text, {
           quoted: xxx,
@@ -136,7 +151,7 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         grplink = await client.groupInviteCode(from);
@@ -151,7 +166,7 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         const isMedia = type === "imageMessage" || type === "videoMessage";
@@ -161,10 +176,10 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, "```Tag the image or send it with the the command.```", text, {
             quoted: xxx,
           });
-        reject();
+        resolve();
         const encmedia = isQuotedImage ?
           JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
-          .extendedTextMessage.contextInfo :
+            .extendedTextMessage.contextInfo :
           xxx;
         const media = await client.downloadAndSaveMediaMessage(encmedia);
         await client.updateProfilePicture(from, media);
@@ -185,7 +200,7 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, true);
@@ -200,7 +215,7 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, false);
@@ -215,7 +230,7 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, "```Argument required```", text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
 
@@ -223,7 +238,7 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         try {
@@ -235,24 +250,31 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, "```Unable to add due to privacy setting```", text, {
             quoted: xxx,
           });
-          reject()
+          resolve();
         }
 
         break;
 
       case "purge":
+        if (!isSuperAdmin) {
+          client.sendMessage(from, mess.only.ownerG, text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
         if (!isBotGroupAdmins) {
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         if (arg[1] != "confirm") {
           client.sendMessage(from, "```Type confirm after purge.```", text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
         numbers = [];
@@ -291,7 +313,7 @@ const grp = (infor, client, xxx) =>
         client.sendMessage(from, "🤬 Now the bot will not abuse back if it is abused!", text, {
           quoted: xxx,
         });
-        reject();
+        resolve();
 
 
 
@@ -305,7 +327,7 @@ const grp = (infor, client, xxx) =>
         client.sendMessage(from, "🙏 Now the bot will abuse back if it is abused!", text, {
           quoted: xxx,
         });
-        reject();
+        resolve();
 
 
 
@@ -317,12 +339,12 @@ const grp = (infor, client, xxx) =>
             quoted: xxx,
           });
 
-          reject();
+          resolve();
           return;
         }
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
-        console.clear();
+
         if (mentioned[0] == client.jid) {
           client.sendMessage(from, "```What if I ban you?\nThere you go!```", text, {
             quoted: xxx,
@@ -352,7 +374,7 @@ const grp = (infor, client, xxx) =>
           client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
           });
-          reject();
+          resolve();
           return;
         }
 
@@ -368,20 +390,17 @@ const grp = (infor, client, xxx) =>
         break;
 
       case "banlist":
-        banlist = await sql.query(
-          `SELECT banned_users FROM groupdata WHERE groupid = '${from}' ;`
-        );
-        if (banlist.rows[0].banned_users.length == 1) {
+        bannedlist = infor.groupdata.banned_users;
+        if (bannedlist.length == 1) {
           client.sendMessage(from, "🤔 ```No members banned.```", text, {
             quoted: xxx,
           });
-
           resolve();
         } else {
-          msg = "🤣 ```Members banned -```\n\n";
-          banlist.rows[0].banned_users.shift()
-          banlist.rows[0].banned_users.forEach((currentItem) => {
-            msg += "🚨 " + currentItem + "\n";
+          msg = "🤣 ```Members banned -```\n";
+          bannedlist.shift()
+          bannedlist.forEach((currentItem) => {
+            msg += "\n🚨 " + currentItem;
           });
           client.sendMessage(from, msg, text, {
             quoted: xxx,

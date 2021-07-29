@@ -1,5 +1,5 @@
+if (process.env.NODE_ENV === "development") require('dotenv').config()
 const express = require("express");
-require('dotenv').config()
 const server = new express();
 const port = process.env.PORT || 5000;
 const fs = require("fs");

@@ -33,7 +33,7 @@ const crypto = (infor,client,xxx) =>
     arg=infor.arg;
     from=infor.from;
 
-    if (arg.length==1     ){
+    if (arg.length==1){
       client.sendMessage(from, "```Enter coin symbol.```", text, {
         quoted: xxx,
       });
@@ -61,7 +61,7 @@ const crypto = (infor,client,xxx) =>
                 " 💹" +
                 "\n\n" +
                 "```Buy price  : ```" +
-                c.price.toFixed(2) +
+                c.price.toFixed(3) +
                 "\n" +
                 "```1h change  : ```" +
                 c.percent_change_1h.toFixed(2) +

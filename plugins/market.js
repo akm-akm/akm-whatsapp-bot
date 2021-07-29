@@ -51,8 +51,10 @@ const market = (infor,client,xxx) =>
             )
             .then((response) => {
               if (response.error) {
-                console.log("err");
-                reject("```Error```");
+                client.sendMessage(from, "```Error```", text, {
+                  quoted: xxx,
+                });
+                reject();
                
               } else {
                 var msg =
@@ -222,6 +224,18 @@ const market = (infor,client,xxx) =>
           break;
 
         case "search":
+
+          if (arg.length < 3) {
+            client.sendMessage(from, "```Enter stocks name to search.```", text, {
+              quoted: xxx,
+            });
+            resolve();
+            return
+          }
+          if (arg.length > 3) {
+            client.sendMessage(from, "```Searching only the first word.```", text, {
+              quoted: xxx,
+            }); }
           axios
             .get(
               "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxCompanySearch.jsp?search=" +
@@ -238,16 +252,15 @@ const market = (infor,client,xxx) =>
               if (response.error) {
                 console.log("err");
               } else {
-              
                 msg =
                 "*Search Result* 🔎\n" 
                 response.data.forEach((element) => {
                   msg = msg+
                    
-                    "\n\n📈 " +
+                    "\n\n\n📈 " +
                     "*" +
                     element.symbol +
-                    "*\n\n" +
+                    "*\n" +
                     "NAME      : ```" +
                     element.name +
                     "```\n" +
@@ -272,6 +285,18 @@ const market = (infor,client,xxx) =>
 
         case "details":
         case "detail":
+          if (arg.length < 3) {
+            client.sendMessage(from, "```Enter stock symbol to get details.```", text, {
+              quoted: xxx,
+            });
+            resolve();
+            return
+          }
+          if (arg.length > 3) {
+            client.sendMessage(from, "```Searching only the first symbol.```", text, {
+              quoted: xxx,
+            });
+          }
           axios
             .get(
               "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=" +

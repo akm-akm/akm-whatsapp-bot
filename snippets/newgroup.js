@@ -17,11 +17,11 @@ const newgroup = (from,client,random) =>
     const groupMetadata = await client.groupMetadata(from);
     const groupMembers = groupMetadata.participants;
     const groupAdmins = getGroupAdmins(groupMembers);
-    var newmsg = "🚨🚨 ```This group has been assigned a prefix of``` " +
+    var newmsg = "🤖🤖🤖 *XXX-BOT* 🤖🤖🤖\n\n"+ "🚨 *This group has been assigned a prefix of* " +
       random +
-      "\n```So, every time the bot has to be called, the sentence must start with this prefix.```\n\n" +
+      "\n\n🚨 ```So, every time the bot has to be called, the sentence must start with: ```" + random +"\n\n"
 
-      "🚨🚨 ```Type``` "+"```"+random+"```"+"```help to see the list of commands bot can follow.```\n\n\n"+
+      "🚨 ```Type``` "+"```"+random+"```"+"```help to see the list of commands bot can follow.```\n\n\n"+
       "🎀 ```Example :```\n\n"+
       "🎡 ```"+random+"```"+"```sticker crop```\n"+
       "🎪 ```"+random+"```"+"```rs```\n"+

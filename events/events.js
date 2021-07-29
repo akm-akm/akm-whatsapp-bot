@@ -8,6 +8,7 @@ const {
 } = MessageType;
 const client = new WAConnection();
 const path = require("path");
+require('dotenv').config({path:path.join(__dirname, '../.env')})
 const fs = require("fs");
 const settingread = require(path.join(__dirname, "../snippets/settingcheck"));
 const {
@@ -55,7 +56,6 @@ async function connect() {
     client.on("open", () => {
       console.clear();
       console.log("connected");
-
       console.log(`credentials updated!`);
       fs.unlink("./public/qr.png", () => {});
     });
@@ -129,11 +129,16 @@ async function main() {
         if (xxx.key.fromMe) return;
         const from = xxx.key.remoteJid;
         const type = Object.keys(xxx.message)[0];
-        stanzaId =
-          type == "extendedTextMessage" ?
-          xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
-          .stanzaId || null :
-          0;
+        try {
+          stanzaId =
+            type == "extendedTextMessage" ?
+              xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
+                .stanzaId || null :
+              0;
+        } catch (error) {
+          stanzaId =0;
+        }
+       
         body =
           type === "conversation" ?
           xxx.message.conversation :
@@ -144,14 +149,22 @@ async function main() {
           type == "extendedTextMessage" ?
           xxx.message.extendedTextMessage.text :
           "";
-
+        const getGroupAdmins = (participants) => {
+          admins = [];
+          for (let i of participants) {
+            i.isAdmin ? admins.push(i.jid) : "";
+          }
+          return admins;
+        };
         const isGroup = from.endsWith("@g.us");
         const sender = isGroup ? xxx.participant : xxx.key.remoteJid;
         const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
+        const groupMembers = isGroup ? groupMetadata.participants : "";
+        const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
+        const isGroupAdmins = groupAdmins.includes(sender) || false;
         const groupName = isGroup ? groupMetadata.subject : "";
         const infor = await settingread(
           body,
-
           from,
           sender,
           groupName,
@@ -166,7 +179,12 @@ async function main() {
           count(infor)
           return
         }
-        if (
+        if (infor.groupdata.totalmsgtoday == process.env.DAILY_GROUP_LIMIT) {
+          client.sendMessage(from, "🤖 ```Daily group limit exhausted!```", text);
+          count(infor)
+          return
+        }
+        if (!(infor.canmemberusebot || isGroupAdmins)||
           infor.noofmsgtoday > process.env.DAILY_LIMIT ||
           infor.isnumberblockedingroup ||
           infor.arg == null ||
