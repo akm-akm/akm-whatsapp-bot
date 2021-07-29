@@ -69,7 +69,7 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg[1] == "off") {
-          sql.query(`UPDATE groupdata SET membercanusebot= 'false' WHERE groupid = '${from}'`);
+          sql.query(`UPDATE groupdata SET membercanusebot= false WHERE groupid = '${from}'`);
           client.sendMessage(from, "🤖 ```Bot access disabled for group menbers.```", text, {
             quoted: xxx,
           });
@@ -77,7 +77,7 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg[1] == "on") {
-          sql.query(`UPDATE groupdata SET membercanusebot= 'true' WHERE groupid = '${from}'`);
+          sql.query(`UPDATE groupdata SET membercanusebot= true WHERE groupid = '${from}'`);
           client.sendMessage(from, "🤖 ```Bot access enabled for group members.```", text, {
             quoted: xxx,
           });

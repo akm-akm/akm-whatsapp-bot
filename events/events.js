@@ -117,6 +117,7 @@ async function main() {
         xxx = xxxx.messages.all()[0];
         if (!xxx.message) return;
         if (xxx.key && xxx.key.remoteJid == "status@broadcast") return;
+        console.log('chat-update');
         if (xxx.key.fromMe) return;
         const from = xxx.key.remoteJid;
         const type = Object.keys(xxx.message)[0];
