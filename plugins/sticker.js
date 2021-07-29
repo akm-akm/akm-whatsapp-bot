@@ -9,8 +9,6 @@ const { text,sticker } = MessageType;
 const stickermaker = (infor,client,xxx) =>
   new Promise(async (resolve, reject) => {
     arg = infor.arg;
-  
-
     const content = JSON.stringify(xxx.message);
     const from = xxx.key.remoteJid;
     const type = Object.keys(xxx.message)[0];
@@ -102,7 +100,7 @@ const stickermaker = (infor,client,xxx) =>
     if ((isMedia && !xxx.message.videoMessage) || isQuotedImage) {
       const encmedia = isQuotedImage
         ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
-            .extendedTextMessage.contextInfo
+          .extendedTextMessage.contextInfo
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia);
       ran = getRandom(".webp");
@@ -156,7 +154,7 @@ const stickermaker = (infor,client,xxx) =>
     ) {
       const encmedia = isQuotedVideo
         ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
-            .extendedTextMessage.contextInfo
+          .extendedTextMessage.contextInfo
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia);
       ran = getRandom(".webp");
@@ -198,6 +196,9 @@ const stickermaker = (infor,client,xxx) =>
         }
       }
     }
-  else  client.sendMessage(from, "```Tag the media or send it with the command.```", text, {quoted: xxx});
+    else {
+      client.sendMessage(from, "```Tag the media or send it with the command.```", text, { quoted: xxx });
+      resolve();
+    }
   });
 module.exports.stickermaker = stickermaker;

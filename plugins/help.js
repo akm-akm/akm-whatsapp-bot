@@ -28,9 +28,8 @@ const help = (infor, client, xxx) =>
         prefix +
         "help crypto\n" +
         prefix +
-        "help shorturl\n" +
-        prefix
-        //+ "help sticker\n\nFew group admin commands have been disabled.";
+        "help shorturl\n"
+       // + prefix+ "help sticker\n\nFew group admin commands have been disabled.";
 
       client.sendMessage(from, msg, text, {
         quoted: xxx,

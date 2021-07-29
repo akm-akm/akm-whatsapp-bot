@@ -115,6 +115,8 @@ const grp = (infor, client, xxx) =>
         break;
 
       case "kick":
+
+        
         if (!isBotGroupAdmins) {
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
@@ -122,7 +124,6 @@ const grp = (infor, client, xxx) =>
           resolve();
           return;
         }
-        
         if (arg.length == 1) {
           client.sendMessage(from, "```Tag the member.```", text, {
             quoted: xxx,
@@ -130,10 +131,16 @@ const grp = (infor, client, xxx) =>
           resolve();
           return;
         }
-
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         if (mentioned.split("@") === groupMetadata.owner.split("@")) {
-          client.sendMessage(from, "```You can't kick group creator.```", text, {
+          client.sendMessage(from, "```You can't kick the group owner.```", text, {
+            quoted: xxx,
+          })
+          resolve();
+          return
+        }
+        if (mentioned.split("@") === client.user.jid.split("@")) {
+          client.sendMessage(from, "```F off.```", text, {
             quoted: xxx,
           })
           resolve();

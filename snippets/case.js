@@ -91,7 +91,7 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "rs":
-   // case "keerthy":
+   
     case "rashmika":
       savedsticker(infor, client, xxx)
         .then((resolve) => {
@@ -203,7 +203,7 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "new":
-      newgroup(infor, client);
+      newgroup(infor.from, client);
       break;
 
     case "hello":
