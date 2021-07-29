@@ -14,12 +14,13 @@ const help = (infor, client, xxx) =>
     var msg;
     if (arg.length == 1) {
       c = prefix == undefined ? "```Not needed in inbox```" : prefix;
-      if (prefix == undefined) prefix = "✨";
+      if (prefix == undefined) prefix = "🔔";
       msg =
         "🤖🤖🤖 *XXX-BOT MENU* 🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
-        "\n\n📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n" +
-        "👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse```\n\n" +
+      "\n\n" +
+        "📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n" +
+        "👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, setprefix, close, open, add, purge, tagall, ban, unban, banlist, allowabuse, denyabuse, botaccess```\n\n" +
         "📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, pin, rashmika```\n\n" +
         "🔗 *For detailed info*\n" +
         prefix +
@@ -29,7 +30,7 @@ const help = (infor, client, xxx) =>
         "help crypto\n" +
         prefix +
         "help shorturl\n"
-       // + prefix+ "help sticker\n\nFew group admin commands have been disabled.";
+        + prefix + "help sticker\n";
 
       client.sendMessage(from, msg, text, {
         quoted: xxx,

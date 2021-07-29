@@ -8,7 +8,6 @@ const {
 } = MessageType;
 const client = new WAConnection();
 const path = require("path");
-require('dotenv').config({path:path.join(__dirname, '../.env')})
 const fs = require("fs");
 const settingread = require(path.join(__dirname, "../snippets/settingcheck"));
 const {

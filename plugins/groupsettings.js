@@ -1,14 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 const sql = require(path.join(__dirname, "../snippets/ps"));
-
+const settings = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/settings.json"))
+);
 const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
 );
-
-const setting = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/settings.json"))
-);
+const { newgroup } = require(path.join(__dirname, "../snippets/newgroup"));
 
 const {
   GroupSettingChange,
@@ -60,6 +59,59 @@ const grp = (infor, client, xxx) =>
 
 
     switch (arg[0]) {
+
+      case "botaccess":
+        if (arg.length == 1) {
+          client.sendMessage(from, "```Enter on or off after the command.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        if (arg[1] == "off") {
+          sql.query(`UPDATE groupdata SET membercanusebot= 'false' WHERE groupid = '${from}'`);
+          client.sendMessage(from, "🤖 ```Bot access disabled for group menbers.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        if (arg[1] == "on") {
+          sql.query(`UPDATE groupdata SET membercanusebot= 'true' WHERE groupid = '${from}'`);
+          client.sendMessage(from, "🤖 ```Bot access enabled for group members.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        break;
+       
+
+      case "setprefix":
+        if (arg.length == 1) {
+          client.sendMessage(from, "```Enter character to be used as prefix.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        if (!settings.prefixchoice.split("").includes(arg[1])) {
+          client.sendMessage(from, "```Select prefix from ```" + settings.prefixchoice, text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        sql.query(
+          `UPDATE groupdata SET prefix = '${arg[1]}' where groupid = '${from}';`
+        );
+        client.sendMessage(from, "🚨 ```Prefix set to " + arg[1] + "```", text, {
+          quoted: xxx,
+        });
+        newgroup(infor.from, client,arg[1]);
+        resolve();
+        break;
+      
       case "promote":
         if (!isBotGroupAdmins) {
           client.sendMessage(from, mess.only.Badmin, text, {
@@ -101,10 +153,19 @@ const grp = (infor, client, xxx) =>
         }
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
-        if (mentioned.split("@") === groupMetadata.owner.split("@")) {
+        z = mentioned[0].split("@")[0];
+        if (z === `${groupMetadata.owner}`.split("@")[0]) {
           client.sendMessage(from, "```You can't demote group creator.```", text, {
             quoted: xxx,
           })
+          resolve();
+          return
+        }
+        if (z === `${client.user.jid}`.split("@")) {
+          client.sendMessage(from, "```I can't demote myself.```", text, {
+            quoted: xxx,
+          })
+          resolve();
           return
         }
         client.groupDemoteAdmin(from, mentioned);
@@ -116,7 +177,7 @@ const grp = (infor, client, xxx) =>
 
       case "kick":
 
-        
+
         if (!isBotGroupAdmins) {
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
@@ -132,14 +193,16 @@ const grp = (infor, client, xxx) =>
           return;
         }
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
-        if (mentioned.split("@") === groupMetadata.owner.split("@")) {
+        z = mentioned[0].split("@")[0];
+        
+        if (z === `${groupMetadata.owner}`.split("@")[0]) {
           client.sendMessage(from, "```You can't kick the group owner.```", text, {
             quoted: xxx,
           })
           resolve();
           return
         }
-        if (mentioned.split("@") === client.user.jid.split("@")) {
+        if (z=== `${client.user.jid}`.split("@")[0]) {
           client.sendMessage(from, "```F off.```", text, {
             quoted: xxx,
           })
@@ -186,7 +249,7 @@ const grp = (infor, client, xxx) =>
         resolve();
         const encmedia = isQuotedImage ?
           JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
-            .extendedTextMessage.contextInfo :
+          .extendedTextMessage.contextInfo :
           xxx;
         const media = await client.downloadAndSaveMediaMessage(encmedia);
         await client.updateProfilePicture(from, media);
@@ -351,17 +414,18 @@ const grp = (infor, client, xxx) =>
         }
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
-
-        if (mentioned[0] == client.jid) {
+        z = mentioned[0].split("@")[0];
+        console.log(z, `${client.user.jid}`.split("@")[0]);
+        if (z === `${client.user.jid}`.split("@")[0]) {
           client.sendMessage(from, "```What if I ban you?\nThere you go!```", text, {
             quoted: xxx,
           });
           sql.query(
-            `UPDATE groupdata SET banned_users = array_append(banned_users, '${sender}') where groupid = '${from}';`
+            `UPDATE groupdata SET banned_users = array_append(banned_users, '${infor.number}') where groupid = '${from}';`
           );
           resolve()
+          return;
         }
-        z = mentioned[0].split("@")[0];
 
         await sql.query(
           `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`

@@ -226,6 +226,7 @@ $("#logout").click(function (e) {
       $("#restart").prop('disabled' , false);     
        $("#stop").addClass("hidden");
       $("#login").text("start bot");
+      $("#logout").text("Log out");
       $("#logout").addClass("hidden");
     },
   });

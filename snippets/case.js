@@ -111,13 +111,14 @@ async function switchcase(infor, client, xxx) {
         });
 
       break;
-
+    case "setprefix":
+    case "botaccess":
     case "promote":
     case "demote":
     case "kick":
     case "grouplink":
-    //   case "changedp":
-    //  case "botleave":
+    //case "changedp":
+    case "botleave":
     case "close":
     case "open":
     // case "add":
