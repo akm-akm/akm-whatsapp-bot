@@ -110,16 +110,8 @@ async function main() {
     client.connectOptions.maxRetries = 100;
 
     console.log("Hello " + client.user.name);
-    node_cron.schedule(process.env.CRON, async () => {
-      console.log("Clearing All Chats");
-      for (let {
-          jid
-        } of client.chats.all()) {
-        await client.modifyChat(jid, ChatModification.delete);
-        console.log("Cleared all Chats!");
-      }
-    });
 
+    
     client.on("chat-update", async (xxxx) => {
       try {
         if (!xxxx.hasNewMessage) return;
@@ -172,10 +164,19 @@ async function main() {
           groupMetadata,
           stanzaId
         );
+        
+        if (!(infor.canmemberusebot || isGroupAdmins)||
+          infor.noofmsgtoday > process.env.DAILY_LIMIT ||
+          infor.isnumberblockedingroup ||
+          infor.arg == null ||
+          infor.arg.length == 0
+        )
+          return;
+        
         if (infor.noofmsgtoday == process.env.DAILY_LIMIT) {
-          client.sendMessage(from, "🤖 ```You have exhausted your daily limit.```", text,{
-       quoted: xxx,
-       });
+          client.sendMessage(from, "🤖 ```You have exhausted your daily limit.```", text, {
+            quoted: xxx,
+          });
           count(infor)
           return
         }
@@ -184,13 +185,7 @@ async function main() {
           count(infor)
           return
         }
-        if (!(infor.canmemberusebot || isGroupAdmins)||
-          infor.noofmsgtoday > process.env.DAILY_LIMIT ||
-          infor.isnumberblockedingroup ||
-          infor.arg == null ||
-          infor.arg.length == 0
-        )
-          return;
+        
         console.log(infor);
         switchcase(infor, client, xxx);
       } catch (error) {

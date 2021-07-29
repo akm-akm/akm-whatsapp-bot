@@ -29,7 +29,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
 
       data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
       if (data1.rows.length == 0) {
-       // if (groupMetadata.participants.length < process.env.MIN_GROUP_SIZE) { await client.sendMessage(from,"```Minimum participants required is ```",text);  client.groupLeave(from); return }
+       // if (groupMetadata.participants.length < process.env.MIN_GROUP_SIZE) { await client.sendMessage(from,"```Minimum participants required is ```"+process.env.MIN_GROUP_SIZE,text);  client.groupLeave(from); return }
         console.log("Entering data for group -  " + from + "  " + groupname);
         console.log("Prefix assigned is  " + random);
         console.log("------------------------------");

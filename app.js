@@ -19,7 +19,9 @@ const {
 ));
 var autoconnect = false;
 node_cron.schedule('0 0 * * * * *', async () => {
-  sql.query(`UPDATE messagecount set totalmsgtoday=0;`);
+  await sql.query(`UPDATE messagecount set totalmsgtoday=0;`);
+  sql.query(`UPDATE groupdata set totalmsgtoday=0;`);
+
 });
 
 /*
