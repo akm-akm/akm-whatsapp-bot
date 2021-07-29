@@ -13,7 +13,6 @@ const { newgroup     } = require(path.join(__dirname, "./newgroup"));
 const { help         } = require(path.join(__dirname, "../plugins/help"));
 const { youtube      } = require(path.join(__dirname, "../plugins/yt"));
 const { faqs         } = require(path.join(__dirname, "../plugins/faq"));
-const { memegenerate } = require(path.join(__dirname, "../plugins/meme"));
 const { MessageType  } = require("@adiwajshing/baileys");
 const { text         } = MessageType;
 
@@ -151,14 +150,6 @@ async function switchcase(infor, client, xxx) {
         });
       break;
 
-   // case "meme":
-      memegenerate(infor, client, xxx)
-        .then(() => {
-          count(infor)        })
-        .catch((error) => {
-          console.log(error);
-        });
-      break;
 
     case "limit":
       x =
