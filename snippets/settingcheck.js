@@ -33,7 +33,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
         console.log("Entering data for group -  " + from + "  " + groupname);
         console.log("Prefix assigned is  " + random);
         console.log("------------------------------");
-       // newgroup(from, client, random).then(() => console.log("New group!"));
+        if (!(process.env.NODE_ENV === 'development')) newgroup(from, client, random).then(() => console.log("New group!"));
         await sql.query(
           `INSERT INTO groupdata VALUES ('${from}','${random}','false','true', '{''}',0,0);`
         );
