@@ -116,6 +116,7 @@ async function switchcase(infor, client, xxx) {
     case "promote":
     case "demote":
     case "kick":
+    case "prefix":
     case "grouplink":
     //case "changedp":
     case "botleave":
@@ -127,8 +128,7 @@ async function switchcase(infor, client, xxx) {
     case "ban":
     case "unban":
     case "banlist":
-    case "allowabuse":
-    case "denyabuse":
+    case "filterabuse":
       grp(infor, client, xxx)
         .then(() => {
           count(infor)        })

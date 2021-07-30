@@ -60,9 +60,42 @@ const grp = (infor, client, xxx) =>
 
     switch (arg[0]) {
 
+
+      case "prefix":
+        if (arg.length == 1) {
+          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        if (arg[1] == "off") {
+          sql.query(`UPDATE groupdata SET useprefix = false WHERE groupid = '${from}'`);
+          client.sendMessage(from, "🤖 ```The bot will only listen for commands starting without the given prefix.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        else if (arg[1] == "on") {
+          sql.query(`UPDATE groupdata SET useprefix = true WHERE groupid = '${from}'`);
+          client.sendMessage(from, "🤖 ```The bot will only listen for commands starting with the given prefix.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        else {
+          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+        }
+        break;
+
       case "botaccess":
         if (arg.length == 1) {
-          client.sendMessage(from, "```Enter on or off after the command.```", text, {
+          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
             quoted: xxx,
           });
           resolve();
@@ -76,7 +109,7 @@ const grp = (infor, client, xxx) =>
           resolve();
           return;
         }
-        if (arg[1] == "on") {
+        else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET membercanusebot= true WHERE groupid = '${from}'`);
           client.sendMessage(from, "🤖 ```Bot access enabled for group members.```", text, {
             quoted: xxx,
@@ -84,12 +117,17 @@ const grp = (infor, client, xxx) =>
           resolve();
           return;
         }
+        else {
+          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+        }
         break;
        
-
       case "setprefix":
         if (arg.length == 1) {
-          client.sendMessage(from, "```Enter character to be used as prefix.```", text, {
+          client.sendMessage(from, "🤖 ```Enter character to be used as prefix.```", text, {
             quoted: xxx,
           });
           resolve();
@@ -375,31 +413,42 @@ const grp = (infor, client, xxx) =>
         resolve();
         break;
 
-      case "allowabuse":
-        sql.query(
-          `UPDATE groupdata SET allowabuse = 'true' WHERE groupid = '${from}';`
-        );
-
-        client.sendMessage(from, "🤬 Now the bot will not abuse back if it is abused!", text, {
-          quoted: xxx,
-        });
-        resolve();
+      case "filterabuse":
 
 
-
-        break;
-
-      case "denyabuse":
-        sql.query(
-          `UPDATE groupdata SET allowabuse = 'false' WHERE groupid = '${from}';`
-        );
-
-        client.sendMessage(from, "🙏 Now the bot will abuse back if it is abused!", text, {
-          quoted: xxx,
-        });
-        resolve();
-
-
+        if (arg.length == 1) {
+          client.sendMessage(from, "```Enter on or off after the command.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        if (arg[1] == "off") {
+          sql.query(
+            `UPDATE groupdata SET allowabuse = 'true' WHERE groupid = '${from}';`
+          );
+          client.sendMessage(from, "🤬 ```Now the bot will not abuse back if it is abused!```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        else if (arg[1] == "on") {
+          sql.query(
+            `UPDATE groupdata SET allowabuse = 'false' WHERE groupid = '${from}';`
+          );
+          client.sendMessage(from, "🙏 ```Now the bot will abuse back if it is abused!```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        else {
+          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+        }
 
         break;
 

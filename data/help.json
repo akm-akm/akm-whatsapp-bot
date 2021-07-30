@@ -7,27 +7,29 @@
     "setprefix": {
         "usage": "setprefix <newprefix>",
         "desc": "```Sets the prefix to be used for bot commands.```",
-        "eg": "setprefix !\nsetprefix .\nsetprefix #\n"
+        "eg": "setprefix !\nsetprefix .\nsetprefix #"
+    },
+    "prefix":
+    {
+        "usage":"prefix <condition>",
+        "desc": "```If you want to use the bot without a prefix then turn this off.```",
+        "eg": "prefix on\nprefix off"
     },
     "botaccess": {
         "usage": "botaccess <condition>",
         "desc": "```If turned off, members other than the group admins cannot use the bot.```",
         "eg": "botaccess off\nbotaccess on"
     },
-    "allowabuse": {
-        "usage": "allowabuse",
-        "desc": "```The bot will reply even if it is abused.```",
-        "eg": "allowabuse"
-    },
+
     "delete": {
         "usage": "delete",
         "desc": "```The bot will delete its message that is tagged.```",
         "eg": "delete"
     },
-    "denyabuse": {
-        "usage": "denyabuse",
-        "desc": "```The bot will not reply if the command conatains any cuss word. Also, it will abuse back.```",
-        "eg": "denyabuse"
+    "filterabuse": {
+        "usage": "filterabuse <condition>",
+        "desc": "```If turned on, the bot will search for cuss words in the command and reply back with the same word!```",
+        "eg": "filterabuse on\nfilterabuse off"
     },
     "market": {
         "usage": "market <arguments>",
