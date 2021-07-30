@@ -8,6 +8,7 @@ const { savedsticker } = require(path.join(__dirname,"../plugins/savedsticker"))
 const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
 const { pinterest    } = require(path.join(__dirname, "../plugins/pinterest"));
 const { grp          } = require(path.join(__dirname, "../plugins/groupsettings"));
+const { xdafootball  } = require(path.join(__dirname, "../plugins/twitter"));
 const { market       } = require(path.join(__dirname, "../plugins/market"));
 const { newgroup     } = require(path.join(__dirname, "./newgroup"));
 const { help         } = require(path.join(__dirname, "../plugins/help"));
@@ -49,6 +50,7 @@ async function switchcase(infor, client, xxx) {
       });
       count(infor)
       break;
+    
     case "crypto":
       crypto(infor, client, xxx)
         .then((resolve) => {
@@ -58,6 +60,17 @@ async function switchcase(infor, client, xxx) {
         });
 
       break;
+    
+    case "tweet":
+      crypto(infor, client, xxx)
+        .then((resolve) => {
+          count(infor) })
+        .catch((error) => {
+          console.log("error");
+        });
+
+      break;
+    
     case "shorturl":
       shorturl(infor, client, xxx)
         .then((resolve) => {

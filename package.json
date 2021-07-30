@@ -23,6 +23,7 @@
     "qr-image": "^3.2.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
+    "twitter": "^1.7.1",
     "wa-sticker-formatter": "^3.6.0",
     "ytdl-core": "^4.9.0"
   }

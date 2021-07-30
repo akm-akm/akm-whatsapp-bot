@@ -5,16 +5,20 @@ const data = JSON.parse(
 );
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
-zz = "\n💻 *Running since:* " + Math.floor(process.uptime()) + " ```seconds```";
+
+
+
 const help = (infor, client, xxx) =>
   new Promise((resolve, reject) => {
     arg = infor.arg;
     from = infor.from;
     prefix = infor.groupdata.prefix;
+    useprefix = infor.groupdata.useprefix;
     var msg;
     if (arg.length == 1) {
-      c = prefix == undefined ? "```Not needed in inbox```" : prefix;
-      if (prefix == undefined) prefix = "🔔";
+      c = prefix == undefined ? "```Not needed in inbox```" : useprefix ?  prefix : "```Disabled```";
+      if (prefix == undefined || !useprefix )  prefix = "🔔";
+
       msg =
         "🤖🤖🤖 *XXX-BOT MENU* 🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
