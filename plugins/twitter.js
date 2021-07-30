@@ -1,3 +1,10 @@
+const {
+  MessageType
+} = require("@adiwajshing/baileys");
+const {
+  text
+} = MessageType
+
 const twitter = require("twitter");
 const twit = new twitter({
     consumer_key: process.env.apiKey,
