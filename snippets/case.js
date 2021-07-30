@@ -62,7 +62,7 @@ async function switchcase(infor, client, xxx) {
       break;
     
     case "tweet":
-      crypto(infor, client, xxx)
+      xdafootball(infor, client, xxx)
         .then((resolve) => {
           count(infor) })
         .catch((error) => {
