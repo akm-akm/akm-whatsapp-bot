@@ -15,7 +15,6 @@ const {
 } = require(path.join(__dirname, "../snippets/case"));
 var qri = require("qr-image");
 const sql = require(path.join(__dirname, "../snippets/ps"));
-const node_cron = require("node-cron");
 const { count } = require(path.join(__dirname, "../snippets/count"));
 
 async function connect() {

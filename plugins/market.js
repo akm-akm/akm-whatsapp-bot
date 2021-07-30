@@ -397,6 +397,7 @@ const market = (infor,client,xxx) =>
           break;
 
         default:
+          help(infor, client, xxx)
           msg =
             "*Usage*" +
             " = " +

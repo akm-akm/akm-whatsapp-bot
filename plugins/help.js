@@ -69,7 +69,7 @@ const help = (infor, client, xxx) =>
             quoted: xxx,
           }
         );
-        reject();
+        resolve();
       }
     }
   });

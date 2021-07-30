@@ -1,11 +1,8 @@
-if (process.env.NODE_ENV === "development") require('dotenv').config()
 const express = require("express");
 const server = new express();
 const port = process.env.PORT || 5000;
-const fs = require("fs");
 const path = require("path");
 const sql = require(path.join(__dirname, "./snippets/ps"));
-const node_cron = require("node-cron");
 
 console.clear();
 const {
@@ -17,32 +14,7 @@ const {
   __dirname,
   "./events/events.js"
 ));
-var autoconnect = false;
-node_cron.schedule('0 0 * * * * *', async () => {
-  await sql.query(`UPDATE messagecount set totalmsgtoday=0;`);
-  sql.query(`UPDATE groupdata set totalmsgtoday=0;`);
 
-});
-
-/*
-setInterval(async () => {
-  try {
-    let state = await isconnected()
-    console.log("CHECKING IF BOT CONNECTED - " + state);
-    console.log("CHECKING autoconnect - " + autoconnect);
-
-    if (autoconnect) {
-    console.log("RECONNECTING ");
-
-      await stop()
-      main()
-    }
-  } catch (err) {
-    console.log(err);
-  }
-}, 1000*60*10);
-
-*/
 
 
 server.use(express.static(path.join(__dirname, "./public")));
@@ -72,6 +44,8 @@ server.get("/login", async (req, res) => {
   else res.send("absent")
 
 });
+
+
 
 server.get("/logout", async (req, res) => {
   logout();

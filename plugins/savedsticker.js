@@ -14,7 +14,7 @@ var random;
     }
  
     else if(arg[0]=="rs"){
-        random = Math.floor(Math.random() * 500 + 1);
+        random = Math.floor(Math.random() * 500 );
         ran = path.join(__dirname, "../media/stickers/allsticker/s (") + random + ").webp";
           
     }

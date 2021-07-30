@@ -1,16 +1,21 @@
 {
-  "name": "xxx",
+  "name": "xxx-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "whatsapp bot to automate whatsapp.",
+  "main": "app.js",
   "scripts": {
     "dev": "node -r dotenv/config app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "whatsapp",
+    "baileys",
+    "bot",
+    "whatsapp bot"
+  ],
+  "author": "ADITYA KUMAR MANDAL",
+  "license": "MIT",
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.1",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
@@ -18,7 +23,6 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "ffmpeg": "0.0.4",
-    "node-cron": "^3.0.0",
     "pg": "^8.6.0",
     "qr-image": "^3.2.0",
     "request": "^2.88.2",
