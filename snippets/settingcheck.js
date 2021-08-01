@@ -4,10 +4,6 @@ const sql = require(path.join(__dirname, "./ps"));
 const settings = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/settings.json"))
 );
-const abuse = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/abuse.json"))
-);
-
 const {
   newgroup
 } = require(path.join(__dirname, "./newgroup"));
@@ -17,9 +13,10 @@ const {
 const {
   text
 } = MessageType;
+const data3 = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/data3.json")));
 
 module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId) {
-
   random = settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))
   try {
@@ -71,7 +68,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       number: number,
       noofmsgtoday: data2.rows[0].totalmsgtoday,
       totalmsg: data2.rows[0].totalmsg,
-      abusepresent: from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? abuse.abuse.filter(e => arg.indexOf(e) !== -1) : [] : abuse.abuse.filter(e => arg.indexOf(e) !== -1),
+      abusepresent: from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? data3.words.filter(e => arg.indexOf(e) !== -1) : [] : data3.words.filter(e => arg.indexOf(e) !== -1),
       canmemberusebot: from.endsWith("@g.us") ? data1.rows[0].membercanusebot == false ? false : true : true,
       isnumberblockedingroup: from.endsWith("@g.us") ? data1.rows[0].banned_users.includes(number) ? 1 : 0 : 0,
       groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,
@@ -83,12 +80,5 @@ module.exports = async function settingread(arg, from, sender, groupname, client
 
   } catch (error) {
     console.log(error);
-    await sql.query(
-      "CREATE TABLE IF NOT EXISTS groupdata (groupid TEXT, useprefix BOOL, prefix TEXT, allowabuse BOOL, membercanusebot BOOL, banned_users TEXT[], totalmsgtoday INT, totalmsg INT);"
-    );
-    sql.query(
-      "CREATE TABLE IF NOT EXISTS messagecount (phonenumber TEXT, totalmsgtoday INT, totalmsg INT);"
-    );
-    console.error(error);
   }
 };

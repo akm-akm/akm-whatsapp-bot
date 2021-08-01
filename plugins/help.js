@@ -20,11 +20,11 @@ const help = (infor, client, xxx) =>
       if (prefix == undefined || !useprefix )  prefix = "🔔";
 
       msg =
-        "🤖🤖🤖 *XXX-BOT MENU* 🤖🤖🤖\n\n💡 *Prefix:*  " +
+        "🤖🤖🤖*XXX-BOT MENU*🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
       "\n\n" +
         "📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n" +
-        "👑 *Group Admin*\n```promote, demote, kick, grouplink, changedp, botleave, setprefix, prefix, close, open, add, purge, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" +
+        "👑 *Group Admin*\n```promote, demote, kick, grouplink, botleave, setprefix, prefix, close, open, add, purge, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" +
         "📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, pin, rashmika```\n\n" +
         "🔗 *For detailed info*\n" +
         prefix +

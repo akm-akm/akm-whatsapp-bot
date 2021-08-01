@@ -1,9 +1,10 @@
 const express = require("express");
 const server = new express();
 const port = process.env.PORT || 5000;
+const fs = require('fs');
 const path = require("path");
 const sql = require(path.join(__dirname, "./snippets/ps"));
-
+//require(path.join(__dirname, "./snippets/config"));
 console.clear();
 const {
   main,
@@ -44,8 +45,6 @@ server.get("/login", async (req, res) => {
   else res.send("absent")
 
 });
-
-
 
 server.get("/logout", async (req, res) => {
   logout();
@@ -95,8 +94,23 @@ server.post("/auth", async (req, res) => {
   }
 });
 
+
 server.get("/restart", async (req, res) => {
   process.exit(0);
+});
+
+
+server.get("/resetdailycount", async (req, res) => {
+ await sql.query('UPDATE groupdata SET totalmsgtoday=0')
+  sql.query('UPDATE messagecount SET totalmsgtoday=0').then(() => {
+    res.status(200).send("ok");
+  })
+});
+
+
+server.get("/xxx", async (req, res) => {
+  console.log(process.env);
+  res.send("1");
 });
 
 

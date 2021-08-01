@@ -45,14 +45,14 @@ async function connect() {
       console.log("scan the qr above ");
     });
     client.on("connecting", () => {
-      console.clear();
+     // console.clear();
       console.log("connecting...");
     });
     await client.connect({
       timeoutMs: 30 * 1000
     });
     client.on("open", () => {
-      console.clear();
+    //  console.clear();
       console.log("connected");
       console.log(`credentials updated!`);
       fs.unlink("./public/qr.png", () => {});
@@ -100,10 +100,10 @@ async function connect() {
 
 async function main() {
   try {
-    console.clear();
+  //  console.clear();
     client.logger.level = "fatal";
     await connect();
-    console.clear();
+   // console.clear();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
 
@@ -116,7 +116,7 @@ async function main() {
         xxx = xxxx.messages.all()[0];
         if (!xxx.message) return;
         if (xxx.key && xxx.key.remoteJid == "status@broadcast") return;
-        console.log('chat-update');
+       
         if (xxx.key.fromMe) return;
         const from = xxx.key.remoteJid;
         const type = Object.keys(xxx.message)[0];

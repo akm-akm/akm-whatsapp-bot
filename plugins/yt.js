@@ -12,13 +12,7 @@ const youtube = (infor, client, xxx) =>
     arg = infor.arg;
     url = arg[1];
     if (infor.arg.length == 1) {
-      client.sendMessage(from,"```Yotube link required.```", text, { quoted: xxx,});
-      resolve();
-      return;
-    }
-
-    if (ytdl.validateURL(url)) {
-      client.sendMessage(from, "🔪 ```Wrong url```", text, {quoted: xxx, });
+      client.sendMessage(from,"```Youtube link required.```", text, { quoted: xxx,});
       resolve();
       return;
     }
@@ -57,7 +51,7 @@ const youtube = (infor, client, xxx) =>
      
     }catch(err){
      
-      client.sendMessage(from,"🔪 ```Yotube link required.```", text, {
+      client.sendMessage(from,"🔪 ```Youtube link required.```", text, {
         quoted: xxx,
       });
       resolve()

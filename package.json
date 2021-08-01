@@ -4,7 +4,7 @@
   "description": "whatsapp bot to automate whatsapp.",
   "main": "app.js",
   "scripts": {
-    "dev": "node -r dotenv/config app.js",
+    "dev": "NODE_ENV='development' node -r dotenv/config app.js ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
