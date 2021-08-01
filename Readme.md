@@ -39,18 +39,18 @@ MIN_GROUP_SIZE=
 BOT_MODERATORS=
 ```
 
-`COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data.
-`WEBSITE_PASSWORD` The password you want to keep for the website.
-`KEEPSAVEIT_API` The API key of KeepSaveIt for downloading the Pinterest videos.
-`OWNER_NUMBER` The Whatsapp number of the owner of the bot.
-`DAILY_LIMIT` The maximum number of replies that the bot will give to any user daily.
-`DAILY_GROUP_LIMIT` The maximum number of replies that the bot will give to any group daily.
-`HOSTING_PLATFORM` The hosting platform you want to host the bot on. The only supported ones are heroku and qovery.
-`MIN_GROUP_SIZE` The minimum number of members in a group for the bot to be added to it.
+`COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data
+`WEBSITE_PASSWORD` The password you want to keep for the website
+`KEEPSAVEIT_API` The API key of KeepSaveIt for downloading the Pinterest videos
+`OWNER_NUMBER` The Whatsapp number of the owner of the bot
+`DAILY_LIMIT` The maximum number of replies that the bot will give to any user daily
+`DAILY_GROUP_LIMIT` The maximum number of replies that the bot will give to any group daily
+`HOSTING_PLATFORM` The hosting platform you want to host the bot on. The only supported ones are heroku and qovery
+`MIN_GROUP_SIZE` The minimum number of members in a group for the bot to be added to it
 `BOT_MODERATORS` The bot's moderators must be separated by a comma and the numbers must be in the following format: `[cc][number]` eg: `919744******`
 
 
-###To get the connection URL there are two ways
+### To get the connection URL there are two ways
 
 
 ## 💻 Running
