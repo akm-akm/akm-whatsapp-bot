@@ -49,7 +49,7 @@ const grp = (infor, client, xxx) =>
       resolve();
       return;
     }
-    if (!isGroupAdmins || isOwner) {
+    if (!isGroupAdmins || !isOwner) {
       client.sendMessage(from, mess.only.admin, text, {
         quoted: xxx,
       });
@@ -60,6 +60,37 @@ const grp = (infor, client, xxx) =>
 
     switch (arg[0]) {
 
+      case "autosticker":
+        if (arg.length == 1) {
+          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        if (arg[1] == "off") {
+          sql.query(`UPDATE groupdata SET autosticker = false WHERE groupid = '${from}'`);
+          client.sendMessage(from, "🤖 ```Automatic sticker turned off.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        else if (arg[1] == "on") {
+          sql.query(`UPDATE groupdata SET autosticker = true WHERE groupid = '${from}'`);
+          client.sendMessage(from, "🤖 ```Now the bot will automatically make sticker of any media sent in this group.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        }
+        else {
+          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+        }
+        break;
 
       case "prefix":
         if (arg.length == 1) {

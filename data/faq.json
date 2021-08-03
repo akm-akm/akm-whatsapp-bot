@@ -10,7 +10,7 @@
     },
     {
         "question":"Why is the bot not replying to someone?",
-        "answer":"The number may have used its daily limit of 30 replies or the bot may be down due to heavy traffic."
+        "answer":"The number may have used its daily limit of x replies or the bot may be down due to heavy traffic."
     },
     {
         "question":"What happens to my private data?",

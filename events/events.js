@@ -45,17 +45,18 @@ async function connect() {
       console.log("scan the qr above ");
     });
     client.on("connecting", () => {
-     // console.clear();
+      // //console.clear();
       console.log("connecting...");
     });
     await client.connect({
       timeoutMs: 30 * 1000
     });
     client.on("open", () => {
-    //  console.clear();
+      //console.clear();
+      sql.query('UPDATE botdata SET isconnected = true')
       console.log("connected");
       console.log(`credentials updated!`);
-      fs.unlink("./public/qr.png", () => {});
+      fs.unlink("./public/qr.png", () => { });
     });
     const authInfo = client.base64EncodedAuthInfo();
     load_clientID = authInfo.clientID;
@@ -100,23 +101,22 @@ async function connect() {
 
 async function main() {
   try {
-  //  console.clear();
+    //console.clear();
     client.logger.level = "fatal";
     await connect();
-   // console.clear();
+    // //console.clear();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
 
     console.log("Hello " + client.user.name);
 
-    
+
     client.on("chat-update", async (xxxx) => {
       try {
         if (!xxxx.hasNewMessage) return;
         xxx = xxxx.messages.all()[0];
         if (!xxx.message) return;
         if (xxx.key && xxx.key.remoteJid == "status@broadcast") return;
-       
         if (xxx.key.fromMe) return;
         const from = xxx.key.remoteJid;
         const type = Object.keys(xxx.message)[0];
@@ -127,19 +127,19 @@ async function main() {
                 .stanzaId || null :
               0;
         } catch (error) {
-          stanzaId =0;
+          stanzaId = 0;
         }
-       
+
         body =
           type === "conversation" ?
-          xxx.message.conversation :
-          type === "imageMessage" ?
-          xxx.message.imageMessage.caption :
-          type === "videoMessage" ?
-          xxx.message.videoMessage.caption :
-          type == "extendedTextMessage" ?
-          xxx.message.extendedTextMessage.text :
-          "";
+            xxx.message.conversation :
+            type === "imageMessage" ?
+              xxx.message.imageMessage.caption :
+              type === "videoMessage" ?
+                xxx.message.videoMessage.caption :
+                type == "extendedTextMessage" ?
+                  xxx.message.extendedTextMessage.text :
+                  "";
         const getGroupAdmins = (participants) => {
           admins = [];
           for (let i of participants) {
@@ -149,6 +149,7 @@ async function main() {
         };
         const isGroup = from.endsWith("@g.us");
         const sender = isGroup ? xxx.participant : xxx.key.remoteJid;
+        const isMedia = type === "imageMessage" || type === "videoMessage";
         const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
         const groupMembers = isGroup ? groupMetadata.participants : "";
         const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
@@ -161,19 +162,20 @@ async function main() {
           groupName,
           client,
           groupMetadata,
-          stanzaId
+          stanzaId, isMedia
         );
-        
-        if (!(infor.canmemberusebot || isGroupAdmins)||
+      //  console.log(infor);
+        if (!(infor.canmemberusebot || isGroupAdmins) ||
           infor.noofmsgtoday > process.env.DAILY_LIMIT ||
           infor.isnumberblockedingroup ||
-          infor.arg == null ||
-          infor.arg.length == 0
+
+
+         ! ((isGroup && infor.groupdata.autosticker)|| !infor.arg.length == 0)
         )
           return;
-        
+
         if (infor.noofmsgtoday == process.env.DAILY_LIMIT) {
-          client.sendMessage(from, "🤖 ```You have exhausted your daily limit.```", text, {
+          client.sendMessage(infor.sender, "🤖 ```You have exhausted your daily limit.```", text, {
             quoted: xxx,
           });
           count(infor)
@@ -184,9 +186,10 @@ async function main() {
           count(infor)
           return
         }
-        
+
         console.log(infor);
         switchcase(infor, client, xxx);
+
       } catch (error) {
         console.log(error);
       }
@@ -198,8 +201,9 @@ async function main() {
 
 async function stop() {
   client.close();
-  console.clear();
+  //console.clear();
   console.log("Stopped");
+  await sql.query('UPDATE botdata SET isconnected = false')
 }
 async function isconnected() {
   return client.state;
@@ -208,10 +212,9 @@ async function logout() {
   client.clearAuthInfo();
   sql.query("DROP TABLE auth;");
   client.close();
-  console.clear();
+  //console.clear();
   console.log("Logged out");
 }
-if (process.env.NODE_ENV === "development") main();
 module.exports.main = main;
 module.exports.logout = logout;
 module.exports.stop = stop;

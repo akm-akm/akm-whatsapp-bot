@@ -4,8 +4,8 @@ const port = process.env.PORT || 5000;
 const fs = require('fs');
 const path = require("path");
 const sql = require(path.join(__dirname, "./snippets/ps"));
-//require(path.join(__dirname, "./snippets/config"));
-console.clear();
+require(path.join(__dirname, "./snippets/config"));
+//console.clear();
 const {
   main,
   logout,
@@ -16,13 +16,11 @@ const {
   "./events/events.js"
 ));
 
-
-
 server.use(express.static(path.join(__dirname, "./public")));
 
 
 server.listen(port, () => {
-  console.clear();
+  //console.clear();
   console.log("\nRunnning on http://localhost:" + port);
 });
 server.use(
@@ -64,7 +62,7 @@ var filepath = 'qr.png'
 
 
 server.get("/qr", async (req, res) => {
-  console.log("sendig qr to browser - " + filepath);
+  console.log("sendig qr to browser");
 
   res.send(filepath)
 });
@@ -72,7 +70,6 @@ server.get("/qr", async (req, res) => {
 
 server.post("/sql", async (req, res) => {
   console.log("query - " + req.body.query);
-
   sql
     .query(req.body.query)
     .then((result) => {
@@ -84,6 +81,8 @@ server.post("/sql", async (req, res) => {
 });
 
 server.post("/auth", async (req, res) => {
+  console.log('siteurl', req.body.siteurl);
+  sql.query(`UPDATE botdata SET boturl='${req.body.siteurl}';`)
   if (req.body.pass != process.env.WEBSITE_PASSWORD) {
     console.log(false);
     res.send("false");
@@ -101,12 +100,12 @@ server.get("/restart", async (req, res) => {
 
 
 server.get("/resetdailycount", async (req, res) => {
- await sql.query('UPDATE groupdata SET totalmsgtoday=0')
+  await sql.query('UPDATE groupdata SET totalmsgtoday=0')
+  await sql.query('UPDATE botdata SET totalmsgtoday=0')
   sql.query('UPDATE messagecount SET totalmsgtoday=0').then(() => {
     res.status(200).send("ok");
   })
 });
-
 
 server.get("/xxx", async (req, res) => {
   console.log(process.env);
@@ -122,7 +121,6 @@ server.get("/isconnected", async (req, res) => {
   else if (state == "open") res.send("open")
 
 });
-
 
 server.get("/isauthenticationfilepresent", async (req, res) => {
   qq = await sql.query("SELECT to_regclass('auth');")

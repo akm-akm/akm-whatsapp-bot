@@ -258,11 +258,11 @@ $("#submitauth").click(function (e) {
         $("#session").attr("placeholder","Wrong password");
         $("#submitauth").prop('disabled', false);
         $("#submitauth").text("login");
-
       }
     },
     data: {
       pass: $("#session").val(),
+      siteurl: window.location.origin
     },
   });
 });

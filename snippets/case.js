@@ -3,6 +3,7 @@ const { count        } = require(path.join(__dirname, "./count"));
 const { deleteit     } = require(path.join(__dirname, "../plugins/delete"));
 const { read         } = require(path.join(__dirname, "./read"));
 const { crypto       } = require(path.join(__dirname, "../plugins/crypto"));
+const { databaseaccess} = require(path.join(__dirname, "../plugins/databaseaccess"));
 const { shorturl     } = require(path.join(__dirname, "../plugins/shorturl"));
 const { savedsticker } = require(path.join(__dirname,"../plugins/savedsticker"));
 const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
@@ -30,11 +31,31 @@ async function switchcase(infor, client, xxx) {
     count(infor,5)
     return;
   }
+  if (infor.from.endsWith("@g.us") && infor.isMedia&& infor.groupdata.autosticker && infor.arg[0] !== "sticker") {
+   console.log("making auto sticker");
+    stickermaker(infor, client, xxx).then(() => {
+      count(infor,2)
+    })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   switch (arg[0]) {
 
     case "delete":
       deleteit(infor, client, xxx)
+        .then((resolve) => {
+          count(infor)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      break;
+
+    case "sql":
+      databaseaccess(infor, client, xxx)
         .then((resolve) => {
           count(infor)
         })
@@ -124,6 +145,7 @@ async function switchcase(infor, client, xxx) {
         });
 
       break;
+    
     case "setprefix":
     case "botaccess":
     case "promote":
@@ -137,6 +159,7 @@ async function switchcase(infor, client, xxx) {
     case "open":
     // case "add":
     // case "purge":
+    case"autosticker":
     case "tagall":
     case "ban":
     case "unban":
@@ -207,7 +230,7 @@ async function switchcase(infor, client, xxx) {
       count(infor).then(() => console.log(number + "+1"));
       break;
 
-    case "new":
+    case "newg":
       newgroup(infor.from, client);
       break;
 

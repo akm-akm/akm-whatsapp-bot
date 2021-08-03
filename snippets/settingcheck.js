@@ -13,14 +13,16 @@ const {
 const {
   text
 } = MessageType;
-const data3 = JSON.parse(
+var data3 = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/data3.json")));
-
-module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId) {
+setTimeout(() => {
+    data3
+    = require(path.join(__dirname, "./config"));
+}, 60000);
+module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId, isMedia) {
   random = settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))
   try {
-
 
     if (from.endsWith("@g.us")) {
 
@@ -32,7 +34,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
         console.log("------------------------------");
         if (!(process.env.NODE_ENV === 'development')) newgroup(from, client, random).then(() => console.log("New group!"));
         await sql.query(
-          `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0);`
+          `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false);`
         );
         return settingread(arg, from, sender, groupname)
       }
@@ -50,8 +52,6 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       await sql.query(`INSERT INTO messagecount VALUES ('${number}', 0, 0);`)
       return settingread(arg, from, sender, groupname)
     }
-
-
 
     return (data = {
 
@@ -73,10 +73,9 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       isnumberblockedingroup: from.endsWith("@g.us") ? data1.rows[0].banned_users.includes(number) ? 1 : 0 : 0,
       groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,
       sender: sender,
-      stanzaId: stanzaId
+      stanzaId: stanzaId,
+      isMedia: isMedia
     })
-
-
 
   } catch (error) {
     console.log(error);

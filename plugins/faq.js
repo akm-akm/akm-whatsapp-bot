@@ -6,7 +6,7 @@ const {
 const faq = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/faq.json"))
 );
-msgl = "🤖 *XXX-BOT FAQs* 🤖\n\n";
+msgl = "🤖🤖 *XXX-BOT FAQs* 🤖🤖\n\n";
 const faqs = (infor, client, xxx) =>
   new Promise((resolve, reject) => {
     faq.forEach((element) => {

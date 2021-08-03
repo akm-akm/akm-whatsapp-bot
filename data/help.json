@@ -4,6 +4,11 @@
         "desc": "```Fetches the price of given crypto currency from coinmarketcap using its API.```",
         "eg": "crypto btc\ncrypto xrp\ncrypto eth"
     },
+    "autosticker": {
+        "usage": "autosticker <condition>",
+        "desc": "```Automatically makes sticker of any media sent in the group.```",
+        "eg": "autosticker on\nautosticker off"
+    },
     "setprefix": {
         "usage": "setprefix <newprefix>",
         "desc": "```Sets the prefix to be used for bot commands.```",
