@@ -35,7 +35,6 @@ const botsettingcheck =() =>  new Promise(async (resolve, reject) => {
             .then((response) => {
             console.log("Getting data3");
             if (response.status == 200) {
-                fs.unlinkSync(path.join(__dirname, "../data/data3.json"));
                 fs.writeFileSync(path.join(__dirname, "../data/data3.json"), JSON.stringify(response.data, null, "\t"))
                 data3 = JSON.parse(
                     fs.readFileSync(path.join(__dirname, "../data/data3.json")));
@@ -43,14 +42,9 @@ const botsettingcheck =() =>  new Promise(async (resolve, reject) => {
             }
             })
             .catch(() => {
-            fs.existsSync(path.join(__dirname, "../data/data3.json")) ? console.log("data3 File present") : fs.writeFileSync(path.join(__dirname, "../data/data3.json"), '{"words": ["xxx"]}') && console.log("Empty data3 File written");
-            data3 = JSON.parse(
-                fs.readFileSync(path.join(__dirname, "../data/data3.json")));
+                console.log("Error getting data3");
             })
-            .finally(() => {
-           
-            module.exports = data3;
-            })
+            
 
         if (botdata.isconnected || process.env.NODE_ENV === "development") {
             main()

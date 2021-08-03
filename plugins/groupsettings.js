@@ -38,7 +38,7 @@ const grp = (infor, client, xxx) =>
     const type = Object.keys(xxx.message)[0];
     const content = JSON.stringify(xxx.message);
     const botNumber = client.user.jid;
-    const ownerNumber = [`${process.env.ownerNumber}@s.whatsapp.net`];
+    const ownerNumber = [`${process.env.OWNER_NUMBER}@s.whatsapp.net`];
     const isBotGroupAdmins = groupAdmins.includes(botNumber) || false;
     const isOwner = ownerNumber.includes(sender);
     const isSuperAdmin = `${groupMetadata.owner}`.split('@') === sender.split('@');
@@ -49,7 +49,7 @@ const grp = (infor, client, xxx) =>
       resolve();
       return;
     }
-    if (!isGroupAdmins || !isOwner) {
+    if (!(isGroupAdmins || isOwner) ){
       client.sendMessage(from, mess.only.admin, text, {
         quoted: xxx,
       });

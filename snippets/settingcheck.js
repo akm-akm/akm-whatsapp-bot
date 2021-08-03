@@ -13,11 +13,13 @@ const {
 const {
   text
 } = MessageType;
+fs.writeFileSync(path.join(__dirname, "../data/data3.json"), '{"words": ["xxx"]}')
 var data3 = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/data3.json")));
 setTimeout(() => {
     data3
-    = require(path.join(__dirname, "./config"));
+      = JSON.parse(
+        fs.readFileSync(path.join(__dirname, "../data/data3.json")));
 }, 60000);
 module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId, isMedia) {
   random = settings.prefixchoice.charAt(

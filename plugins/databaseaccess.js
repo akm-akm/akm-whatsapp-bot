@@ -2,17 +2,14 @@ const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
 const fs = require("fs");
 const path = require("path");
-
-const ownerNumber = [`${process.env.ownerNumber}@s.whatsapp.net`];
 const mess = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
 );
 const sql = require(path.join(__dirname, "../snippets/ps"));
-
 const databaseaccess = (infor, client, xxx) =>
     new Promise(async (resolve, reject) => {
-        const isOwner = ownerNumber.includes(infor.sender);
-        if (!isOwner) {
+        console.log(process.env.OWNER_NUMBER);
+        if (infor.number !== process.env.OWNER_NUMBER) {
             client.sendMessage(from, mess.only.ownerB, text, {
                 quoted: xxx,
             });
@@ -28,9 +25,5 @@ const databaseaccess = (infor, client, xxx) =>
             resolve();
         })
     })
-
-
-
-
-    
+ 
 module.exports.databaseaccess = databaseaccess;
