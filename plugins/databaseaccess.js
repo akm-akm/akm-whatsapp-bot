@@ -1,5 +1,8 @@
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
+const fs = require("fs");
+const path = require("path");
+
 const ownerNumber = [`${process.env.ownerNumber}@s.whatsapp.net`];
 const mess = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
