@@ -15,7 +15,9 @@ const {
 } = require(path.join(__dirname, "../snippets/case"));
 var qri = require("qr-image");
 const sql = require(path.join(__dirname, "../snippets/ps"));
-const { count } = require(path.join(__dirname, "../snippets/count"));
+const {
+  count
+} = require(path.join(__dirname, "../snippets/count"));
 
 async function connect() {
   try {
@@ -53,10 +55,9 @@ async function connect() {
     });
     client.on("open", () => {
       //console.clear();
-      sql.query('UPDATE botdata SET isconnected = true')
       console.log("connected");
       console.log(`credentials updated!`);
-      fs.unlink("./public/qr.png", () => { });
+      fs.unlink("./public/qr.png", () => {});
     });
     const authInfo = client.base64EncodedAuthInfo();
     load_clientID = authInfo.clientID;
@@ -107,9 +108,8 @@ async function main() {
     // //console.clear();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
-
     console.log("Hello " + client.user.name);
-
+    sql.query('UPDATE botdata SET isconnected = true;')
 
     client.on("chat-update", async (xxxx) => {
       try {
@@ -123,23 +123,23 @@ async function main() {
         try {
           stanzaId =
             type == "extendedTextMessage" ?
-              xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
-                .stanzaId || null :
-              0;
+            xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
+            .stanzaId || null :
+            0;
         } catch (error) {
           stanzaId = 0;
         }
 
         body =
           type === "conversation" ?
-            xxx.message.conversation :
-            type === "imageMessage" ?
-              xxx.message.imageMessage.caption :
-              type === "videoMessage" ?
-                xxx.message.videoMessage.caption :
-                type == "extendedTextMessage" ?
-                  xxx.message.extendedTextMessage.text :
-                  "";
+          xxx.message.conversation :
+          type === "imageMessage" ?
+          xxx.message.imageMessage.caption :
+          type === "videoMessage" ?
+          xxx.message.videoMessage.caption :
+          type == "extendedTextMessage" ?
+          xxx.message.extendedTextMessage.text :
+          "";
         const getGroupAdmins = (participants) => {
           admins = [];
           for (let i of participants) {
@@ -164,25 +164,23 @@ async function main() {
           groupMetadata,
           stanzaId, isMedia
         );
-      //  console.log(infor);
+        //  console.log(infor);
         if (!(infor.canmemberusebot || isGroupAdmins) ||
-          infor.noofmsgtoday > process.env.DAILY_LIMIT ||
+          !(infor.noofmsgtoday < process.env.DAILY_LIMIT || infor.number === process.env.OWNER_NUMBER)||
           infor.isnumberblockedingroup ||
-
-
-         ! ((isGroup && infor.groupdata.autosticker)|| !infor.arg.length == 0)
+          !((isGroup && infor.groupdata.autosticker) || !infor.arg.length == 0)
         )
           return;
 
         if (infor.noofmsgtoday == process.env.DAILY_LIMIT) {
-          client.sendMessage(infor.sender, "🤖 ```You have exhausted your daily limit.```", text, {
+          client.sendMessage(infor.sender, "🤖 ```You have exhausted your daily limit, the bot will not reply you anymore.```", text, {
             quoted: xxx,
           });
           count(infor)
           return
         }
-        if (infor.groupdata.totalmsgtoday == process.env.DAILY_GROUP_LIMIT) {
-          client.sendMessage(from, "🤖 ```Daily group limit exhausted!```", text);
+        if (infor.groupdata.totalmsgtoday == process.env.DAILY_GROUP_LIMIT && infor.number !== process.env.OWNER_NUMBER) {
+          client.sendMessage(from, "🤖 ```Daily group limit exhausted, the bot will not repl anymore.```", text);
           count(infor)
           return
         }

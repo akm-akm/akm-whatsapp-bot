@@ -24,10 +24,7 @@
         "question":"How does the bot detect abuse?",
         "answer":"It searches for the abuse in its database containing 500 words."
     },
-    {
-        "question":"The bot has a bug, how do I report it?",
-        "answer":"you can use reportabug command followed by the description of the bug."
-    },
+   
     {
         "question":"How many groups use this bot?",
         "answer":"This bot is present in almost 1000 groups."

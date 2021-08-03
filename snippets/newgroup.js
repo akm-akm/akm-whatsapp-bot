@@ -13,7 +13,6 @@ const getGroupAdmins = (participants) => {
 };
 const newgroup = (from,client,random) =>
   new Promise(async (resolve, reject) => {
-   
     const groupMetadata = await client.groupMetadata(from);
     const groupMembers = groupMetadata.participants;
     const groupAdmins = getGroupAdmins(groupMembers);

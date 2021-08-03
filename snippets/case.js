@@ -1,22 +1,22 @@
 const path = require("path");
-const { count        } = require(path.join(__dirname, "./count"));
-const { deleteit     } = require(path.join(__dirname, "../plugins/delete"));
-const { read         } = require(path.join(__dirname, "./read"));
-const { crypto       } = require(path.join(__dirname, "../plugins/crypto"));
-const { databaseaccess} = require(path.join(__dirname, "../plugins/databaseaccess"));
-const { shorturl     } = require(path.join(__dirname, "../plugins/shorturl"));
-const { savedsticker } = require(path.join(__dirname,"../plugins/savedsticker"));
+const { count } = require(path.join(__dirname, "./count"));
+const { deleteit } = require(path.join(__dirname, "../plugins/delete"));
+const { read } = require(path.join(__dirname, "./read"));
+const { crypto } = require(path.join(__dirname, "../plugins/crypto"));
+const { databaseaccess } = require(path.join(__dirname, "../plugins/databaseaccess"));
+const { shorturl } = require(path.join(__dirname, "../plugins/shorturl"));
+const { savedsticker } = require(path.join(__dirname, "../plugins/savedsticker"));
 const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
-const { pinterest    } = require(path.join(__dirname, "../plugins/pinterest"));
-const { grp          } = require(path.join(__dirname, "../plugins/groupsettings"));
-const { xdafootball  } = require(path.join(__dirname, "../plugins/twitter"));
-const { market       } = require(path.join(__dirname, "../plugins/market"));
-const { newgroup     } = require(path.join(__dirname, "./newgroup"));
-const { help         } = require(path.join(__dirname, "../plugins/help"));
-const { youtube      } = require(path.join(__dirname, "../plugins/yt"));
-const { faqs         } = require(path.join(__dirname, "../plugins/faq"));
-const { MessageType  } = require("@adiwajshing/baileys");
-const { text         } = MessageType;
+const { pinterest } = require(path.join(__dirname, "../plugins/pinterest"));
+const { grp } = require(path.join(__dirname, "../plugins/groupsettings"));
+const { xdafootball } = require(path.join(__dirname, "../plugins/twitter"));
+const { market } = require(path.join(__dirname, "../plugins/market"));
+const { newgroup } = require(path.join(__dirname, "./newgroup"));
+const { help } = require(path.join(__dirname, "../plugins/help"));
+const { youtube } = require(path.join(__dirname, "../plugins/yt"));
+const { faqs } = require(path.join(__dirname, "../plugins/faq"));
+const { MessageType } = require("@adiwajshing/baileys");
+const { text } = MessageType;
 
 async function switchcase(infor, client, xxx) {
   number = infor.number;
@@ -28,13 +28,13 @@ async function switchcase(infor, client, xxx) {
     client.sendMessage(from, "⚠️ ```Tu " + infor.abusepresent[0] + "```", text, {
       quoted: xxx,
     });
-    count(infor,5)
+    count(infor, 5)
     return;
   }
-  if (infor.from.endsWith("@g.us") && infor.isMedia&& infor.groupdata.autosticker && infor.arg[0] !== "sticker") {
-   console.log("making auto sticker");
+  if (infor.from.endsWith("@g.us") && infor.isMedia && infor.groupdata.autosticker && infor.arg[0] !== "sticker") {
+    console.log("making auto sticker");
     stickermaker(infor, client, xxx).then(() => {
-      count(infor,2)
+      count(infor, 2)
     })
       .catch((err) => {
         console.log(err);
@@ -71,31 +71,34 @@ async function switchcase(infor, client, xxx) {
       });
       count(infor)
       break;
-    
+
     case "crypto":
       crypto(infor, client, xxx)
         .then((resolve) => {
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log("error");
         });
 
       break;
-    
+
     case "tweet":
       xdafootball(infor, client, xxx)
         .then((resolve) => {
-          count(infor) })
+          count(infor)
+        })
         .catch((error) => {
           console.log("error");
         });
 
       break;
-    
+
     case "shorturl":
       shorturl(infor, client, xxx)
         .then((resolve) => {
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log("error");
         });
@@ -105,7 +108,8 @@ async function switchcase(infor, client, xxx) {
     case "market":
       market(infor, client, xxx)
         .then(() => {
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log("Error");
         });
@@ -116,7 +120,8 @@ async function switchcase(infor, client, xxx) {
       stickermaker(infor, client, xxx)
         .then(() => {
           console.log("sent");
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log("error");
         });
@@ -124,11 +129,12 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "rs":
-   
+
     case "rashmika":
       savedsticker(infor, client, xxx)
         .then((resolve) => {
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log("rashmika error");
         });
@@ -138,14 +144,15 @@ async function switchcase(infor, client, xxx) {
     case "pin":
       pinterest(infor, client, xxx)
         .then(() => {
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log("pin error");
           console.log(error);
         });
 
       break;
-    
+
     case "setprefix":
     case "botaccess":
     case "promote":
@@ -159,7 +166,7 @@ async function switchcase(infor, client, xxx) {
     case "open":
     // case "add":
     // case "purge":
-    case"autosticker":
+    case "autosticker":
     case "tagall":
     case "ban":
     case "unban":
@@ -167,11 +174,11 @@ async function switchcase(infor, client, xxx) {
     case "filterabuse":
       grp(infor, client, xxx)
         .then(() => {
-          count(infor)        })
+          count(infor, 3)
+        })
         .catch((error) => {
           console.log(error);
         });
-
       break;
 
     case "help":
@@ -181,7 +188,8 @@ async function switchcase(infor, client, xxx) {
     case "commands":
       help(infor, client, xxx)
         .then(() => {
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -203,7 +211,8 @@ async function switchcase(infor, client, xxx) {
     case "ytv":
       youtube(infor, client, xxx)
         .then((resolve) => {
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -212,7 +221,8 @@ async function switchcase(infor, client, xxx) {
     case "faq":
       faqs(infor, client, xxx)
         .then((resolve) => {
-          count(infor)        })
+          count(infor)
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -245,7 +255,7 @@ async function switchcase(infor, client, xxx) {
 
     case "xrestartx":
       process.exit(0);
-     
+
 
     default:
       break;

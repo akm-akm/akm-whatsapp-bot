@@ -1,6 +1,6 @@
 const { Pool } = require("pg");
 var credentials = {};
-if (process.env.NODE_ENV === "development") {
+if (process.env.HOSTING_PLATFORM === "local") {
   credentials = {
     user: "postgres",
     password: "root",

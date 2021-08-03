@@ -110,7 +110,7 @@ const grp = (infor, client, xxx) =>
         }
         else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET useprefix = true WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```The bot will only listen for commands starting with the given prefix.```", text, {
+          client.sendMessage(from, "🤖 ```The bot will only listen for commands starting with ```" + infor.groupdata.prefix, text, {
             quoted: xxx,
           });
           resolve();
@@ -430,9 +430,9 @@ const grp = (infor, client, xxx) =>
         if (arg.length > 1) {
           arg.shift();
           msg = arg.join(" ")
-        } else msg = "```Hello 👋```\n\n";
+        } else msg = "👋 ```Hello Everyone```\n\n";
         for (let member of groupMembers) {
-          msg += `\n🤖 @${member.jid.split("@")[0]}\n`;
+          msg += `\n🤖 @${member.jid.split("@")[0]}`;
           memberslist.push(member.jid);
         }
         client.sendMessage(from, msg, extendedText, {

@@ -60,7 +60,7 @@ $("#submit").click(function (e) {
       console.log(res);
       $("#submit").prop('disabled', false);
       $("#submit").text("Run Query");
-      $("#output").text(JSON.stringify(res));
+      $("#output").text(JSON.stringify(res, null, "\t"));
 
     },
     data: {

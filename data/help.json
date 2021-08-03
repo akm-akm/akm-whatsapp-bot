@@ -28,7 +28,7 @@
 
     "delete": {
         "usage": "delete",
-        "desc": "```The bot will delete its message that is tagged.```",
+        "desc": "```The bot will delete the tagged message.```",
         "eg": "delete"
     },
     "filterabuse": {
@@ -38,7 +38,7 @@
     },
     "market": {
         "usage": "market <arguments>",
-        "desc": "```Fetches the information of given symbol from NSE. Arguments it can take are,\n\n🧿 status - It will give the status of the market.\n🧿 search <name> - It will search all the companies with this name.\n🧿 details <key> - It will give all the details of the stock from NSE.\n🧿 losers - It will give top 10 loosers of NSE.\n🧿 gainers - It will give top 10 gainers of NSE.```",
+        "desc": "```Fetches the information of given symbol from NSE. Arguments it can take are,\n\n🧿 status - It will give the status of the market.\n\n🧿 search <name> - It will search all the companies with this name.\n\n🧿 details <key> - It will give all the details of the stock from NSE.\n\n🧿 losers - It will give top 10 loosers of NSE.\n\n🧿 gainers - It will give top 10 gainers of NSE.```",
         "eg": "market status\nmarket search tata\nmarket details tcs\nmarket losers\nmarket gainers"
     },
     "sticker": {
@@ -48,7 +48,7 @@
     },
     "ytv": {
         "usage": "ytv <link>",
-        "desc": "```Downloads video from give youtube link.```",
+        "desc": "```Downloads video from the given youtube link.```",
         "eg": "ytv https://youtu.be/JJWE3QH-Q6s"
     },
     "limit": {
@@ -122,19 +122,19 @@
         "desc": "```Removes the tagged member from the group.```",
         "eg": "kick @ankit\nkick @dibyam"
     },
-    "open": {
-        "usage": "open",
-        "desc": "```Changes the setting so that only admins can message.```",
-        "eg": "open"
-    },
     "close": {
         "usage": "close",
-        "desc": "```Changes the setting so that members can message.```",
+        "desc": "```Changes the setting so that only admins can message.```",
         "eg": "close"
+    },
+    "open": {
+        "usage": "open",
+        "desc": "```Changes the setting so that members can message.```",
+        "eg": "open"
     },
     "rashmika": {
         "usage": "rashmika",
-        "desc": "```The bot will send a Rashmika sticker.```♥️",
+        "desc": "```The bot will send a Rashmika sticker♥️.```",
         "eg": "rashmika"
     },
     "rs": {
@@ -162,7 +162,7 @@
     "shorturl": {
         "usage": "shorturl <link>",
         "desc": "```Generates a short url uf the given link using lenk.cf API.```",
-        "eg": "shorturl https://www.hindustantimes.com/world-news/microsoft-asks-windows-users-to-immediately-install-security-update-for-printnightmare-101625676872300-amp.html"
+        "eg": "shorturl https://www.hindustantimes.com/world-news"
     },
     "add": {
         "usage": "add <number>",
