@@ -1,4 +1,6 @@
 const axios = require("axios");
+const path = require("path");
+
 var msg ='';
 const {
   MessageType
@@ -6,6 +8,7 @@ const {
 const {
   text
 } = MessageType;
+const { help } = require(path.join(__dirname, "./help"));
 
 function stripTags(string) {
   return string.replace(/<(.|\n)*?>/g, "").trim();
@@ -37,11 +40,10 @@ const market = (infor,client,xxx) =>
     arg = infor.arg
     from=infor.from;
 
-    if (arg.length==1){
-      client.sendMessage(from,"```Argument required```", text, {
-        quoted: xxx,
-      }); 
-       reject()
+    if (arg.length == 1) {
+      infor.arg=["help",arg[0]]
+      help(infor,client,xxx,1);
+       resolve()
       return}
       switch (arg[1]) {
         case "status":
@@ -54,7 +56,7 @@ const market = (infor,client,xxx) =>
                 client.sendMessage(from, "```Error```", text, {
                   quoted: xxx,
                 });
-                reject();
+                resolve();
                
               } else {
                 var msg =
@@ -397,7 +399,8 @@ const market = (infor,client,xxx) =>
           break;
 
         default:
-          help(infor, client, xxx)
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx);
           msg =
             "*Usage*" +
             " = " +

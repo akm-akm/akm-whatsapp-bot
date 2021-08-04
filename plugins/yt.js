@@ -3,8 +3,11 @@ const ytdl = require("ytdl-core");
 const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}${ext}`;
 };
+const path = require("path");
+
 const { MessageType } = require("@adiwajshing/baileys");
 const { text,video } = MessageType;
+const { help } = require(path.join(__dirname, "./help"));
 
 const youtube = (infor, client, xxx) =>
   new Promise(async (resolve, reject) => {
@@ -12,7 +15,8 @@ const youtube = (infor, client, xxx) =>
     arg = infor.arg;
     url = arg[1];
     if (infor.arg.length == 1) {
-      client.sendMessage(from,"```Youtube link required.```", text, { quoted: xxx,});
+      infor.arg = ["help", arg[0]]
+      help(infor, client, xxx, 1);
       resolve();
       return;
     }

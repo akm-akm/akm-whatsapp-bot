@@ -8,28 +8,30 @@ const { text } = MessageType;
 
 
 
-const help = (infor, client, xxx) =>
+const help = (infor, client, xxx,syntax) =>
   new Promise((resolve, reject) => {
+   
     arg = infor.arg;
     from = infor.from;
     prefix = infor.groupdata.prefix;
     useprefix = infor.groupdata.useprefix;
     var msg;
-    if (arg.length == 1) {
-      c = prefix == undefined ? "```Not needed in inbox```" : useprefix ?  prefix : "```Disabled```";
-      if (prefix == undefined || !useprefix )  prefix = "🔔";
+    c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "```Disabled```";
+    if (prefix == undefined || !useprefix) prefix = "📍";
 
+    if (arg.length == 1) {
+      
       msg =
-        "🤖🤖 *XXX-BOT MENU* 🤖🤖\n\n💡 *Prefix:*  " +
+        "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
       "\n\n" +
         "📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n" +
         "👑 *Group Admin*\n```promote, demote, kick, grouplink, botleave, setprefix, prefix, autosticker, close, open, add, purge, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" +
         "📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, pin, rashmika```\n\n" +
-        "🔗 *For detailed info*\n" +
+        "🎁 *For detailed info*\n" +
         prefix +
         "```help <command>```\n\n" +
-        "🎲 *Example*\n" +
+        "🚄 *Example* :\n" +
         prefix +
         "help crypto\n" +
         prefix +
@@ -41,21 +43,21 @@ const help = (infor, client, xxx) =>
       });
       resolve();
     } else {
+
       try {
         msg =
-          "\n🔖 *Description* :\n" +
-          data[arg[1]].desc +
-          "\n\n" +
+          syntax == undefined ? "🔖 *Description* :\n" +
+          data[arg[1]].desc : "😡 *Error* :\n```syntax error in the given command.```";
+        msg += "\n\n" +
           "📕 *Usage* :\n" +
-          "```" +
+          prefix + "```" +
           data[arg[1]].usage +
           "```" +
           "\n\n" +
-          "📚 *Example* :\n" +
-          "```" +
-          data[arg[1]].eg +
-          "```" +
-          "\n";
+          "📚 *Example* :\n";
+          data[arg[1]].eg.forEach(currentItem => {
+            msg += "```" + prefix + currentItem + "```" + "\n";
+          });
         client.sendMessage(from, msg, text, {
           quoted: xxx,
         });
@@ -63,7 +65,7 @@ const help = (infor, client, xxx) =>
       } catch (e) {
         client.sendMessage(
           from,
-          "```Command``` " + "```" + arg[1] + "```" + " ```not found.```",
+          "🤖 ```No such command:``` " + arg[1],
           text,
           {
             quoted: xxx,

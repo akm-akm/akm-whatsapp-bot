@@ -1,6 +1,8 @@
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
+const { help } = require(path.join(__dirname, "./help"));
+
 const {
   MessageType
 } = require("@adiwajshing/baileys");
@@ -34,9 +36,8 @@ const crypto = (infor,client,xxx) =>
     from=infor.from;
 
     if (arg.length==1){
-      client.sendMessage(from, "```Enter coin symbol.```", text, {
-        quoted: xxx,
-      });
+      infor.arg = ["help", arg[0]]
+      help(infor, client, xxx, 1);
       reject()
     return}
     if (!coins.includes(arg[1].toUpperCase())) {

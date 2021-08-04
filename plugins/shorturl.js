@@ -1,28 +1,51 @@
 const axios = require("axios");
 const { MessageType } = require("@adiwajshing/baileys");
-const { text, extendedtext, image, video, sticker, audio } = MessageType;
+const { text } = MessageType;
+const path = require("path");
 
-const shorturl = (infor) =>
+const { help } = require(path.join(__dirname, "./help"));
+
+const shorturl = (infor, client, xxx) =>
     new Promise((resolve, reject) => {
-        arg     = infor.arg
-        if (arg.length==1     )reject("```Argument required```")
+        arg = infor.arg
+        from = infor.from;
+        if (arg.length == 1) {
+            infor.arg = ["help", arg[0]]
+            help(infor, client, xxx, 1);
+            resolve()
+        }
 
         axios({
-                method: "POST",
-                url: "https://lenk.cf/p/" + encodeURIComponent(arg[1])
-            })
+            method: "POST",
+            url: "https://lenk.cf/p/" + encodeURIComponent(arg[1])
+        })
             .then((response) => {
-                if(response.data=='Invalid URL') resolve("```Wrong URL```")
-                msg ="```short url is```" + "\n" +
+                if (response.data == 'Invalid URL') {
+                    client.sendMessage(from, "🤖 ```Wrong URL```", text, {
+                        quoted: xxx
+                    });
+                    resolve()
+                    return
+                }
+                msg = "🤖 ```short url is:```" + "\n" +
                     "```https://lenk.cf/```" +
                     "```" +
                     response.data +
                     "```" +
                     "\n\n" +
                     "```API by lenk.cf```";
-                resolve(msg);
+                client.sendMessage(from, msg, text, {
+                    quoted: xxx
+                })
+                resolve();
+
             })
-            .catch(() => reject("```server busy```"));
+            .catch(() => {
+                client.sendMessage(from, "🤖  ```Server error.```", text, {
+                    quoted: xxx
+                });
+                reject();
+            })
     });
 
   

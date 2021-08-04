@@ -3,7 +3,7 @@ const { count } = require(path.join(__dirname, "./count"));
 const { deleteit } = require(path.join(__dirname, "../plugins/delete"));
 const { read } = require(path.join(__dirname, "./read"));
 const { crypto } = require(path.join(__dirname, "../plugins/crypto"));
-const { databaseaccess } = require(path.join(__dirname, "../plugins/databaseaccess"));
+const { owner } = require(path.join(__dirname, "../plugins/owner"));
 const { shorturl } = require(path.join(__dirname, "../plugins/shorturl"));
 const { savedsticker } = require(path.join(__dirname, "../plugins/savedsticker"));
 const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
@@ -17,6 +17,7 @@ const { youtube } = require(path.join(__dirname, "../plugins/yt"));
 const { faqs } = require(path.join(__dirname, "../plugins/faq"));
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
+
 
 async function switchcase(infor, client, xxx) {
   number = infor.number;
@@ -43,6 +44,7 @@ async function switchcase(infor, client, xxx) {
 
   switch (arg[0]) {
 
+
     case "delete":
       deleteit(infor, client, xxx)
         .then((resolve) => {
@@ -55,7 +57,12 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "sql":
-      databaseaccess(infor, client, xxx)
+    case "dl":
+    case "dgl":
+    case "mdr":
+    case "sql":
+    case "restart":
+      owner(infor, client, xxx)
         .then((resolve) => {
           count(infor)
         })
@@ -66,7 +73,7 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "sourcecode":
-      client.sendMessage(from, "```https://github.com/akm-akm/xxx```", text, {
+      client.sendMessage(from, "```https://github.com/akm-akm/xxx-bot/```", text, {
         quoted: xxx,
       });
       count(infor)
@@ -184,6 +191,7 @@ async function switchcase(infor, client, xxx) {
     case "help":
     case "bot":
     case "menu":
+    case "🤖":
     case "command":
     case "commands":
       help(infor, client, xxx)
@@ -247,15 +255,11 @@ async function switchcase(infor, client, xxx) {
     case "hello":
     case "hi":
     case "hey":
-      client.sendMessage(from, "```Hello```", text, {
+      client.sendMessage(from, "👋 ```Hello```", text, {
         quoted: xxx,
       });
       count(infor)
       break;
-
-    case "xrestartx":
-      process.exit(0);
-
 
     default:
       break;

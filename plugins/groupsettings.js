@@ -8,6 +8,7 @@ const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
 );
 const { newgroup } = require(path.join(__dirname, "../snippets/newgroup"));
+const { help } = require(path.join(__dirname, "./help"));
 
 const {
   GroupSettingChange,
@@ -62,9 +63,8 @@ const grp = (infor, client, xxx) =>
 
       case "autosticker":
         if (arg.length == 1) {
-          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -85,18 +85,16 @@ const grp = (infor, client, xxx) =>
           return;
         }
         else {
-          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
         }
         break;
 
       case "prefix":
         if (arg.length == 1) {
-          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -117,18 +115,16 @@ const grp = (infor, client, xxx) =>
           return;
         }
         else {
-          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
         }
         break;
 
       case "botaccess":
         if (arg.length == 1) {
-          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -149,23 +145,21 @@ const grp = (infor, client, xxx) =>
           return;
         }
         else {
-          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
         }
         break;
        
       case "setprefix":
         if (arg.length == 1) {
-          client.sendMessage(from, "🤖 ```Enter character to be used as prefix.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
         if (!settings.prefixchoice.split("").includes(arg[1])) {
-          client.sendMessage(from, "```Select prefix from ```" + settings.prefixchoice, text, {
+          client.sendMessage(from, "🤖 ```Select prefix from ```" + settings.prefixchoice, text, {
             quoted: xxx,
           });
           resolve();
@@ -190,9 +184,8 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg.length == 1) {
-          client.sendMessage(from, "```Tag the member.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -214,9 +207,8 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg.length == 1) {
-          client.sendMessage(from, "```Tag the member.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -224,7 +216,7 @@ const grp = (infor, client, xxx) =>
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
         if (z === `${groupMetadata.owner}`.split("@")[0]) {
-          client.sendMessage(from, "```You can't demote group creator.```", text, {
+          client.sendMessage(from, "```You can't demote the group creator.```", text, {
             quoted: xxx,
           })
           resolve();
@@ -245,8 +237,9 @@ const grp = (infor, client, xxx) =>
         break;
 
       case "kick":
-
-
+        try {
+          
+        
         if (!isBotGroupAdmins) {
           client.sendMessage(from, mess.only.Badmin, text, {
             quoted: xxx,
@@ -255,9 +248,8 @@ const grp = (infor, client, xxx) =>
           return;
         }
         if (arg.length == 1) {
-          client.sendMessage(from, "```Tag the member.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -278,11 +270,18 @@ const grp = (infor, client, xxx) =>
           resolve();
           return
         }
-        client.groupRemove(from, mentioned);
+          await client.groupRemove(from, mentioned);
+          
         client.sendMessage(from, "🥲", text, {
           quoted: xxx,
         });
-        resolve();
+          resolve();
+        } catch (error) {
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
+          resolve()
+        }
+
         break;
 
       case "grouplink":
@@ -366,9 +365,8 @@ const grp = (infor, client, xxx) =>
 
       case "add":
         if (arg.length == 1) {
-          client.sendMessage(from, "```Argument required```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -448,9 +446,8 @@ const grp = (infor, client, xxx) =>
 
 
         if (arg.length == 1) {
-          client.sendMessage(from, "```Enter on or off after the command.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -475,9 +472,8 @@ const grp = (infor, client, xxx) =>
           return;
         }
         else {
-          client.sendMessage(from, "🤖 ```Enter on or off after the command.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
         }
 
@@ -485,9 +481,8 @@ const grp = (infor, client, xxx) =>
 
       case "ban":
         if (arg.length == 1) {
-          client.sendMessage(from, "```Tag the member.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
 
           resolve();
           return;
@@ -522,9 +517,8 @@ const grp = (infor, client, xxx) =>
 
       case "unban":
         if (arg.length == 1) {
-          client.sendMessage(from, "```Tag the member.```", text, {
-            quoted: xxx,
-          });
+          infor.arg = ["help", arg[0]]
+          help(infor, client, xxx, 1);
           resolve();
           return;
         }

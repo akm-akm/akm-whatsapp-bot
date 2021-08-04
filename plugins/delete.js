@@ -5,7 +5,7 @@ const deleteit = (infor, client, xxx) =>
     new Promise(async (resolve, reject) => {
         const type = Object.keys(xxx.message)[0];
        if(type !== "extendedTextMessage") {
-            client.sendMessage(infor.from,"```Tag the message to be deleted.```", text, { quoted: xxx });
+            client.sendMessage(infor.from,"🤖  ```Tag the message to be deleted.```", text, { quoted: xxx });
             resolve()
             return}
         try {

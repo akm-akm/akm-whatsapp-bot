@@ -10,7 +10,7 @@ const {
     text
 } = MessageType;
 const sql = require(path.join(__dirname, "../snippets/ps"));
-const owner = (client, infor, xxx) => new Promise(async (resolve, reject) => {
+const owner = (infor, client, xxx) => new Promise(async (resolve, reject) => {
 
     if (infor.number !== process.env.OWNER_NUMBER) {
         client.sendMessage(from, mess.only.ownerB, text, {
@@ -21,7 +21,7 @@ const owner = (client, infor, xxx) => new Promise(async (resolve, reject) => {
     }
     switch (infor.arg[0]) {
 
-        case sql:
+        case 'sql':
             let cmd = infor.arg.slice(1).join(" ");
             console.log(`Command: ${cmd}`);
             sql.query(cmd).then(result => {
@@ -38,20 +38,47 @@ const owner = (client, infor, xxx) => new Promise(async (resolve, reject) => {
         
         case "dl":
             if (infor.arg.length < 2) {
-                client.sendMessage(from, '🤖```Enter the number to be set as daily limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter the number to be set as daily limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
                 return;
             }
             if (typeof infor.arg[1] === 'number' && infor.arg[1] > 0 && infor.arg[1] < 1000) {
-                client.sendMessage(from, '🤖```Enter a valid number to be set as daily limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter a valid number to be set as daily limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
                 return;
             }
             sql.query(`update botdata set dailylimit = '${infor.arg[1]}'`).then(result => {
+                client.sendMessage(from, mess.success, text, {
+                    quoted: xxx,
+                }).catch(err => {
+                    client.sendMessage(from, mess.error.error, text, {
+                        quoted: xxx,
+                    });
+                })
+                resolve();
+            })
+
+            break;
+        case "mgs":
+            if (infor.arg.length < 2) {
+                client.sendMessage(from, '🤖 ```Enter the number to be set as minimum group size.```', text, {
+                    quoted: xxx,
+                });
+                resolve();
+                return;
+            }
+            if (typeof infor.arg[1] === 'number' && infor.arg[1] > 0 && infor.arg[1] < 257) {
+                client.sendMessage(from, '🤖 ```Enter a valid number to be set as daily limit.```', text, {
+                    quoted: xxx,
+                });
+                resolve();
+                return;
+            }
+            sql.query(`update botdata set mingroupsize = '${infor.arg[1]}'`).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
                 }).catch(err => {
@@ -94,7 +121,7 @@ const owner = (client, infor, xxx) => new Promise(async (resolve, reject) => {
         
         case "mdr":
             if (infor.arg.length < 2) {
-                client.sendMessage(from, '🤖```Enter the number with cc to be set as moderator.```', text, {
+                client.sendMessage(from, '🤖 ```Enter the number with cc to be set as moderator.```', text, {
                     quoted: xxx,
                 });
                 resolve();
@@ -102,7 +129,7 @@ const owner = (client, infor, xxx) => new Promise(async (resolve, reject) => {
             }
             z = infor.arg[1];
             sql.query(
-                `UPDATE botdata SET moderators = array_append(moderators, '${z}')';`
+                `UPDATE botdata SET moderators = array_append(moderators, '${z}');`
             ).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
@@ -113,6 +140,14 @@ const owner = (client, infor, xxx) => new Promise(async (resolve, reject) => {
                 });
             })
                 break;
+
+
+        case "restart":
+           await client.sendMessage(from, '🤖 ```Restarting```', text, {
+                quoted: xxx,
+            });
+            process.exit(0);
+
 
         default:
             break;

@@ -26,11 +26,21 @@ module.exports = async function settingread(arg, from, sender, groupname, client
     Math.floor(Math.random() * settings.prefixchoice.length))
   try {
 
+    botdata = await sql.query(
+      "select * from botdata;"
+    );
+
     if (from.endsWith("@g.us")) {
 
       data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
       if (data1.rows.length == 0) {
-        // if (groupMetadata.participants.length < process.env.MIN_GROUP_SIZE||groupMetadata.participants.includes() { await client.sendMessage(from,"```Minimum participants required is ```"+process.env.MIN_GROUP_SIZE,text);  client.groupLeave(from); return }
+        if (
+          groupMetadata.participants.length < botdata.rows[0].mingroupsize
+         ) {
+          await client.sendMessage(from, "```Minimum participants required is: ```" + botdata.rows[0].mingroupsize, text);
+          client.groupLeave(from);
+          return
+        }
         console.log("Entering data for group -  " + from + "  " + groupname);
         console.log("Prefix assigned is  " + random);
         console.log("------------------------------");
@@ -55,6 +65,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       return settingread(arg, from, sender, groupname)
     }
 
+
     return (data = {
 
       from: from,
@@ -74,6 +85,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       canmemberusebot: from.endsWith("@g.us") ? data1.rows[0].membercanusebot == false ? false : true : true,
       isnumberblockedingroup: from.endsWith("@g.us") ? data1.rows[0].banned_users.includes(number) ? 1 : 0 : 0,
       groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,
+      botdata: botdata.rows[0],
       sender: sender,
       stanzaId: stanzaId,
       isMedia: isMedia
