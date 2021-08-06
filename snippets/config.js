@@ -55,12 +55,12 @@ serverurl = 'https://z66c276bb-zbc1ed153-gtw.qovery.io';
             "CREATE TABLE IF NOT EXISTS groupdata (groupid TEXT, useprefix BOOL, prefix TEXT, allowabuse BOOL, membercanusebot BOOL, banned_users TEXT[], totalmsgtoday INT, totalmsg INT, autosticker BOOL);"
         );
         await sql.query(
-            "CREATE TABLE IF NOT EXISTS messagecount (phonenumber TEXT, totalmsgtoday INT, totalmsg INT);"
+            "CREATE TABLE IF NOT EXISTS messagecount (phonenumber TEXT, totalmsgtoday INT, totalmsg INT, dailylimitover BOOL);"
         );
         await sql.query(
             "CREATE TABLE IF NOT EXISTS botdata (isconnected BOOL, isregistered BOOL, allowinboxuse BOOL, allowabuse BOOL, moderators TEXT[], banned_users TEXT[], boturl TEXT, totalmsgtoday INT, totalmsg INT, dailylimit INT, dailygrouplimit INT,  mingroupsize INT);"
         );
-        await sql.query(`INSERT INTO botdata VALUES (false, false, true, false, '{''}' , '{''}','', 0, 0,25,50,3 );`)
+        await sql.query(`INSERT INTO botdata VALUES (false, false, true, false, '{''}' , '{''}','', 0, 0,25,50,3);`)
 
         botsettingcheck();
     }

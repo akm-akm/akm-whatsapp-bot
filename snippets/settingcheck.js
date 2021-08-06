@@ -61,7 +61,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
     if (data2.rows.length == 0) {
       console.log("Entering data for  number -" + number);
       console.log("------------------------------");
-      await sql.query(`INSERT INTO messagecount VALUES ('${number}', 0, 0);`)
+      await sql.query(`INSERT INTO messagecount VALUES ('${number}', 0, 0, false);`)
       return settingread(arg, from, sender, groupname)
     }
 
@@ -81,6 +81,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       number: number,
       noofmsgtoday: data2.rows[0].totalmsgtoday,
       totalmsg: data2.rows[0].totalmsg,
+      dailylimitover: data2.rows[0].dailylimitover,
       abusepresent: from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? data3.words.filter(e => arg.indexOf(e) !== -1) : [] : data3.words.filter(e => arg.indexOf(e) !== -1),
       canmemberusebot: from.endsWith("@g.us") ? data1.rows[0].membercanusebot == false ? false : true : true,
       isnumberblockedingroup: from.endsWith("@g.us") ? data1.rows[0].banned_users.includes(number) ? 1 : 0 : 0,

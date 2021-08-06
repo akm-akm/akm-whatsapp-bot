@@ -78,7 +78,7 @@ const grp = (infor, client, xxx) =>
         }
         else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET autosticker = true WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```Now the bot will automatically make sticker of any media sent in this group.```", text, {
+          client.sendMessage(from, "🤖 ```Automatic sticker turned on.```", text, {
             quoted: xxx,
           });
           resolve();
@@ -216,14 +216,14 @@ const grp = (infor, client, xxx) =>
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
         if (z === `${groupMetadata.owner}`.split("@")[0]) {
-          client.sendMessage(from, "```You can't demote the group creator.```", text, {
+          client.sendMessage(from, "🤖 ```You can't demote the group creator.```", text, {
             quoted: xxx,
           })
           resolve();
           return
         }
         if (z === `${client.user.jid}`.split("@")) {
-          client.sendMessage(from, "```I can't demote myself.```", text, {
+          client.sendMessage(from, "🤖 ```I can't demote myself.```", text, {
             quoted: xxx,
           })
           resolve();
@@ -257,7 +257,7 @@ const grp = (infor, client, xxx) =>
         z = mentioned[0].split("@")[0];
         
         if (z === `${groupMetadata.owner}`.split("@")[0]) {
-          client.sendMessage(from, "```You can't kick the group owner.```", text, {
+          client.sendMessage(from, "🤖 ```You can't kick the group owner.```", text, {
             quoted: xxx,
           })
           resolve();
@@ -293,7 +293,7 @@ const grp = (infor, client, xxx) =>
           return;
         }
         grplink = await client.groupInviteCode(from);
-        client.sendMessage(from, "```https://chat.whatsapp.com/```" + "```" + grplink + "```", text, {
+        client.sendMessage(from, "🤖 ```https://chat.whatsapp.com/```" + "```" + grplink + "```", text, {
           quoted: xxx,
         });
         resolve();
@@ -311,7 +311,7 @@ const grp = (infor, client, xxx) =>
         const isQuotedImage =
           type === "extendedTextMessage" && content.includes("imageMessage");
         if (!(isMedia || isQuotedImage))
-          client.sendMessage(from, "```Tag the image or send it with the the command.```", text, {
+          client.sendMessage(from, "🤖 ```Tag the image or send it with the the command.```", text, {
             quoted: xxx,
           });
         resolve();
@@ -347,7 +347,7 @@ const grp = (infor, client, xxx) =>
         });
         resolve();
         break;
-
+       
       case "open":
         if (!isBotGroupAdmins) {
           client.sendMessage(from, mess.only.Badmin, text, {
@@ -380,7 +380,7 @@ const grp = (infor, client, xxx) =>
         }
         try {
           if (arg[1].length < 11) {
-            arg = "91" + arg[1] + "@s.whatsapp.net";
+            arg = arg[1] + "@s.whatsapp.net";
           }
           client.groupAdd(from, arg);
         } catch (e) {
@@ -483,21 +483,26 @@ const grp = (infor, client, xxx) =>
         if (arg.length == 1) {
           infor.arg = ["help", arg[0]]
           help(infor, client, xxx, 1);
-
           resolve();
           return;
         }
-
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
         console.log(z, `${client.user.jid}`.split("@")[0]);
         if (z === `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from, "```What if I ban you?\nThere you go!```", text, {
+          client.sendMessage(from, "🤖 ```What if I ban you?\nThere you go!```", text, {
             quoted: xxx,
           });
           sql.query(
             `UPDATE groupdata SET banned_users = array_append(banned_users, '${infor.number}') where groupid = '${from}';`
           );
+          resolve()
+          return;
+        }
+        if (infor.botdata.moderators.includes(z)) {
+          client.sendMessage(from, "🤖 ```Can not ban the bot moderator.```", text, {
+            quoted: xxx,
+          });
           resolve()
           return;
         }

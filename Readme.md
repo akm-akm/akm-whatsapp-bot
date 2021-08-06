@@ -1,83 +1,84 @@
-### 🤖 [Click-here-to-chat-with-this-bot](http://wa.me/+17122205956?text=help)
+# 🤖 XXX WHATSAPP BOT 🤖
 
-#### 💻 3700 lines of code and increasing
-# XXX-BOT Self-hosting Guide
-
-## ⛵ Prerequisites
-
-- [Git](https://git-scm.com/)
-- [Node.JS](https://nodejs.org/en/)
-- [Postgres](https://www.postgresql.org/)
-
-## 🍀 Installation
-
-- Run the following code to clone the repository.
-
-```SH
-> git clone https://github.com/akm-akm/xxx-bot.git
-> cd xxx-bot
-```
-
-- Run this to install the dependencies
-
-```SH
-> npm install
-```
-
-## ✍ Configuration
-
-- Create a file named `.env` then add the following fields
-
-```env
-COINMARKETCAP_API_KEY=
-KEEPSAVEIT_API=
-WEBSITE_PASSWORD=
-OWNER_NUMBER=
-HOSTING_PLATFORM=
-MIN_GROUP_SIZE=
-```
-
-`COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data
-
-`WEBSITE_PASSWORD` The password you want to keep for the website
-
-`KEEPSAVEIT_API` The API key of KeepSaveIt for downloading the Pinterest videos
-
-`OWNER_NUMBER` The Whatsapp number of the owner of the bot
-
-`HOSTING_PLATFORM` The hosting platform you want to host the bot on. The only supported ones are local, heroku and qovery
-
-`MIN_GROUP_SIZE` The minimum number of members in a group for the bot to be added to it
+### 🤖 Click [here](http://wa.me/+17122205956?text=help) to chat with this bot🤖
 
 
-### To get the connection URL there are two ways
+## ✨ Highlights
+
+- 💻 3700 lines of code
+- 💖 open source
+- 💙 Written in Javascript
+- 💛 Event-Based 
+- 💝 Built with [Baileys](https://github.com/adiwajshing/baileys)
+- 🖤 Integrated abuse detection.
 
 
-## 💻 Running
+## 💮 Hosting
 
-- Running in development mode
+#### 💻 See the [Self-Hosting Guide](/readme/self-hosting.md) 
+#### 🛰️ See the [Heroku Deploy Guide](/readme/heroku-hosting.md)
 
-```sh
-> npm run dev
-```
 
-- Running in production mode
+## 💪 Contribution
 
-```sh
-> npm run prod
-```
++ Feel free to open issues regarding any problems or if you have any feature requests
++ Make sure to enter proper documentations before opening PRs
 
-#### Running the above command will start the bot.
 
-**! If the bot is started in production mode, it will be accessible at `http://localhost:5000`**
+## 💡 How to use the bot
 
-- To start the bot, go to the URL shown on the terminal.
-- Enter the password you set in the Environment variable.
-- Click on start and scan the qr code shown on the website using the WA-Web Scanner on your WhatsApp.
-- Now you're on your own. Good Luck!
+- Send hi to the bot.
+- The bot will respond with `👋 hello`.
+- Send `help` to the bot.
+- The bot will respond with the menu.
 
-**! If the bot is started in development mode**
 
-- It will auto connect everytime you start the bot.
-- Scan the qr code shown in the terminal using the WA-Web Scanner on your WhatsApp
-- The bot will not work in group in development mode.
+## 🔧 Default Configuration
+
+- Default daily limit for a normal user is `25` messages.
+- Owner and bot moderators have no limit.
+- Default daily group limit is `50` messages.
+- By default abuse detection is on.
+- Default minimum group size for bot to work in it is `3` members.
+- These values can be changed only by the bot owner.
+- When the bot is added to any group, it will auto assign ay random prefix to it, which can be changed by group admins.
+
+
+## ⚠️ Troubleshooting
+
+##### 1. The bot is not responding to anyone.
+- Send the command `restart` to the bot.
+- Go to to the bot website and click on the `restart` button.
+- See heroku logs and see if it is showing connected and bot name or not.
+- If not try logging out using the bot website annd login again.
+
+
+##### 2. The bot is not responding to a particular user.
+- The user might have used the daily limit.
+- If so the limit will be reset at `00:00` every day.
+- The user might have been blocked by the bot if it is not replying in a group.
+- type `banlist` in a group to see the list of banned users.
+
+
+##### 3. The bot is not responding to a particular group.
+- The bot does not work in groups with disappearing messaages turned on.
+- The group may be admins only.
+- The users may not be using the correct prefix.
+- Try `.hi` , `!hi` , `#hi` or `-hi` to see if the bot responds to any of them.
+- If the bot is not responding to any of the above prefixes, then send `hi` to see if the prefix is disabled for that group.
+- The bot may be down due to heavy traffic.
+- Try after some time.
+- Open an issue if the problem persists.
+
+
+##### 4. Other troubles.
+- Make sure the env variables are set properly.
+- Make sure the phone is connected to the internet.
+- Make sure the heroku postgres is added in the addons if running on heroku or the database uri is set properly if running locally.
+
+
+
+
+## 📜 Documentation
+
+- you are on you own...

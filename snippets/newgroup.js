@@ -16,7 +16,7 @@ const newgroup = (from,client,random) =>
     const groupMetadata = await client.groupMetadata(from);
     const groupMembers = groupMetadata.participants;
     const groupAdmins = getGroupAdmins(groupMembers);
-    var newmsg = "🤖🤖🤖 *XXX-BOT* 🤖🤖🤖\n\n"+ "🚨 *This group has been assigned a prefix of* " +
+    var newmsg = "🤖🤖🤖 *XXX*🤖*BOT* 🤖🤖🤖\n\n"+ "🚨 *This group has been assigned a prefix * " +
       random +
       "\n\n🚨 *The bot will only listen to commands starting with* " + random +"\n\n"+
       "🚨 ```Type``` "+"```"+random+"```"+"```help to see the list of commands bot can follow.```\n\n\n"+

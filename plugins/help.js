@@ -47,7 +47,7 @@ const help = (infor, client, xxx,syntax) =>
       try {
         msg =
           syntax == undefined ? "🔖 *Description* :\n" +
-          data[arg[1]].desc : "😡 *Error* :\n```syntax error in the given command.```";
+          data[arg[1]].desc : "🌋 *Error* :\n```syntax error in the given command.```";
         msg += "\n\n" +
           "📕 *Usage* :\n" +
           prefix + "```" +

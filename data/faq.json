@@ -13,8 +13,8 @@
         "answer":"The number may have used its daily limit of x replies or the bot may be down due to heavy traffic."
     },
     {
-        "question":"What happens to my private data?",
-        "answer":"The bot doesn't collect any data from the groups, except the errors it encounters in the group while running."
+        "question":"When is the limit reset?",
+        "answer":"The limit is reset at midngiht everyday"
     },
     {
         "question":"How does the bot work?",
@@ -24,7 +24,10 @@
         "question":"How does the bot detect abuse?",
         "answer":"It searches for the abuse in its database containing 500 words."
     },
-   
+    {
+        "question":"The bot is not working in a group?",
+        "answer":"The bot does not work in groups with disappearing messages turned on."
+    },
     {
         "question":"How many groups use this bot?",
         "answer":"This bot is present in almost 1000 groups."

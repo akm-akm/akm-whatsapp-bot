@@ -4,9 +4,9 @@ if (process.env.HOSTING_PLATFORM === "local") {
   credentials = {
     user: "postgres",
     password: "root",
+    database: "bottest",
     host: "localhost",
-    port: "5432",
-    database: "bottest"
+    port: "5432"
   };
 } else if (process.env.HOSTING_PLATFORM === "heroku") {
   credentials = {

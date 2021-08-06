@@ -166,23 +166,38 @@ async function main() {
           isMedia
         );
         console.log(infor);
-        if (!(infor.canmemberusebot || isGroupAdmins) ||
-          !(infor.noofmsgtoday < infor.botdata.dailylimit ||
-            infor.botdata.moderators.includes(infor.number) ||
-            infor.number === process.env.OWNER_NUMBER) ||
-          infor.isnumberblockedingroup ||
-          (isGroup && infor.groupdata.totalmsgtoday > infor.botdata.dailygrouplimit) ||
-          !((isGroup && infor.groupdata.autosticker) || !infor.arg.length == 0)
-        )
-          return;
+        console.log("169");
+        if (!(
+          (infor.canmemberusebot || isGroupAdmins)
+          &&
+          (!infor.isnumberblockedingroup)
+          &&
+          !isGroup|| (isGroup && (infor.groupdata.totalmsgtoday < infor.botdata.dailygrouplimit))
+          &&
+          (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker))
+        )) return
+          console.log("179");
 
-        if (infor.noofmsgtoday == infor.botdata.dailylimit && (infor.number !== process.env.OWNER_NUMBER && !infor.botdata.moderators.includes(infor.number) ) ){
+        if (
+          infor.noofmsgtoday >= infor.botdata.dailylimit
+          &&
+          infor.number !== process.env.OWNER_NUMBER
+          &&
+          !infor.botdata.moderators.includes(infor.number)
+          &&
+          infor.dailylimitover === false
+        ) {
+          sql.query(`UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${infor.number}';`)
           client.sendMessage(infor.sender, "🤖 ```You have exhausted your daily limit, the bot will not reply you anymore.```", text, {
             quoted: xxx,
           });
-          count(infor)
+          console.log("194");
           return
         }
+        console.log("197");
+        if (infor.dailylimitover===true) return
+        
+        console.log("200");
         if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit ) {
           client.sendMessage(from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
           count(infor)

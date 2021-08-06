@@ -191,7 +191,7 @@ async function switchcase(infor, client, xxx) {
     case "help":
     case "bot":
     case "menu":
-    case "🤖":
+   
     case "command":
     case "commands":
       help(infor, client, xxx)

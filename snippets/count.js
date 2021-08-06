@@ -9,6 +9,8 @@ const count = (infor, abused = 1) => new Promise(async (resolve, reject) => {
   await sql.query(`UPDATE messagecount SET totalmsgtoday = ${no_of_msg_today} , totalmsg = ${totalmsg} WHERE phonenumber ='${number}';`)
   //await sql.query(`UPDATE botdata SET totalmsgtoday = ${no_of_msg_today} , totalmsg = ${totalmsg} WHERE phonenumber ='${number}';`)
   infor.from.endsWith("@g.us") ? sql.query(`UPDATE groupdata SET totalmsgtoday = ${no_of_msg_today_group} , totalmsg = ${no_of_msg_group} WHERE groupid ='${infor.from}';`):0
+  
+ 
   resolve()
 });
 module.exports.count = count;
