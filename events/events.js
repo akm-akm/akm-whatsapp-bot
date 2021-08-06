@@ -183,7 +183,7 @@ async function main() {
           count(infor)
           return
         }
-        if (infor.groupdata.totalmsgtoday == process.env.DAILY_GROUP_LIMIT ) {
+        if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit ) {
           client.sendMessage(from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
           count(infor)
           return
