@@ -29,7 +29,7 @@ async function switchcase(infor, client, xxx) {
     client.sendMessage(from, "⚠️ ```Tu " + infor.abusepresent[0] + "```", text, {
       quoted: xxx,
     });
-    count(infor, 5)
+    count(infor, 1)
     return;
   }
   if (infor.from.endsWith("@g.us") && infor.isMedia && infor.groupdata.autosticker && infor.arg[0] !== "sticker") {

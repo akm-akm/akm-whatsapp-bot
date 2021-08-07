@@ -1,4 +1,4 @@
-# 🤖 XXX WHATSAPP BOT 🤖
+<h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
 
 ### 🤖 Click [here](http://wa.me/+17122205956?text=help) to chat with this bot🤖
 
@@ -81,4 +81,4 @@
 
 ## 📜 Documentation
 
-- you are on you own...
+- you are on your own...

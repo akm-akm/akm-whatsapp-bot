@@ -91,4 +91,4 @@ WEBSITE_PASSWORD=
 
 
 
-###  🔗 Want to host on server ? Click [here](/readme\heroku-hosting.md)
+###  🔗 Want to host on server ? Click [here](/heroku-hosting.md)
