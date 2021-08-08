@@ -60,7 +60,6 @@ async function switchcase(infor, client, xxx) {
     case "dl":
     case "dgl":
     case "mdr":
-    case "sql":
     case "restart":
       owner(infor, client, xxx)
         .then((resolve) => {
@@ -189,7 +188,6 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "help":
-    case "bot":
     case "menu":
    
     case "command":
@@ -206,7 +204,7 @@ async function switchcase(infor, client, xxx) {
 
     case "limit":
       x =
-        "```Number of times bot has replied you today is:``` " +
+        "🤖 ```Number of replies today is:``` " +
         "```" +
         infor.noofmsgtoday +
         "``` ";

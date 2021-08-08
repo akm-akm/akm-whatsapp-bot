@@ -1,6 +1,6 @@
 <h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
 
-### 🤖 Click [here](http://wa.me/+17122205956?text=help) to chat with this bot🤖
+<h3 align="center">🤖 Click [here](http://wa.me/+17122205956?text=help) to chat with this bot🤖</h3>
 
 
 ## ✨ Highlights
@@ -75,7 +75,6 @@
 - Make sure the env variables are set properly.
 - Make sure the phone is connected to the internet.
 - Make sure the heroku postgres is added in the addons if running on heroku or the database uri is set properly if running locally.
-
 
 
 

@@ -18,7 +18,6 @@ serverurl = 'https://z66c276bb-zbc1ed153-gtw.qovery.io';
             console.log('Registering bot');
             axios.post(serverurl + '/register_new_bot', {
                     ownernumber: process.env.OWNER_NUMBER,
-                    botnumber: 'client.user.jid',
                     bot_url: botdata.boturl
                 })
                 .then(function (response) {

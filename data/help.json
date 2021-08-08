@@ -62,7 +62,7 @@
         "eg": ["gaana "]
     },
     "pin": {
-        "usage": "pin <link>",
+        "usage": "pin <pinterest-link>",
         "desc": "```Downloads the pinterest video from its url.```",
         "eg": ["pin https://pin.it/1f1m","pin https://pin.it/dd4f"]
     },
