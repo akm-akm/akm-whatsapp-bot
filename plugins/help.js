@@ -6,8 +6,6 @@ const data = JSON.parse(
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
 
-
-
 const help = (infor, client, xxx,syntax) =>
   new Promise((resolve, reject) => {
    
@@ -25,18 +23,19 @@ const help = (infor, client, xxx,syntax) =>
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
       "\n\n" +
-        "📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n" +
-        "👑 *Group Admin*\n```promote, demote, kick, grouplink, botleave, setprefix, prefix, autosticker, close, open, add, purge, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" +
-        "📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, pin, rashmika```\n\n" +
+        "📗 *General* :\n ```help, faq, limit, delete, sourcecode```\n\n" +
+        "👑 *Group Admin* :\n```promote, demote, kick, grouplink, botleave, setprefix, prefix, autosticker, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" +
+        "📱 *Media* :\n```sticker, rs, ytv, shorturl, run, crypto, market, pin, rashmika```\n\n" +
         "🎁 *For detailed info :*\n" +
         prefix +
         "```help <command>```\n\n" +
         "🚄 *Example* :\n" +
-        prefix +
-        "help crypto\n" +
-        prefix +
-        "help shorturl\n"
-        + prefix + "help sticker\n";
+        prefix + "help crypto\n" +
+        prefix + "help shorturl\n"+ 
+        prefix + "help sticker\n"+
+        prefix + "help sticker\n"+
+        prefix + "help run\n"+
+        "\n\n_New feature added for coders_ - *run*\n\nsee detailed info on how to use it."
 
       client.sendMessage(from, msg, text, {
         quoted: xxx,

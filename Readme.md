@@ -1,7 +1,9 @@
 <h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
 
 <h3 align="center">🤖 Click <a href="https://wa.me/+17123507778?text=help">here</a> to chat with this bot🤖</h3>
-
+<p align="center">
+<img src="/readme/images/logo.jpeg" width=400px alt="xxxlogo" />
+</p>
 
 ## ✨ Highlights
 
@@ -35,13 +37,13 @@
 
 ## 🔧 Default Configuration
 
-- Default daily limit for a normal user is `25` messages.
+- Default daily limit for a normal user is `30` messages.
 - Owner and bot moderators have no limit.
 - Default daily group limit is `50` messages.
 - By default abuse detection is on.
 - Default minimum group size for bot to work in it is `3` members.
 - These values can be changed only by the bot owner.
-- When the bot is added to any group, it will auto assign ay random prefix to it, which can be changed by group admins.
+- When the bot is added to any group, it will auto assign any random prefix to it, which can be changed by group admins.
 
 
 ## ⚠️ Troubleshooting

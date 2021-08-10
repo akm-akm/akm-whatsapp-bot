@@ -162,7 +162,7 @@
     "shorturl": {
         "usage": "shorturl <link>",
         "desc": "```Generates a short url uf the given link using lenk.cf API.```",
-        "eg": ["shorturl https://www.hindustantimes.com/world-news"]
+        "eg": ["shorturl https://www.hindustantimes.com/world-nes"]
     },
     "add": {
         "usage": "add <number>",
@@ -186,7 +186,7 @@
     },
     "run": {
         "usage":"run <language-code> <inputs>",
-        "desc":"compiles and runs the tagged code. ",
-        "eg":["run cpp","run cpp 30 50","run python3","run java 20","run nodejs"]
+        "desc":"```Compiles and runs the tagged code in any programming language and sends the output here. Supported language codes are - c, csharp, cpp, python3, python2, java, nodejs, kotlin, php, perl, ruby, go, rust, fortran, swift and many more. If the program takes input, it must be added after the language code seperated by spaces. In the example below it shows cpp 30 50, here 30 and 50 are two inputs. similarly in java 20 here 20 is the input. If your code does not require any input it should be left blank. After writing the code tag that code with this run command follwed by language code and inputs if required. The code should be pure as if it is written in any IDE.```",
+        "eg":["run cpp","run cpp 30 50","run python3","run java 20","run nodejs","run php","run python2"]
     }
 }

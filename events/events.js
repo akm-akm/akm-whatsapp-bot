@@ -172,7 +172,7 @@ async function main() {
           &&
           (!infor.isnumberblockedingroup)
           &&
-          !isGroup|| (isGroup && (infor.groupdata.totalmsgtoday < infor.botdata.dailygrouplimit))
+          !isGroup|| (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit))
           &&
           (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker))
         )) return
@@ -199,7 +199,9 @@ async function main() {
         
         console.log("200");
         if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit ) {
-          client.sendMessage(from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
+          client.sendMessage(infor.from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
+          count('203')
+
           count(infor)
           return
         }
