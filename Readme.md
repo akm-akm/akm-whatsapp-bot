@@ -1,6 +1,6 @@
 <h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
 
-<h3 align="center">🤖 Click [here](http://wa.me/+17122205956?text=help) to chat with this bot🤖</h3>
+<h3 align="center">🤖 Click <a href="https://wa.me/+17123507778?text=help">here</a> to chat with this bot🤖</h3>
 
 
 ## ✨ Highlights
@@ -27,7 +27,7 @@
 
 ## 💡 How to use the bot
 
-- Send hi to the bot.
+- Send `hi` to the bot.
 - The bot will respond with `👋 hello`.
 - Send `help` to the bot.
 - The bot will respond with the menu.

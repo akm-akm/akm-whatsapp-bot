@@ -2,7 +2,6 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 const { help } = require(path.join(__dirname, "./help"));
-
 const {
   MessageType
 } = require("@adiwajshing/baileys");
@@ -42,7 +41,7 @@ const crypto = (infor,client,xxx) =>
     return}
     if (!coins.includes(arg[1].toUpperCase())) {
    
-      client.sendMessage(from,  "```Not listed in coinmarketcap.```", text, {
+      client.sendMessage(from,  "🤖 ```Not in coinmarketcap.```", text, {
         quoted: xxx,
       });
       resolve();

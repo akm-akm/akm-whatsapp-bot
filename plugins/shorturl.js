@@ -13,6 +13,7 @@ const shorturl = (infor, client, xxx) =>
             infor.arg = ["help", arg[0]]
             help(infor, client, xxx, 1);
             resolve()
+            return
         }
 
         axios({

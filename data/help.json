@@ -183,5 +183,10 @@
         "usage": "banlist",
         "desc": "```Displays the list of members banned from using the bot in this group.```",
         "eg": ["banlist"]
+    },
+    "run": {
+        "usage":"run <language-code> <inputs>",
+        "desc":"compiles and runs the tagged code. ",
+        "eg":["run cpp","run cpp 30 50","run python3","run java 20","run nodejs"]
     }
 }

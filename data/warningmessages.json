@@ -11,7 +11,7 @@
         "ownerG": "💎 ```This command can only be used by the owner of the group!```",
         "ownerB": "🎩 ```This command can only be used by the owner of the bot!```",
         "modB": "👮 ```This command can only be used by the moderators of the bot!```",
-        "admin": "🤷‍♂️ ```This command can only be used by the admins!```",
+        "admin": "🛡️ ```This command can only be used by the admins!```",
         "Badmin": "🤖 ```This command can only be used when the bot has admin rights!```"
     }
 }

@@ -8,6 +8,7 @@ const { shorturl } = require(path.join(__dirname, "../plugins/shorturl"));
 const { savedsticker } = require(path.join(__dirname, "../plugins/savedsticker"));
 const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
 const { pinterest } = require(path.join(__dirname, "../plugins/pinterest"));
+const { coderunner } = require(path.join(__dirname, "../plugins/coderunner"));
 const { grp } = require(path.join(__dirname, "../plugins/groupsettings"));
 const { xdafootball } = require(path.join(__dirname, "../plugins/twitter"));
 const { market } = require(path.join(__dirname, "../plugins/market"));
@@ -44,6 +45,17 @@ async function switchcase(infor, client, xxx) {
 
   switch (arg[0]) {
 
+
+    case "run":
+      coderunner(infor, client, xxx)
+        .then((resolve) => {
+          count(infor)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      break;
 
     case "delete":
       deleteit(infor, client, xxx)

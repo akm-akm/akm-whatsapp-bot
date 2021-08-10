@@ -62,4 +62,4 @@ WEBSITE_PASSWORD=
 - Now close the browser.
 
 
-###  🔗 Want to host locally ? Click [here](/self-hosting.md)
+###  🔗 Want to host locally ? Click [here](self-hosting.md)

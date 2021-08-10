@@ -28,7 +28,7 @@ const help = (infor, client, xxx,syntax) =>
         "📗 *General*\n ```help, faq, limit, delete, sourcecode```\n\n" +
         "👑 *Group Admin*\n```promote, demote, kick, grouplink, botleave, setprefix, prefix, autosticker, close, open, add, purge, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" +
         "📱 *Media*\n```sticker, rs, ytv, shorturl, crypto, market, pin, rashmika```\n\n" +
-        "🎁 *For detailed info*\n" +
+        "🎁 *For detailed info :*\n" +
         prefix +
         "```help <command>```\n\n" +
         "🚄 *Example* :\n" +
