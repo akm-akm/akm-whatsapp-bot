@@ -13,10 +13,7 @@ const sql = require(path.join(__dirname, "../snippets/ps"));
 const owner = (infor, client, xxx) => new Promise(async (resolve, reject) => {
 
     if (infor.number !== process.env.OWNER_NUMBER) {
-        client.sendMessage(from, mess.only.ownerB, text, {
-            quoted: xxx,
-        });
-        resolve();
+      reject()
         return;
     }
     switch (infor.arg[0]) {
@@ -45,7 +42,7 @@ const owner = (infor, client, xxx) => new Promise(async (resolve, reject) => {
                 return;
             }
             if (typeof infor.arg[1] === 'number' && infor.arg[1] > 0 && infor.arg[1] < 1000) {
-                client.sendMessage(from, '🤖 ```Enter a valid number to be set as daily limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
@@ -72,7 +69,7 @@ const owner = (infor, client, xxx) => new Promise(async (resolve, reject) => {
                 return;
             }
             if (typeof infor.arg[1] === 'number' && infor.arg[1] > 0 && infor.arg[1] < 257) {
-                client.sendMessage(from, '🤖 ```Enter a valid number to be set as daily limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
@@ -93,14 +90,14 @@ const owner = (infor, client, xxx) => new Promise(async (resolve, reject) => {
 
         case "dgl":
             if (infor.arg.length < 2) {
-                client.sendMessage(from, '🤖 ```Enter the number to be set as daily limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter the number to be set as daily user limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
                 return;
             }
             if (typeof infor.arg[1] === 'number' && infor.arg[1] > 0 && infor.arg[1] < 1000) {
-                client.sendMessage(from, '🤖 ```Enter a valid number to be set as daily limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily user limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();

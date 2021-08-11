@@ -28,7 +28,7 @@ const shorturl = (infor, client, xxx) =>
                     resolve()
                     return
                 }
-                msg = "🤖 ```short url is:```" + "\n" +
+                msg = "🤖 ```shortened url is:```" + "\n" +
                     "```https://lenk.cf/```" +
                     "```" +
                     response.data +
@@ -36,14 +36,17 @@ const shorturl = (infor, client, xxx) =>
                     "\n\n" +
                     "```API by lenk.cf```";
                 client.sendMessage(from, msg, text, {
-                    quoted: xxx
+                    quoted: xxx,
+                    detectLinks: false
+
                 })
                 resolve();
 
             })
             .catch(() => {
                 client.sendMessage(from, "🤖  ```Server error.```", text, {
-                    quoted: xxx
+                    quoted: xxx,
+                    
                 });
                 reject();
             })

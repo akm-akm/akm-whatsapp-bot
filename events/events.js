@@ -167,15 +167,15 @@ async function main() {
         );
         console.log(infor);
         console.log("169");
-        if (!(
-          (infor.canmemberusebot || isGroupAdmins)
+        if (!
+          (     (infor.canmemberusebot || isGroupAdmins)
           &&
           (!infor.isnumberblockedingroup)
           &&
           !isGroup|| (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit))
           &&
-          (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker))
-        )) return
+            (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker))     )
+        ) return
           console.log("179");
 
         if (

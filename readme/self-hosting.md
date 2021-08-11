@@ -33,6 +33,8 @@
 ```env
 COINMARKETCAP_API_KEY=
 KEEPSAVEIT_API=
+clientId=
+clientSecret=
 OWNER_NUMBER=
 HOSTING_PLATFORM=
 WEBSITE_PASSWORD=
@@ -41,6 +43,11 @@ WEBSITE_PASSWORD=
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
 
 `KEEPSAVEIT_API` The API key of KeepSaveIt for downloading the Pinterest videos. (optional)
+
+`clientId` The client id from jdoodle.com for the run feature to compile code. (optional)
+
+`clientSecret` The client secret from jdoodle.com for the run feature to compile code. (optional)
+
 
 `OWNER_NUMBER` Your whatsapp number along with country code. (required)
 

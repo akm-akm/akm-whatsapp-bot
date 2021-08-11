@@ -9,14 +9,24 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akm-akm/xxx-bot.git"
+  },
   "keywords": [
     "whatsapp",
     "baileys",
+    "stickers",
+    "whatsapp-stickers",
     "bot",
     "whatsapp bot"
   ],
   "author": "ADITYA KUMAR MANDAL",
-  "license": "MIT",
+  "license": "GNU General Public License v3.0",
+  "bugs": {
+    "url": "https://github.com/akm-akm/xxx-bot/issues"
+  },
+    "homepage": "https://github.com/akm-akm/xxx-bot#readme",
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.1",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",

@@ -6,6 +6,7 @@ const { crypto } = require(path.join(__dirname, "../plugins/crypto"));
 const { owner } = require(path.join(__dirname, "../plugins/owner"));
 const { shorturl } = require(path.join(__dirname, "../plugins/shorturl"));
 const { savedsticker } = require(path.join(__dirname, "../plugins/savedsticker"));
+const { sourcecode } = require(path.join(__dirname, "../plugins/sourcecode"));
 const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
 const { pinterest } = require(path.join(__dirname, "../plugins/pinterest"));
 const { coderunner } = require(path.join(__dirname, "../plugins/coderunner"));
@@ -72,6 +73,7 @@ async function switchcase(infor, client, xxx) {
     case "dl":
     case "dgl":
     case "mdr":
+    case "mgs":
     case "restart":
       owner(infor, client, xxx)
         .then((resolve) => {
@@ -83,13 +85,18 @@ async function switchcase(infor, client, xxx) {
 
       break;
 
-    case "sourcecode":
-      client.sendMessage(from, "```https://github.com/akm-akm/xxx-bot/```", text, {
-        quoted: xxx,
-      });
-      count(infor)
-      break;
 
+    case "sourcecode":
+   
+      sourcecode(infor, client, xxx)
+        .then((resolve) => {
+          count(infor)
+        })
+        .catch((error) => {
+          console.log("error");
+        });
+
+      break;
     case "crypto":
       crypto(infor, client, xxx)
         .then((resolve) => {
@@ -147,7 +154,6 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "rs":
-
     case "rashmika":
       savedsticker(infor, client, xxx)
         .then((resolve) => {
@@ -201,7 +207,6 @@ async function switchcase(infor, client, xxx) {
 
     case "help":
     case "menu":
-   
     case "command":
     case "commands":
       help(infor, client, xxx)
@@ -216,10 +221,7 @@ async function switchcase(infor, client, xxx) {
 
     case "limit":
       x =
-        "🤖 ```Number of replies today is:``` " +
-        "```" +
-        infor.noofmsgtoday +
-        "``` ";
+        "🤖 ```Daily credit used:``` " +infor.noofmsgtoday + "/ *" + infor.botdata.dailylimit+"*";
       client.sendMessage(from, x, text, {
         quoted: xxx,
       });
@@ -246,7 +248,7 @@ async function switchcase(infor, client, xxx) {
         });
       break;
 
-    case "xxx":
+    case "xxdfbx":
       client.sendMessage(
         from,
         "```Bot down. New features being added.```",
@@ -264,7 +266,12 @@ async function switchcase(infor, client, xxx) {
 
     case "hello":
     case "hi":
-    case "hey":
+    case "hii":
+    case "hiii":
+    case "howdy":
+    case "heyy":
+    case "heyyyy":
+    case "heyyy":
       client.sendMessage(from, "👋 ```Hello```", text, {
         quoted: xxx,
       });

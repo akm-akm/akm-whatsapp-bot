@@ -130,7 +130,7 @@ const grp = (infor, client, xxx) =>
         }
         if (arg[1] == "off") {
           sql.query(`UPDATE groupdata SET membercanusebot= false WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```Bot access disabled for group menbers.```", text, {
+          client.sendMessage(from, "🤖 ```Bot access disabled for non admins.```", text, {
             quoted: xxx,
           });
           resolve();
@@ -138,7 +138,7 @@ const grp = (infor, client, xxx) =>
         }
         else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET membercanusebot= true WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```Bot access enabled for group members.```", text, {
+          client.sendMessage(from, "🤖 ```Bot access enabled for non admins.```", text, {
             quoted: xxx,
           });
           resolve();
@@ -191,6 +191,14 @@ const grp = (infor, client, xxx) =>
         }
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
+        z = mentioned[0].split("@")[0];
+        if (z === `${client.user.jid}`.split("@")[0]) {
+          client.sendMessage(from, "🤖 ```Any Logic?```", text, {
+            quoted: xxx,
+          });
+          resolve()
+          return;
+        }
         client.groupMakeAdmin(from, mentioned);
         client.sendMessage(from, "👮 ```Promoted```", text, {
           quoted: xxx,
@@ -215,6 +223,13 @@ const grp = (infor, client, xxx) =>
 
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
+        if (z === `${client.user.jid}`.split("@")[0]) {
+          client.sendMessage(from, "🤖 ```I can't demote myself```", text, {
+            quoted: xxx,
+          });
+          resolve()
+          return;
+        }
         if (z === `${groupMetadata.owner}`.split("@")[0]) {
           client.sendMessage(from, "🤖 ```You can't demote the group creator.```", text, {
             quoted: xxx,
@@ -257,14 +272,14 @@ const grp = (infor, client, xxx) =>
         z = mentioned[0].split("@")[0];
         
         if (z === `${groupMetadata.owner}`.split("@")[0]) {
-          client.sendMessage(from, "🤖 ```You can't kick the group owner.```", text, {
+          client.sendMessage(from, "🤖 ```You can't kick the group creator.```", text, {
             quoted: xxx,
           })
           resolve();
           return
         }
         if (z=== `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from, "```F off.```", text, {
+          client.sendMessage(from, "🙂", text, {
             quoted: xxx,
           })
           resolve();
@@ -488,9 +503,9 @@ const grp = (infor, client, xxx) =>
         }
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
-        console.log(z, `${client.user.jid}`.split("@")[0]);
+       
         if (z === `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from, "🤖 ```What if I ban you?\nThere you go!```", text, {
+          client.sendMessage(from, "🤖 ```I can't ban myself, but I can ban you! There you go!``` _BANNED_", text, {
             quoted: xxx,
           });
           sql.query(
@@ -514,7 +529,7 @@ const grp = (infor, client, xxx) =>
           `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
         );
 
-        client.sendMessage(from, "🥲 ```Banned```", text, {
+        client.sendMessage(from, "🥲 ```He can not use me now!```", text, {
           quoted: xxx,
         });
         resolve();

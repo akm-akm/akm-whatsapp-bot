@@ -102,7 +102,7 @@ server.get("/restart", async (req, res) => {
 server.get("/resetdailycount", async (req, res) => {
   await sql.query('UPDATE groupdata SET totalmsgtoday=0;')
   await sql.query('UPDATE botdata SET totalmsgtoday=0;')
-  sql.query('UPDATE messagecount SET totalmsgtoday=0;').then(() => {
+  sql.query('UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;').then(() => {
     res.status(200).send("ok");
   })
 });

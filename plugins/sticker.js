@@ -197,12 +197,12 @@ const stickermaker = (infor,client,xxx) =>
       }
     }
     else if (
-      (isMedia && xxx.message.videoMessage.seconds < 11) ||
+      (isMedia && xxx.message.videoMessage.seconds > 11) ||
       (isQuotedVideo &&
         xxx.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage
           .seconds > 11)
     ) {
-      client.sendMessage(from, "🤖 ```Video shoul not be longer than 11 seconds.```", text, { quoted: xxx });
+      client.sendMessage(from, "🤖 ```Video should not be longer than 11 seconds.```", text, { quoted: xxx });
       resolve();
     }
     else {

@@ -15,17 +15,22 @@ const help = (infor, client, xxx,syntax) =>
     useprefix = infor.groupdata.useprefix;
     var msg;
     c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "```Disabled```";
-    if (prefix == undefined || !useprefix) prefix = "📍";
+    if (prefix == undefined || !useprefix) prefix = "🎀";
 
     if (arg.length == 1) {
-      
+      cas = infor.number === process.env.OWNER_NUMBER ?
+        "🚧 *Owner only* :\n```dl - Change daily limit,\ndgl - Change daily group limit,\nmgs- Minimum group size,\nsql - Database query,\nmdr - Add bot moderators,\nrestart - Restart the bot```\n\n"
+        : "\n";
+
+
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
       "\n\n" +
         "📗 *General* :\n ```help, faq, limit, delete, sourcecode```\n\n" +
         "👑 *Group Admin* :\n```promote, demote, kick, grouplink, botleave, setprefix, prefix, autosticker, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" +
-        "📱 *Media* :\n```sticker, rs, ytv, shorturl, run, crypto, market, pin, rashmika```\n\n" +
+      "📱 *Media* :\n```sticker, rs, ytv, shorturl, run, crypto, market, pin, rashmika```\n\n" +
+       cas+
         "🎁 *For detailed info :*\n" +
         prefix +
         "```help <command>```\n\n" +
@@ -33,7 +38,7 @@ const help = (infor, client, xxx,syntax) =>
         prefix + "help crypto\n" +
         prefix + "help shorturl\n"+ 
         prefix + "help sticker\n"+
-        prefix + "help sticker\n"+
+        prefix + "help autosticker\n"+
         prefix + "help run\n"+
         "\n\n_New feature added for coders_ - *run*\n\nsee detailed info on how to use it."
 
@@ -59,6 +64,8 @@ const help = (infor, client, xxx,syntax) =>
           });
         client.sendMessage(from, msg, text, {
           quoted: xxx,
+          detectLinks: false
+
         });
         resolve();
       } catch (e) {
