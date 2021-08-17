@@ -165,19 +165,18 @@ async function main() {
           stanzaId,
           isMedia
         );
-        console.log(infor);
+      
         console.log("169");
         if (!
           (     (infor.canmemberusebot || isGroupAdmins)
-          &&
-          (!infor.isnumberblockedingroup)
           &&
           !isGroup|| (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit))
           &&
             (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker))     )
         ) return
           console.log("179");
-
+        if (infor.isnumberblockedingroup) return
+        
         if (
           infor.noofmsgtoday >= infor.botdata.dailylimit
           &&
@@ -228,6 +227,7 @@ async function isconnected() {
   return client.state;
 }
 async function logout() {
+  sql.query('UPDATE botdata SET isconnected = false;')
   client.clearAuthInfo();
   sql.query("DROP TABLE auth;");
   client.close();

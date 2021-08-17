@@ -27,8 +27,8 @@ const newgroup = (from,client,random) =>
       "🎡 ```" + random + "```" + "```sticker crop```\n" +
       "🎪 ```" + random + "```" + "```rs```\n" +     
       "🎢 ```" + random + "```" + "```crypto btc```\n" +      
-      "🎫 ```" + random + "```" + "```limit```\n" +      
-      "🎠 ```" + random + "```" + "```market details tcs```\n\n"; +"👮 ```Admins:```\n"  
+      "🎫 ```" + random + "```" + "```limit```\n"       
+    // + "🎠 ```" + random + "```" + "```market details tcs```\n\n"; +"👮 ```Admins:```\n"  
       index = 0;
       for (let admin of groupAdmins) {
         index += 1;

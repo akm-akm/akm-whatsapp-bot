@@ -1,7 +1,6 @@
 const express = require("express");
 const server = new express();
 const port = process.env.PORT || 5000;
-const fs = require('fs');
 const path = require("path");
 const sql = require(path.join(__dirname, "./snippets/ps"));
 require(path.join(__dirname, "./snippets/config"));
@@ -79,6 +78,7 @@ server.post("/sql", async (req, res) => {
       res.send(err);
     });
 });
+
 
 server.post("/auth", async (req, res) => {
   console.log('siteurl', req.body.siteurl);
