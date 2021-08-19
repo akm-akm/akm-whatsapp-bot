@@ -5,7 +5,7 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
 const { text,sticker } = MessageType;
-
+const { ai } = require("./deepai");
 const stickermaker = (infor,client,xxx) =>
   new Promise(async (resolve, reject) => {
     arg = infor.arg;
@@ -95,7 +95,6 @@ const stickermaker = (infor,client,xxx) =>
       ];
     }
 
-   
     ///////////////image//////////////////
     if ((isMedia && !xxx.message.videoMessage) || isQuotedImage) {
       const encmedia = isQuotedImage
@@ -104,13 +103,23 @@ const stickermaker = (infor,client,xxx) =>
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia);
       ran = getRandom(".webp");
-
+      let nsfw = await ai(media)
+      if (nsfw.output.nsfw_score > 0.5) {
+        client.sendMessage(from, "🌚", text, {
+          quoted: xxx
+        });
+        resolve();
+        fs.unlinkSync(media);
+        return;
+      }
       ffmpeg(`./${media}`)
         .input(media)
         .on("error", function (err) {
           fs.unlinkSync(media);
           console.log(`Error : ${err}`);
-          reject("🤖 ```failed to convert image into sticker!```");
+          client.sendMessage(from, "🤖 ```failed to convert image into sticker!```", text, {
+            quoted: xxx
+          });
         })
         .on("end", function () {
           buildSticker();
@@ -138,7 +147,7 @@ const stickermaker = (infor,client,xxx) =>
           });
 
           resolve();
-          fs.unlinkSync(media);
+       //   fs.unlinkSync(media);
           fs.unlinkSync(ran);
         }
       }

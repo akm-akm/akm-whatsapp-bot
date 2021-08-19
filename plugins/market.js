@@ -61,7 +61,10 @@ const market = (infor,client,xxx) =>
               } else {
                 var msg =
                   "Market status : ```" + response.data.NormalMktStatus + "```";
-                resolve(msg);
+                client.sendMessage(from, msg, text, {
+                  quoted: xxx,
+                });
+                resolve();
                
               }
             })
