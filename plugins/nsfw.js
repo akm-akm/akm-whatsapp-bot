@@ -19,7 +19,9 @@ const nsfw = (infor4, client, xxx3) =>
         const isMedia = type === "imageMessage" || type === "videoMessage";
         const isQuotedImage =
             type === "extendedTextMessage" && content.includes("imageMessage");
-        const getRandom = (ext) => {
+        const isQuotedVideo =
+            type === "extendedTextMessage" && content.includes("videoMessage");
+     const getRandom = (ext) => {
             return `${Math.floor(Math.random() * 10000)}${ext}`;
         };
         if ((isMedia && !xxx.message.videoMessage) || isQuotedImage) {
