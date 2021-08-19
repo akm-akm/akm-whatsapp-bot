@@ -30,7 +30,7 @@ const help = (infor4, client, xxx3,syntax) =>
       "\n\n" +
         "📗 *General* :\n ```help, faq, limit, delete, sourcecode```\n\n" +
       grpcmds+
-      "📱 *Media* :\n```sticker, rs, ytv, shorturl, run, crypto, market, pin, rashmika```\n\n" +
+      "📱 *Media* :\n```sticker, rs, ytv, shorturl, nsfw, run, crypto, market, pin, rashmika```\n\n" +
        cas+
         "🎁 *For detailed info :*\n" +
         prefix +

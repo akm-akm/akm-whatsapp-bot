@@ -5,6 +5,11 @@
         "desc": "```Fetches the price of given crypto currency from coinmarketcap using its API.```",
         "eg": ["crypto btc","crypto xrp","crypto eth"]
     },
+    "nsfw": {
+        "usage": "nsfw",
+        "desc": "```Scans the image for nudity using deep ai and returns the result.```",
+        "eg": ["nsfw"]
+    },
     "autosticker": {
         "usage": "autosticker <condition>",
         "desc": "```Automatically makes sticker of any media sent in the group.```",

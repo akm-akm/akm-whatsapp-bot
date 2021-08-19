@@ -1,7 +1,9 @@
 const deepai = require('deepai');
 const fs = require('fs');
 let eresp = {
-    output: { nsfw_score = 0}
+    output: { 
+        nsfw_score : 0
+    }
 };
 deepai.setApiKey(process.env.DEEPAI);
 const ai=(imgpath)=> new Promise((resolve,reject)=>{
