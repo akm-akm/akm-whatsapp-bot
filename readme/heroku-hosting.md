@@ -33,6 +33,7 @@ clientSecret=
 OWNER_NUMBER=
 HOSTING_PLATFORM=
 WEBSITE_PASSWORD=
+DEEPAI=
 ```
 
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
@@ -48,6 +49,8 @@ WEBSITE_PASSWORD=
 `HOSTING_PLATFORM` The hosting platform you want to host the bot on. The only supported ones are local, heroku and qovery. (required)
 
 `WEBSITE_PASSWORD` The password you want to keep for the bot website. (required)
+
+`DEEPAI` The api key for nsfw detection in images from deepai.org. (optional)
 
 - Now click on Deploy tab and scroll to the bottom and click on deploy.
 <img src='/readme\images\deploy.png'></img>

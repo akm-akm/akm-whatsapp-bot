@@ -5,13 +5,16 @@ const path = require("path");
 
 const { help } = require(path.join(__dirname, "./help"));
 
-const shorturl = (infor, client, xxx) =>
+const shorturl = (infor4, client, xxx3) =>
     new Promise((resolve, reject) => {
-        arg = infor.arg
-        from = infor.from;
+        let infor5 = { ...infor4 };
+        let xxx = { ...xxx3 };
+
+        arg = infor5.arg
+        from = infor5.from;
         if (arg.length == 1) {
-            infor.arg = ["help", arg[0]]
-            help(infor, client, xxx, 1);
+            infor5.arg = ["help", arg[0]]
+            help(infor5, client, xxx, 1);
             resolve()
             return
         }

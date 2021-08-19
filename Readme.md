@@ -7,12 +7,13 @@
 
 ## ✨ Highlights
 
-- 💻 3700 lines of code
+- 💻 4000 lines of code
 - 💖 open source
 - 💙 Written in Javascript
 - 💛 Event-Based 
 - 💝 Built with [Baileys](https://github.com/adiwajshing/baileys)
 - 🖤 Integrated abuse detection.
+- ⚠️ Integrated NSFW detection.
 
 
 ## 💮 Hosting

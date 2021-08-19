@@ -6,29 +6,30 @@ const data = JSON.parse(
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
 
-const help = (infor, client, xxx,syntax) =>
+const help = (infor4, client, xxx3,syntax) =>
   new Promise((resolve, reject) => {
-   
-    arg = infor.arg;
-    from = infor.from;
-    prefix = infor.groupdata.prefix;
-    useprefix = infor.groupdata.useprefix;
+    let infor5 = { ...infor4 };
+    let xxx = { ...xxx3 };
+    arg = infor5.arg;
+    from = infor5.from;
+    prefix = infor5.groupdata.prefix;
+    useprefix = infor5.groupdata.useprefix;
     var msg;
     c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "```Disabled```";
     if (prefix == undefined || !useprefix) prefix = "🎀";
 
     if (arg.length == 1) {
-      cas = infor.number === process.env.OWNER_NUMBER ?
-        "🚧 *Owner only* :\n```dl - Change daily limit,\ndgl - Change daily group limit,\nmgs- Minimum group size,\nsql - Database query,\nmdr - Add bot moderators,\nrestart - Restart the bot```\n\n"
-        : "\n";
+      cas = infor5.number === process.env.OWNER_NUMBER ?
+        "🚧 *Owner only* :\n```dl :         Change daily limit,\ndgl :       Change daily group limit,\nmgs :     Minimum group size,\nsql :        Database query,\nmdr :      Add bot moderators,\nrestart : Restart the bot```\n\n"
+        : "";
 
-
+      const grpcmds = infor5.groupdata == 0 ?"":"👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, prefix, autosticker, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n";
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
       "\n\n" +
         "📗 *General* :\n ```help, faq, limit, delete, sourcecode```\n\n" +
-        "👑 *Group Admin* :\n```promote, demote, kick, grouplink, botleave, setprefix, prefix, autosticker, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" +
+      grpcmds+
       "📱 *Media* :\n```sticker, rs, ytv, shorturl, run, crypto, market, pin, rashmika```\n\n" +
        cas+
         "🎁 *For detailed info :*\n" +
@@ -39,8 +40,11 @@ const help = (infor, client, xxx,syntax) =>
         prefix + "help shorturl\n"+ 
         prefix + "help sticker\n"+
         prefix + "help autosticker\n"+
-        prefix + "help run\n"+
-        "\n\n_New feature added for coders_ - *run*\n\nsee detailed info on how to use it."
+       prefix + "help run\n" +
+      "\n📃 *Bot Updates* :" +
+      "\n‼️ _NSFW detection added_"+
+      "\n‼️ _groupinfo added_"+
+      "\n‼️ _New feature added for coders_ - *run*, see detailed info on how to use it."
 
       client.sendMessage(from, msg, text, {
         quoted: xxx,

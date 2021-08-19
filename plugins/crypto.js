@@ -28,11 +28,14 @@ const requestOptions = {
 
 var message;
 
-const crypto = (infor,client,xxx) =>
+const crypto = (infor4, client, xxx3) =>
   new Promise((resolve, reject) => {
     var c = 0;
-    arg=infor.arg;
-    from=infor.from;
+    let infor5 = { ...infor4 };
+    let xxx = { ...xxx3 };
+
+    arg=infor5.arg;
+    from=infor5.from;
 
     if (arg.length==1){
       infor.arg = ["help", arg[0]]

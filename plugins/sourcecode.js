@@ -5,8 +5,11 @@ const fs = require("fs");
 const path = require("path");
 
 path.join(__dirname,"../readme/images/logo.jpeg")
-const sourcecode = (infor, client, xxx) => new Promise((resolve, reject) => {
-    from = infor.from;
+const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
+    let infor5 = { ...infor4 };
+    let xxx = { ...xxx3 };
+
+    from = infor5.from;
     axios.get(`https://api.github.com/repos/akm-akm/xxx-bot`)
         .then((response) => {
             let data = response.data;

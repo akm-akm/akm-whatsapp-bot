@@ -35,14 +35,17 @@ function searchTransformer(isIndex) {
   };
 }
 
-const market = (infor,client,xxx) =>
+const market = (infor4, client, xxx3) =>
   new Promise((resolve, reject) => {
-    arg = infor.arg
-    from=infor.from;
+    let infor5 = { ...infor4 };
+    let xxx = { ...xxx3 };
+
+    arg = infor5.arg
+    from=infor5.from;
 
     if (arg.length == 1) {
-      infor.arg=["help",arg[0]]
-      help(infor,client,xxx,1);
+      infor5.arg=["help",arg[0]]
+      help(infor5,client,xxx,1);
        resolve()
       return}
       switch (arg[1]) {
@@ -402,8 +405,8 @@ const market = (infor,client,xxx) =>
           break;
 
         default:
-          infor.arg = ["help", arg[0]]
-          help(infor, client, xxx);
+          infor5.arg = ["help", arg[0]]
+          help(infor5, client, xxx);
           msg =
             "*Usage*" +
             " = " +

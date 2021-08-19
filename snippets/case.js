@@ -17,27 +17,30 @@ const { newgroup } = require(path.join(__dirname, "./newgroup"));
 const { help } = require(path.join(__dirname, "../plugins/help"));
 const { youtube } = require(path.join(__dirname, "../plugins/yt"));
 const { faqs } = require(path.join(__dirname, "../plugins/faq"));
+const { nsfw } = require(path.join(__dirname, "../plugins/nsfw"));
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
 
 
-async function switchcase(infor, client, xxx) {
-  number = infor.number;
-  arg = infor.arg;
-  d = infor.from;
-  from = d;
+async function switchcase(infor2, client, xxx4) {
+  let infor3 = { ...infor2 };
+  arg = infor3.arg;
+  from = infor3.from;
+  const xxx3 = {
+    ...xxx4
+  };
 
-  if (infor.abusepresent.length != 0) {
-    client.sendMessage(from, "⚠️ ```Tu " + infor.abusepresent[0] + "```", text, {
-      quoted: xxx,
+  if (infor3.abusepresent.length != 0) {
+    client.sendMessage(from, "⚠️ ```Tu " + infor3.abusepresent[0] + "```", text, {
+      quoted: xxx3,
     });
-    count(infor, 1)
+    count(infor3, 1)
     return;
   }
-  if (infor.from.endsWith("@g.us") && infor.isMedia && infor.groupdata.autosticker && infor.arg[0] !== "sticker") {
+  if (infor3.from.endsWith("@g.us") && infor3.isMedia && infor3.groupdata.autosticker && infor3.arg[0] !== "sticker") {
     console.log("making auto sticker");
-    stickermaker(infor, client, xxx).then(() => {
-      count(infor, 2)
+    stickermaker(infor3, client, xxx3).then(() => {
+      count(infor3, 2)
     })
       .catch((err) => {
         console.log(err);
@@ -48,9 +51,9 @@ async function switchcase(infor, client, xxx) {
 
 
     case "run":
-      coderunner(infor, client, xxx)
+      coderunner(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((err) => {
           console.log(err);
@@ -59,9 +62,9 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "delete":
-      deleteit(infor, client, xxx)
+      deleteit(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((err) => {
           console.log(err);
@@ -75,9 +78,9 @@ async function switchcase(infor, client, xxx) {
     case "mdr":
     case "mgs":
     case "restart":
-      owner(infor, client, xxx)
+      owner(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((err) => {
           console.log(err);
@@ -88,9 +91,9 @@ async function switchcase(infor, client, xxx) {
 
     case "sourcecode":
    
-      sourcecode(infor, client, xxx)
+      sourcecode(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log("error");
@@ -98,9 +101,9 @@ async function switchcase(infor, client, xxx) {
 
       break;
     case "crypto":
-      crypto(infor, client, xxx)
+      crypto(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log("error");
@@ -109,9 +112,9 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "tweet":
-      xdafootball(infor, client, xxx)
+      xdafootball(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log("error");
@@ -120,9 +123,9 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "shorturl":
-      shorturl(infor, client, xxx)
+      shorturl(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log("error");
@@ -131,9 +134,9 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "market":
-      market(infor, client, xxx)
+      market(infor3, client, xxx3)
         .then(() => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log("Error");
@@ -142,10 +145,10 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "sticker":
-      stickermaker(infor, client, xxx)
+      stickermaker(infor3, client, xxx3)
         .then(() => {
           console.log("sent");
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log("error");
@@ -155,9 +158,9 @@ async function switchcase(infor, client, xxx) {
 
     case "rs":
     case "rashmika":
-      savedsticker(infor, client, xxx)
+      savedsticker(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log("rashmika error");
@@ -166,9 +169,20 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "pin":
-      pinterest(infor, client, xxx)
+      pinterest(infor3, client, xxx3)
         .then(() => {
-          count(infor)
+          count(infor3)
+        })
+        .catch((error) => {
+          console.log("pin error");
+          console.log(error);
+        });
+
+      break;
+    case "nsfw":
+      nsfw(infor3, client, xxx3)
+        .then(() => {
+          count(infor3)
         })
         .catch((error) => {
           console.log("pin error");
@@ -178,6 +192,7 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "setprefix":
+    case "groupinfo":
     case "botaccess":
     case "promote":
     case "demote":
@@ -196,9 +211,9 @@ async function switchcase(infor, client, xxx) {
     case "unban":
     case "banlist":
     case "filterabuse":
-      grp(infor, client, xxx)
+      grp(infor3, client, xxx3)
         .then(() => {
-          count(infor, 3)
+          count(infor3, 3)
         })
         .catch((error) => {
           console.log(error);
@@ -209,9 +224,9 @@ async function switchcase(infor, client, xxx) {
     case "menu":
     case "command":
     case "commands":
-      help(infor, client, xxx)
+      help(infor3, client, xxx3)
         .then(() => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log(error);
@@ -221,17 +236,17 @@ async function switchcase(infor, client, xxx) {
 
     case "limit":
       x =
-        "🤖 ```Daily credit used:``` " +infor.noofmsgtoday + "/ *" + infor.botdata.dailylimit+"*";
+        "🤖 ```Daily credit used:``` " +infor3.noofmsgtoday + "/ *" + infor3.botdata.dailylimit+"*";
       client.sendMessage(from, x, text, {
-        quoted: xxx,
+        quoted: xxx3,
       });
 
       break;
 
     case "ytv":
-      youtube(infor, client, xxx)
+      youtube(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log(error);
@@ -239,29 +254,18 @@ async function switchcase(infor, client, xxx) {
       break;
 
     case "faq":
-      faqs(infor, client, xxx)
+      faqs(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor)
+          count(infor3)
         })
         .catch((error) => {
           console.log(error);
         });
       break;
 
-    case "xxdfbx":
-      client.sendMessage(
-        from,
-        "```Bot down. New features being added.```",
-        text,
-        {
-          quoted: xxx,
-        }
-      );
-      count(infor).then(() => console.log(number + "+1"));
-      break;
-
+   
     case "newg":
-      newgroup(infor.from, client);
+      newgroup(infor3.from, client);
       break;
 
     case "hello":
@@ -273,9 +277,9 @@ async function switchcase(infor, client, xxx) {
     case "heyyyy":
     case "heyyy":
       client.sendMessage(from, "👋 ```Hello```", text, {
-        quoted: xxx,
+        quoted: xxx3,
       });
-      count(infor)
+      count(infor3)
       break;
 
     default:

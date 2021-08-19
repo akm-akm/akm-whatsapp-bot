@@ -10,12 +10,15 @@ const path = require("path");
 
 const { help } = require(path.join(__dirname, "./help"));
 
-const pinterest = (infor,client,xxx) =>
+const pinterest = (infor4, client, xxx3) =>
   new Promise((resolve, reject) => {
-    arg = infor.arg;
+    let infor5 = { ...infor4 };
+    let xxx = { ...xxx3 };
+
+    arg = infor5.arg;
     if (arg.length == 1) {
-      infor.arg = ["help", arg[0]]
-      help(infor, client, xxx, 1);
+      infor5.arg = ["help", arg[0]]
+      help(infor5, client, xxx, 1);
       resolve();
       return;
     }
@@ -34,9 +37,9 @@ const pinterest = (infor,client,xxx) =>
           file.on("finish", function () {
             file.close(async() => {
               console.log("filesaved");
-              title.startsWith("<div") ? client.sendMessage(infor.from, '🤖 ```Cannot download status.```', text, {
+              title.startsWith("<div") ? client.sendMessage(infor5.from, '🤖 ```Cannot download status.```', text, {
                 quoted: xxx
-              }): await client.sendMessage(infor.from, fs.readFileSync(ran), video, {
+              }): await client.sendMessage(infor5.from, fs.readFileSync(ran), video, {
                 quoted: xxx,
                 caption:"```"+title+"```"
              });

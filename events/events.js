@@ -114,16 +114,16 @@ async function main() {
     client.on("chat-update", async (xxxx) => {
       try {
         if (!xxxx.hasNewMessage) return;
-        xxx = xxxx.messages.all()[0];
-        if (!xxx.message) return;
-        if (xxx.key && xxx.key.remoteJid == "status@broadcast") return;
-        if (xxx.key.fromMe) return;
-        const from = xxx.key.remoteJid;
-        const type = Object.keys(xxx.message)[0];
+        xxx5 = xxxx.messages.all()[0];
+        if (!xxx5.message) return;
+        if (xxx5.key && xxx5.key.remoteJid == "status@broadcast") return;
+        if (xxx5.key.fromMe) return;
+        const from = xxx5.key.remoteJid;
+        const type = Object.keys(xxx5.message)[0];
         try {
           stanzaId =
             type == "extendedTextMessage" ?
-              xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
+              xxx5x.messages.all()[0].message.extendedTextMessage.contextInfo
                 .stanzaId || null :
               0;
         } catch (error) {
@@ -132,13 +132,13 @@ async function main() {
 
         body =
           type === "conversation" ?
-            xxx.message.conversation :
+            xxx5.message.conversation :
             type === "imageMessage" ?
-              xxx.message.imageMessage.caption :
+              xxx5.message.imageMessage.caption :
               type === "videoMessage" ?
-                xxx.message.videoMessage.caption :
+                xxx5.message.videoMessage.caption :
                 type == "extendedTextMessage" ?
-                  xxx.message.extendedTextMessage.text :
+                  xxx5.message.extendedTextMessage.text :
                   "";
         const getGroupAdmins = (participants) => {
           admins = [];
@@ -148,7 +148,7 @@ async function main() {
           return admins;
         };
         const isGroup = from.endsWith("@g.us");
-        const sender = isGroup ? xxx.participant : xxx.key.remoteJid;
+        const sender = isGroup ? xxx5.participant : xxx5.key.remoteJid;
         const isMedia = type === "imageMessage" || type === "videoMessage";
         const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
         const groupMembers = isGroup ? groupMetadata.participants : "";
@@ -188,7 +188,7 @@ async function main() {
         ) {
           sql.query(`UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${infor.number}';`)
           client.sendMessage(infor.sender, "🤖 ```You have exhausted your daily limit, the bot will not reply you anymore.```", text, {
-            quoted: xxx,
+            quoted: xxx5,
           });
           console.log("194");
           return
@@ -201,12 +201,17 @@ async function main() {
           client.sendMessage(infor.from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
           count('203')
 
-          count(infor)
+          count(infor1)
           return
         }
-
-        console.log(infor);
-        switchcase(infor, client, xxx);
+        const infor1 = {
+          ...infor
+        };
+        const xxx4 = {
+          ...xxx5
+        };
+        console.log(infor1);
+        switchcase(infor1, client, xxx4);
 
       } catch (error) {
         console.log(error);

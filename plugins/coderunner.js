@@ -13,11 +13,13 @@ const {
     text
 } = MessageType
 
-const coderunner = (infor, client, xxx) =>
+const coderunner = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
+        let infor5 = { ...infor4 };
+        let xxx = { ...xxx3 };
         const type = Object.keys(xxx.message)[0];
         if (type !== "extendedTextMessage") {
-            client.sendMessage(infor.from, "🤖  ```Tag the code to run.```", text, { quoted: xxx });
+            client.sendMessage(infor5.from, "🤖  ```Tag the code to run. See help to understand the syntax.```", text, { quoted: xxx });
             resolve()
             return
         }
@@ -27,7 +29,7 @@ const coderunner = (infor, client, xxx) =>
             reject()
             return
         } if (!languagecode.includes(arg[1])) {
-            client.sendMessage(from, "🤖 ```No such language. See help to understand the syntax.```", text, {
+            client.sendMessage(infor5.from, "🤖 ```No such language. See help to understand the syntax.```", text, {
                 quoted: xxx,
             });
             resolve();
@@ -49,7 +51,7 @@ const coderunner = (infor, client, xxx) =>
             },
                 function (error, response, body) {
                     output = body.output
-                    client.sendMessage(infor.from, "🧮 > " + arg[1] +"\n\n"+"```"+ output+"```", text, { quoted: xxx });
+                    client.sendMessage(infor5.from, "🧮 > " + arg[1] +"\n\n"+"```"+ output+"```", text, { quoted: xxx });
                     console.log('body:', body);
                 });
                 resolve()

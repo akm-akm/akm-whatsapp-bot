@@ -13,7 +13,7 @@ const {
 const {
   text
 } = MessageType;
-fs.writeFileSync(path.join(__dirname, "../data/data3.json"), '{"words": ["xxx"]}')
+fs.writeFileSync(path.join(__dirname, "../data/data3.json"), '{"words": ["xxxxxx"]}')
 var data3 = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/data3.json")));
 setTimeout(() => {

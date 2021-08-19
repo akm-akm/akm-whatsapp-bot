@@ -6,9 +6,12 @@ const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
 const { text,sticker } = MessageType;
 const { ai } = require("./deepai");
-const stickermaker = (infor,client,xxx) =>
+const stickermaker = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
-    arg = infor.arg;
+    let infor5 = { ...infor4 };
+    let xxx = { ...xxx3 };
+
+    arg = infor5.arg;
     const content = JSON.stringify(xxx.message);
     const from = xxx.key.remoteJid;
     const type = Object.keys(xxx.message)[0];

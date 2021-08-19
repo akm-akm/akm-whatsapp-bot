@@ -9,14 +9,17 @@ const { MessageType } = require("@adiwajshing/baileys");
 const { text,video } = MessageType;
 const { help } = require(path.join(__dirname, "./help"));
 
-const youtube = (infor, client, xxx) =>
+const youtube = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
+    let infor5 = { ...infor4 };
+    let xxx = { ...xxx3 };
+
     try{
-    arg = infor.arg;
+    arg = infor5.arg;
     url = arg[1];
-    if (infor.arg.length == 1) {
-      infor.arg = ["help", arg[0]]
-      help(infor, client, xxx, 1);
+    if (infor5.arg.length == 1) {
+      infor5.arg = ["help", arg[0]]
+      help(infor5, client, xxx, 1);
       resolve();
       return;
     }
