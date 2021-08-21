@@ -21,8 +21,9 @@ const xdafootball = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
         let infor5 = { ...infor4 };
         let xxx = { ...xxx3 };
+        let msg = "⚽ *Name : ```Fabrizio Romano```\n\n"
 
-      
+
         if (!(infor5.botdata.moderators.includes(infor5.number) || infor5.number === process.env.OWNER_NUMBER ) ){
             client.sendMessage(infor5.from, mess.only.modB,text, {
                     quoted: xxx
@@ -48,20 +49,17 @@ const xdafootball = (infor4, client, xxx3) =>
                 while (i < 10) {
                     if (!tweets[i].in_reply_to_screen_name) {
                         
-                        msg = `👲 *Name*: ${tweets[i].user.name
-                            } \n📱 *Tweet*:\n${tweets[i].full_text
+                        msg += `📱 *Tweet*: \n${tweets[i].full_text
                                 .split("https://t.co/")[0]
                                 .replace(/\n/g, " ")}\n📅 *Time*: ${tweets[i].created_at.split("+")[0]
                             }\n🔄 *Retweets*: ${tweets[i].retweet_count
-                            }\n♥ *Likes*: ${tweets[i].favorite_count}\n\n\n`;
-
-                        txt += msg
+                            }\n♥ *Likes*: ${tweets[i].favorite_count}\n\n`;
                       
                     }
                   
                     i++;
                 } 
-                client.sendMessage(infor5.from, txt, text, {quoted: xxx}); resolve()
+                client.sendMessage(infor5.from, msg, text, {quoted: xxx}); resolve()
                 
             }
         );

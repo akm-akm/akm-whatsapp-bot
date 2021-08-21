@@ -15,6 +15,11 @@ const {
   "./events/events.js"
 ));
 
+
+
+
+
+
 server.use(express.static(path.join(__dirname, "./public")));
 
 
@@ -35,7 +40,6 @@ server.get("/", (req, res) => {
 
 server.get("/login", async (req, res) => {
   main();
-  autoconnect = true;
   qqr = await sql.query("SELECT to_regclass('auth');")
   console.log("server is sending isauthenticationfilepresent - " + qqr.rows[0].to_regclass);
   if (qqr.rows[0].to_regclass == "auth") res.send("present")
@@ -48,6 +52,7 @@ server.get("/logout", async (req, res) => {
   autoconnect = false;
   res.send("1")
 });
+
 
 server.get("/stop", async (req, res) => {
   console.log("stop");

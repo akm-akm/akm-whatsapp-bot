@@ -49,7 +49,7 @@ async function switchcase(infor2, client, xxx4) {
 
   switch (arg[0]) {
 
-
+    
     case "run":
       coderunner(infor3, client, xxx3)
         .then((resolve) => {
@@ -73,9 +73,11 @@ async function switchcase(infor2, client, xxx4) {
       break;
 
     case "sql":
-    case "dl":
+    case "dul":
+    case "rst":
     case "dgl":
     case "mdr":
+    case "stp":
     case "mgs":
     case "restart":
       owner(infor3, client, xxx3)
@@ -179,7 +181,7 @@ async function switchcase(infor2, client, xxx4) {
         });
 
       break;
-    case "nsfw":
+    case "testnsfw":
       nsfw(infor3, client, xxx3)
         .then(() => {
           count(infor3)
@@ -197,7 +199,7 @@ async function switchcase(infor2, client, xxx4) {
     case "promote":
     case "demote":
     case "kick":
-    case "prefix":
+    case "useprefix":
     case "grouplink":
     //case "changedp":
     case "botleave":
@@ -207,6 +209,7 @@ async function switchcase(infor2, client, xxx4) {
     // case "purge":
     case "autosticker":
     case "tagall":
+    case "nsfw":
     case "ban":
     case "unban":
     case "banlist":
@@ -222,6 +225,7 @@ async function switchcase(infor2, client, xxx4) {
 
     case "help":
     case "menu":
+    case "menus":
     case "command":
     case "commands":
       help(infor3, client, xxx3)
@@ -236,7 +240,7 @@ async function switchcase(infor2, client, xxx4) {
 
     case "limit":
       x =
-        "🤖 ```Daily credit used:``` " +infor3.noofmsgtoday + "/ *" + infor3.botdata.dailylimit+"*";
+        "🤖 ```Daily credit used:``` " +infor3.noofmsgtoday + "/*" + infor3.botdata.dailylimit+"*";
       client.sendMessage(from, x, text, {
         quoted: xxx3,
       });

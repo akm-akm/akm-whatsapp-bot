@@ -4,7 +4,7 @@ if (process.env.HOSTING_PLATFORM === "local") {
   credentials = {
     user: "postgres",
     password: "root",
-    database: "bottest",
+    database: "z",
     host: "localhost",
     port: "5432"
   };

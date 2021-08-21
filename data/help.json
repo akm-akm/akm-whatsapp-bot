@@ -5,10 +5,15 @@
         "desc": "```Fetches the price of given crypto currency from coinmarketcap using its API.```",
         "eg": ["crypto btc","crypto xrp","crypto eth"]
     },
-    "nsfw": {
-        "usage": "nsfw",
+    "testnsfw": {
+        "usage": "testnsfw",
         "desc": "```Scans the image for nudity using deep ai and returns the result.```",
-        "eg": ["nsfw"]
+        "eg": ["testnsfw"]
+    },
+    "nsfw": {
+        "usage": "nsfw <condition>",
+        "desc": "```Scans the image for nudity before converting it to sticker.```",
+        "eg": ["nsfw on","nsfw off"]
     },
     "autosticker": {
         "usage": "autosticker <condition>",
@@ -20,11 +25,11 @@
         "desc": "```Sets the prefix to be used for bot commands.```",
         "eg": ["setprefix !","setprefix .","setprefix #"]
     },
-    "prefix":
+    "useprefix":
     {
-        "usage":"prefix <condition>",
+        "usage":"useprefix <condition>",
         "desc": "```If you want to use the bot without a prefix then turn this off.```",
-        "eg": ["prefix on","prefix off"]
+        "eg": ["useprefix on","useprefix off"]
     },
     "botaccess": {
         "usage": "botaccess <condition>",
@@ -59,7 +64,7 @@
     },
     "limit": {
         "usage": "limit",
-        "desc": "```This command will give the number of message sent by bot to that person.```",
+        "desc": "```This command will give the total credits used by any user.```",
         "eg": ["limit"]
     },
     "gaana": {

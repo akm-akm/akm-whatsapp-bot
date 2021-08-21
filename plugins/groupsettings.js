@@ -97,7 +97,7 @@ const grp = (infor4, client, xxx3) =>
                 "\n🐶 *Autosticker* : " + "```" + infor5.groupdata.autosticker + "```" +
                 "\n🤖 *Botaccess* :   " + "```" + infor5.groupdata.membercanusebot + "```" +
                 "\n🌏 *Abusefilter* :   " + "```" + infor5.groupdata.allowabuse + "```" +
-                "\n⚠️ *NSFW detect* : " + "```" + "true" + "```" +
+                "\n⚠️ *NSFW detect* : " + "```" + infor5.groupdata.nsfw + "```" +
                 "\n🎫 *Credits used* : " + "```" + infor5.groupdata.totalmsgtoday + "```" +
                 "\n🧶 *Total credits* : " + "```" + infor5.botdata.dailygrouplimit + "```" +
                 "\n🚨 *Banned users* : " + "```" + (Number( infor5.groupdata.banned_users.length) - 1 )+ "```\n";
@@ -144,8 +144,37 @@ const grp = (infor4, client, xxx3) =>
           resolve();
         }
         break;
+      
+      
+      case "nsfw":
+        if (arg.length == 1) {
+          infor5.arg = ["help", arg[0]]
+          help(infor5, client, xxx, 1);
+          resolve();
+          return;
+        }
+        if (arg[1] == "off") {
+          sql.query(`UPDATE groupdata SET nsfw = false WHERE groupid = '${from}'`);
+          client.sendMessage(from, "🤖 ```NSFW detection turned off.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        } else if (arg[1] == "on") {
+          sql.query(`UPDATE groupdata SET nsfw = true WHERE groupid = '${from}'`);
+          client.sendMessage(from, "🤖 ```NSFW detection turned on.```", text, {
+            quoted: xxx,
+          });
+          resolve();
+          return;
+        } else {
+          infor5.arg = ["help", arg[0]]
+          help(infor5, client, xxx, 1);
+          resolve();
+        }
+        break;
 
-      case "prefix":
+      case "useprefix":
         if (arg.length == 1) {
           infor5.arg = ["help", arg[0]]
           help(infor5, client, xxx, 1);

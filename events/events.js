@@ -39,12 +39,14 @@ async function connect() {
     }
 
     client.on("qr", (qr) => {
+
       qri
         .image(qr, {
           type: "png"
         })
         .pipe(fs.createWriteStream("./public/qr.png"));
       console.log("scan the qr above ");
+      console.log(qr);
     });
     client.on("connecting", () => {
       // //console.clear();
@@ -65,7 +67,7 @@ async function connect() {
     load_clientToken = authInfo.clientToken;
     load_encKey = authInfo.encKey;
     load_macKey = authInfo.macKey;
-
+    console.table(authInfo);
     if (auth_row_count == 0) {
       console.log("Inserting login data...");
       sql.query("INSERT INTO auth VALUES($1,$2,$3,$4,$5);", [
@@ -101,6 +103,16 @@ async function connect() {
 }
 
 async function main() {
+  (async function () {
+    qqr = await sql.query("SELECT count(*) from messagecount;")
+    if (qqr.rows[0].count === 0) {
+      console.log("New bot!, changing its dp and name!");
+      client.updateProfileName("xxx-bot");
+      client.updateProfilePicture(fs.readFileSync(path.join(__dirname, "../readme/images/logo.jpeg")));
+    }
+  })();
+
+
   try {
     //console.clear();
     client.logger.level = "fatal";
@@ -110,6 +122,35 @@ async function main() {
     client.connectOptions.maxRetries = 100;
     console.log("Hello " + client.user.name);
     sql.query('UPDATE botdata SET isconnected = true;')
+
+
+/*
+client.on('CB:Call', async json => {
+        let number = json[1]['from'];
+        let isOffer = json[1]["type"] == "offer";
+
+        if (number && isOffer && json[1]["data"]) {
+            console.log(json)
+            var tag = client.generateMessageTag();
+            var jsjs = ["action","call", ["call",{"from":client.user.jid,"to": number.split("@")[0]+"@s.whatsapp.net","id":tag}, [["reject", {"call-id": json[1]['id'],"call-creator": number.split("@")[0]+"@s.whatsapp.net","count":"0"}, null]]]];
+            console.log(jsjs)
+            client.send(`${tag},${JSON.stringify(jsjs)}`)
+            client.sendMessage(number, "I can't call. Too busy!", baileys.MessageType.text);
+        }
+ })
+
+ */
+
+
+
+
+
+
+
+
+
+
+
 
     client.on("chat-update", async (xxxx) => {
       try {
@@ -155,17 +196,8 @@ async function main() {
         const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
         const isGroupAdmins = groupAdmins.includes(sender) || false;
         const groupName = isGroup ? groupMetadata.subject : "";
-        const infor = await settingread(
-          body,
-          from,
-          sender,
-          groupName,
-          client,
-          groupMetadata,
-          stanzaId,
-          isMedia
-        );
-      
+        const infor = await settingread( body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia );
+    
         console.log("169");
         if (!
           (     (infor.canmemberusebot || isGroupAdmins)
@@ -201,7 +233,7 @@ async function main() {
           client.sendMessage(infor.from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
           count('203')
 
-          count(infor1)
+          count(infor)
           return
         }
         const infor1 = {
@@ -224,7 +256,6 @@ async function main() {
 
 async function stop() {
   client.close();
-  //console.clear();
   console.log("Stopped");
   await sql.query('UPDATE botdata SET isconnected = false;')
 }
@@ -233,12 +264,14 @@ async function isconnected() {
 }
 async function logout() {
   sql.query('UPDATE botdata SET isconnected = false;')
-  client.clearAuthInfo();
+  console.log("isconnected set to false");
   sql.query("DROP TABLE auth;");
+  console.log("auth dropped");
   client.close();
-  //console.clear();
   console.log("Logged out");
+ 
 }
+
 module.exports.main = main;
 module.exports.logout = logout;
 module.exports.stop = stop;

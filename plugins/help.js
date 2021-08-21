@@ -20,31 +20,30 @@ const help = (infor4, client, xxx3,syntax) =>
 
     if (arg.length == 1) {
       cas = infor5.number === process.env.OWNER_NUMBER ?
-        "🚧 *Owner only* :\n```dl :         Change daily limit,\ndgl :       Change daily group limit,\nmgs :     Minimum group size,\nsql :        Database query,\nmdr :      Add bot moderators,\nrestart : Restart the bot```\n\n"
+        "🚧 *Owner only* :\n```rst : Reset daily session,\ndul : Change daily user limit,\ndgl : Change daily group limit,\nmgs : Minimum group size,\nsql : Database query,\nmdr : Add bot moderators,\nrtrt : Restart the bot,\nstp : Shutdown the bot```\n\n"
         : "";
 
-      const grpcmds = infor5.groupdata == 0 ?"":"👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, prefix, autosticker, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n";
+      const grpcmds = infor5.groupdata == 0 ? "" :"👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n";
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
-      "\n\n" +
-        "📗 *General* :\n ```help, faq, limit, delete, sourcecode```\n\n" +
-      grpcmds+
-      "📱 *Media* :\n```sticker, rs, ytv, shorturl, nsfw, run, crypto, market, pin, rashmika```\n\n" +
-       cas+
+        "\n\n" +
+        "📗 *General* :\n ```help, faq, limit, sourcecode```\n\n" +
+        grpcmds +
+        "📱 *Media* :\n```sticker, rs, ytv, shorturl, testnsfw, run, crypto, market, pin, rashmika```\n\n" +
+        cas +
         "🎁 *For detailed info :*\n" +
         prefix +
         "```help <command>```\n\n" +
         "🚄 *Example* :\n" +
         prefix + "help crypto\n" +
-        prefix + "help shorturl\n"+ 
-        prefix + "help sticker\n"+
-        prefix + "help autosticker\n"+
-       prefix + "help run\n" +
-      "\n📃 *Bot Updates* :" +
-      "\n‼️ _NSFW detection added_"+
-      "\n‼️ _groupinfo added_"+
-      "\n‼️ _New feature added for coders_ - *run*, see detailed info on how to use it."
+        prefix + "help shorturl\n" +
+        prefix + "help sticker\n" +
+        prefix + "help autosticker\n" +
+        prefix + "help run\n" +
+        "\n📃 *Bot Updates* :" +
+        "\n‼️ _NSFW detection added_" +
+        "\n‼️ _groupinfo added_";
 
       client.sendMessage(from, msg, text, {
         quoted: xxx,

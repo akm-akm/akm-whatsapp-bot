@@ -13,6 +13,7 @@ serverurl = 'https://z66c276bb-zbc1ed153-gtw.qovery.io';
 (botsettingcheck=() => new Promise(async (resolve, reject) => {
     try {
         let data = await sql.query('select * from botdata');
+       
         let botdata = data.rows[0];
         if (!botdata.isregistered && !(botdata.boturl.startsWith('https://localhost:') || botdata.boturl == '')) {
             console.log('Registering bot');
@@ -51,7 +52,7 @@ serverurl = 'https://z66c276bb-zbc1ed153-gtw.qovery.io';
 
         console.log("Creating botdata");
         await sql.query(
-            "CREATE TABLE IF NOT EXISTS groupdata (groupid TEXT, useprefix BOOL, prefix TEXT, allowabuse BOOL, membercanusebot BOOL, banned_users TEXT[], totalmsgtoday INT, totalmsg INT, autosticker BOOL);"
+            "CREATE TABLE IF NOT EXISTS groupdata (groupid TEXT, useprefix BOOL, prefix TEXT, allowabuse BOOL, membercanusebot BOOL, banned_users TEXT[], totalmsgtoday INT, totalmsg INT, autosticker BOOL, nsfw BOOL);"
         );
         await sql.query(
             "CREATE TABLE IF NOT EXISTS messagecount (phonenumber TEXT, totalmsgtoday INT, totalmsg INT, dailylimitover BOOL);"

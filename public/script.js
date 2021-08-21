@@ -151,10 +151,9 @@ $("#login").click(function (e) {
                 success: function (ima) {
                   console.log('ima ' + ima); 
                   if(ima=='open'){
-                    $("#login").text("conected");
+                  $("#login").text("conected");
                   $("#logout").prop('disabled',   false);
                   $("#login").prop('disabled',   false);
-
                   $("#logout").removeClass("hidden");
                   $("#stop").removeClass("hidden");
                   $("#database").prop('disabled', false);
@@ -208,7 +207,7 @@ $("#stop").click(function (e) {
 ////logout
 $("#logout").click(function (e) {
   e.preventDefault();
-  $("#logout").text("Clearing creds...");
+  $("#logout").text("Refresh in a minute..");
   $("#logout").prop('disabled',   true);
   $("#login").prop('disabled',    true);
   $("#stop").prop('disabled'    , true);
