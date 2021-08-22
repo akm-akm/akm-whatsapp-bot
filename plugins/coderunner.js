@@ -24,8 +24,8 @@ const coderunner = (infor4, client, xxx3) =>
             return
         }
         if (arg.length === 1) {
-            infor.arg = ["help", arg[0]]
-            help(infor, client, xxx, 1);
+            infor5.arg = ["help", arg[0]]
+            help(infor5, client, xxx, 1);
             reject()
             return
         } if (!languagecode.includes(arg[1])) {

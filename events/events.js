@@ -101,7 +101,6 @@ async function connect() {
     await connect();
   }
 }
-
 async function main() {
   (async function () {
     qqr = await sql.query("SELECT count(*) from messagecount;")

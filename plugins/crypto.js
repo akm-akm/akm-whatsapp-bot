@@ -38,8 +38,8 @@ const crypto = (infor4, client, xxx3) =>
     from=infor5.from;
 
     if (arg.length==1){
-      infor.arg = ["help", arg[0]]
-      help(infor, client, xxx, 1);
+      infor5.arg = ["help", arg[0]]
+      help(infor5, client, xxx, 1);
       reject()
     return}
     if (!coins.includes(arg[1].toUpperCase())) {

@@ -15,6 +15,7 @@ const { xdafootball } = require(path.join(__dirname, "../plugins/twitter"));
 const { market } = require(path.join(__dirname, "../plugins/market"));
 const { newgroup } = require(path.join(__dirname, "./newgroup"));
 const { help } = require(path.join(__dirname, "../plugins/help"));
+const { joingroup } = require(path.join(__dirname, "../plugins/join"));
 const { youtube } = require(path.join(__dirname, "../plugins/yt"));
 const { faqs } = require(path.join(__dirname, "../plugins/faq"));
 const { nsfw } = require(path.join(__dirname, "../plugins/nsfw"));
@@ -49,6 +50,17 @@ async function switchcase(infor2, client, xxx4) {
 
   switch (arg[0]) {
 
+    
+    case "invite":
+      joingroup(infor3, client, xxx3)
+        .then((resolve) => {
+          count(infor3)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      break;
     
     case "run":
       coderunner(infor3, client, xxx3)

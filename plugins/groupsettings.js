@@ -422,27 +422,10 @@ const grp = (infor4, client, xxx3) =>
         break;
 
       case "botleave":
-      //  await client.sendMessage(from, "🤧 ```Bye, Miss you all ```", text);
-
-
-
-        const buttons = [
-          { buttonId: 'id1', buttonText: { displayText: 'confirm' }, type: 1 },
-          { buttonId: 'id2', buttonText: { displayText: 'Abort' }, type: 1 }
-        ]
-
-        const buttonMessage = {
-          contentText: "🤖 ```Are you sure about this ?```",
-          footerText: 'botleave',
-          buttons: buttons,
-          headerType: 1
-        }
-
-        client.sendMessage(from, buttonMessage, MessageType.buttonsMessage)
-
-        
-     ///   client.groupLeave(from);
-        resolve();
+       await client.sendMessage(from, "🤧 ```Bye, Miss you all ```", text);
+  
+      client.groupLeave(from);
+         resolve();
         break;
 
       case "close":

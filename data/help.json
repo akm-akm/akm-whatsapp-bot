@@ -1,5 +1,10 @@
 {
    
+    "invite": {
+        "usage": "invite <group-link>",
+        "desc": "```The bot joins the group using the given invite link.```",
+        "eg": [ "invite https://chat.whatsapp.com/fgRTy5-sdeY","invite https://chat.whatsapp.com/aDreSAg56-98"]
+    },
     "crypto": {
         "usage": "crypto <coinsymbol>",
         "desc": "```Fetches the price of given crypto currency from coinmarketcap using its API.```",

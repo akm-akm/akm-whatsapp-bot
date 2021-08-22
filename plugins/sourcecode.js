@@ -15,7 +15,7 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
             let data = response.data;
 
             msg = "🧠🧠 *Sharing is caring* 🧠🧠\n\n" +
-                "🛰️ *Github Repository-*\n```https://github.com/akm-akm/xxx-bot```\n\n"+
+                "🐱‍👤 *Github Repository-*\n```https://github.com/akm-akm/xxx-bot```\n\n"+
                 "👨‍💻 *Repo Owner:* ```" + data.owner.login + "```\n" +
                 "💻 *Repo Name:*  ```" + data.name + "```\n" +
                // "🪀 *Desc:*              ```" + data.description + "```\n" +
