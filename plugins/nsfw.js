@@ -32,14 +32,21 @@ const nsfw = (infor4, client, xxx3) =>
             const media = await client.downloadAndSaveMediaMessage(encmedia);
             ran = getRandom(".webp");
             ai(media).then((result) => {
-                client.sendMessage(infor5.from, JSON.stringify(result, null, "\t"), text, {
+                let zz = result.output.detections.length !== 0 ? "\n👙 *Detections* :\n" : " "
+                let nsfw = "🔞 *Probability* :  ```" + (result.output.nsfw_score * 100).toFixed(1) + "%```\n" + zz;
+                result.output.detections.forEach(function (element) {
+                    nsfw = nsfw+ "\nName : " + element.name + "\n" +
+                        "Confidence : " + (element.confidence * 100).toFixed(0) + " %\n";
+                })
+
+                client.sendMessage(infor5.from, nsfw, text, {
                     quoted: xxx
                 });
                 resolve();
                 fs.unlinkSync(media);
 
             }).catch((err) => {
-
+                console.log(err);
                 client.sendMessage(infor5.from, "🤖 ```Error```", text, {
                     quoted: xxx
                 });

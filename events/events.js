@@ -115,16 +115,16 @@ async function main() {
 
   try {
     //console.clear();
-    client.logger.level = "fatal";
+    client.logger.level = "debug";
     await connect();
-    // //console.clear();
+    //console.clear();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
     console.log("Hello " + client.user.name);
     sql.query('UPDATE botdata SET isconnected = true;')
 
 
-/*
+
 client.on('CB:Call', async json => {
         let number = json[1]['from'];
         let isOffer = json[1]["type"] == "offer";
@@ -135,20 +135,9 @@ client.on('CB:Call', async json => {
             var jsjs = ["action","call", ["call",{"from":client.user.jid,"to": number.split("@")[0]+"@s.whatsapp.net","id":tag}, [["reject", {"call-id": json[1]['id'],"call-creator": number.split("@")[0]+"@s.whatsapp.net","count":"0"}, null]]]];
             console.log(jsjs)
             client.send(`${tag},${JSON.stringify(jsjs)}`)
-            client.sendMessage(number, "I can't call. Too busy!", baileys.MessageType.text);
+            client.sendMessage(number, "🤖 ```Call me again to get banned!```", MessageType.text);
         }
  })
-
- */
-
-
-
-
-
-
-
-
-
 
 
 
@@ -164,7 +153,7 @@ client.on('CB:Call', async json => {
         try {
           stanzaId =
             type == "extendedTextMessage" ?
-              xxx5x.messages.all()[0].message.extendedTextMessage.contextInfo
+              xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
                 .stanzaId || null :
               0;
         } catch (error) {
@@ -250,7 +239,7 @@ client.on('CB:Call', async json => {
       }
     });
   } catch (err) {
-    console.log("ErRoR-------------" + err);
+    console.log("EVENTS.JS ERROR-----------------------" + err);
   }
 }
 

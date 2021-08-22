@@ -26,23 +26,21 @@ const youtube = (infor4, client, xxx3) =>
 
     let info = await ytdl.getInfo(ytdl.getURLVideoID(url));
     vid = getRandom(".mp4");
-    msg =
-      "🎞️ *Title:*  " +
-      "```" +
+    msg = "```" +
       info.videoDetails.title +
       "```\n\n" +
-      "🍚 *Author:*  " +
+      "🍟 *Author:* " +
       "```" +
       info.videoDetails.author.name +
-      "```\n\n" +
+      "```\n" +
       "🎥 *Views:*  " +
       "```" +
       info.videoDetails.viewCount +
-      "```\n\n" +
+      "```\n" +
       "👍 *Likes:*  " +
       "```" +
       info.videoDetails.likes +
-      "```\n\n" +
+      "```\n" +
       "👎 *Disikes:*  " +
       "```" +
       info.videoDetails.dislikes +

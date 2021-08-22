@@ -71,7 +71,7 @@ async function switchcase(infor2, client, xxx4) {
         });
 
       break;
-
+    case "xxx":
     case "sql":
     case "dul":
     case "rst":

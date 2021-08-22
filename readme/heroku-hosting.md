@@ -2,7 +2,7 @@
 
 
 ## ⛵ Pre-requisite
- - 🌐️ Internet 🌐️️
+- 🌐️ Internet 🌐️️
 - 🧠️ Brain 🧠️
 - 🎵️ Music 🎵️
 
@@ -66,7 +66,7 @@ DEEPAI=
 <img src='/readme\images\sitelogin.png'></img>
 - Click on start and scan the qr code shown on the website using the WA-Web Scanner on your WhatsApp.
 <img src='/readme\images\scan.png'></img>
-- On successful login you will see the connected written on the button.
+- On successful login you will see connected written on the button.
 <img src='/readme\images\connected.png'></img>
 - Now close the browser.
 

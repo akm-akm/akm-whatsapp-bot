@@ -1,0 +1,41 @@
+{
+    "key": {
+        "remoteJid": "919709094733-1626697947@g.us",
+        "fromMe": false,
+        "id": "8E1D79E10F91ED93926EE19126CC89F6"
+    },
+    "message": {
+        "buttonsResponseMessage": {
+            "selectedButtonId": "id2",
+            "selectedDisplayText": "Abort",
+            "contextInfo": {
+                "stanzaId": "3EB09326D11D",
+                "participant": "17123152531@s.whatsapp.net",
+                "quotedMessage": {
+                    "buttonsMessage": {
+                        "contentText": "🤖 ```Are you sure about that?```",
+                        "footerText": "botleave",
+                        "buttons": [{
+                            "buttonId": "id1",
+                            "buttonText": {
+                                "displayText": "confirm"
+                            },
+                            "type": "RESPONSE"
+                        }, {
+                            "buttonId": "id2",
+                            "buttonText": {
+                                "displayText": "Abort"
+                            },
+                            "type": "RESPONSE"
+                        }],
+                        "headerType": "EMPTY"
+                    }
+                }
+            },
+            "type": "DISPLAY_TEXT"
+        }
+    },
+    "messageTimestamp": "1629632974",
+    "participant": "919110071726@s.whatsapp.net",
+    "ephemeralOutOfSync": false
+}

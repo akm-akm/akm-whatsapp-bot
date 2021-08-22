@@ -28,7 +28,7 @@ const help = (infor4, client, xxx3,syntax) =>
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
         "\n\n" +
-        "📗 *General* :\n ```help, faq, limit, sourcecode```\n\n" +
+        "📗 *General* :\n ```help, faq, limit, delete, sourcecode```\n\n" +
         grpcmds +
         "📱 *Media* :\n```sticker, rs, ytv, shorturl, testnsfw, run, crypto, market, pin, rashmika```\n\n" +
         cas +

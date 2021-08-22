@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "NODE_ENV='development' node -r dotenv/config app.js ",
     "prod": "NODE_ENV='production' node -r dotenv/config app.js ",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
   "repository": {
@@ -28,7 +27,7 @@
   },
   "homepage": "https://github.com/akm-akm/xxx-bot#readme",
   "dependencies": {
-    "@adiwajshing/baileys": "^3.5.1",
+    "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "axios": "^0.21.1",
     "deepai": "^1.0.17",

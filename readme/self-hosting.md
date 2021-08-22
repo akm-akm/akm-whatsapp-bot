@@ -101,4 +101,4 @@ DEEPAI=
 
 
 
-###  🔗 Want to host on server ? Click [here](/heroku-hosting.md)
+###  🔗 Want to host on server ? Click [here](heroku-hosting.md)
