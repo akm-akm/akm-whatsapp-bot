@@ -2,6 +2,9 @@
   "name": "xxx-bot",
   "version": "1.0.0",
   "description": "whatsapp bot to automate whatsapp.",
+  "engines": {
+    "node": "14.17.3"
+  },
   "main": "app.js",
   "scripts": {
     "dev": "NODE_ENV='development' node -r dotenv/config app.js ",
