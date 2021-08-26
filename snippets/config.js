@@ -13,24 +13,7 @@ serverurl = 'https://z66c276bb-zbc1ed153-gtw.qovery.io';
 (botsettingcheck=() => new Promise(async (resolve, reject) => {
     try {
         let data = await sql.query('select * from botdata');
-       
         let botdata = data.rows[0];
-        if (!botdata.isregistered && !(botdata.boturl.startsWith('https://localhost:') || botdata.boturl == '')) {
-            console.log('Registering bot');
-            axios.post(serverurl + '/register_new_bot', {
-                    ownernumber: process.env.OWNER_NUMBER,
-                    bot_url: botdata.boturl
-                })
-                .then(function (response) {
-                    console.log(response.data);
-                    response.data == "OK" ? sql.query('UPDATE botdata set isregistered = true').then(() => console.log("Wrote registered in database")).catch(() => console.log("Error writing registered to database")) :
-                        console.log("not written");
-                })
-                .catch(function (error) {
-                    console.log("Error Registering");
-                });
-        }
-
         axios.get(serverurl + '/allabuse')
             .then((response) => {
                 console.log("Getting data3");
@@ -42,7 +25,6 @@ serverurl = 'https://z66c276bb-zbc1ed153-gtw.qovery.io';
             .catch(() => {
                 console.log("Error getting data3");
             })
-
 
         if (botdata.isconnected || process.env.NODE_ENV !== "production") {
             main()

@@ -26,7 +26,7 @@ $(function () {
       console.log("site received isauthenticationfilepresent - " + res);
       if (res == "present") {
         $("#logout").removeClass("hidden");
-        $("#qrcode").addClass("hidden");
+        $("#qrcode").removeAttr("src");
 
       } else {
         $("#logout").addClass("hidden");

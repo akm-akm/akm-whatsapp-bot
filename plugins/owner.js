@@ -202,7 +202,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
         
         case "mdr":
             if (infor5.arg.length < 2) {
-                client.sendMessage(from, '🤖 ```Enter the number with cc to be set as moderator.```', text, {
+                client.sendMessage(from, '🤖 ```Enter the number with cc to be set as moderator or tag the user.```', text, {
                     quoted: xxx,
                 });
                 resolve();
@@ -210,7 +210,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
             }
             z = infor5.arg[1];
             sql.query(
-                `UPDATE botdata SET moderators = array_append(moderators, '${z}');`
+                `UPDATE botdata SET moderators = array_append(moderators, '${z.replace('@','')}');`
             ).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,

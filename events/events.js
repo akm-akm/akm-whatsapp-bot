@@ -19,6 +19,11 @@ const {
   count
 } = require(path.join(__dirname, "../snippets/count"));
 
+
+
+
+
+
 async function connect() {
   try {
     auth_result = await sql.query("select * from auth;");
@@ -35,6 +40,7 @@ async function connect() {
         encKey: auth_result.rows[0].enckey,
         macKey: auth_result.rows[0].mackey,
       };
+
       client.loadAuthInfo(auth_obj);
     }
 
@@ -46,7 +52,6 @@ async function connect() {
         })
         .pipe(fs.createWriteStream("./public/qr.png"));
       console.log("scan the qr above ");
-      console.log(qr);
     });
     client.on("connecting", () => {
       // //console.clear();
@@ -59,7 +64,7 @@ async function connect() {
       //console.clear();
       console.log("connected");
       console.log(`credentials updated!`);
-      fs.unlink("./public/qr.png", () => { });
+      fs.unlink("./public/qr.png", () => {});
     });
     const authInfo = client.base64EncodedAuthInfo();
     load_clientID = authInfo.clientID;
@@ -67,7 +72,7 @@ async function connect() {
     load_clientToken = authInfo.clientToken;
     load_encKey = authInfo.encKey;
     load_macKey = authInfo.macKey;
-    console.table(authInfo);
+
     if (auth_row_count == 0) {
       console.log("Inserting login data...");
       sql.query("INSERT INTO auth VALUES($1,$2,$3,$4,$5);", [
@@ -93,7 +98,19 @@ async function connect() {
       sql.query("commit;");
       console.log("Login data updated!");
     }
-  } catch {
+  } catch (err) {
+    console.error(err.message);
+    if (err.message.startsWith("Unexpected error in login")) {
+      console.log("Please check your credentials")
+      await sql.query('UPDATE botdata SET isconnected = false;')
+      console.log("isconnected set to false");
+      await sql.query("DROP TABLE auth;");
+      console.log("auth dropped");
+      client.close();
+      client.logout();
+      console.log("Logged out");
+      process.exit(1);
+    }
     console.log("Creating database...");
     await sql.query(
       "CREATE TABLE IF NOT EXISTS auth(clientID text, serverToken text, clientToken text, encKey text, macKey text);"
@@ -107,37 +124,56 @@ async function main() {
     if (qqr.rows[0].count === 0) {
       console.log("New bot!, changing its dp and name!");
       client.updateProfileName("xxx-bot");
-      client.updateProfilePicture(fs.readFileSync(path.join(__dirname, "../readme/images/logo.jpeg")));
+      client.updateProfilePicture(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, fs.readFileSync(path.join(__dirname, "../readme/images/logo.jpeg")));
     }
   })();
 
 
   try {
     //console.clear();
-    client.logger.level = "debug";
+    client.logger.level = "fatal";
     await connect();
     //console.clear();
+    client.browserDescription = ["chrome", "xXx BOT", "10.0"];
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
     console.log("Hello " + client.user.name);
     sql.query('UPDATE botdata SET isconnected = true;')
 
+    client.on("ws-close",async (aq) => {
+      console.log(aq, "Connection closed");
+      await sql.query('UPDATE botdata SET isconnected = false;')
+      console.log("isconnected set to false");
+      await sql.query("DROP TABLE auth;");
+      console.log("auth dropped");
+      process.exit(1);
+    })
 
+    client.on('CB:Call', async json => {
+      let number = json[1]['from'];
+      let isOffer = json[1]["type"] == "offer";
 
-client.on('CB:Call', async json => {
-        let number = json[1]['from'];
-        let isOffer = json[1]["type"] == "offer";
-
-        if (number && isOffer && json[1]["data"]) {
-            console.log(json)
-            var tag = client.generateMessageTag();
-            var jsjs = ["action","call", ["call",{"from":client.user.jid,"to": number.split("@")[0]+"@s.whatsapp.net","id":tag}, [["reject", {"call-id": json[1]['id'],"call-creator": number.split("@")[0]+"@s.whatsapp.net","count":"0"}, null]]]];
-            console.log(jsjs)
-            client.send(`${tag},${JSON.stringify(jsjs)}`)
-            client.sendMessage(number, "🤖 ```Call me again to get banned!```", MessageType.text);
-        }
- })
-
+      if (number && isOffer && json[1]["data"]) {
+        console.log(json)
+        var tag = client.generateMessageTag();
+        var jsjs = ["action", "call", ["call", {
+            "from": client.user.jid,
+            "to": number.split("@")[0] + "@s.whatsapp.net",
+            "id": tag
+          },
+          [
+            ["reject", {
+              "call-id": json[1]['id'],
+              "call-creator": number.split("@")[0] + "@s.whatsapp.net",
+              "count": "0"
+            }, null]
+          ]
+        ]];
+        console.log(jsjs)
+        client.send(`${tag},${JSON.stringify(jsjs)}`)
+        client.sendMessage(number, "🤖 ```Call me again to get banned!```", MessageType.text);
+      }
+    })
 
 
     client.on("chat-update", async (xxxx) => {
@@ -152,23 +188,23 @@ client.on('CB:Call', async json => {
         try {
           stanzaId =
             type == "extendedTextMessage" ?
-              xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
-                .stanzaId || null :
-              0;
+            xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
+            .stanzaId || null :
+            0;
         } catch (error) {
           stanzaId = 0;
         }
 
         body =
           type === "conversation" ?
-            xxx5.message.conversation :
-            type === "imageMessage" ?
-              xxx5.message.imageMessage.caption :
-              type === "videoMessage" ?
-                xxx5.message.videoMessage.caption :
-                type == "extendedTextMessage" ?
-                  xxx5.message.extendedTextMessage.text :
-                  "";
+          xxx5.message.conversation :
+          type === "imageMessage" ?
+          xxx5.message.imageMessage.caption :
+          type === "videoMessage" ?
+          xxx5.message.videoMessage.caption :
+          type == "extendedTextMessage" ?
+          xxx5.message.extendedTextMessage.text :
+          "";
         const getGroupAdmins = (participants) => {
           admins = [];
           for (let i of participants) {
@@ -184,26 +220,21 @@ client.on('CB:Call', async json => {
         const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
         const isGroupAdmins = groupAdmins.includes(sender) || false;
         const groupName = isGroup ? groupMetadata.subject : "";
-        const infor = await settingread( body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia );
-    
+        const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
+
         console.log("169");
         if (!
-          (     (infor.canmemberusebot || isGroupAdmins)
-          &&
-          !isGroup|| (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit))
-          &&
-            (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker))     )
+          ((infor.canmemberusebot || isGroupAdmins) &&
+            !isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
+            (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker)))
         ) return
-          console.log("179");
+        console.log("179");
         if (infor.isnumberblockedingroup) return
-        
+
         if (
-          infor.noofmsgtoday >= infor.botdata.dailylimit
-          &&
-          infor.number !== process.env.OWNER_NUMBER
-          &&
-          !infor.botdata.moderators.includes(infor.number)
-          &&
+          infor.noofmsgtoday >= infor.botdata.dailylimit &&
+          infor.number !== process.env.OWNER_NUMBER &&
+          !infor.botdata.moderators.includes(infor.number) &&
           infor.dailylimitover === false
         ) {
           sql.query(`UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${infor.number}';`)
@@ -214,10 +245,10 @@ client.on('CB:Call', async json => {
           return
         }
         console.log("197");
-        if (infor.dailylimitover===true) return
-        
+        if (infor.dailylimitover === true) return
+
         console.log("200");
-        if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit ) {
+        if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit) {
           client.sendMessage(infor.from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
           count('203')
 
@@ -256,8 +287,9 @@ async function logout() {
   sql.query("DROP TABLE auth;");
   console.log("auth dropped");
   client.close();
+  client.logout();
   console.log("Logged out");
- 
+
 }
 
 module.exports.main = main;

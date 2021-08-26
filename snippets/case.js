@@ -252,7 +252,7 @@ async function switchcase(infor2, client, xxx4) {
 
     case "limit":
       x =
-        "🤖 ```Daily credit used:``` " +infor3.noofmsgtoday + "/*" + infor3.botdata.dailylimit+"*";
+        "🤖 ```Daily credit used:``` " +infor3.noofmsgtoday + "/ *" + infor3.botdata.dailylimit+"*";
       client.sendMessage(from, x, text, {
         quoted: xxx3,
       });

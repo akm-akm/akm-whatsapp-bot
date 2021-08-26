@@ -2,7 +2,36 @@ const express = require("express");
 const server = new express();
 const port = process.env.PORT || 5000;
 const path = require("path");
+const node = require('node-cron');
+const axios = require("axios");
 const sql = require(path.join(__dirname, "./snippets/ps"));
+
+validatesetting()
+function validatesetting(){
+
+  if (!process.env.WEBSITE_PASSWORD){
+    console.log("WEBSITE_PASSWORD is not set");
+    throw new Error("WEBSITE_PASSWORD is not set");
+    process.exit(1)
+  }
+  
+  if (!process.env.OWNER_NUMBER){
+    console.log("OWNER_NUMBER is not set");
+    throw new Error("OWNER_NUMBER is not set");
+    process.exit(1)
+  }
+
+  if (!process.env.HOSTING_PLATFORM){
+    console.log("HOSTING_PLATFORM is not set");
+    throw new Error("HOSTING_PLATFORM is not set");
+    process.exit(1)
+  }
+
+}
+
+
+
+
 require(path.join(__dirname, "./snippets/config"));
 //console.clear();
 const {
@@ -14,14 +43,37 @@ const {
   __dirname,
   "./events/events.js"
 ));
+let urldata =undefined;
 
+node.schedule("*/15 * * * *", () => {
+  try {
+    axios.get(urldata).then((res) => {
+      console.log("####################");
 
+      console.log("called- ", urldata);
+      
+    }
+    ).catch((err) => {
+      sql.query('select * from botdata;').then(res => {
+        console.log("-------------------------");
+        console.log(res.rows[0]);
+        urldata = res.rows[0].boturl;
+      });
+    });
+  } catch (error) {
+    
+  }
+})
 
-
-
+node.schedule("0 */24 * * *", () => {
+ 
+  sql.query('UPDATE groupdata SET totalmsgtoday=0;')
+     sql.query('UPDATE botdata SET totalmsgtoday=0;')
+    sql.query('UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;')
+   
+})
 
 server.use(express.static(path.join(__dirname, "./public")));
-
 
 server.listen(port, () => {
   //console.clear();
@@ -41,8 +93,16 @@ server.get("/", (req, res) => {
 server.get("/login", async (req, res) => {
   main();
   qqr = await sql.query("SELECT to_regclass('auth');")
-  console.log("server is sending isauthenticationfilepresent - " + qqr.rows[0].to_regclass);
-  if (qqr.rows[0].to_regclass == "auth") res.send("present")
+  if (qqr.rows[0].to_regclass == "auth")
+  {
+    let qwer = await sql.query("SELECT * FROM auth;");
+    auth_row_count = await qwer.rowCount;
+    if (auth_row_count == 0) {
+      res.send("absent")
+      
+    }
+    else res.send("present")
+  }
   else res.send("absent")
 
 });
@@ -62,13 +122,9 @@ server.get("/stop", async (req, res) => {
 });
 
 
-var filepath = 'qr.png'
-
-
 server.get("/qr", async (req, res) => {
   console.log("sendig qr to browser");
-
-  res.send(filepath)
+  res.send('qr.png')
 });
 
 
@@ -104,19 +160,6 @@ server.get("/restart", async (req, res) => {
 });
 
 
-server.get("/resetdailycount", async (req, res) => {
-  await sql.query('UPDATE groupdata SET totalmsgtoday=0;')
-  await sql.query('UPDATE botdata SET totalmsgtoday=0;')
-  sql.query('UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;').then(() => {
-    res.status(200).send("ok");
-  })
-});
-
-server.get("/xxx", async (req, res) => {
-  console.log(process.env);
-  res.send("1");
-});
-
 
 server.get("/isconnected", async (req, res) => {
   let state = await isconnected()
@@ -128,15 +171,17 @@ server.get("/isconnected", async (req, res) => {
 });
 
 server.get("/isauthenticationfilepresent", async (req, res) => {
-  qq = await sql.query("SELECT to_regclass('auth');")
-  console.log(qq.rows[0].to_regclass);
-  if (qq.rows[0].to_regclass == null) {
-    res.send("absent")
-    console.log("server is sending isauthenticationfilepresent - absent");
-  } else {
-    res.send("present")
-    console.log("server is sending isauthenticationfilepresent - present");
+  qqr = await sql.query("SELECT to_regclass('auth');")
+  if (qqr.rows[0].to_regclass == "auth") {
+    let qwer = await sql.query("SELECT * FROM auth;");
+    auth_row_count = await qwer.rowCount;
+    if (auth_row_count == 0) {
+      res.send("absent")
+
+    }
+    else res.send("present")
   }
+  else res.send("absent")
 });
 
 process.on('uncaughtException', err => console.log(err));

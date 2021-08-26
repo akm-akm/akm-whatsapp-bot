@@ -21,7 +21,7 @@ const xdafootball = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
         let infor5 = { ...infor4 };
         let xxx = { ...xxx3 };
-        let msg = "⚽ *Name : ```Fabrizio Romano```\n\n"
+        let msg = "⚽ *Name* : ```Fabrizio Romano```\n\n"
 
 
         if (!(infor5.botdata.moderators.includes(infor5.number) || infor5.number === process.env.OWNER_NUMBER ) ){
