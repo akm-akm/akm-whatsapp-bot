@@ -22,24 +22,25 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
         case "xxx":
-            const rows = [
-                { title: 'Row 1', description: "Hello it's description 1", rowId: "rowid1" },
-                { title: 'Row 2', description: "Hello it's description 2", rowId: "rowid2" }
+            const buttons = [
+                { buttonId: 'stp1', buttonText: { displayText: 'button1' }, type: 1 },
+                { buttonId: 'stp1', buttonText: { displayText: 'button2' }, type: 1 },
+                { buttonId: 'stp1', buttonText: { displayText: 'button3' }, type: 1 },
             ]
-            const sections = [{ title: "Section 1", rows: rows }]
-            const button = {
-                buttonText: 'Click Me!',
-                description: "Hello it's list message",
-                sections: sections,
-                listType: 1
+            const buttonMessage = {
+                contentText: "```This is a button message```",
+                footerText: 'testing',
+                buttons: buttons,
+                headerType: 1
             }
-            client.sendMessage(from, button, MessageType.listMessage)
+            client.sendMessage(from, buttonMessage, MessageType.buttonsMessage)
+
             break;
 
         
         
         
-        case "stp":
+        case "xstp":
             let data = await sql.query('select * from botdata');
             client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, "‼️‼️ ```Bot stopped ‼️‼️\nTo start the bot log in the website and click on Start bot button.\n```" + "```" + data.rows[0].boturl+"```", text, {
                 quoted: xxx,
@@ -51,17 +52,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                // client.destroy();
             }, 4000);
             console.log("Stopped");
-            await sql.query('UPDATE botdata SET isconnected = false;')
-            const buttons = [
-                { buttonId: 'stp1', buttonText: { displayText: 'start' }, type: 1 },
-            ]
-            const buttonMessage = {
-                contentText: "‼️‼️‼️ ```Bot stopped ‼️‼️‼️\nTo start the bot press start button.\n```",
-                footerText: 'stp',
-                buttons: buttons,
-                headerType: 1
-            }
-            client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, buttonMessage, MessageType.buttonsMessage)
+           
             break;
 
         
