@@ -1,13 +1,9 @@
 const { Pool } = require("pg");
-var credentials = {};
+let credentials = {};
 if (process.env.HOSTING_PLATFORM === "local") {
   credentials = {
-    user: "postgres",
-    password: "root",
-    database: "z",
-    host: "localhost",
-    port: "5432"
-  };
+ connectionString: 'postgres://postgres:root@localhost:5432/z'
+};
 } else if (process.env.HOSTING_PLATFORM === "heroku") {
   credentials = {
     connectionString: process.env.DATABASE_URL,

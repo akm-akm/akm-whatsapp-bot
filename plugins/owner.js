@@ -40,6 +40,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
         
         
         
+        
         case "xstp":
             let data = await sql.query('select * from botdata');
             client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, "‼️‼️ ```Bot stopped ‼️‼️\nTo start the bot log in the website and click on Start bot button.\n```" + "```" + data.rows[0].boturl+"```", text, {
@@ -227,17 +228,9 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
            await client.sendMessage(from, '🤖 ```Restarting```', text, {
                 quoted: xxx,
             });
-            process.exit(0);
+            process.exit(1);
+            break;
 
-
-
-
-
-
-
-
-
-            
 
         default:
             break;

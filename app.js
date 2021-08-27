@@ -7,33 +7,30 @@ const axios = require("axios");
 const sql = require(path.join(__dirname, "./snippets/ps"));
 
 validatesetting()
-function validatesetting(){
 
-  if (!process.env.WEBSITE_PASSWORD){
+function validatesetting() {
+
+  if (!process.env.WEBSITE_PASSWORD) {
     console.log("WEBSITE_PASSWORD is not set");
-    throw new Error("WEBSITE_PASSWORD is not set");
-    process.exit(1)
-  }
-  
-  if (!process.env.OWNER_NUMBER){
-    console.log("OWNER_NUMBER is not set");
-    throw new Error("OWNER_NUMBER is not set");
     process.exit(1)
   }
 
-  if (!process.env.HOSTING_PLATFORM){
-    console.log("HOSTING_PLATFORM is not set");
-    throw new Error("HOSTING_PLATFORM is not set");
+  if (!(process.env.OWNER_NUMBER.match(/^\d{12}$/) || process.env.OWNER_NUMBER.match(/^\d{11}$/))) {
+    console.log("OWNER_NUMBER is not set correctly. Remove + sign if added in the beginning of country code and check if the country code is properly added.");
+    process.exit(1)
+  }
+  if (!process.env.HOSTING_PLATFORM === 'heroku' && !process.env.HOSTING_PLATFORM === "local" && !process.env.HOSTING_PLATFORM === 'qovery') {
+    console.log("HOSTING_PLATFORM is not set correctly ");
     process.exit(1)
   }
 
+  if (process.env.NODE_ENV === 'production' && !process.env.DATABASE_URL) {
+    console.log("Heroku postgres addon is not added. ");
+    process.exit(1)
+  }
 }
 
-
-
-
 require(path.join(__dirname, "./snippets/config"));
-//console.clear();
 const {
   main,
   logout,
@@ -43,7 +40,7 @@ const {
   __dirname,
   "./events/events.js"
 ));
-let urldata =undefined;
+let urldata = undefined;
 
 node.schedule("*/15 * * * *", () => {
   try {
@@ -51,9 +48,8 @@ node.schedule("*/15 * * * *", () => {
       console.log("####################");
 
       console.log("called- ", urldata);
-      
-    }
-    ).catch((err) => {
+
+    }).catch((err) => {
       sql.query('select * from botdata;').then(res => {
         console.log("-------------------------");
         console.log(res.rows[0]);
@@ -61,16 +57,16 @@ node.schedule("*/15 * * * *", () => {
       });
     });
   } catch (error) {
-    
+
   }
 })
 
 node.schedule("0 */24 * * *", () => {
- 
+
   sql.query('UPDATE groupdata SET totalmsgtoday=0;')
-     sql.query('UPDATE botdata SET totalmsgtoday=0;')
-    sql.query('UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;')
-   
+  sql.query('UPDATE botdata SET totalmsgtoday=0;')
+  sql.query('UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;')
+
 })
 
 server.use(express.static(path.join(__dirname, "./public")));
@@ -93,17 +89,14 @@ server.get("/", (req, res) => {
 server.get("/login", async (req, res) => {
   main();
   qqr = await sql.query("SELECT to_regclass('auth');")
-  if (qqr.rows[0].to_regclass == "auth")
-  {
+  if (qqr.rows[0].to_regclass == "auth") {
     let qwer = await sql.query("SELECT * FROM auth;");
     auth_row_count = await qwer.rowCount;
     if (auth_row_count == 0) {
       res.send("absent")
-      
-    }
-    else res.send("present")
-  }
-  else res.send("absent")
+
+    } else res.send("present")
+  } else res.send("absent")
 
 });
 
@@ -178,10 +171,8 @@ server.get("/isauthenticationfilepresent", async (req, res) => {
     if (auth_row_count == 0) {
       res.send("absent")
 
-    }
-    else res.send("present")
-  }
-  else res.send("absent")
+    } else res.send("present")
+  } else res.send("absent")
 });
 
 process.on('uncaughtException', err => console.log(err));

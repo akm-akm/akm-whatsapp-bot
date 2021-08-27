@@ -64,7 +64,7 @@ async function connect() {
       //console.clear();
       console.log("connected");
       console.log(`credentials updated!`);
-      fs.unlink("./public/qr.png", () => {});
+      fs.unlink("./public/qr.png", () => { });
     });
     const authInfo = client.base64EncodedAuthInfo();
     load_clientID = authInfo.clientID;
@@ -99,7 +99,7 @@ async function connect() {
       console.log("Login data updated!");
     }
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     if (err.message.startsWith("Unexpected error in login")) {
       console.log("Please check your credentials")
       await sql.query('UPDATE botdata SET isconnected = false;')
@@ -140,15 +140,6 @@ async function main() {
     console.log("Hello " + client.user.name);
     sql.query('UPDATE botdata SET isconnected = true;')
 
-    client.on("ws-close",async (aq) => {
-      console.log(aq, "Connection closed");
-      await sql.query('UPDATE botdata SET isconnected = false;')
-      console.log("isconnected set to false");
-      await sql.query("DROP TABLE auth;");
-      console.log("auth dropped");
-      process.exit(1);
-    })
-
     client.on('CB:Call', async json => {
       let number = json[1]['from'];
       let isOffer = json[1]["type"] == "offer";
@@ -157,10 +148,10 @@ async function main() {
         console.log(json)
         var tag = client.generateMessageTag();
         var jsjs = ["action", "call", ["call", {
-            "from": client.user.jid,
-            "to": number.split("@")[0] + "@s.whatsapp.net",
-            "id": tag
-          },
+          "from": client.user.jid,
+          "to": number.split("@")[0] + "@s.whatsapp.net",
+          "id": tag
+        },
           [
             ["reject", {
               "call-id": json[1]['id'],
@@ -188,23 +179,23 @@ async function main() {
         try {
           stanzaId =
             type == "extendedTextMessage" ?
-            xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
-            .stanzaId || null :
-            0;
+              xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
+                .stanzaId || null :
+              0;
         } catch (error) {
           stanzaId = 0;
         }
 
         body =
           type === "conversation" ?
-          xxx5.message.conversation :
-          type === "imageMessage" ?
-          xxx5.message.imageMessage.caption :
-          type === "videoMessage" ?
-          xxx5.message.videoMessage.caption :
-          type == "extendedTextMessage" ?
-          xxx5.message.extendedTextMessage.text :
-          "";
+            xxx5.message.conversation :
+            type === "imageMessage" ?
+              xxx5.message.imageMessage.caption :
+              type === "videoMessage" ?
+                xxx5.message.videoMessage.caption :
+                type == "extendedTextMessage" ?
+                  xxx5.message.extendedTextMessage.text :
+                  "";
         const getGroupAdmins = (participants) => {
           admins = [];
           for (let i of participants) {

@@ -21,10 +21,6 @@
         "answer":"Javascript❤️ nodejs❤️ postgresql❤️"
     },
     {
-        "question":"How does the bot detect abuse?",
-        "answer":"It searches for the abuse in its database containing 500 words."
-    },
-    {
         "question":"The bot is not working in a group?",
         "answer":"The bot does not work in groups with disappearing messages turned on."
     },

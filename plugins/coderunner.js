@@ -38,7 +38,7 @@ const coderunner = (infor4, client, xxx3) =>
         try {
             var program = {
                 script: xxx.message.extendedTextMessage.contextInfo.quotedMessage.conversation,
-                language:  arg[1],
+                language: arg[1],
                 versionIndex: "0",
                 stdin: arg.slice(2).join(' '),
                 clientId: process.env.clientId,
@@ -51,10 +51,10 @@ const coderunner = (infor4, client, xxx3) =>
             },
                 function (error, response, body) {
                     output = body.output
-                    client.sendMessage(infor5.from, "🧮 > " + arg[1] +"\n\n"+"```"+ output+"```", text, { quoted: xxx });
+                    client.sendMessage(infor5.from, "🧮 > " + arg[1] + "\n\n" + "```" + output + "```", text, { quoted: xxx });
                     console.log('body:', body);
                 });
-                resolve()
+            resolve()
         } catch (error) {
 
             reject()

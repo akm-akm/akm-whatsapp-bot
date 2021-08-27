@@ -91,7 +91,8 @@ async function switchcase(infor2, client, xxx4) {
     case "mdr":
     case "stp":
     case "mgs":
-    case "restart":
+    case "rtrt":
+      
       owner(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
