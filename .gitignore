@@ -2,3 +2,4 @@ node_modules
 .env
 data/data3.json
 public/qr.png
+package-lock.json

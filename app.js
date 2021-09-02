@@ -9,12 +9,17 @@ const sql = require(path.join(__dirname, "./snippets/ps"));
 validatesetting()
 
 function validatesetting() {
-
-  if (!process.env.WEBSITE_PASSWORD) {
-    console.log("WEBSITE_PASSWORD is not set");
+  
+  
+    if (!process.env.WEBSITE_PASSWORD) {
+      console.log("WEBSITE_PASSWORD is not set");
+      process.exit(1)
+    }
+  if (!process.env.OWNER_NUMBER) {
+    console.log("OWNER_NUMBER is not set");
     process.exit(1)
   }
-
+  
   if (!(process.env.OWNER_NUMBER.match(/^\d{12}$/) || process.env.OWNER_NUMBER.match(/^\d{11}$/))) {
     console.log("OWNER_NUMBER is not set correctly. Remove + sign if added in the beginning of country code and check if the country code is properly added.");
     process.exit(1)
