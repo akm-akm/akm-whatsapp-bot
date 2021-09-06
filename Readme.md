@@ -1,6 +1,6 @@
 <h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
 
-<h3 align="center">🤖 Click <a href="https://wa.me/+17123507778?text=help">here</a> to chat with this bot🤖</h3>
+
 <p align="center">
 <img src="/readme/images/logo.jpeg" width=400px alt="xxxlogo" />
 </p>

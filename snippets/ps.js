@@ -1,10 +1,19 @@
 const { Pool } = require("pg");
 let credentials = {};
 if (process.env.HOSTING_PLATFORM === "local") {
+  if (!process.env.LOCAL_DATABASE_URL) {
+    console.log("LOCAL_DATABASE_URL is not set");
+    process.exit(1);
+  }
   credentials = {
-    connectionString: 'postgres://htifsjyb:wE_ZiBK7GFwPgGOb5au5OtyaPO9LKFw8@chunee.db.elephantsql.com/htifsjyb'
+    connectionString: process.env.LOCAL_DATABASE_URL,
 };
 } else if (process.env.HOSTING_PLATFORM === "heroku") {
+  if (!process.env.DATABASE_URL) {
+    console.log("Heroku postgres is not set");
+    process.exit(1);
+  }
+
   credentials = {
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false }

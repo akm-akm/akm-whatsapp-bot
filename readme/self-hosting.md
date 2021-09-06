@@ -39,6 +39,7 @@ OWNER_NUMBER=
 HOSTING_PLATFORM=
 WEBSITE_PASSWORD=
 DEEPAI=
+LOCAL_DATABASE_URL=
 ```
 
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
@@ -57,6 +58,8 @@ DEEPAI=
 
 `DEEPAI` The api key for nsfw detection in images from deepai.org. (optional)
 
+`LOCAL_DATABASE_URL` The url of the database if the bot is running locallly on your system. (optional)
+
 
 #### Step 2 > 💾 Setting up the database
 
@@ -64,9 +67,9 @@ DEEPAI=
 
 - Use the postsgres installed in your pc
 
-- Use online database from (easy)
-  - [elephant sql](https://customer.elephantsql.com/signup)
-  - [pantheon](https://pantheon.io/register)
+- Use online database from any of the following providers:
+  - [elephant sql](https://customer.elephantsql.com/signup) or [pantheon](https://pantheon.io/register)
+  - Copy the url of the database and add it in the LOCAL_DATABASE_URL field in the .env file.
 
 
 ## 💻 Running

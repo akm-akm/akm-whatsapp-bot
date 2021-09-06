@@ -29,10 +29,6 @@ function validatesetting() {
     process.exit(1)
   }
 
-  if (process.env.NODE_ENV === 'production' && !process.env.DATABASE_URL) {
-    console.log("Heroku postgres addon is not added. ");
-    process.exit(1)
-  }
 }
 
 require(path.join(__dirname, "./snippets/config"));
