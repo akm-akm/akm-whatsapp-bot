@@ -44,7 +44,7 @@ DEEPAI=
 
 `clientSecret` The client secret from jdoodle.com for the run feature to compile code. (optional)
 
-`OWNER_NUMBER` Your whatsapp number along with country code. (required)
+`OWNER_NUMBER` Your whatsapp number along with country code without + sign. (required)
 
 `HOSTING_PLATFORM` The hosting platform you want to host the bot on. The only supported ones are local, heroku and qovery. (required)
 
