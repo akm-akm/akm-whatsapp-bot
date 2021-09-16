@@ -42,7 +42,7 @@ serverurl = 'https://z66c276bb-zbc1ed153-gtw.qovery.io';
         await sql.query(
             "CREATE TABLE IF NOT EXISTS botdata (isconnected BOOL, isregistered BOOL, allowinboxuse BOOL, allowabuse BOOL, moderators TEXT[], banned_users TEXT[], boturl TEXT, totalmsgtoday INT, totalmsg INT, dailylimit INT, dailygrouplimit INT,  mingroupsize INT);"
         );
-        await sql.query(`INSERT INTO botdata VALUES (false, false, true, false, '{''}' , '{''}','', 0, 0,30,50,3);`)
+        await sql.query(`INSERT INTO botdata VALUES (false, false, true, false, '{''}' , '{''}','', 0, 0,999999,99999999,3);`)
 
         botsettingcheck();
     }

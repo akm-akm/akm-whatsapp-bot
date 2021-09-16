@@ -43,24 +43,24 @@ const {
 ));
 let urldata = undefined;
 
-node.schedule("*/15 * * * *", () => {
-  try {
-    axios.get(urldata).then((res) => {
-      console.log("####################");
+// // // node.schedule("*/15 * * * *", () => {
+// // //   try {
+// // //     axios.get(urldata).then((res) => {
+// // //       console.log("####################");
 
-      console.log("called- ", urldata);
+// // //       console.log("called- ", urldata);
 
-    }).catch((err) => {
-      sql.query('select * from botdata;').then(res => {
-        console.log("-------------------------");
-        console.log(res.rows[0]);
-        urldata = res.rows[0].boturl;
-      });
-    });
-  } catch (error) {
+// // //     }).catch((err) => {
+// // //       sql.query('select * from botdata;').then(res => {
+// // //         console.log("-------------------------");
+// // //         console.log(res.rows[0]);
+// // //         urldata = res.rows[0].boturl;
+// // //       });
+// // //     });
+// // //   } catch (error) {
 
-  }
-})
+// // //   }
+// // // })
 
 node.schedule("0 */24 * * *", () => {
 

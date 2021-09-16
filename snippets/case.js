@@ -293,7 +293,7 @@ async function switchcase(infor2, client, xxx4) {
     case "heyy":
     case "heyyyy":
     case "heyyy":
-      client.sendMessage(from, "👋 ```Hello```", text, {
+      client.sendMessage(from, ["👋 ```Hello```", "👋 ```Howdy```", "👋 ```Hi```", "👋 ```Hey```"][Math.floor(Math.random() * 4)], text, {
         quoted: xxx3,
       });
       count(infor3)

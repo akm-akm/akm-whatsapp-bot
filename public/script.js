@@ -165,7 +165,7 @@ $("#login").click(function (e) {
               $("#qrcode").attr("src", qr + "?" + new Date().getTime());
             },
           });
-        }, 3000);
+        }, 2000);
       }
      // $("#login").text("connecting...");
     },
@@ -209,7 +209,7 @@ $("#logout").click(function (e) {
   e.preventDefault();
   $("#logout").text("Refresh in a minute..");
   $("#logout").prop('disabled',   true);
-  $("#login").prop('disabled',    true);
+  $("#login").prop('disabled', true);
   $("#stop").prop('disabled'    , true);
   $("#database").prop('disabled', true);
   $("#restart").prop('disabled' , true);
