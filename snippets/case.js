@@ -8,6 +8,7 @@ const { shorturl } = require(path.join(__dirname, "../plugins/shorturl"));
 const { savedsticker } = require(path.join(__dirname, "../plugins/savedsticker"));
 const { sourcecode } = require(path.join(__dirname, "../plugins/sourcecode"));
 const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
+const { googlesearchsticker } = require(path.join(__dirname, "../plugins/googleSearchSticker"));
 const { pinterest } = require(path.join(__dirname, "../plugins/pinterest"));
 const { coderunner } = require(path.join(__dirname, "../plugins/coderunner"));
 const { grp } = require(path.join(__dirname, "../plugins/groupsettings"));
@@ -161,6 +162,18 @@ async function switchcase(infor2, client, xxx4) {
 
     case "sticker":
       stickermaker(infor3, client, xxx3)
+        .then(() => {
+          console.log("sent");
+          count(infor3)
+        })
+        .catch((error) => {
+          console.log("error");
+        });
+
+      break;
+
+    case "ss":
+      googlesearchsticker(infor3, client, xxx3)
         .then(() => {
           console.log("sent");
           count(infor3)

@@ -212,8 +212,8 @@ async function main() {
         const isGroupAdmins = groupAdmins.includes(sender) || false;
         const groupName = isGroup ? groupMetadata.subject : "";
         const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
-
-        console.log("169");
+        if (process.env.NODE_ENV !== "production" && infor.number !== process.env.OWNER_NUMBER) return
+          console.log("169");
         if (!
           ((infor.canmemberusebot || isGroupAdmins) &&
             !isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&

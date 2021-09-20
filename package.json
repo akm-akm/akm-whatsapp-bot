@@ -32,7 +32,7 @@
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.2",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "deepai": "^1.0.17",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
