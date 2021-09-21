@@ -1,25 +1,25 @@
-let cheerio = require('cheerio-httpcli')
-let htmlEntities = require('html-entities').Html5Entities
-//let htmlEntities =  Html5Entities()
-let url = require('url')
+const cherio = require('cherio');
+const request = require('request');
+const search = "mia khalifa";
+const q = `https://www.google.com/search?q=${(search).replace(' ','+')}&source=lnms&tbm=isch&sa=X`;
+console.log(q);
+request(q, (err, resp, html) => {
 
-const SEARCH_URL = 'https://www.google.com/search'
-params = { q: 'ford', tbm: 'isch', tbs: 'isz:m', safe: 'active' }
+    if (!err && resp.statusCode == 200) {
+        console.log("Request was successfull ");
 
-fetch = (params) => {
-    return new Promise((resolve, reject) => {
-        cheerio.fetch(SEARCH_URL, params, (err, $, res) => {
-            if (err) {
-                return reject(err)
-            }
-            let urls = $('.rg_l').map((index, element) => {
-                return url.parse(htmlEntities.decode($(element).attr('href')), true).query.imgurl
-            }).get()
-            resolve(urls)
-        })
-    })
-}
-fetch(params).then((urls) => {
-    console.log(urls)
-}
-)
+        const $ = cherio.load(html);
+
+        $("img.rg_i").each((index, image) => {
+
+            var img = $(image).attr('src');
+            var baseUrl = 'https://www.google.com';
+            var Links = baseUrl + img;
+            console.log(img);
+        });
+
+    } else {
+        console.log("Request Failed ");
+    }
+
+});

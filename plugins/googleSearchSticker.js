@@ -66,7 +66,7 @@ const googlesearchsticker = (infor4, client, xxx3) =>
             const random = Math.floor(Math.random() * (response1.data.value.length >= 20 ? 19 : response1.data.value.length));
             console.log(response1.data.value[random], random, response1.data.value.length);
             const packName = a+" - "+random;
-            const imageurl = response1.data.value[random].thumbnail;
+            const imageurl = response1.data.value[random].url;
             const media = getRandom(".jpg");
             const file = fs.createWriteStream(media);
 
