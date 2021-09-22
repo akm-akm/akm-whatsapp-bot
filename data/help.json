@@ -8,8 +8,8 @@
    
     "ss": {
         "usage": "ss <search-term>",
-        "desc": "```The bot will search for the image and send its sticker.```",
-        "eg": [ "ss Rahul gandhi","ss Sonia gandhi"]
+        "desc": "```The bot will search for the image and send its sticker. Add crop to crop the sticker sent by the bot.```",
+        "eg": [ "ss Rahul gandhi","ss Sonia gandhi","ss crop Sonia Gandhi"]
     },
     "crypto": {
         "usage": "crypto <coinsymbol>",

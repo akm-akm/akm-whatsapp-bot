@@ -13,10 +13,13 @@ const googlesearchsticker = (infor4, client, xxx3) =>
         let infor5 = { ...infor4 };
         let xxx = { ...xxx3 };
         arg = infor5.arg;
+        if (infor5.arg.length == 1) {
+            infor5.arg = ["help", arg[0]]
+            help(infor5, client, xxx, 1);
+            resolve();
+            return;
+        }
         const from = xxx.key.remoteJid;
-        const isGroup = from.endsWith("@g.us");
-        const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
-        const groupName = isGroup ? groupMetadata.subject : "";
         const getRandom = (ext) => {
             return `${Math.floor(Math.random() * 10000)}${ext}`;
         };
