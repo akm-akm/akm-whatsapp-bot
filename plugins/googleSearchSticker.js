@@ -6,6 +6,8 @@ const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
 const axios = require("axios").default;
+const path = require("path");
+
 const { help } = require(path.join(__dirname, "./help"));
 
 const googlesearchsticker = (infor4, client, xxx3) =>
