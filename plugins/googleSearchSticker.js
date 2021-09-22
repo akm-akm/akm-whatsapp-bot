@@ -5,8 +5,8 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
-const { ai } = require("./deepai");
 const axios = require("axios").default;
+const { help } = require(path.join(__dirname, "./help"));
 
 const googlesearchsticker = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
@@ -57,7 +57,7 @@ const googlesearchsticker = (infor4, client, xxx3) =>
             method: 'GET',
             url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
             params: {
-                q: a, pageNumber: '1', pageSize: 100, autoCorrect: 'true', safeSearch: 'false'
+                q: a, pageNumber: '1', pageSize: 100, autoCorrect: 'true', safeSearch: infor5.groupdata.nsfw
             },
             headers: {
                 'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',

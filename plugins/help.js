@@ -42,7 +42,7 @@ const help = (infor4, client, xxx3,syntax) =>
         prefix + "help autosticker\n" +
         prefix + "help run\n" +
         "\n📃 *Bot Updates* :" +
-        "\n‼️ _NSFW detection added_" +
+        "\n‼️ _ss added_" +
         "\n‼️ _groupinfo added_";
 
       client.sendMessage(from, msg, text, {

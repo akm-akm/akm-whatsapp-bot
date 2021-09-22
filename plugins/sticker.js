@@ -106,14 +106,16 @@ const stickermaker = (infor4, client, xxx3) =>
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia);
       ran = getRandom(".webp");
-      let nsfw = await ai(media)
-      if (nsfw.output.nsfw_score > 0.5) {
-        client.sendMessage(from, "🌚", text, {
-          quoted: xxx
-        });
-        resolve();
-        fs.unlinkSync(media);
-        return;
+      if (infor5.groupdata.nsfw) {
+        let nsfw = await ai(media)
+        if (nsfw.output.nsfw_score > 0.5) {
+          client.sendMessage(from, "🌚", text, {
+            quoted: xxx
+          });
+          resolve();
+          fs.unlinkSync(media);
+          return;
+        }
       }
       ffmpeg(`./${media}`)
         .input(media)
