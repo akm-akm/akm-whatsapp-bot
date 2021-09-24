@@ -5,9 +5,15 @@ const data = JSON.parse(
 );
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
-
+const getGroupAdmins = (participants) => {
+  admins = [];
+  for (let i of participants) {
+    i.isAdmin ? admins.push(i.jid) : "";
+  }
+  return admins;
+};
 const help = (infor4, client, xxx3, syntax) =>
-  new Promise((resolve, reject) => {
+  new Promise(async (resolve, reject) => {
     let infor5 = { ...infor4 };
     let xxx = { ...xxx3 };
     arg = infor5.arg;
