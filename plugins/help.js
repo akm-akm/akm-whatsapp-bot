@@ -23,7 +23,7 @@ const help = (infor4, client, xxx3, syntax) =>
     const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
     const groupMembers = isGroup ? groupMetadata.participants : "";
     const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
-    const isGroupAdmins = groupAdmins.includes(infor5.number) || false;
+    const isGroupAdmins = groupAdmins.includes(infor5.sender) || false;
 
     prefix = infor5.groupdata.prefix;
     useprefix = infor5.groupdata.useprefix;
@@ -36,7 +36,7 @@ const help = (infor4, client, xxx3, syntax) =>
         "🚧 *Owner only* :\n```rst : Reset daily session,\ndul : Change daily user limit,\ndgl : Change daily group limit,\nmgs : Minimum group size,\nsql : Database query,\nmdr : Add bot moderators,\nrtrt: Restart the bot,\nstp : Shutdown the bot```\n\n"
         : "";
 
-      const grpcmds = infor5.groupdata == 0 ? "" : isGroupAdmins ? "👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
+      const grpcmds = isGroupAdmins ? "👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
