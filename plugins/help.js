@@ -23,7 +23,7 @@ const help = (infor4, client, xxx3, syntax) =>
     const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
     const groupMembers = isGroup ? groupMetadata.participants : "";
     const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
-    const isGroupAdmins = groupAdmins.includes(sender) || false;
+    const isGroupAdmins = groupAdmins.includes(infor5.number) || false;
 
     prefix = infor5.groupdata.prefix;
     useprefix = infor5.groupdata.useprefix;
