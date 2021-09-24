@@ -51,7 +51,7 @@ const shorturl = (infor4, client, xxx3) =>
                     quoted: xxx,
                     
                 });
-                reject();
+                reject(infor5)
             })
     });
 

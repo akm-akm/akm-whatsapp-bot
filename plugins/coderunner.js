@@ -57,7 +57,7 @@ const coderunner = (infor4, client, xxx3) =>
             resolve()
         } catch (error) {
 
-            reject()
+            reject(infor5)
         }
 
 

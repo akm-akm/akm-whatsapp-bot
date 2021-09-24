@@ -40,11 +40,8 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
         })
         .catch((e) => {
             console.log(e);
-            ran = path.join(__dirname, "../media/stickers/error.webp");
-            client.sendMessage(from, fs.readFileSync(ran), sticker, {
-                quoted: xxx,
-            });
-            reject();
+            reject(infor5)
+
         })
 })
 module.exports.sourcecode = sourcecode;

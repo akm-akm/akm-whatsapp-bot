@@ -1,4 +1,5 @@
 const path = require("path");
+const fs = require('fs');
 const { count } = require(path.join(__dirname, "./count"));
 const { deleteit } = require(path.join(__dirname, "../plugins/delete"));
 const { read } = require(path.join(__dirname, "./read"));
@@ -21,8 +22,8 @@ const { youtube } = require(path.join(__dirname, "../plugins/yt"));
 const { faqs } = require(path.join(__dirname, "../plugins/faq"));
 const { nsfw } = require(path.join(__dirname, "../plugins/nsfw"));
 const { MessageType } = require("@adiwajshing/baileys");
-const { text } = MessageType;
-
+const { text, sticker } = MessageType;
+errorSticker = path.join(__dirname, "../media/stickers/error1.webp");
 
 async function switchcase(infor2, client, xxx4) {
   let infor3 = { ...infor2 };
@@ -51,39 +52,39 @@ async function switchcase(infor2, client, xxx4) {
 
   switch (arg[0]) {
 
-    
+
     case "invite":
       joingroup(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
-    
+
+
     case "run":
       coderunner(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
+
 
     case "delete":
       deleteit(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
+
     case "xxx":
     case "sql":
     case "dul":
@@ -93,49 +94,48 @@ async function switchcase(infor2, client, xxx4) {
     case "stp":
     case "mgs":
     case "rtrt":
-      
+
       owner(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
 
 
+
     case "sourcecode":
-   
+
       sourcecode(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log("error");
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
+
     case "crypto":
       crypto(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log("error");
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
+
 
     case "tweet":
       xdafootball(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log("error");
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
 
     case "shorturl":
@@ -143,10 +143,9 @@ async function switchcase(infor2, client, xxx4) {
         .then((resolve) => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log("error");
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
 
     case "market":
@@ -154,10 +153,9 @@ async function switchcase(infor2, client, xxx4) {
         .then(() => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log("Error");
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
 
     case "sticker":
@@ -166,10 +164,9 @@ async function switchcase(infor2, client, xxx4) {
           console.log("sent");
           count(infor3)
         })
-        .catch((error) => {
-          console.log("error");
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
 
     case "ss":
@@ -178,10 +175,9 @@ async function switchcase(infor2, client, xxx4) {
           console.log("sent");
           count(infor3)
         })
-        .catch((error) => {
-          console.log("error");
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
 
     case "rs":
@@ -190,10 +186,9 @@ async function switchcase(infor2, client, xxx4) {
         .then((resolve) => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log("rashmika error");
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
 
     case "pin":
@@ -201,10 +196,10 @@ async function switchcase(infor2, client, xxx4) {
         .then(() => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log("pin error");
-          console.log(error);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
+      break;
 
       break;
     case "testnsfw":
@@ -212,11 +207,9 @@ async function switchcase(infor2, client, xxx4) {
         .then(() => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log("pin error");
-          console.log(error);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
-
       break;
 
     case "setprefix":
@@ -244,8 +237,8 @@ async function switchcase(infor2, client, xxx4) {
         .then(() => {
           count(infor3, 3)
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
       break;
 
@@ -258,15 +251,14 @@ async function switchcase(infor2, client, xxx4) {
         .then(() => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
       break;
 
-
     case "limit":
       x =
-        "🤖 ```Daily credit used:``` " +infor3.noofmsgtoday + "/ *" + infor3.botdata.dailylimit+"*";
+        "🤖 ```Daily credit used:``` " + infor3.noofmsgtoday + "/ *" + infor3.botdata.dailylimit + "*";
       client.sendMessage(from, x, text, {
         quoted: xxx3,
       });
@@ -278,8 +270,8 @@ async function switchcase(infor2, client, xxx4) {
         .then((resolve) => {
           count(infor3)
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
       break;
 
@@ -287,14 +279,14 @@ async function switchcase(infor2, client, xxx4) {
       faqs(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
-          
+
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
       break;
 
-   
+
     case "newg":
       newgroup(infor3.from, client);
       break;
@@ -304,6 +296,7 @@ async function switchcase(infor2, client, xxx4) {
     case "hii":
     case "hiii":
     case "howdy":
+    case "hey":
     case "heyy":
     case "heyyyy":
     case "heyyy":

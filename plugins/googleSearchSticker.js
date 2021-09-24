@@ -124,11 +124,8 @@ const googlesearchsticker = (infor4, client, xxx3) =>
         }
         ).catch(e => {
             console.log(e);
-            ran = path.join(__dirname, "../media/stickers/error.webp");
-            client.sendMessage(from, fs.readFileSync(ran), sticker, {
-                quoted: xxx,
-            });
-            // googlesearchsticker(infor5, client, xxx)
+            reject(infor5)
+
         });
 
     });

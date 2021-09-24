@@ -32,9 +32,8 @@ const joingroup = (infor4, client, xxx3) =>
         });
         resolve();
       } catch (error) {
-          client.sendMessage(infor5.from, JSON.stringify(error,null,"\t"), MessageType.text, {
-              quoted: xxx,
-          });
+          reject(infor5)
+
       }
        
     });

@@ -54,7 +54,8 @@ const pinterest = (infor4, client, xxx3) =>
         client.sendMessage(from, '🤖 ```Cannot download status.```', text, {
           quoted: xxx,
         });
-        reject();
+        reject(infor5)
+
       });
   });
 module.exports.pinterest = pinterest;

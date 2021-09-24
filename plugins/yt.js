@@ -55,11 +55,7 @@ const youtube = (infor4, client, xxx3) =>
     resolve();
      
     }catch(err){
-     
-      client.sendMessage(from,"🔪 ```Youtube link required.```", text, {
-        quoted: xxx,
-      });
-      resolve()
+      reject(infor5)
     }
   });
 

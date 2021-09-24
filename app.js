@@ -9,17 +9,17 @@ const sql = require(path.join(__dirname, "./snippets/ps"));
 validatesetting()
 
 function validatesetting() {
-  
-  
-    if (!process.env.WEBSITE_PASSWORD) {
-      console.log("WEBSITE_PASSWORD is not set");
-      process.exit(1)
-    }
+
+
+  if (!process.env.WEBSITE_PASSWORD) {
+    console.log("WEBSITE_PASSWORD is not set");
+    process.exit(1)
+  }
   if (!process.env.OWNER_NUMBER) {
     console.log("OWNER_NUMBER is not set");
     process.exit(1)
   }
-  
+
   if (!(process.env.OWNER_NUMBER.match(/^\d{12}$/) || process.env.OWNER_NUMBER.match(/^\d{11}$/))) {
     console.log("OWNER_NUMBER is not set correctly. Remove + sign if added in the beginning of country code and check if the country code is properly added.");
     process.exit(1)
@@ -41,26 +41,6 @@ const {
   __dirname,
   "./events/events.js"
 ));
-let urldata = undefined;
-
-// // // node.schedule("*/15 * * * *", () => {
-// // //   try {
-// // //     axios.get(urldata).then((res) => {
-// // //       console.log("####################");
-
-// // //       console.log("called- ", urldata);
-
-// // //     }).catch((err) => {
-// // //       sql.query('select * from botdata;').then(res => {
-// // //         console.log("-------------------------");
-// // //         console.log(res.rows[0]);
-// // //         urldata = res.rows[0].boturl;
-// // //       });
-// // //     });
-// // //   } catch (error) {
-
-// // //   }
-// // // })
 
 node.schedule("0 */24 * * *", () => {
 
@@ -73,7 +53,6 @@ node.schedule("0 */24 * * *", () => {
 server.use(express.static(path.join(__dirname, "./public")));
 
 server.listen(port, () => {
-  //console.clear();
   console.log("\nRunnning on http://localhost:" + port);
 });
 server.use(

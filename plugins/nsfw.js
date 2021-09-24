@@ -47,9 +47,8 @@ const nsfw = (infor4, client, xxx3) =>
 
             }).catch((err) => {
                 console.log(err);
-                client.sendMessage(infor5.from, "🤖 ```Error```", text, {
-                    quoted: xxx
-                });
+                reject(infor5)
+
             });
 
 

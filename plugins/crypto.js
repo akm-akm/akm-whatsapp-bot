@@ -89,10 +89,8 @@ const crypto = (infor4, client, xxx3) =>
         })
         .catch(function (error) {
           console.log(error);
-          client.sendMessage(from,"```Error```", text, {
-            quoted: xxx,
-          }); 
-          reject();
+         
+          reject(infor5)
         });
     }
   });
