@@ -1,8 +1,8 @@
 const {
-  MessageType
+    MessageType
 } = require("@adiwajshing/baileys");
 const {
-  text
+    text
 } = MessageType
 const path = require("path");
 const fs = require("fs");
@@ -24,10 +24,10 @@ const xdafootball = (infor4, client, xxx3) =>
         let msg = "⚽ *Name* : ```Fabrizio Romano```\n\n"
 
 
-        if (!(infor5.botdata.moderators.includes(infor5.number) || infor5.number === process.env.OWNER_NUMBER ) ){
-            client.sendMessage(infor5.from, mess.only.modB,text, {
-                    quoted: xxx
-                } );
+        if (!(infor5.botdata.moderators.includes(infor5.number) || infor5.number === process.env.OWNER_NUMBER)) {
+            client.sendMessage(infor5.from, mess.only.modB, text, {
+                quoted: xxx
+            });
             resolve();
             return
         }
@@ -45,22 +45,22 @@ const xdafootball = (infor4, client, xxx3) =>
                     return;
                 }
                 var i = 0;
-                var txt = ""
+
                 while (i < 10) {
                     if (!tweets[i].in_reply_to_screen_name) {
-                        
+
                         msg += `📱 *Tweet*: \n${tweets[i].full_text
-                                .split("https://t.co/")[0]
-                                .replace(/\n/g, " ")}\n📅 *Time*: ${tweets[i].created_at.split("+")[0]
+                            .split("https://t.co/")[0]
+                            .replace(/\n/g, " ")}\n📅 *Time*: ${tweets[i].created_at.split("+")[0]
                             }\n🔄 *Retweets*: ${tweets[i].retweet_count
                             }\n♥ *Likes*: ${tweets[i].favorite_count}\n\n`;
-                      
+
                     }
-                  
+
                     i++;
-                } 
-                client.sendMessage(infor5.from, msg, text, {quoted: xxx}); resolve()
-                
+                }
+                client.sendMessage(infor5.from, msg, text, { quoted: xxx }); resolve()
+
             }
         );
 

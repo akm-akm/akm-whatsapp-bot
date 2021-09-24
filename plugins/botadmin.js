@@ -94,14 +94,14 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
         
         case "dul":
             if (infor5.arg.length < 2) {
-                client.sendMessage(from, '🤖 ```Enter the number to be set as daily limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter the number to be set as daily user limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
                 return;
             }
             if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 1000) {
-                client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily user limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
@@ -160,14 +160,14 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
         
         case "dgl":
             if (infor5.arg.length < 2) {
-                client.sendMessage(from, '🤖 ```Enter the number to be set as daily user limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter the number to be set as daily group limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
                 return;
             }
             if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 1000) {
-                client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily user limit.```', text, {
+                client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily group limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();

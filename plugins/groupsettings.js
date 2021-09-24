@@ -67,7 +67,7 @@ const grp = (infor4, client, xxx3) =>
       resolve();
       return;
     }
-    if (!(isGroupAdmins || isOwner)) {
+    if (!(isGroupAdmins || isOwner || infor5.botdata.moderators.includes(infor5.number))) {
       client.sendMessage(from, mess.only.admin, text, {
         quoted: xxx,
       });
@@ -522,8 +522,8 @@ const grp = (infor4, client, xxx3) =>
 
         if (arg.length > 1) {
           arg.shift();
-          msg = arg.join(" ")
-        } else msg = "👋 ```Hello Everyone```\n\n";
+          msg = arg.join(" ")+"\n;"
+        } else msg = "👋 ```Hello Everyone```\n";
         for (let member of groupMembers) {
           msg += `\n🤖 @${member.jid.split("@")[0]}`;
           memberslist.push(member.jid);

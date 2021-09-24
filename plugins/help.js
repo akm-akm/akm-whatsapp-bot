@@ -6,12 +6,17 @@ const data = JSON.parse(
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
 
-const help = (infor4, client, xxx3,syntax) =>
+const help = (infor4, client, xxx3, syntax) =>
   new Promise((resolve, reject) => {
     let infor5 = { ...infor4 };
     let xxx = { ...xxx3 };
     arg = infor5.arg;
     from = infor5.from;
+    const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
+    const groupMembers = isGroup ? groupMetadata.participants : "";
+    const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
+    const isGroupAdmins = groupAdmins.includes(sender) || false;
+
     prefix = infor5.groupdata.prefix;
     useprefix = infor5.groupdata.useprefix;
     var msg;
@@ -20,10 +25,10 @@ const help = (infor4, client, xxx3,syntax) =>
 
     if (arg.length == 1) {
       cas = infor5.number === process.env.OWNER_NUMBER ?
-        "🚧 *Owner only* :\n```rst : Reset daily session,\ndul : Change daily user limit,\ndgl : Change daily group limit,\nmgs : Minimum group size,\nsql : Database query,\nmdr : Add bot moderators,\nrtrt : Restart the bot,\nstp : Shutdown the bot```\n\n"
+        "🚧 *Owner only* :\n```rst : Reset daily session,\ndul : Change daily user limit,\ndgl : Change daily group limit,\nmgs : Minimum group size,\nsql : Database query,\nmdr : Add bot moderators,\nrtrt: Restart the bot,\nstp : Shutdown the bot```\n\n"
         : "";
 
-      const grpcmds = infor5.groupdata == 0 ? "" :"👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n";
+      const grpcmds = infor5.groupdata == 0 ? "" : isGroupAdmins ? "👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
@@ -39,7 +44,6 @@ const help = (infor4, client, xxx3,syntax) =>
         prefix + "help crypto\n" +
         prefix + "help shorturl\n" +
         prefix + "help sticker\n" +
-       
         prefix + "help run\n" +
         "\n📃 *Bot Updates* :" +
         "\n‼️ _ss added_" +
@@ -54,7 +58,7 @@ const help = (infor4, client, xxx3,syntax) =>
       try {
         msg =
           syntax == undefined ? "🔖 *Description* :\n" +
-          data[arg[1]].desc : "‼️ *Error* :\n```syntax error in the given command.```";
+            data[arg[1]].desc : "‼️ *Error* :\n```syntax error in the given command.```";
         msg += "\n\n" +
           "📕 *Usage* :\n" +
           prefix + "```" +
@@ -62,9 +66,9 @@ const help = (infor4, client, xxx3,syntax) =>
           "```" +
           "\n\n" +
           "📚 *Example* :\n";
-          data[arg[1]].eg.forEach(currentItem => {
-            msg += "```" + prefix + currentItem + "```" + "\n";
-          });
+        data[arg[1]].eg.forEach(currentItem => {
+          msg += "```" + prefix + currentItem + "```" + "\n";
+        });
         client.sendMessage(from, msg, text, {
           quoted: xxx,
           detectLinks: false
