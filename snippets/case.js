@@ -23,7 +23,7 @@ const { faqs } = require(path.join(__dirname, "../plugins/faq"));
 const { nsfw } = require(path.join(__dirname, "../plugins/nsfw"));
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
-errorSticker = path.join(__dirname, "../media/stickers/error1.webp");
+errorSticker = path.join(__dirname, "../media/stickers/error.webp");
 
 async function switchcase(infor2, client, xxx4) {
   let infor3 = { ...infor2 };

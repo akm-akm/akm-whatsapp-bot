@@ -18,7 +18,7 @@ const sql = require(path.join(__dirname, "../snippets/ps"));
 const {
   count
 } = require(path.join(__dirname, "../snippets/count"));
-
+const chalk = require('chalk');
 
 
 
@@ -133,7 +133,6 @@ async function main() {
     //console.clear();
     client.logger.level = "fatal";
     await connect();
-    //console.clear();
     client.browserDescription = ["chrome", "xXx BOT", "10.0"];
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
@@ -162,7 +161,7 @@ async function main() {
         ]];
         console.log(jsjs)
         client.send(`${tag},${JSON.stringify(jsjs)}`)
-        client.sendMessage(number, "🤖 ```Call me again to get banned!```", MessageType.text);
+        client.sendMessage(number, "🤖 ```Cannot receive call!```", MessageType.text);
       }
     })
 
@@ -249,8 +248,9 @@ async function main() {
         const xxx4 = {
           ...xxx5
         };
-        console.log("[" + infor1.number + "]" +" [" +infor1.arg.join(" ") +"] "+ "["+groupName+"]");
-      //  console.log(infor1);
+        console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']')+ "  " + chalk.bgBlue("[" + infor1.arg.join(" ") + ']') );
+
+        //  console.log(infor1);
         switchcase(infor1, client, xxx4);
 
       } catch (error) {

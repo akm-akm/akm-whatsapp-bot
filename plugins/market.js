@@ -73,10 +73,7 @@ const market = (infor4, client, xxx3) =>
             })
             .catch((err) => {
               console.log(err);
-              client.sendMessage(from,"```Error```", text, {
-                quoted: xxx,
-              }); 
-              reject();
+              reject(infor5);
             });
           break;
         case "gainer":
@@ -124,10 +121,7 @@ const market = (infor4, client, xxx3) =>
             })
             .catch((err) => {
               console.log(err);
-              client.sendMessage(from,"```Error```", text, {
-                quoted: xxx,
-              }); 
-              reject();
+              reject(infor5);
             });
 
           break;
@@ -175,10 +169,8 @@ const market = (infor4, client, xxx3) =>
             .catch((err) => {
               
               console.log(err);
-              client.sendMessage(from,"```Error```", text, {
-                quoted: xxx,
-              }); 
-              reject();
+             
+              reject(infor5);
 
             });
 
@@ -223,10 +215,7 @@ const market = (infor4, client, xxx3) =>
             })
             .catch((err) => {
               console.log(err);
-              client.sendMessage(from,"```Error```", text, {
-                quoted: xxx,
-              }); 
-              reject();
+              reject(infor5);
             });
 
           break;
@@ -284,10 +273,7 @@ const market = (infor4, client, xxx3) =>
             })
             .catch((err) => {
               console.log(err);
-              client.sendMessage(from,"```Error```", text, {
-                quoted: xxx,
-              }); 
-              reject();
+              reject(infor5);
             });
           break;
 
@@ -397,10 +383,7 @@ const market = (infor4, client, xxx3) =>
             })
             .catch((err) => {
               console.log(err);
-              client.sendMessage(from,"```Error```", text, {
-                quoted: xxx,
-              }); 
-              reject();
+              reject(infor5);
             });
           break;
 

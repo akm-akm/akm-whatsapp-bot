@@ -1,6 +1,6 @@
 {
   "name": "xxx-bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "whatsapp bot to automate whatsapp.",
   "engines": {
     "node": "v16.10.0"
@@ -33,6 +33,7 @@
     "@adiwajshing/baileys": "^3.5.2",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "axios": "^0.21.1",
+    "chalk": "^4.1.2",
     "deepai": "^1.0.17",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

@@ -1,20 +1,6 @@
-const axios = require('axios');
-axios
-    .get(
-        "https://www1.nseindia.com//emerge/homepage/smeNormalMktStatus.json"
-    )
-    .then((response) => {
-        if (response.error) {
-            console.log(response.error);
+const chalk = require('chalk');
 
-        } else {
-            console.log(response.data);
-            var msg =
-                "Market status : ```" + response.data.NormalMktStatus + "```";
-            console.log(msg);
-
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+c = "919709094733"
+g = "only fans"
+a= "market search relaiance"
+console.log("🤖  " + chalk.bgRed("[" + c + ']') + "  " + chalk.bgBlue("[" + g + ']') + "  " + chalk.bgGreen("[" + a + ']'));
