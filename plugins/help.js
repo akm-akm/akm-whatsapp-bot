@@ -12,6 +12,8 @@ const help = (infor4, client, xxx3, syntax) =>
     let xxx = { ...xxx3 };
     arg = infor5.arg;
     from = infor5.from;
+    const isGroup = from.endsWith("@g.us");
+
     const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
     const groupMembers = isGroup ? groupMetadata.participants : "";
     const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
