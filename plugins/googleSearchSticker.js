@@ -15,12 +15,12 @@ const googlesearchsticker = (infor4, client, xxx3) =>
         let infor5 = { ...infor4 };
         let xxx = { ...xxx3 };
         arg = infor5.arg;
-      
+
         const from = xxx.key.remoteJid;
         const getRandom = (ext) => {
             return `${Math.floor(Math.random() * 10000)}${ext}`;
         };
-        
+
         const authorName = "BOT";
         outputOptions = [
             `-vcodec`,
@@ -70,8 +70,8 @@ const googlesearchsticker = (infor4, client, xxx3) =>
 
         axios.request(options).then(async response1 => {
             const random = Math.floor(Math.random() * (response1.data.value.length >= 20 ? 19 : response1.data.value.length));
-            console.log(response1.data.value[random], random, response1.data.value.length);
-            const packName = a+" - "+random;
+            //console.log(response1.data.value[random], random, response1.data.value.length);
+            const packName = a + " - " + random;
             const imageurl = response1.data.value[random].url;
             const media = getRandom(".jpg");
             const file = fs.createWriteStream(media);
@@ -90,10 +90,9 @@ const googlesearchsticker = (infor4, client, xxx3) =>
                             .input(media)
                             .on("error", function (err) {
                                 fs.unlinkSync(media);
-                                console.log(`Error : ${err}`);
-                                client.sendMessage(from, "🤖 ```failed to convert image into sticker!```", text, {
-                                    quoted: xxx
-                                });
+                                //  console.log(`Error : ${err}`);
+                                client.sendMessage(from, "🤖 ```failed to convert image into sticker!```", text, { quoted: xxx });
+                                // googlesearchsticker(infor5, client, xxx)
                             })
                             .on("end", function () {
                                 buildSticker();
@@ -103,7 +102,6 @@ const googlesearchsticker = (infor4, client, xxx3) =>
                             .save(ran);
 
                         async function buildSticker() {
-
                             const webpWithMetadata = await WSF.setMetadata(
                                 packName,
                                 authorName,
@@ -124,7 +122,14 @@ const googlesearchsticker = (infor4, client, xxx3) =>
                 });
             });
         }
-        ).catch(console.log);
+        ).catch(e => {
+            console.log(e);
+            ran = path.join(__dirname, "../media/stickers/error.webp");
+            client.sendMessage(from, fs.readFileSync(ran), sticker, {
+                quoted: xxx,
+            });
+            // googlesearchsticker(infor5, client, xxx)
+        });
 
     });
 module.exports.googlesearchsticker = googlesearchsticker;

@@ -122,8 +122,9 @@ const stickermaker = (infor4, client, xxx3) =>
         .on("error", function (err) {
           fs.unlinkSync(media);
           console.log(`Error : ${err}`);
-          client.sendMessage(from, "🤖 ```failed to convert image into sticker!```", text, {
-            quoted: xxx
+          ran = path.join(__dirname, "../media/stickers/error.webp");
+          client.sendMessage(from, fs.readFileSync(ran), sticker, {
+            quoted: xxx,
           });
         })
         .on("end", function () {
@@ -178,7 +179,10 @@ const stickermaker = (infor4, client, xxx3) =>
         .on("error", function (err) {
           fs.unlinkSync(media);
           mediaType = media.endsWith(".mp4") ? "video" : "gif";
-          reject("🤖```ERROR: Failed to convert to sticker!```");
+          ran = path.join(__dirname, "../media/stickers/error.webp");
+          client.sendMessage(from, fs.readFileSync(ran), sticker, {
+            quoted: xxx,
+          });
         })
         .on("end", function () {
           buildSticker();

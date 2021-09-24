@@ -198,7 +198,7 @@ const market = (infor4, client, xxx3) =>
               } else {
                 response.data.data.forEach((element) => {
                   msg +=
-                    "\n\n\n📈 " +
+                    "\n\n📈 " +
                     "*" +
                     element.symbol +
                     "*\n```Open Price: " +
@@ -265,7 +265,7 @@ const market = (infor4, client, xxx3) =>
                 response.data.forEach((element) => {
                   msg = msg+
                    
-                    "\n\n\n📈 " +
+                    "\n\n📈 " +
                     "*" +
                     element.symbol +
                     "*\n" +
@@ -407,22 +407,7 @@ const market = (infor4, client, xxx3) =>
         default:
           infor5.arg = ["help", arg[0]]
           help(infor5, client, xxx);
-          msg =
-            "*Usage*" +
-            " = " +
-            "```market [options]```\n\n" +
-            "```OPTIONS=```\n\n" +
-            "status  : " +
-            " ```stock market status```\n\n" +
-            "gainers : " +
-            " ```top 10 gainers of NSE```\n\n" +
-            "losers  : " +
-            " ```top 10 losers of NSE```\n\n" +
-            "search  [stock symbol]: " +
-            " ```list of companies in provided NSE index with matching keyword```\n\n" +
-            "details  [stock symbol]: " +
-            " ```Get the data of the symbol from NSE```\n\n";
-            resolve(msg);
+          resolve();
       }
       
    

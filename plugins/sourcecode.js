@@ -40,8 +40,9 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
         })
         .catch((e) => {
             console.log(e);
-            client.sendMessage(from, "🤖  ```Server error.```", text, {
-                quoted: xxx
+            ran = path.join(__dirname, "../media/stickers/error.webp");
+            client.sendMessage(from, fs.readFileSync(ran), sticker, {
+                quoted: xxx,
             });
             reject();
         })

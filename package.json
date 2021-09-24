@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "whatsapp bot to automate whatsapp.",
   "engines": {
-    "node": "14.17.3"
+    "node": "v16.10.0"
   },
   "main": "app.js",
   "scripts": {
@@ -32,19 +32,17 @@
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.2",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
-    "axios": "^0.21.4",
-    "cherio": "^1.0.0-rc.2",
+    "axios": "^0.21.1",
     "deepai": "^1.0.17",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "ffmpeg": "0.0.4",
-    "images-scraper": "^6.4.0",
     "node-cron": "^3.0.0",
     "pg": "^8.6.0",
     "qr-image": "^3.2.0",
     "request": "^2.88.2",
     "twitter": "^1.7.1",
     "wa-sticker-formatter": "^3.6.0",
-    "ytdl-core": "^4.9.0"
+    "ytdl-core": "^4.9.1"
   }
 }
