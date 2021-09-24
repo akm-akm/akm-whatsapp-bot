@@ -17,9 +17,9 @@ fs.writeFileSync(path.join(__dirname, "../data/data3.json"), '{"words": ["xxxxxx
 var data3 = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/data3.json")));
 setTimeout(() => {
-    data3
-      = JSON.parse(
-        fs.readFileSync(path.join(__dirname, "../data/data3.json")));
+  data3
+    = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "../data/data3.json")));
 }, 60000);
 module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId, isMedia) {
   random = settings.prefixchoice.charAt(
@@ -36,7 +36,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       if (data1.rows.length == 0) {
         if (
           groupMetadata.participants.length < botdata.rows[0].mingroupsize
-         ) {
+        ) {
           await client.sendMessage(from, "```Minimum participants required is: ```" + botdata.rows[0].mingroupsize, text);
           client.groupLeave(from);
           return
@@ -69,14 +69,9 @@ module.exports = async function settingread(arg, from, sender, groupname, client
     return (data = {
 
       from: from,
-      arg: from.endsWith("@g.us") ?
-        data1.rows[0].useprefix ?
-        arg
-        .replace(/\s+/g, " ").toLowerCase().startsWith(data1.rows[0].prefix) ?
+      arg: from.endsWith("@g.us") ? data1.rows[0].useprefix ? arg.replace(/\s+/g, " ").toLowerCase().startsWith(data1.rows[0].prefix) ?
         arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").slice(1).replace(/^\s+|\s+$/g, "").split(" ")).map(xa => xa.startsWith("https://") || xa.startsWith("http://") || xa.startsWith("www.") || xa.endsWith(".com") || xa.endsWith(".in") || xa.endsWith(".org") || xa.endsWith(".uk") ? xa : xa.toLowerCase()) :
-        arg = [] :
-        arg =
-        (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").split(" ")).map(xa =>
+        arg = [] : arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").split(" ")).map(xa =>
           xa.startsWith("https://") || xa.startsWith("http://") || xa.startsWith("www.") || xa.endsWith(".com") || xa.endsWith(".in") || xa.endsWith(".org") || xa.endsWith(".uk") ? xa : xa.toLowerCase()) : arg.replace(/\s+/g, " ").startsWith('!') || arg.replace(/\s+/g, " ").startsWith('.') || arg.replace(/\s+/g, " ").startsWith('#') || arg.replace(/\s+/g, " ").startsWith('-') ? arg = (arg.slice(1).replace(/^\s+|\s+$/g, "").replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://") || xa.startsWith("http://") || xa.startsWith("www.") || xa.endsWith(".com") || xa.endsWith(".in") || xa.endsWith(".org") || xa.endsWith(".uk") ? xa : xa.toLowerCase()) : arg = (arg.replace(/\s+/g, " ").split(" ")).map(xa => xa.startsWith("https://") || xa.startsWith("http://") || xa.startsWith("www.") || xa.endsWith(".com") || xa.endsWith(".in") || xa.endsWith(".org") || xa.endsWith(".uk") ? xa : xa.toLowerCase()),
       number: number,
       noofmsgtoday: data2.rows[0].totalmsgtoday,

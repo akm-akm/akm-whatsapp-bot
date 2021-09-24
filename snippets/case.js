@@ -287,6 +287,7 @@ async function switchcase(infor2, client, xxx4) {
       faqs(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
+          
         })
         .catch((error) => {
           console.log(error);

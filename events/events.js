@@ -210,16 +210,16 @@ async function main() {
         const groupMembers = isGroup ? groupMetadata.participants : "";
         const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
         const isGroupAdmins = groupAdmins.includes(sender) || false;
-        const groupName = isGroup ? groupMetadata.subject : "";
+        const groupName = isGroup ? groupMetadata.subject : "inbox";
         const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
         if (process.env.NODE_ENV !== "production" && infor.number !== process.env.OWNER_NUMBER) return
-          console.log("169");
+        
         if (!
           ((infor.canmemberusebot || isGroupAdmins) &&
             !isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
             (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker)))
         ) return
-        console.log("179");
+       
         if (infor.isnumberblockedingroup) return
 
         if (
@@ -232,16 +232,13 @@ async function main() {
           client.sendMessage(infor.sender, "🤖 ```You have exhausted your daily limit, the bot will not reply you anymore.```", text, {
             quoted: xxx5,
           });
-          console.log("194");
           return
         }
-        console.log("197");
         if (infor.dailylimitover === true) return
 
-        console.log("200");
         if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit) {
           client.sendMessage(infor.from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
-          count('203')
+         // count('203')
 
           count(infor)
           return
@@ -252,7 +249,8 @@ async function main() {
         const xxx4 = {
           ...xxx5
         };
-        console.log(infor1);
+        console.log("[" + infor1.number + "]" +" [" +infor1.arg.join(" ") +"] "+ "["+groupName+"]");
+      //  console.log(infor1);
         switchcase(infor1, client, xxx4);
 
       } catch (error) {
@@ -263,7 +261,7 @@ async function main() {
     console.log("EVENTS.JS ERROR-----------------------" + err);
   }
 }
-
+////////////////////////////////////////////////////////////////////
 async function stop() {
   client.close();
   console.log("Stopped");
