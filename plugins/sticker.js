@@ -220,7 +220,7 @@ const stickermaker = (infor4, client, xxx3) =>
       resolve();
     }
     else {
-      client.sendMessage(from, "🤖 ```Tag the media or send it with the command.```", text, { quoted: xxx });
+      client.sendMessage(from, "🤖 ```Tag the media or send it with the command to make a sticker.```", text, { quoted: xxx });
       resolve();
     }
   });

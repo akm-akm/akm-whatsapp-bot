@@ -39,7 +39,7 @@ const help = (infor4, client, xxx3,syntax) =>
         prefix + "help crypto\n" +
         prefix + "help shorturl\n" +
         prefix + "help sticker\n" +
-        prefix + "help autosticker\n" +
+       
         prefix + "help run\n" +
         "\n📃 *Bot Updates* :" +
         "\n‼️ _ss added_" +
