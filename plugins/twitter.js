@@ -44,7 +44,7 @@ const xdafootball = (infor4, client, xxx3) =>
                     reject();
                     return;
                 }
-                var i = 0;
+                let i = 0;
 
                 while (i < 10) {
                     if (!tweets[i].in_reply_to_screen_name) {

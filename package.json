@@ -1,6 +1,6 @@
 {
   "name": "xxx-bot",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "whatsapp bot to automate whatsapp.",
   "engines": {
     "node": "v16.10.0"
@@ -35,7 +35,6 @@
     "axios": "^0.21.1",
     "chalk": "^4.1.2",
     "deepai": "^1.0.17",
-    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "ffmpeg": "0.0.4",
     "node-cron": "^3.0.0",
@@ -45,5 +44,8 @@
     "twitter": "^1.7.1",
     "wa-sticker-formatter": "^3.6.0",
     "ytdl-core": "^4.9.1"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
   }
 }

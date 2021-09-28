@@ -1,4 +1,4 @@
-var request = require('request');
+let request = require('request');
 const fs = require("fs");
 const path = require("path");
 const { help } = require(path.join(__dirname, "./help"));
@@ -36,7 +36,7 @@ const coderunner = (infor4, client, xxx3) =>
             return
         }
         try {
-            var program = {
+            let program = {
                 script: xxx.message.extendedTextMessage.contextInfo.quotedMessage.conversation,
                 language: arg[1],
                 versionIndex: "0",

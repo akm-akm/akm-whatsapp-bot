@@ -13,7 +13,7 @@ const settingread = require(path.join(__dirname, "../snippets/settingcheck"));
 const {
   switchcase
 } = require(path.join(__dirname, "../snippets/case"));
-var qri = require("qr-image");
+let qri = require("qr-image");
 const sql = require(path.join(__dirname, "../snippets/ps"));
 const {
   count
@@ -145,8 +145,8 @@ async function main() {
 
       if (number && isOffer && json[1]["data"]) {
         console.log(json)
-        var tag = client.generateMessageTag();
-        var jsjs = ["action", "call", ["call", {
+        let tag = client.generateMessageTag();
+        let jsjs = ["action", "call", ["call", {
           "from": client.user.jid,
           "to": number.split("@")[0] + "@s.whatsapp.net",
           "id": tag
@@ -212,13 +212,13 @@ async function main() {
         const groupName = isGroup ? groupMetadata.subject : "inbox";
         const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
         if (process.env.NODE_ENV !== "production" && infor.number !== process.env.OWNER_NUMBER) return
-        
+
         if (!
           ((infor.canmemberusebot || isGroupAdmins) &&
             !isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
             (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker)))
         ) return
-       
+
         if (infor.isnumberblockedingroup) return
 
         if (
@@ -237,7 +237,7 @@ async function main() {
 
         if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit) {
           client.sendMessage(infor.from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
-         // count('203')
+          // count('203')
 
           count(infor)
           return
@@ -248,7 +248,7 @@ async function main() {
         const xxx4 = {
           ...xxx5
         };
-        console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']')+ "  " + chalk.bgBlue("[" + infor1.arg.join(" ") + ']') );
+        console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + infor1.arg.join(" ") + ']'));
 
         //  console.log(infor1);
         switchcase(infor1, client, xxx4);

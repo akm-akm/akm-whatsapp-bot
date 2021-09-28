@@ -20,31 +20,32 @@ const requestOptions = {
     convert: "USD",
   },
   headers: {
-    "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY ,
+    "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY,
   },
   json: true,
   gzip: true,
 };
 
-var message;
+let message;
 
 const crypto = (infor4, client, xxx3) =>
   new Promise((resolve, reject) => {
-    var c = 0;
+    let c = 0;
     let infor5 = { ...infor4 };
     let xxx = { ...xxx3 };
 
-    arg=infor5.arg;
-    from=infor5.from;
+    arg = infor5.arg;
+    from = infor5.from;
 
-    if (arg.length==1){
+    if (arg.length == 1) {
       infor5.arg = ["help", arg[0]]
       help(infor5, client, xxx, 1);
       reject()
-    return}
+      return
+    }
     if (!coins.includes(arg[1].toUpperCase())) {
-   
-      client.sendMessage(from,  "🤖 ```Not in coinmarketcap.```", text, {
+
+      client.sendMessage(from, "🤖 ```Not in coinmarketcap.```", text, {
         quoted: xxx,
       });
       resolve();
@@ -79,17 +80,17 @@ const crypto = (infor4, client, xxx3) =>
                 "\n\n" +
                 "```CoinMarketCap API```" +
                 "\n";
-            
-              client.sendMessage(from,message, text, {
+
+              client.sendMessage(from, message, text, {
                 quoted: xxx,
-              });  
+              });
               resolve();
             }
           });
         })
         .catch(function (error) {
           console.log(error);
-         
+
           reject(infor5)
         });
     }

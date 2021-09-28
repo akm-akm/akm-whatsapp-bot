@@ -1,26 +1,40 @@
 const path = require("path");
 const fs = require("fs");
+const chalk = require('chalk');
 const sql = require(path.join(__dirname, "./ps"));
 const settings = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/settings.json"))
 );
+
 const {
   newgroup
 } = require(path.join(__dirname, "./newgroup"));
+
 const {
   MessageType
 } = require("@adiwajshing/baileys");
+
 const {
   text
 } = MessageType;
-fs.writeFileSync(path.join(__dirname, "../data/data3.json"), '{"words": ["xxxxxx"]}')
-var data3 = JSON.parse(
+
+let data3 = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/data3.json")));
-setTimeout(() => {
-  data3
-    = JSON.parse(
-      fs.readFileSync(path.join(__dirname, "../data/data3.json")));
-}, 60000);
+
+Array.prototype.detecta = function () {
+  const returnarray = [];
+  this.forEach((element, index) => {
+    let hash = 0, i, chr;
+    if (element.length === 0) return hash;
+    for (i = 0; i < element.length; i++) {
+      chr = element.charCodeAt(i);
+      hash = ((hash << 5) - hash) + chr;
+      hash |= 0;
+    }
+    data3.words.indexOf(hash) != -1 ? returnarray.push(this[index]) : null;
+  })
+  return returnarray;
+}
 module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId, isMedia) {
   random = settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))
@@ -34,24 +48,31 @@ module.exports = async function settingread(arg, from, sender, groupname, client
 
       data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
       if (data1.rows.length == 0) {
-        if (
-          groupMetadata.participants.length < botdata.rows[0].mingroupsize
-        ) {
-          await client.sendMessage(from, "```Minimum participants required is: ```" + botdata.rows[0].mingroupsize, text);
-          client.groupLeave(from);
-          return
+        if (process.env.NODE_ENV === 'development') {
+          console.log("🤖 " + chalk.bgCyan("Entering data for group " + groupname));
+          console.log("🤖 " + chalk.bgCyan("Prefix assigned is / "));
+          await sql.query(
+            `INSERT INTO groupdata VALUES ('${from}','true','/','false','true', '{''}',0,0,false,true);`
+          );
+          return settingread(arg, from, sender, groupname)
         }
-        console.log("Entering data for group -  " + from + "  " + groupname);
-        console.log("Prefix assigned is  " + random);
-        console.log("------------------------------");
-        if (!(process.env.NODE_ENV === 'development')) newgroup(from, client, random).then(() => console.log("New group!"));
-        await sql.query(
-          `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
-        );
-        return settingread(arg, from, sender, groupname)
+        if (process.env.NODE_ENV === 'production') {
+          if (
+            groupMetadata.participants.length < botdata.rows[0].mingroupsize
+          ) {
+            await client.sendMessage(from, "```Minimum participants required is: ```" + botdata.rows[0].mingroupsize, text);
+            client.groupLeave(from);
+            return
+          }
+          newgroup(from, client, random).then(() => console.log("New group!"));
+          await sql.query(
+            `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
+          );
+          return settingread(arg, from, sender, groupname)
+        }
       }
-
     }
+
     from.endsWith("@g.us") ?
       (number = sender.split("@")[0]) :
       (number = from.split("@")[0]);
@@ -59,8 +80,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
     data2 = await sql.query(
       `select * from messagecount where phonenumber='${number}';`)
     if (data2.rows.length == 0) {
-      console.log("Entering data for  number -" + number);
-      console.log("------------------------------");
+      console.log("🤖 " + chalk.bgBlueBright("Entering data for  number -" + number));
       await sql.query(`INSERT INTO messagecount VALUES ('${number}', 0, 0, false);`)
       return settingread(arg, from, sender, groupname)
     }
@@ -77,7 +97,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       noofmsgtoday: data2.rows[0].totalmsgtoday,
       totalmsg: data2.rows[0].totalmsg,
       dailylimitover: data2.rows[0].dailylimitover,
-      abusepresent: from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? data3.words.filter(e => arg.indexOf(e) !== -1) : [] : data3.words.filter(e => arg.indexOf(e) !== -1),
+      abusepresent: from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? arg.detecta() : [] : arg.detecta(),
       canmemberusebot: from.endsWith("@g.us") ? data1.rows[0].membercanusebot == false ? false : true : true,
       isnumberblockedingroup: from.endsWith("@g.us") ? data1.rows[0].banned_users.includes(number) ? 1 : 0 : 0,
       groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,

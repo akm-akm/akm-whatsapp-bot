@@ -4,7 +4,7 @@ const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
-const { text,sticker } = MessageType;
+const { text, sticker } = MessageType;
 const { ai } = require("./deepai");
 const stickermaker = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
@@ -28,8 +28,8 @@ const stickermaker = (infor4, client, xxx3) =>
       return `${Math.floor(Math.random() * 10000)}${ext}`;
     };
 
-    var packName = isGroup ? groupName : "xXx";
-    var authorName = "BOT";
+    let packName = isGroup ? groupName : "xXx";
+    let authorName = "BOT";
 
     if (arg.includes("pack") == true) {
       packName = "";
@@ -153,7 +153,7 @@ const stickermaker = (infor4, client, xxx3) =>
           });
 
           resolve();
-       //   fs.unlinkSync(media);
+          //   fs.unlinkSync(media);
           fs.unlinkSync(ran);
         }
       }

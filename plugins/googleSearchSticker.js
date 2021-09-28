@@ -56,7 +56,7 @@ const googlesearchsticker = (infor4, client, xxx3) =>
             resolve();
             return;
         }
-        var options = {
+        let options = {
             method: 'GET',
             url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
             params: {

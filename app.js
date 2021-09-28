@@ -3,35 +3,10 @@ const server = new express();
 const port = process.env.PORT || 5000;
 const path = require("path");
 const node = require('node-cron');
-const axios = require("axios");
+require(path.join(__dirname, "./snippets/config"));
 const sql = require(path.join(__dirname, "./snippets/ps"));
 
-validatesetting()
 
-function validatesetting() {
-
-
-  if (!process.env.WEBSITE_PASSWORD) {
-    console.log("WEBSITE_PASSWORD is not set");
-    process.exit(1)
-  }
-  if (!process.env.OWNER_NUMBER) {
-    console.log("OWNER_NUMBER is not set");
-    process.exit(1)
-  }
-
-  if (!(process.env.OWNER_NUMBER.match(/^\d{12}$/) || process.env.OWNER_NUMBER.match(/^\d{11}$/))) {
-    console.log("OWNER_NUMBER is not set correctly. Remove + sign if added in the beginning of country code and check if the country code is properly added.");
-    process.exit(1)
-  }
-  if (!process.env.HOSTING_PLATFORM === 'heroku' && !process.env.HOSTING_PLATFORM === "local" && !process.env.HOSTING_PLATFORM === 'qovery') {
-    console.log("HOSTING_PLATFORM is not set correctly ");
-    process.exit(1)
-  }
-
-}
-
-require(path.join(__dirname, "./snippets/config"));
 const {
   main,
   logout,
@@ -39,11 +14,10 @@ const {
   isconnected,
 } = require(path.join(
   __dirname,
-  "./events/events.js"
+  "./events/events"
 ));
 
 node.schedule("0 */24 * * *", () => {
-
   sql.query('UPDATE groupdata SET totalmsgtoday=0;')
   sql.query('UPDATE botdata SET totalmsgtoday=0;')
   sql.query('UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;')

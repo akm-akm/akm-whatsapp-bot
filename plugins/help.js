@@ -27,7 +27,7 @@ const help = (infor4, client, xxx3, syntax) =>
 
     prefix = infor5.groupdata.prefix;
     useprefix = infor5.groupdata.useprefix;
-    var msg;
+    let msg;
     c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "```Disabled```";
     if (prefix == undefined || !useprefix) prefix = "🎀";
 
@@ -43,7 +43,7 @@ const help = (infor4, client, xxx3, syntax) =>
         "\n\n" +
         "📗 *General* :\n ```help, faq, limit, delete, sourcecode, invite```\n\n" +
         grpcmds +
-        "📱 *Media* :\n```ss, sticker, rs, ytv, shorturl, testnsfw, run, crypto, market, pin, rashmika```\n\n" +
+        "📱 *Media* :\n```ss, sticker, rs, ytv, shorturl, testnsfw, run, crypto, pin, rashmika```\n\n" +
         cas +
         "🎁 *For detailed info :*\n" +
         prefix +
