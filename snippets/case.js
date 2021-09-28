@@ -161,7 +161,7 @@ async function switchcase(infor2, client, xxx4) {
     case "sticker":
       stickermaker(infor3, client, xxx3)
         .then(() => {
-          console.log("sent");
+          
           count(infor3)
         })
         .catch((infor5) => {
@@ -172,7 +172,7 @@ async function switchcase(infor2, client, xxx4) {
     case "ss":
       googlesearchsticker(infor3, client, xxx3)
         .then(() => {
-          console.log("sent");
+
           count(infor3)
         })
         .catch((infor5) => {
@@ -301,6 +301,20 @@ async function switchcase(infor2, client, xxx4) {
     case "heyyyy":
     case "heyyy":
       client.sendMessage(from, ["👋 ```Hello```", "👋 ```Howdy```", "👋 ```Hi```", "👋 ```Hey```"][Math.floor(Math.random() * 4)], text, {
+        quoted: xxx3,
+      });
+      count(infor3)
+      break;
+    
+    case "goodmorning":
+      client.sendMessage(from,"👋 ```Goodmorning```", text, {
+        quoted: xxx3,
+      });
+      count(infor3)
+      break;
+    
+    case "goodnight":
+      client.sendMessage(from, "👋 ```Goodnight```", text, {
         quoted: xxx3,
       });
       count(infor3)
