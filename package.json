@@ -1,7 +1,7 @@
 {
   "name": "xxx-bot",
   "version": "3.2.0",
-  "description": "whatsapp bot to automate whatsapp.",
+  "description": "Whatsapp bot that can convert images and videos into sticker, send crypto price updates, stock market updates, search internet for any stickers and send random stickers, download youtube and pinterest videos and do many more things.",
   "engines": {
     "node": "v16.10.0"
   },

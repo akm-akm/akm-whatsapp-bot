@@ -123,7 +123,7 @@ const googlesearchsticker = (infor4, client, xxx3) =>
             });
         }
         ).catch(e => {
-            console.log(e);
+           
             reject(infor5)
 
         });
