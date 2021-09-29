@@ -1,15 +1,15 @@
 {
   "name": "xxx-bot",
-  "version": "2.1.0",
+  "version": "3.2.0",
   "description": "whatsapp bot to automate whatsapp.",
   "engines": {
     "node": "v16.10.0"
   },
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "dev": "NODE_ENV='development' node -r dotenv/config app.js ",
-    "prod": "NODE_ENV='production' node -r dotenv/config app.js ",
-    "start": "node app.js"
+    "dev": "NODE_ENV='development' node -r dotenv/config src/app.js ",
+    "prod": "NODE_ENV='production' node -r dotenv/config src/app.js ",
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 node_modules
 .env
-public/qr.png
+src/public/qr.png
 package-lock.json
 *.jpeg
 *.jpg
