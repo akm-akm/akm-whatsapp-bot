@@ -18,7 +18,7 @@ const newgroup = (from, client, random) =>
     const groupAdmins = getGroupAdmins(groupMembers);
     let newmsg =
       "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n" +
-      "🚨 *Prefix assigned is* " +
+      "🚨 *Prefix assigned is:* " +
       random +
       "\n\n🚨 *The bot will only listen to commands starting with* " + random + "\n\n" +
       "🚨 ```Type``` " + "```" + random + "```" + "```help to see the list of commands bot can follow.```\n\n" +
