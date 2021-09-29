@@ -13,16 +13,16 @@
 - Create an account [Heroku](https://signup.heroku.com/login).
 - Create a [new app](https://dashboard.heroku.com/new-app).
 - Now select github under deployment method.
-<img src='/readme\images\connectgithub.png' ></img>
+<img src='\images\connectgithub.png' ></img>
 - input xxx-bot and search and connect the repo displayed.
 - now under resources tab select add addons.
-<img src='/readme\images\herokupostgres.png'></img>
+<img src='\images\herokupostgres.png'></img>
 - Search heroku postgres and click on the result.
 - Then click on submit order form on the pop up.
 - Now under settinngs tab click on reveal config vars.
-<img src='/readme\images\herokuconfigvars.png'></img>
+<img src='\images\herokuconfigvars.png'></img>
 - Now under config vars input the values shown in `.env.example`.
-<img src='/readme\images\herokuenv.png'></img>
+<img src='\images\herokuenv.png'></img>
 
 
 ```env
@@ -53,7 +53,7 @@ DEEPAI=
 `DEEPAI` The api key for nsfw detection in images from deepai.org. (optional)
 
 - Now click on Deploy tab and scroll to the bottom and click on deploy.
-<img src='/readme\images\deploy.png'></img>
+<img src='\images\deploy.png'></img>
 - Now the bot will be deployed in under a minute.
 
 
@@ -61,13 +61,13 @@ DEEPAI=
 ## 🤖 Running
 
 - Now click on view.
-<img src='/readme\images\viewheroku.png'></img>
+<img src='\images\viewheroku.png'></img>
 - The website will open in your browser. Login using the password you entered in the previous step.
-<img src='/readme\images\sitelogin.png'></img>
+<img src='\images\sitelogin.png'></img>
 - Click on start and scan the qr code shown on the website using the WA-Web Scanner on your WhatsApp.
-<img src='/readme\images\scan.png'></img>
+<img src='\images\scan.png'></img>
 - On successful login you will see connected written on the button.
-<img src='/readme\images\connected.png'></img>
+<img src='\images\connected.png'></img>
 - Now close the browser.
 
 
