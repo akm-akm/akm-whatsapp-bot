@@ -8,4 +8,10 @@ String.prototype.hash = function () {
         }
         return hash;    
 }
-console.log("lodu".hash());
+console.log("test".hash());
+
+
+
+
+
+

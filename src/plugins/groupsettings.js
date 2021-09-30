@@ -100,10 +100,10 @@ const grp = (infor4, client, xxx3) =>
                 "\n⚠️ *NSFW detect* : " + "```" + infor5.groupdata.nsfw + "```" +
                 "\n🎫 *Credits used* : " + "```" + infor5.groupdata.totalmsgtoday + "```" +
                 "\n🧶 *Total credits* : " + "```" + infor5.botdata.dailygrouplimit + "```" +
-                "\n🚨 *Banned users* : " + "```" + (Number( infor5.groupdata.banned_users.length) - 1 )+ "```\n";
-             
-             
-            await  client.sendMessage(from, fs.readFileSync(ran), image, {
+                "\n🚨 *Banned users* : " + "```" + (Number(infor5.groupdata.banned_users.length) - 1) + "```\n";
+
+
+              await client.sendMessage(from, fs.readFileSync(ran), image, {
                 quoted: xxx,
                 caption: grpdata,
                 mimetype: Mimetype.jpeg
@@ -114,7 +114,7 @@ const grp = (infor4, client, xxx3) =>
             })
           });
         })
-       
+
         break;
 
       case "autosticker":
@@ -144,8 +144,8 @@ const grp = (infor4, client, xxx3) =>
           resolve();
         }
         break;
-      
-      
+
+
       case "nsfw":
         if (arg.length == 1) {
           infor5.arg = ["help", arg[0]]
@@ -411,7 +411,7 @@ const grp = (infor4, client, xxx3) =>
         resolve();
         const encmedia = isQuotedImage ?
           JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
-          .extendedTextMessage.contextInfo :
+            .extendedTextMessage.contextInfo :
           xxx;
         const media = await client.downloadAndSaveMediaMessage(encmedia);
         await client.updateProfilePicture(from, media);
@@ -422,10 +422,10 @@ const grp = (infor4, client, xxx3) =>
         break;
 
       case "botleave":
-       await client.sendMessage(from, "🤧 ```Bye, Miss you all ```", text);
-  
-      client.groupLeave(from);
-         resolve();
+        await client.sendMessage(from, "🤧 ```Bye, Miss you all ```", text);
+
+        client.groupLeave(from);
+        resolve();
         break;
 
       case "close":
@@ -522,7 +522,7 @@ const grp = (infor4, client, xxx3) =>
 
         if (arg.length > 1) {
           arg.shift();
-          msg = arg.join(" ")+"\n;"
+          msg = arg.join(" ") + "\n;"
         } else msg = "👋 ```Hello Everyone```\n";
         for (let member of groupMembers) {
           msg += `\n🤖 @${member.jid.split("@")[0]}`;

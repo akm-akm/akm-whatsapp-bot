@@ -34,7 +34,7 @@ async function switchcase(infor2, client, xxx4) {
   };
 
   if (infor3.abusepresent.length != 0) {
-    client.sendMessage(from, "⚠️ ```" + infor3.abusepresent[0] + "```", text, {
+    client.sendMessage(from, "⚠️ ```" + infor3.abusepresent.join(" ") + "```", text, {
       quoted: xxx3,
     });
     count(infor3, 1)

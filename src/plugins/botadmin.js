@@ -15,7 +15,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
     let xxx = { ...xxx3 };
 
     if (infor5.number !== process.env.OWNER_NUMBER) {
-      reject()
+        reject()
         return;
     }
     switch (infor5.arg[0]) {
@@ -37,28 +37,28 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
             break;
 
-        
-        
-        
-        
+
+
+
+
         case "xstp":
             let data = await sql.query('select * from botdata');
-            client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, "‼️‼️ ```Bot stopped ‼️‼️\nTo start the bot log in the website and click on Start bot button.\n```" + "```" + data.rows[0].boturl+"```", text, {
+            client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, "‼️‼️ ```Bot stopped ‼️‼️\nTo start the bot log in the website and click on Start bot button.\n```" + "```" + data.rows[0].boturl + "```", text, {
                 quoted: xxx,
                 detectlink: false
             });
             setTimeout(() => {
                 client.close()
                 process.exit(1)
-               // client.destroy();
+                // client.destroy();
             }, 4000);
             console.log("Stopped");
-           
+
             break;
 
-        
-        
-        
+
+
+
         case 'sql':
             let cmd = infor5.arg.slice(1).join(" ");
             console.log(`Command: ${cmd}`);
@@ -73,13 +73,13 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve();
             })
             break;
-        
-        
-        
-        
-        
+
+
+
+
+
         case "rst":
-             sql.query('UPDATE groupdata SET totalmsgtoday=0;')
+            sql.query('UPDATE groupdata SET totalmsgtoday=0;')
             sql.query('UPDATE botdata SET totalmsgtoday=0;')
             sql.query('UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;')
             client.sendMessage(from, mess.success, text, {
@@ -87,11 +87,11 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
             });
             resolve();
             break;
-        
-        
-        
-        
-        
+
+
+
+
+
         case "dul":
             if (infor5.arg.length < 2) {
                 client.sendMessage(from, '🤖 ```Enter the number to be set as daily user limit.```', text, {
@@ -119,12 +119,12 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
             })
 
             break;
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         case "mgs":
             if (infor5.arg.length < 2) {
                 client.sendMessage(from, '🤖 ```Enter the number to be set as minimum group size.```', text, {
@@ -152,12 +152,12 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
             })
             break;
 
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         case "dgl":
             if (infor5.arg.length < 2) {
                 client.sendMessage(from, '🤖 ```Enter the number to be set as daily group limit.```', text, {
@@ -185,13 +185,13 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
             })
 
             break;
-        
-        
-        
-        
 
-        
-        
+
+
+
+
+
+
         case "mdr":
             if (infor5.arg.length < 2) {
                 client.sendMessage(from, '🤖 ```Enter the number with cc to be set as moderator or tag the user.```', text, {
@@ -202,7 +202,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
             }
             z = infor5.arg[1];
             sql.query(
-                `UPDATE botdata SET moderators = array_append(moderators, '${z.replace('@','')}');`
+                `UPDATE botdata SET moderators = array_append(moderators, '${z.replace('@', '')}');`
             ).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
@@ -212,20 +212,20 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                     });
                 });
             })
-                break;
-
-
-        
-        
+            break;
 
 
 
 
 
 
-        
+
+
+
+
+
         case "rtrt":
-           await client.sendMessage(from, '🤖 ```Restarting```', text, {
+            await client.sendMessage(from, '🤖 ```Restarting```', text, {
                 quoted: xxx,
             });
             process.exit(1);
