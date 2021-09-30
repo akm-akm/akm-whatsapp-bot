@@ -6,3 +6,4 @@ package-lock.json
 *.jpg
 *.webp
 *.mp4
+pgdata

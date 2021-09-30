@@ -36,6 +36,9 @@ Array.prototype.detecta = function () {
   })
   return returnarray;
 }
+
+
+
 module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId, isMedia) {
   random = settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))

@@ -1,7 +1,8 @@
 version: '3.3'
 services:
-  bot:
+  app:
     build: .
+    restart: on-failure
     depends_on:
       - db
     ports:
@@ -9,10 +10,15 @@ services:
   db:
     image: 'postgres'
     ports:
-      - '5432:5432'
+      - '5431:5432'
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'root'
       POSTGRES_DB: 'bot'
     volumes:
       - './pgdata:/var/lib/postgresql/data'
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:5431"]
+        interval: 5s
+        timeout: 10s
+        retries: 5
