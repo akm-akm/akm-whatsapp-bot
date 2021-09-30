@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  bot:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - '5000:5000'
+  db:
+    image: 'postgres'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'root'
+      POSTGRES_DB: 'bot'
+    volumes:
+      - './pgdata:/var/lib/postgresql/data'
