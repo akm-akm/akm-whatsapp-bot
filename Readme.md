@@ -1,8 +1,9 @@
 <h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
 
 <p align="center">
-<img src="src/readme/images/logo.jpeg" width=400px alt="xxxlogo" />
+<img src="https://user-images.githubusercontent.com/37355997/135646758-f37a88fa-1234-47ff-b57f-f70aed05dcb8.png" width=400px alt="xxxlogo" />
 </p>
+
 
 ## ✨ Highlights
 
