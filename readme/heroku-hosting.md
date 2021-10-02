@@ -13,7 +13,7 @@
 - Create an account [Heroku](https://signup.heroku.com/login).
 - Create a [new app](https://dashboard.heroku.com/new-app).
 - Now select github under deployment method.
- <br><img width = "500px" src='images\connectgithub.png' ></img>
+ <br/><img width = "500px" src='images\connectgithub.png' ></img>
 - input xxx-bot and search and connect the repo displayed.
 - now under resources tab select add addons.
  <br/><img width = "500px"  src='images\herokupostgres.png'></img>
@@ -56,7 +56,16 @@ DEEPAI=
  <br/><img width = "500px" src='images\deploy.png'></img>
 - Now the bot will be deployed in under a minute.
 
+# ‼️‼️ FAiling to do this step will stop the bot from working.
 
+## ✋ Important
+
+- Make sure you have the latest version of the bot.
+- Since heroku uses Dyno sleeping in which if an app has a free web dyno, and that dyno receives no web traffic in a 30-minute period, it will sleep. In addition to the web dyno sleeping, the worker dyno (if present) will also sleep. and if a sleeping web dyno receives web traffic, it will become active again after a short delay (assuming your account has free dyno hours available) You can use [Cron job](https://console.cron-job.org) to ping the heroku app every 30 minutes to prevent it from sleeping. Heroku will stop the bot if the website does not receive any traffic.
+- Create an account on [cron job](https://console.cron-job.org/signup).
+- Create a [new job](https://console.cron-job.org/jobs/create), fill the title and url of the bot and and keep the execution schedule to 15 minute.
+- Now click on create button.
+- The bot will be ping every 15 minutes and it will never sleep(for 550 Hour which is the limit per month).
 
 ## 🤖 Running
 
