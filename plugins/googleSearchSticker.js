@@ -64,7 +64,7 @@ const googlesearchsticker = (infor4, client, xxx3) =>
             },
             headers: {
                 'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
-                'x-rapidapi-key': process.env.x_rapidapi_key
+                'x-rapidapi-key': process.env.SEARCH_STICKER
             }
         };
 
