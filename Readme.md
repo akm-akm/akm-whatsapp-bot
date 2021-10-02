@@ -41,16 +41,6 @@
   </tr>
  </table>
 
-<img  src="readme/demo/help.jpg" width="300px" />
-<img   src="readme/demo/help1.jpg" width="300px" />
-<img   src="readme/demo/help2.jpg" width="300px" />
-<img   src="readme/demo/sticker.jpg" width="300px" />
-<img   src="readme/demo/ytv.jpg"  width="300px"/>
-<img   src="readme/demo/crypto.jpg"  width="300px"/>
-<img   src="readme/demo/ss.jpg"  width="300px"/>
-<img   src="readme/demo/run.jpg"  width="300px"/>
-<img  src="readme/demo/ss.jpg"  width="300px"/>
-
 ## 💮 Hosting
 
 #### 💻 See the [Self-Hosting Guide](/readme/self-hosting.md)
