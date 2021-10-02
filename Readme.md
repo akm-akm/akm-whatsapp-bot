@@ -9,7 +9,7 @@
 
 - 💻 4000 lines of code
 - 💖 open source
-- 💙 Written in Javascript
+- 💙 Written in Javascript. 
 - 💛 Event-Based
 - 💝 Built with [Baileys](https://github.com/adiwajshing/baileys)
 - 🖤 Integrated abuse detection.
@@ -78,4 +78,4 @@
 
 ## 📜 Documentation
 
-- you are on your own...
+- you are on your own.... 
