@@ -10,7 +10,7 @@
     "dev": "NODE_ENV='development' node -r dotenv/config app.js ",
     "prod": "NODE_ENV='production' node -r dotenv/config app.js ",
     "docker": "NODE_ENV='development' LOCAL_DATABASE_URL='postgresql://postgres:root@db:5432/bot' node -r dotenv/config app.js ",
-    "start": "node src/app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
