@@ -17,15 +17,15 @@
 
 ## 📝 Features
 
-<img src="readme/demo/help.jpg" >
-<img src="readme/demo/help1.jpg" >
-<img src="readme/demo/help2.jpg" >
-<img src="readme/demo/sticker.jpg" >
-<img src="readme/demo/ytv.jpg" >
-<img src="readme/demo/crypto.jpg" >
-<img src="readme/demo/ss.jpg" >
-<img src="readme/demo/run.jpg" >
-<img src="readme/demo/ss.jpg" />
+<img src="readme/demo/help.jpg" width="300px" />
+<img src="readme/demo/help1.jpg" width="300px" />
+<img src="readme/demo/help2.jpg" width="300px" />
+<img src="readme/demo/sticker.jpg" width="300px" />
+<img src="readme/demo/ytv.jpg"  width="300px"/>
+<img src="readme/demo/crypto.jpg"  width="300px"/>
+<img src="readme/demo/ss.jpg"  width="300px"/>
+<img src="readme/demo/run.jpg"  width="300px"/>
+<img src="readme/demo/ss.jpg"  width="300px"/>
 
 
 ## 💮 Hosting
@@ -48,13 +48,13 @@
 
 ## 🔧 Default Configuration
 
-- Default daily limit for a normal user is `30` messages.
+- Default daily limit for a normal user is `10` messages.
 - Owner and bot moderators have no limit.
-- Default daily group limit is `50` messages.
+- Default daily group limit is `300` messages.
 - By default, abuse detection is on.
 - Default minimum group size for the bot to work in it is `3` members.
 - These values can be changed only by the bot owner.
-- When the bot is added to any group, it will auto assign any random prefix to it, which can be changed by group admins.
+- When the bot is added to any group, it will auto assign any random prefix to it, which can be changed by group admins using setprefix command.
 
 ## ⚠️ Troubleshooting
 

@@ -331,6 +331,7 @@ const grp = (infor4, client, xxx3) =>
         break;
 
       case "kick":
+      case "remove":
         try {
 
 

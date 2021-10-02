@@ -1,214 +1,318 @@
 {
-   
     "invite": {
         "usage": "invite <group-link>",
         "desc": "```The bot joins the group using the given invite link.```",
-        "eg": [ "invite https://chat.whatsapp.com/fgRTy5-sdeY","invite https://chat.whatsapp.com/aDreSAg56-98"]
+        "eg": [
+            "invite https://chat.whatsapp.com/fgRTy5-sdeY",
+            "invite https://chat.whatsapp.com/aDreSAg56-98"
+        ]
     },
-   
     "ss": {
         "usage": "ss <search-term>",
         "desc": "```The bot will search for the image and send its sticker. Add crop to crop the sticker sent by the bot.```",
-        "eg": [ "ss Rahul gandhi","ss Sonia gandhi","ss crop Sonia Gandhi"]
+        "eg": [
+            "ss Rahul gandhi",
+            "ss Sonia gandhi",
+            "ss crop Sonia Gandhi"
+        ]
     },
     "crypto": {
         "usage": "crypto <coinsymbol>",
         "desc": "```Fetches the price of given crypto currency from coinmarketcap using its API.```",
-        "eg": ["crypto btc","crypto xrp","crypto eth"]
+        "eg": [
+            "crypto btc",
+            "crypto xrp",
+            "crypto eth"
+        ]
     },
     "testnsfw": {
         "usage": "testnsfw",
         "desc": "```Scans the image for nudity using deep ai and returns the result.```",
-        "eg": ["testnsfw"]
+        "eg": [
+            "testnsfw"
+        ]
     },
     "nsfw": {
         "usage": "nsfw <condition>",
         "desc": "```Scans the image for nudity before converting it to sticker.```",
-        "eg": ["nsfw on","nsfw off"]
+        "eg": [
+            "nsfw on",
+            "nsfw off"
+        ]
     },
     "autosticker": {
         "usage": "autosticker <condition>",
         "desc": "```Automatically makes sticker of any media sent in the group.```",
-        "eg": ["autosticker on","autosticker off"]
+        "eg": [
+            "autosticker on",
+            "autosticker off"
+        ]
     },
     "setprefix": {
         "usage": "setprefix <newprefix>",
         "desc": "```Sets the prefix to be used for bot commands.```",
-        "eg": ["setprefix !","setprefix .","setprefix #"]
+        "eg": [
+            "setprefix !",
+            "setprefix .",
+            "setprefix #"
+        ]
     },
-    "useprefix":
-    {
-        "usage":"useprefix <condition>",
+    "useprefix": {
+        "usage": "useprefix <condition>",
         "desc": "```If you want to use the bot without a prefix then turn this off.```",
-        "eg": ["useprefix on","useprefix off"]
+        "eg": [
+            "useprefix on",
+            "useprefix off"
+        ]
     },
     "botaccess": {
         "usage": "botaccess <condition>",
         "desc": "```If turned off, members other than the group admins cannot use the bot.```",
-        "eg": ["botaccess off","botaccess on"]
+        "eg": [
+            "botaccess off",
+            "botaccess on"
+        ]
     },
-
     "delete": {
         "usage": "delete",
         "desc": "```The bot will delete the tagged message.```",
-        "eg": ["delete"]
+        "eg": [
+            "delete"
+        ]
     },
     "filterabuse": {
         "usage": "filterabuse <condition>",
         "desc": "```If turned on, the bot will search for cuss words in the command and reply back with the same word!```",
-        "eg": ["filterabuse on","filterabuse off"]
+        "eg": [
+            "filterabuse on",
+            "filterabuse off"
+        ]
     },
     "market": {
         "usage": "market <arguments>",
         "desc": "```Fetches the information of given symbol from NSE. Arguments it can take are,\n📱 status - It will give the status of the market.\n📱 search <name> - It will search all the companies with this name.\n📱 details <key> - It will give all the details of the stock from NSE.\n📱 losers - It will give top 10 loosers of NSE.\n📱 gainers - It will give top 10 gainers of NSE.```",
-        "eg": ["market status","market search tata","market details tcs","market losers","market gainers"]
+        "eg": [
+            "market status",
+            "market search tata",
+            "market details tcs",
+            "market losers",
+            "market gainers"
+        ]
     },
     "sticker": {
         "usage": "sticker <arguments>",
         "desc": "```Converts the image, tagged image or video with length less than 11 seconds to sticker.```",
-        "eg": ["sticker crop nodata","sticker crop pack cheems sticker author doge","sticker nodata"]
+        "eg": [
+            "sticker crop nodata",
+            "sticker pack cheems author doge",
+            "sticker nodata",
+            "sticker crop pack cheems"
+        ]
     },
     "ytv": {
         "usage": "ytv <link>",
         "desc": "```Downloads video from the given youtube link.```",
-        "eg": ["ytv https://youtu.be/JJWE3-Q6s"]
+        "eg": [
+            "ytv https://youtu.be/JJWE3-Q6s"
+        ]
     },
     "limit": {
         "usage": "limit",
         "desc": "```This command will give the total credits used by any user.```",
-        "eg": ["limit"]
-    },
-    "gaana": {
-        "usage": "gaana <link>",
-        "desc": "```Downloads songs of gaana.com from its url.```",
-        "eg": ["gaana "]
+        "eg": [
+            "limit"
+        ]
     },
     "pin": {
         "usage": "pin <pinterest-link>",
         "desc": "```Downloads the pinterest video from its url.```",
-        "eg": ["pin https://pin.it/1f1m","pin https://pin.it/dd4f"]
+        "eg": [
+            "pin https://pin.it/1f1m",
+            "pin https://pin.it/dd4f"
+        ]
     },
     "tagall": {
         "usage": "tagall <text>",
         "desc": "```Tags all the members in the group.```",
-        "eg": ["tagall class at 7am","tagall holiday today"]
-    },
-    "adminlist": {
-        "usage": "adminlist",
-        "desc": "```Tags all the admins in the group.```",
-        "eg": ["adminlist"]
+        "eg": [
+            "tagall class at 7am",
+            "tagall holiday today"
+        ]
     },
     "groupinfo": {
         "usage": "groupinfo",
         "desc": "```Provides all the information about setting of the group.```",
-        "eg": ["groupinfo"]
+        "eg": [
+            "groupinfo"
+        ]
     },
     "purge": {
         "usage": "purge confirm",
         "desc": "```Removes all the members from the group.```",
-        "eg": ["purge confirm"]
+        "eg": [
+            "purge confirm"
+        ]
     },
     "grouplink": {
         "usage": "grouplink",
         "desc": "```Creates a group invite link for the group.```",
-        "eg": ["grouplink"]
+        "eg": [
+            "grouplink"
+        ]
     },
     "changedesc": {
         "usage": "changedesc <text>",
         "desc": "```Changes the description of the group.```",
-        "eg": ["changedesc New bot in the group.","changedesc cricket group."]
+        "eg": [
+            "changedesc New bot in the group.",
+            "changedesc cricket group."
+        ]
     },
     "botleave": {
         "usage": "botleave",
         "desc": "```The bot will leave the group.```",
-        "eg": ["botleave"]
+        "eg": [
+            "botleave"
+        ]
     },
     "join": {
         "usage": "join <link>",
         "desc": "```The bot will join the group with the invite link.```",
-        "eg": ["join "]
+        "eg": [
+            "join "
+        ]
     },
-  
     "promote": {
         "usage": "promote <tag-member>",
         "desc": "```Promotes the tagged member as an admin.```",
-        "eg": ["promote @ankit","promote @dibyam"]
+        "eg": [
+            "promote @ankit",
+            "promote @dibyam"
+        ]
     },
     "demote": {
         "usage": "demote <tag-member>",
         "desc": "```Demotes the tagged member from admin.```",
-        "eg": ["demote @ankit","demote @dibyam"]
+        "eg": [
+            "demote @ankit",
+            "demote @dibyam"
+        ]
     },
     "kick": {
         "usage": "kick <tag-member>",
         "desc": "```Removes the tagged member from the group.```",
-        "eg": ["kick @ankit","kick @dibyam"]
+        "eg": [
+            "kick @ankit",
+            "kick @dibyam"
+        ]
+    },
+    "remove": {
+        "usage": "remove <tag-member>",
+        "desc": "```Removes the tagged member from the group.```",
+        "eg": [
+            "remove @ankit",
+            "remove @dibyam"
+        ]
     },
     "close": {
         "usage": "close",
         "desc": "```Changes the setting so that only admins can message.```",
-        "eg": ["close"]
+        "eg": [
+            "close"
+        ]
     },
     "open": {
         "usage": "open",
         "desc": "```Changes the setting so that members can message.```",
-        "eg": ["open"]
+        "eg": [
+            "open"
+        ]
     },
     "rashmika": {
         "usage": "rashmika",
         "desc": "```The bot will send a Rashmika sticker♥️.```",
-        "eg": ["rashmika"]
+        "eg": [
+            "rashmika"
+        ]
     },
     "rs": {
         "usage": "rs",
         "desc": "```The bot will send a random sticker.```",
-        "eg": ["rs"]
+        "eg": [
+            "rs"
+        ]
     },
-   
     "sourcecode": {
         "usage": "sourcecode",
         "desc": "```Provids the link to the source code of the bot.```",
-        "eg": ["sourcecode"]
+        "eg": [
+            "sourcecode"
+        ]
     },
     "changedp": {
         "usage": "changedp",
         "desc": "```Sets the tagged media as profile picture of the group.```",
-        "eg": ["changedp"]
+        "eg": [
+            "changedp"
+        ]
     },
-  
     "unban": {
         "usage": "unban <tag-member>",
         "desc": "```Allow the banned user to use the bot in the group again.```",
-        "eg": ["unban @ankit","unban @dibyam"]
+        "eg": [
+            "unban @ankit",
+            "unban @dibyam"
+        ]
     },
     "shorturl": {
         "usage": "shorturl <link>",
         "desc": "```Generates a short url uf the given link using lenk.cf API.```",
-        "eg": ["shorturl https://www.hindustantimes.com/world-nes"]
+        "eg": [
+            "shorturl https://www.hindustantimes.com/world-nes"
+        ]
     },
     "add": {
         "usage": "add <number>",
         "desc": "```Adds the given number to the group.```",
-        "eg": ["add 9876543210","add 9012345678"]
+        "eg": [
+            "add 9876543210",
+            "add 9012345678"
+        ]
     },
     "lyrics": {
         "usage": "lyrics <song name>",
         "desc": "```Provides the lyrics of the given song.```",
-        "eg": ["lyrics Brown munde","lyrics Baby"]
+        "eg": [
+            "lyrics Brown munde",
+            "lyrics Baby"
+        ]
     },
     "ban": {
         "usage": "ban <tag-member>",
         "desc": "```Bans the tagged member from using the bot in this group.```",
-        "eg": ["ban @ankit","ban @dibyam"]
+        "eg": [
+            "ban @ankit",
+            "ban @dibyam"
+        ]
     },
     "banlist": {
         "usage": "banlist",
         "desc": "```Displays the list of members banned from using the bot in this group.```",
-        "eg": ["banlist"]
+        "eg": [
+            "banlist"
+        ]
     },
     "run": {
-        "usage":"run <language-code> <inputs>",
-        "desc":"```Compiles and runs the tagged code in any programming language and sends the output here. Supported language codes are - c, csharp, cpp, python3, python2, java, nodejs, kotlin, php, perl, ruby, go, rust, fortran, swift and many more. If the program takes input, it must be added after the language code seperated by spaces. In the example below it shows cpp 30 50, here 30 and 50 are two inputs. similarly in java 20 here 20 is the input. If your code does not require any input it should be left blank. After writing the code tag that code with this run command follwed by language code and inputs if required. The code should be pure as if it is written in any IDE.```",
-        "eg":["run cpp","run cpp 30 50","run python3","run java 20","run nodejs","run php","run python2"]
+        "usage": "run <language-code> <inputs>",
+        "desc": "```Compiles and runs the tagged code in any programming language and sends the output here. Supported language codes are - c, csharp, cpp, python3, python2, java, nodejs, kotlin, php, perl, ruby, go, rust, fortran, swift and many more. If the program takes input, it must be added after the language code seperated by spaces. In the example below it shows cpp 30 50, here 30 and 50 are two inputs. similarly in java 20 here 20 is the input. If your code does not require any input it should be left blank. After writing the code tag that code with this run command follwed by language code and inputs if required. The code should be pure as if it is written in any IDE.```",
+        "eg": [
+            "run cpp",
+            "run cpp 30 50",
+            "run python3",
+            "run java 20",
+            "run nodejs",
+            "run php",
+            "run python2"
+        ]
     }
 }
