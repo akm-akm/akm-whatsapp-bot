@@ -4,35 +4,33 @@
 <img src="readme/images/xxxlogo.jpeg" width=400px alt="xxxlogo" />
 </p>
 
-
 ## ✨ Highlights
 
 - 💻 4000 lines of code
 - 💖 open source
-- 💙 Written in Javascript. 
+- 💙 Written in Javascript
 - 💛 Event-Based
 - 💝 Built with [Baileys](https://github.com/adiwajshing/baileys)
-- 🖤 Integrated abuse detection.
-- ⚠️ Integrated NSFW detection.
+- 🖤 Integrated abuse detection
+- ⚠️ Integrated NSFW detection
 
 ## 📝 Features
 
-<img src="readme/demo/help.jpg" width="300px" />
-<img src="readme/demo/help1.jpg" width="300px" />
-<img src="readme/demo/help2.jpg" width="300px" />
-<img src="readme/demo/sticker.jpg" width="300px" />
-<img src="readme/demo/ytv.jpg"  width="300px"/>
-<img src="readme/demo/crypto.jpg"  width="300px"/>
-<img src="readme/demo/ss.jpg"  width="300px"/>
-<img src="readme/demo/run.jpg"  width="300px"/>
-<img src="readme/demo/ss.jpg"  width="300px"/>
-
+<img align="left" src="readme/demo/help.jpg" width="300px" />
+<img align="left"  src="readme/demo/help1.jpg" width="300px" />
+<img align="left"  src="readme/demo/help2.jpg" width="300px" />
+<img align="left"  src="readme/demo/sticker.jpg" width="300px" />
+<img align="left"  src="readme/demo/ytv.jpg"  width="300px"/>
+<img align="left"  src="readme/demo/crypto.jpg"  width="300px"/>
+<img align="left"  src="readme/demo/ss.jpg"  width="300px"/>
+<img align="left"  src="readme/demo/run.jpg"  width="300px"/>
+<img  align="left" src="readme/demo/ss.jpg"  width="300px"/>
 
 ## 💮 Hosting
 
-#### 💻 See the [Self-Hosting Guide](/src/readme/self-hosting.md)
+#### 💻 See the [Self-Hosting Guide](/readme/self-hosting.md)
 
-#### 🛰️ See the [Heroku Deploy Guide](/src/readme/heroku-hosting.md)
+#### 🛰️ See the [Heroku Deploy Guide](/readme/heroku-hosting.md)
 
 ## 💪 Contribution
 
@@ -74,7 +72,6 @@
 
 ##### 3. The bot is not responding to a particular group
 
-- The bot does not work in groups with disappearing messages turned on.
 - The group may be admins only.
 - The users may not be using the correct prefix.
 - Try `.hi` , `!hi` , `#hi` or `-hi` to see if the bot responds to any of them.
@@ -91,4 +88,4 @@
 
 ## 📜 Documentation
 
-- you are on your own.... 
+- you are on your own....
