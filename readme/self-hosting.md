@@ -88,20 +88,18 @@ LOCAL_DATABASE_URL=
 
 #### Running the above command will start the bot.
 
-! If the bot is started in production mode, it will be accessible at `http://localhost:5000`
+#### If the bot is started in production mode, it will be accessible at `http://localhost:5000`
 
 - To start the bot, go to the URL shown on the terminal.
 - Enter the password you set in the Environment variable.
 - Click on start and scan the qr code shown on the website using the WA-Web Scanner on your WhatsApp.
 - Now you're on your own. Good Luck!
 
-**! If the bot is started in development mode**
+#### If the bot is started in development mode
 
 - It will auto connect everytime you start the bot.
 - Scan the qr code shown in the terminal using the WA-Web Scanner on your WhatsApp
-- The bot will not work in group in development mode.
-
-
-
+- The bot will work in group in development mode if the commands start with /.
+- eg. `/help`, `/limit`, `rs`
 
 ###  🔗 Want to host on server ? Click [here](heroku-hosting.md)

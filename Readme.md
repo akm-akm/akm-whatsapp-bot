@@ -74,6 +74,7 @@
 
 ##### 1. The bot is not responding to anyone
 
+- Make sure you have the latest version of the bot, to get it click on fetch upstream on your forked github repo.
 - Send the command `rtrt` to restart the bot.
 - Go to to the bot website and click on the `restart` button.
 - See heroku logs and see if it is showing connected and bot name or not.
