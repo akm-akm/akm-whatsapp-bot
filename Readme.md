@@ -41,7 +41,7 @@
   </tr>
  </table>
 
-## 💮 Hosting
+## 💮 Want your bot?
 
 #### 💻 See the [Self-Hosting Guide](/readme/self-hosting.md)
 
@@ -54,18 +54,19 @@
 
 ## 💡 How to use the bot
 
-- Send `hi` to the bot.
+- Send `hi` to the bot in the inbox or hi along with prefix if in a group.
 - The bot will respond with `👋 hello`.
-- Send `help` to the bot.
+- Send `help` to the bot in the inbox or help along with prefix if in a group.
 - The bot will respond with the menu.
 
 ## 🔧 Default Configuration
 
-- Default daily limit for a normal user is `10` messages.
-- Owner and bot moderators have no limit.
+- Default daily limit for a normal user is `100` messages.
+- Owner and bot moderators have no limit and they cannot be banned in groups.
+- Owner and bot moderators have access to all group commands even if they are not admin in any group.
 - Default daily group limit is `300` messages.
 - By default, abuse detection is on.
-- Default minimum group size for the bot to work in it is `3` members.
+- Default minimum group size for the bot to work in it is `1` members.
 - These values can be changed only by the bot owner.
 - When the bot is added to any group, it will auto assign any random prefix to it, which can be changed by group admins using setprefix command.
 
@@ -73,7 +74,7 @@
 
 ##### 1. The bot is not responding to anyone
 
-- Send the command `restart` to the bot.
+- Send the command `rtrt` to restart the bot.
 - Go to to the bot website and click on the `restart` button.
 - See heroku logs and see if it is showing connected and bot name or not.
 - If not try logging out using the bot website and login again.
