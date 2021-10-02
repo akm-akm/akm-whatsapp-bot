@@ -15,6 +15,19 @@
 - 🖤 Integrated abuse detection.
 - ⚠️ Integrated NSFW detection.
 
+## 📝 Features
+
+<img src="readme/demo/help.jpg" >
+<img src="readme/demo/help1.jpg" >
+<img src="readme/demo/help2.jpg" >
+<img src="readme/demo/sticker.jpg" >
+<img src="readme/demo/ytv.jpg" >
+<img src="readme/demo/crypto.jpg" >
+<img src="readme/demo/ss.jpg" >
+<img src="readme/demo/run.jpg" >
+<img src="readme/demo/ss.jpg" />
+
+
 ## 💮 Hosting
 
 #### 💻 See the [Self-Hosting Guide](/src/readme/self-hosting.md)

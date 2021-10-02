@@ -2,7 +2,8 @@ node_modules
 .env
 public/qr.png
 package-lock.json
-*.jpg
-*.webp
-*.mp4
+/*.jpg
+/*.webp
+/*.mp4
+/*.jpeg
 pgdata
