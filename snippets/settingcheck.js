@@ -67,8 +67,8 @@ module.exports = async function settingread(arg, from, sender, groupname, client
             client.groupLeave(from);
             return
           }
-          newgroup(from, client, random).then(() => console.log("New group!"));
-          await sql.query(
+        //  newgroup(from, client, random).then(() => console.log("New group!"));
+           sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
           );
           return settingread(arg, from, sender, groupname)
