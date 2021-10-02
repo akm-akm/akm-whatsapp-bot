@@ -1,7 +1,7 @@
 <h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
 
 <p align="center">
-<img src="/readme/images/logo.jpeg" width=400px alt="xxxlogo" />
+<img src="readme/images/xxxlogo.jpeg" width=400px alt="xxxlogo" />
 </p>
 
 
