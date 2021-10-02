@@ -41,15 +41,15 @@
   </tr>
  </table>
 
-<img align="left" src="readme/demo/help.jpg" width="300px" />
-<img align="left"  src="readme/demo/help1.jpg" width="300px" />
-<img align="left"  src="readme/demo/help2.jpg" width="300px" />
-<img align="left"  src="readme/demo/sticker.jpg" width="300px" />
-<img align="left"  src="readme/demo/ytv.jpg"  width="300px"/>
-<img align="left"  src="readme/demo/crypto.jpg"  width="300px"/>
-<img align="left"  src="readme/demo/ss.jpg"  width="300px"/>
-<img align="left"  src="readme/demo/run.jpg"  width="300px"/>
-<img  align="left" src="readme/demo/ss.jpg"  width="300px"/>
+<img  src="readme/demo/help.jpg" width="300px" />
+<img   src="readme/demo/help1.jpg" width="300px" />
+<img   src="readme/demo/help2.jpg" width="300px" />
+<img   src="readme/demo/sticker.jpg" width="300px" />
+<img   src="readme/demo/ytv.jpg"  width="300px"/>
+<img   src="readme/demo/crypto.jpg"  width="300px"/>
+<img   src="readme/demo/ss.jpg"  width="300px"/>
+<img   src="readme/demo/run.jpg"  width="300px"/>
+<img  src="readme/demo/ss.jpg"  width="300px"/>
 
 ## 💮 Hosting
 
