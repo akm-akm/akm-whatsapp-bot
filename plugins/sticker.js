@@ -8,8 +8,8 @@ const { text, sticker } = MessageType;
 const { ai } = require("./deepai");
 const stickermaker = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
-    let infor5 = { ...infor4 };
-    let xxx = { ...xxx3 };
+    const infor5 = { ...infor4 };
+    const xxx = { ...xxx3 };
 
     arg = infor5.arg;
     const content = JSON.stringify(xxx.message);
@@ -107,7 +107,7 @@ const stickermaker = (infor4, client, xxx3) =>
       const media = await client.downloadAndSaveMediaMessage(encmedia);
       ran = getRandom(".webp");
       if (infor5.groupdata.nsfw) {
-        let nsfw = await ai(media)
+        const nsfw = await ai(media)
         if (nsfw.output.nsfw_score > 0.5) {
           client.sendMessage(from, "🌚", text, {
             quoted: xxx
@@ -121,11 +121,7 @@ const stickermaker = (infor4, client, xxx3) =>
         .input(media)
         .on("error", function (err) {
           fs.unlinkSync(media);
-          console.log(`Error : ${err}`);
-          ran = path.join(__dirname, "../media/stickers/error.webp");
-          client.sendMessage(from, fs.readFileSync(ran), sticker, {
-            quoted: xxx,
-          });
+         reject()
         })
         .on("end", function () {
           buildSticker();
@@ -153,7 +149,6 @@ const stickermaker = (infor4, client, xxx3) =>
           });
 
           resolve();
-          //   fs.unlinkSync(media);
           fs.unlinkSync(ran);
         }
       }
@@ -178,11 +173,7 @@ const stickermaker = (infor4, client, xxx3) =>
         .inputFormat(media.split(".")[1])
         .on("error", function (err) {
           fs.unlinkSync(media);
-          mediaType = media.endsWith(".mp4") ? "video" : "gif";
-          ran = path.join(__dirname, "../media/stickers/error.webp");
-          client.sendMessage(from, fs.readFileSync(ran), sticker, {
-            quoted: xxx,
-          });
+         reject()
         })
         .on("end", function () {
           buildSticker();
@@ -224,7 +215,7 @@ const stickermaker = (infor4, client, xxx3) =>
       resolve();
     }
     else {
-      client.sendMessage(from, "🤖 ```Tag the media or send it with the command to make a sticker.```", text, { quoted: xxx });
+      client.sendMessage(from, "🤖 ```Tag the image or send it with the command.```", text, { quoted: xxx });
       resolve();
     }
   });

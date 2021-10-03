@@ -7,18 +7,18 @@ services:
       - db
     ports:
       - '5000:5000'
+    environment:
+      - LOCAL_DATABASE_URL: postgresql://bot:bot@db:5432/bot
   db:
     image: 'postgres'
-    ports:
-      - '5431:5432'
     environment:
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'root'
+      POSTGRES_USER: 'bot'
+      POSTGRES_PASSWORD: 'bot'
       POSTGRES_DB: 'bot'
     volumes:
       - './pgdata:/var/lib/postgresql/data'
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:5431"]
+        test: ["CMD", "curl", "-f", "http://localhost:5432"]
         interval: 5s
         timeout: 10s
         retries: 5

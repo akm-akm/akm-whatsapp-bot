@@ -9,12 +9,16 @@ const {
 const {
     text
 } = MessageType;
+
 const sql = require(path.join(__dirname, "../snippets/ps"));
 const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
-    let infor5 = { ...infor4 };
-    let xxx = { ...xxx3 };
-
+    const infor5 = { ...infor4 };
+    const xxx = { ...xxx3 };
+    const from = infor5.from;
     if (infor5.number !== process.env.OWNER_NUMBER) {
+        client.sendMessage(from, mess.only.ownerB, text, {
+            quoted: xxx,
+        });
         reject()
         return;
     }
@@ -28,7 +32,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 { buttonId: 'stp1', buttonText: { displayText: 'button3' }, type: 1 },
             ]
             const buttonMessage = {
-                contentText: "```This is a button message```",
+                contentText: "```This is a useless button message```",
                 footerText: 'testing',
                 buttons: buttons,
                 headerType: 1
@@ -60,7 +64,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
         case 'sql':
-            let cmd = infor5.arg.slice(1).join(" ");
+            const cmd = infor5.arg.slice(1).join(" ");
             console.log(`Command: ${cmd}`);
             sql.query(cmd).then(result => {
                 client.sendMessage(from, JSON.stringify(result.rows, null, "\t"), text, {

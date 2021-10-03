@@ -38,16 +38,16 @@ const getRandom = (ext) => {
 };
 const grp = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
-    let infor5 = {
+    const infor5 = {
       ...infor4
     };
-    let xxx = {
+    const xxx = {
       ...xxx3
     };
 
-    arg = infor5.arg;
-    from = infor5.from;
-    sender = infor5.sender;
+    const arg = infor5.arg;
+    const from = infor5.from;
+    const sender = infor5.sender;
     const isGroup = from.endsWith("@g.us");
     const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
     const groupMembers = isGroup ? groupMetadata.participants : "";
@@ -593,7 +593,7 @@ const grp = (infor4, client, xxx3) =>
           resolve()
           return;
         }
-        if (infor5.botdata.moderators.includes(z)) {
+        if (infor5.botdata.moderators.includes(z) || z == process.env.OWNER_NUMBER) {
           client.sendMessage(from, "🤖 ```Can not ban the bot moderator.```", text, {
             quoted: xxx,
           });

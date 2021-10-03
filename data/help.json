@@ -1,4 +1,60 @@
 {
+    "rtrt": {
+        "usage": "rtrt",
+        "desc": "```The bot will restart in a minute.```",
+        "eg": [
+            "rtrt"
+        ]
+    },
+    "rst": {
+        "usage": "rst",
+        "desc": "```The bot will reset daily session.```",
+        "eg": [
+            "rst"
+        ]
+    },
+    "sql": {
+        "usage": "sql <query>",
+        "desc": "```The bot will perform the given sqlquery on its postgres databse.```",
+        "eg": [
+            "sql select * from groupdata;",
+            "sql select * from messagecount;","sql select * from botdata;","update botdata set "
+        ]
+    },
+    "dul": {
+        "usage": "dul <argument>",
+        "desc": "```The bot will change the daily user limit.```",
+        "eg": [
+            "dul 50",
+            "dul 100"
+        ]
+    },
+    "dgl": {
+        "usage": "dgl <argument>",
+        "desc": "```The bot will change the daily group limit.```",
+        "eg": [
+            "dgl 300",
+            "dgl 200"
+        ]
+    },
+    "mdr": {
+        "usage": "mdr <@tag-member>",
+        "desc": "```The bot will make the tageed user a moderator of the bot.```",
+        "eg": [
+            "mdr @ankit",
+            "mdr @messi",
+            "mdr 15123479768"
+        ]
+    },
+    "mgs": {
+        "usage": "mgs <argument>",
+        "desc": "```The bot will change the minimum group size for the bot to work in it.```",
+        "eg": [
+            "mgs 5",
+            "mgs 10",
+            "mgs 20"
+        ]
+    },
     "invite": {
         "usage": "invite <group-link>",
         "desc": "```The bot joins the group using the given invite link.```",
@@ -30,6 +86,13 @@
         "desc": "```Scans the image for nudity using deep ai and returns the result.```",
         "eg": [
             "testnsfw"
+        ]
+    },
+    "faq": {
+        "usage": "faq",
+        "desc": "```The bot will send some frequently asked questions about the bot.```",
+        "eg": [
+            "faq"
         ]
     },
     "nsfw": {
@@ -113,7 +176,7 @@
         "usage": "ytv <link>",
         "desc": "```Downloads video from the given youtube link.```",
         "eg": [
-            "ytv https://youtu.be/JJWE3-Q6s"
+            "ytv youtu.be/JJWE3-Q6s","ytv youtu.be/Tjdu4-yhd"
         ]
     },
     "limit": {

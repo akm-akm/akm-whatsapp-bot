@@ -36,7 +36,7 @@
   </tr> <tr>
     <td><img src="readme/demo/crypto.jpg" width=300></td>
     <td><img src="readme/demo/run.jpg" width=300></td>
-    <td><img src="readme/demo/help2.jpg" width=300></td>
+    <td><img src="readme/demo/help.jpg" width=300></td>
 
   </tr>
  </table>

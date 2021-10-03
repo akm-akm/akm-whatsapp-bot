@@ -31,17 +31,24 @@ let message;
 const crypto = (infor4, client, xxx3) =>
   new Promise((resolve, reject) => {
     let c = 0;
-    let infor5 = { ...infor4 };
-    let xxx = { ...xxx3 };
-
-    arg = infor5.arg;
-    from = infor5.from;
+    const infor5 = { ...infor4 };
+    const xxx = { ...xxx3 };
+    const arg = infor5.arg;
+    const from = infor5.from;
 
     if (arg.length == 1) {
       infor5.arg = ["help", arg[0]]
       help(infor5, client, xxx, 1);
       reject()
       return
+    }
+    if (process.env.COINMARKETCAP_API_KEY === undefined) {
+      client.sendMessage(from, "🤖 ```COINMARKETCAP_API_KEY environment variable is not set. Contact the bot owner.```"
+        , text, {
+        quoted: xxx
+      })
+      resolve()
+      return;
     }
     if (!coins.includes(arg[1].toUpperCase())) {
 
@@ -54,7 +61,7 @@ const crypto = (infor4, client, xxx3) =>
         .then(function (response) {
           response.data.data.forEach((element) => {
             if (element.symbol == arg[1].toUpperCase()) {
-              c = element.quote.USD;
+              c = element.quoted.USD;
               message =
                 "*" +
                 arg[1].toUpperCase() +

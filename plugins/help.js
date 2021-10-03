@@ -33,7 +33,7 @@ const help = (infor4, client, xxx3, syntax) =>
 
     if (arg.length == 1) {
       cas = infor5.number === process.env.OWNER_NUMBER ?
-        "🎩 *Owner only* :\n```rst : Reset daily session,\ndul : Change daily user limit,\ndgl : Change daily group limit,\nmgs : Minimum group size,\nsql : Database query,\nmdr : Add bot moderators,\nrtrt: Restart the bot,\nstp : Shutdown the bot```\n\n"
+        "🎩 *Owner only* :\n```rst, dul, dgl, mgs, sql, mdr, rtrt, stp```\n\n"
         : "";
 
       const grpcmds = isGroupAdmins ? "👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";

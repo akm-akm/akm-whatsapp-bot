@@ -6,13 +6,13 @@ const getRandom = (ext) => {
 const path = require("path");
 
 const { MessageType } = require("@adiwajshing/baileys");
-const { text,video } = MessageType;
+const { video } = MessageType;
 const { help } = require(path.join(__dirname, "./help"));
 
 const youtube = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
-    let infor5 = { ...infor4 };
-    let xxx = { ...xxx3 };
+    const infor5 = { ...infor4 };
+    const xxx = { ...xxx3 };
 
     try{
     arg = infor5.arg;
@@ -24,7 +24,7 @@ const youtube = (infor4, client, xxx3) =>
       return;
     }
 
-    let info = await ytdl.getInfo(ytdl.getURLVideoID(url));
+    const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
     vid = getRandom(".mp4");
     msg = "```" +
       info.videoDetails.title +

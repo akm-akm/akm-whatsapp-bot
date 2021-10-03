@@ -7,11 +7,11 @@ const { help } = require(path.join(__dirname, "./help"));
 
 const shorturl = (infor4, client, xxx3) =>
     new Promise((resolve, reject) => {
-        let infor5 = { ...infor4 };
-        let xxx = { ...xxx3 };
+        const infor5 = { ...infor4 };
+        const xxx = { ...xxx3 };
 
-        arg = infor5.arg
-        from = infor5.from;
+        const arg = infor5.arg
+        const from = infor5.from;
         if (arg.length == 1) {
             infor5.arg = ["help", arg[0]]
             help(infor5, client, xxx, 1);
@@ -31,7 +31,7 @@ const shorturl = (infor4, client, xxx3) =>
                     resolve()
                     return
                 }
-                msg = "🤖 ```shortened url is:```" + "\n" +
+                const msg = "🤖 ```shortened url is:```" + "\n" +
                     "```https://lenk.cf/```" +
                     "```" +
                     response.data +
@@ -49,11 +49,11 @@ const shorturl = (infor4, client, xxx3) =>
             .catch(() => {
                 client.sendMessage(from, "🤖  ```Server error.```", text, {
                     quoted: xxx,
-                    
+
                 });
                 reject(infor5)
             })
     });
 
-  
+
 module.exports.shorturl = shorturl;

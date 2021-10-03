@@ -12,11 +12,19 @@ const { help } = require(path.join(__dirname, "./help"));
 
 const googlesearchsticker = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
-        let infor5 = { ...infor4 };
-        let xxx = { ...xxx3 };
-        arg = infor5.arg;
+        const infor5 = { ...infor4 };
+        const xxx = { ...xxx3 };
+        const arg = infor5.arg;
+        const from = infor5.from;
 
-        const from = xxx.key.remoteJid;
+        if (process.env.SEARCH_STICKER === undefined) {
+            client.sendText(from, "🤖 ```SEARCH_STICKER environment variable is not set. Contact the bot owner.```"
+                , text, {
+                quoted: xxx
+            })
+            resolve()
+            return;
+        }
         const getRandom = (ext) => {
             return `${Math.floor(Math.random() * 10000)}${ext}`;
         };
@@ -70,7 +78,6 @@ const googlesearchsticker = (infor4, client, xxx3) =>
 
         axios.request(options).then(async response1 => {
             const random = Math.floor(Math.random() * (response1.data.value.length >= 20 ? 19 : response1.data.value.length));
-            //console.log(response1.data.value[random], random, response1.data.value.length);
             const packName = a + " - " + random;
             const imageurl = response1.data.value[random].url;
             const media = getRandom(".jpg");
@@ -123,7 +130,7 @@ const googlesearchsticker = (infor4, client, xxx3) =>
             });
         }
         ).catch(e => {
-           
+
             reject(infor5)
 
         });

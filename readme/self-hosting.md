@@ -100,6 +100,6 @@ SEARCH_STICKER=
 - It will auto connect everytime you start the bot.
 - Scan the qr code shown in the terminal using the WA-Web Scanner on your WhatsApp
 - The bot will work in group in development mode if the commands start with /.
-- eg. `/help`, `/limit`, `rs`
+- eg. `/help`, `/limit`, `/rs`
 
 ### 🔗 Want to host on server ? Click [here](heroku-hosting.md)

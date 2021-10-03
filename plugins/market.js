@@ -23,7 +23,7 @@ function searchTransformer(isIndex) {
   }
 
   return function (data) {
-    let matches = data.match(/<li>(.*?)<\/li>/g);
+    const matches = data.match(/<li>(.*?)<\/li>/g);
     return matches.map(function (value1) {
       let symbol = value1.match(matcher);
       value1 = stripTags(value1).replace(symbol[1], "");
@@ -37,11 +37,10 @@ function searchTransformer(isIndex) {
 
 const market = (infor4, client, xxx3) =>
   new Promise((resolve, reject) => {
-    let infor5 = { ...infor4 };
-    let xxx = { ...xxx3 };
-
-    arg = infor5.arg
-    from = infor5.from;
+    const infor5 = { ...infor4 };
+    const xxx = { ...xxx3 };
+    const arg = infor5.arg
+    const from = infor5.from;
 
     if (arg.length == 1) {
       infor5.arg = ["help", arg[0]]

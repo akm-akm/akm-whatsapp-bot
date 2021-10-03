@@ -3,8 +3,11 @@ const server = new express();
 const port = process.env.PORT || 5000;
 const path = require("path");
 const node = require('node-cron');
-require(path.join(__dirname, "./snippets/config"));
-const sql = require(path.join(__dirname, "./snippets/ps"));
+
+setTimeout(() => {
+  require(path.join(__dirname, "./snippets/config"));
+  sql = require(path.join(__dirname, "./snippets/ps"));
+}, 6000)
 
 
 const {

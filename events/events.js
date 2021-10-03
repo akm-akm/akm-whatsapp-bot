@@ -54,14 +54,12 @@ async function connect() {
       console.log("scan the qr above ");
     });
     client.on("connecting", () => {
-      // //console.clear();
       console.log("connecting...");
     });
     await client.connect({
       timeoutMs: 30 * 1000
     });
     client.on("open", () => {
-      //console.clear();
       console.log("connected");
       console.log(`credentials updated!`);
       fs.unlink("./public/qr.png", () => { });
@@ -130,7 +128,6 @@ async function main() {
 
 
   try {
-    //console.clear();
     client.logger.level = "fatal";
     await connect();
     client.browserDescription = ["chrome", "xXx BOT", "10.0"];
@@ -211,7 +208,6 @@ async function main() {
         const isGroupAdmins = groupAdmins.includes(sender) || false;
         const groupName = isGroup ? groupMetadata.subject : "inbox";
         const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
-        if (process.env.NODE_ENV !== "production" && infor.number !== process.env.OWNER_NUMBER) return
 
         if (!
           ((infor.canmemberusebot || isGroupAdmins) &&
@@ -237,7 +233,6 @@ async function main() {
 
         if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit) {
           client.sendMessage(infor.from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
-          // count('203')
 
           count(infor)
           return
@@ -250,7 +245,6 @@ async function main() {
         };
         console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + infor1.arg.join(" ") + ']'));
 
-        //  console.log(infor1);
         switchcase(infor1, client, xxx4);
 
       } catch (error) {
