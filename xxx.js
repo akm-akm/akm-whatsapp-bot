@@ -20,7 +20,3 @@ String.prototype.hash1 = function () {
     }
     return hash;
 }
-console.log("1teat".hash());
-console.log("1teat".hash1());
-
-
