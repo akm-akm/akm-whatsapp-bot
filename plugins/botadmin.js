@@ -2,14 +2,14 @@ const fs = require("fs");
 const path = require("path");
 const mess = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
-);
+); const { help } = require(path.join(__dirname, "./help"));
+
 const {
     MessageType
 } = require("@adiwajshing/baileys");
 const {
     text
 } = MessageType;
-
 const sql = require(path.join(__dirname, "../snippets/ps"));
 const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
     const infor5 = { ...infor4 };
@@ -19,7 +19,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
         client.sendMessage(from, mess.only.ownerB, text, {
             quoted: xxx,
         });
-        reject()
+        resolve()
         return;
     }
     switch (infor5.arg[0]) {
@@ -64,6 +64,12 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
         case 'sql':
+            if (arg.length == 1) {
+                infor5.arg = ["help", arg[0]]
+                help(infor5, client, xxx, 1);
+                resolve()
+                return
+            }
             const cmd = infor5.arg.slice(1).join(" ");
             console.log(`Command: ${cmd}`);
             sql.query(cmd).then(result => {
@@ -97,13 +103,13 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
         case "dul":
-            if (infor5.arg.length < 2) {
-                client.sendMessage(from, '🤖 ```Enter the number to be set as daily user limit.```', text, {
-                    quoted: xxx,
-                });
-                resolve();
-                return;
+            if (arg.length == 1) {
+                infor5.arg = ["help", arg[0]]
+                help(infor5, client, xxx, 1);
+                resolve()
+                return
             }
+          
             if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 1000) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily user limit.```', text, {
                     quoted: xxx,
@@ -130,12 +136,11 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
         case "mgs":
-            if (infor5.arg.length < 2) {
-                client.sendMessage(from, '🤖 ```Enter the number to be set as minimum group size.```', text, {
-                    quoted: xxx,
-                });
-                resolve();
-                return;
+            if (arg.length == 1) {
+                infor5.arg = ["help", arg[0]]
+                help(infor5, client, xxx, 1);
+                resolve()
+                return
             }
             if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 257) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily limit.```', text, {
@@ -163,12 +168,11 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
         case "dgl":
-            if (infor5.arg.length < 2) {
-                client.sendMessage(from, '🤖 ```Enter the number to be set as daily group limit.```', text, {
-                    quoted: xxx,
-                });
-                resolve();
-                return;
+            if (arg.length == 1) {
+                infor5.arg = ["help", arg[0]]
+                help(infor5, client, xxx, 1);
+                resolve()
+                return
             }
             if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 1000) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily group limit.```', text, {
@@ -194,18 +198,17 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
         case "mdr":
-            if (infor5.arg.length < 2) {
-                client.sendMessage(from, '🤖 ```Enter the number with cc to be set as moderator or tag the user.```', text, {
-                    quoted: xxx,
-                });
-                resolve();
-                return;
+            if (arg.length == 1) {
+                infor5.arg = ["help", arg[0]]
+                help(infor5, client, xxx, 1);
+                resolve()
+                return
             }
             const z = infor5.arg[1].replace('@', '').replace('+', '');
             sql.query(
                 `UPDATE botdata SET moderators = array_append(moderators, '${z}');`);
             sql.query(
-                `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}';`
+                `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}');`
             ).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
