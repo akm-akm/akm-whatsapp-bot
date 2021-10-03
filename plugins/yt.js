@@ -13,48 +13,49 @@ const youtube = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
     const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-
-    try{
-    arg = infor5.arg;
-    url = arg[1];
-    if (infor5.arg.length == 1) {
-      infor5.arg = ["help", arg[0]]
-      help(infor5, client, xxx, 1);
-      resolve();
-      return;
-    }
-
-    const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
-    vid = getRandom(".mp4");
-    msg = "```" +
-      info.videoDetails.title +
-      "```\n\n" +
-      "🍟 *Author:* " +
-      "```" +
-      info.videoDetails.author.name +
-      "```\n" +
-      "🎥 *Views:*  " +
-      "```" +
-      info.videoDetails.viewCount +
-      "```\n" +
-      "👍 *Likes:*  " +
-      "```" +
-      info.videoDetails.likes +
-      "```\n" +
-      "👎 *Disikes:*  " +
-      "```" +
-      info.videoDetails.dislikes +
-      "```";
-    ytdl(url)
-      .pipe(fs.createWriteStream(vid))
-      .on("finish", async() => {
-        await client.sendMessage(from, fs.readFileSync(vid), video, { quoted: xxx, caption: msg });
-        fs.unlinkSync(vid)
-      });
-
-    resolve();
+    const from = infor5.from;
+    const arg = infor5.arg;
+    const url = arg[1];
+    try {
      
-    }catch(err){
+      if (infor5.arg.length == 1) {
+        infor5.arg = ["help", arg[0]]
+        help(infor5, client, xxx, 1);
+        resolve();
+        return;
+      }
+
+      const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
+      const vid = getRandom(".mp4");
+      msg = "```" +
+        info.videoDetails.title +
+        "```\n\n" +
+        "🍟 *Author:* " +
+        "```" +
+        info.videoDetails.author.name +
+        "```\n" +
+        "🎥 *Views:*  " +
+        "```" +
+        info.videoDetails.viewCount +
+        "```\n" +
+        "👍 *Likes:*  " +
+        "```" +
+        info.videoDetails.likes +
+        "```\n" +
+        "👎 *Disikes:*  " +
+        "```" +
+        info.videoDetails.dislikes +
+        "```";
+      ytdl(url)
+        .pipe(fs.createWriteStream(vid))
+        .on("finish", async () => {
+          await client.sendMessage(from, fs.readFileSync(vid), video, { quoted: xxx, caption: msg });
+          fs.unlinkSync(vid)
+        });
+
+      resolve();
+
+    } catch (err) {
       reject(infor5)
     }
   });
