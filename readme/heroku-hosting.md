@@ -1,11 +1,9 @@
 # 🤖️ Heroku Deployment Guide 🤖️
 
-
 ## ⛵ Pre-requisite
 - 🌐️ Internet 🌐️️
 - 🧠️ Brain 🧠️
 - 🎵️ Music 🎵️
-
 
 ## 🍀 Deployment
 
@@ -13,16 +11,16 @@
 - Create an account [Heroku](https://signup.heroku.com/login).
 - Create a [new app](https://dashboard.heroku.com/new-app).
 - Now select github under deployment method.
- <br/><img width = "500px" src='images\connectgithub.png' ></img>
+ <br/><img width = "500px" src='images/connectgithub.png' ></img>
 - input xxx-bot and search and connect the repo displayed.
 - now under resources tab select add addons.
- <br/><img width = "500px"  src='images\herokupostgres.png'></img>
+ <br/><img width = "500px"  src='images/herokupostgres.png'></img>
 - Search heroku postgres and click on the result.
 - Then click on submit order form on the pop up.
 - Now under settinngs tab click on reveal config vars.
- <br/><img  width = "500px" src='images\herokuconfigvars.png'></img>
+ <br/><img  width = "500px" src='images/herokuconfigvars.png'></img>
 - Now under config vars input the values shown in `.env.example`.
- <br/><img width = "500px"  src='images\herokuenv.png'></img>
+ <br/><img width = "500px"  src='images/herokuenv.png'></img>
 
 ```env
 COINMARKETCAP_API_KEY=
@@ -55,7 +53,7 @@ SEARCH_STICKER=
 `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/contextualwebsearch/api/web-search) if you want to use the search sticker (ss) feature. (optional)
 
 - Now click on Deploy tab and scroll to the bottom and click on deploy.
- <br/><img width = "500px" src='images\deploy.png'></img>
+ <br/><img width = "500px" src='images/deploy.png'></img>
 - Now the bot will be deployed in under a minute.
 
 # ‼️‼️ FAiling to do the below step will stop the bot from working.
@@ -69,13 +67,13 @@ SEARCH_STICKER=
 ## 🤖 Running
 
 - Now click on view.
- <br/><img  width = "500px" src='images\viewheroku.png'></img>
+ <br/><img  width = "500px" src='images/viewheroku.png'></img>
 - The website will open in your browser. Login using the password you entered in the previous step.
- <br/><img  width = "500px" src='images\sitelogin.png'></img>
+ <br/><img  width = "500px" src='images/sitelogin.png'></img>
 - Click on start and scan the qr code shown on the website using the WA-Web Scanner on your WhatsApp.
- <br/><img  width = "500px" src='images\scan.png'></img>
+ <br/><img  width = "500px" src='images/scan.png'></img>
 - On successful login you will see connected written on the button.
- <br/><img width = "500px"  src='images\connected.png'></img>
+ <br/><img width = "500px"  src='images/connected.png'></img>
 - Now close the browser.
 
-###  🔗 Want to test on you computer? Click [here](self-hosting.md)
+### 🔗 Want to test on you computer? Click [here](self-hosting.md)
