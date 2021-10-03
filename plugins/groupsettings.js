@@ -600,7 +600,13 @@ const grp = (infor4, client, xxx3) =>
           resolve()
           return;
         }
-
+        if (z == infor5.number) {
+          client.sendMessage(from, "🤖 ```You cannot ban yourself.```", text, {
+            quoted: xxx,
+          });
+          resolve()
+          return;
+        }
         await sql.query(
           `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
         );
