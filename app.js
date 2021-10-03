@@ -9,7 +9,6 @@ setTimeout(() => {
   sql = require(path.join(__dirname, "./snippets/ps"));
 }, 3000)
 
-console.log(process.env);
 const {
   main,
   logout,
