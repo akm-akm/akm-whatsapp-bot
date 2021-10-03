@@ -17,7 +17,7 @@ const youtube = (infor4, client, xxx3) =>
     const arg = infor5.arg;
     const url = arg[1];
     try {
-     
+
       if (infor5.arg.length == 1) {
         infor5.arg = ["help", arg[0]]
         help(infor5, client, xxx, 1);
@@ -27,7 +27,7 @@ const youtube = (infor4, client, xxx3) =>
 
       const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
       const vid = getRandom(".mp4");
-      msg = "```" +
+      const msg = "```" +
         info.videoDetails.title +
         "```\n\n" +
         "🍟 *Author:* " +

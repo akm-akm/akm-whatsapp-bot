@@ -523,7 +523,7 @@ const grp = (infor4, client, xxx3) =>
 
         if (arg.length > 1) {
           arg.shift();
-          msg = arg.join(" ") + "\n;"
+          msg = arg.join(" ") + "\n"
         } else msg = "👋 ```Hello Everyone```\n";
         for (let member of groupMembers) {
           msg += `\n🤖 @${member.jid.split("@")[0]}`;
