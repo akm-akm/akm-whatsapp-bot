@@ -7,9 +7,9 @@ const node = require('node-cron');
 setTimeout(() => {
   require(path.join(__dirname, "./snippets/config"));
   sql = require(path.join(__dirname, "./snippets/ps"));
-}, 6000)
+}, 3000)
 
-
+console.log(process.env);
 const {
   main,
   logout,

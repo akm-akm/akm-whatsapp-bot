@@ -39,7 +39,7 @@
     },
     "mdr": {
         "usage": "mdr <@tag-member>",
-        "desc": "```The bot will make the tageed user a moderator of the bot.```",
+        "desc": "```The bot will prmoote the tagged user a moderator of the bot.```",
         "eg": [
             "mdr @ankit",
             "mdr @messi",
