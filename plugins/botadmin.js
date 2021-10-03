@@ -32,7 +32,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 { buttonId: 'stp1', buttonText: { displayText: 'button3' }, type: 1 },
             ]
             const buttonMessage = {
-                contentText: "```This is a useless button message```",
+                contentText: "```This is a useless button message in development.```",
                 footerText: 'testing',
                 buttons: buttons,
                 headerType: 1
@@ -193,9 +193,6 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
 
-
-
-
         case "mdr":
             if (infor5.arg.length < 2) {
                 client.sendMessage(from, '🤖 ```Enter the number with cc to be set as moderator or tag the user.```', text, {
@@ -204,9 +201,11 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve();
                 return;
             }
-            z = infor5.arg[1];
+            const z = infor5.arg[1].replace('@', '').replace('+', '');
             sql.query(
-                `UPDATE botdata SET moderators = array_append(moderators, '${z.replace('@', '')}');`
+                `UPDATE botdata SET moderators = array_append(moderators, '${z}');`);
+            sql.query(
+                `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}';`
             ).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
