@@ -1,13 +1,10 @@
 const fs = require("fs");
 const ytdl = require("ytdl-core");
+const axios = require('axios');
 const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}${ext}`;
 };
 const path = require("path");
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
-const ffmpeg = require("fluent-ffmpeg");
-ffmpeg.setFfmpegPath(ffmpegPath);
-
 const { MessageType } = require("@adiwajshing/baileys");
 const { video } = MessageType;
 const { help } = require(path.join(__dirname, "./help"));
@@ -28,8 +25,21 @@ const youtube = (infor4, client, xxx3) =>
         return;
       }
       const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
+      const thumb = getRandom(".jpg");
+      const file = fs.createWriteStream(thumb);
+
+      axios.request({
+        url: info.videoDetails.thumbnails.pop().url,
+        method: 'GET',
+        responseType: 'stream'
+      }).then(response => {
+        response.data.pipe(file);
+        file.on('finish', () => {
+          file.close(async () => {
+          });
+        });
+      })
       const vid = getRandom(".mp4");
-      const thumb = getRandom(".jpg")
       const msg = "🎪 *Title  :*\n" + "```" +
         info.videoDetails.title +
         "```\n\n" +
@@ -53,29 +63,23 @@ const youtube = (infor4, client, xxx3) =>
         .pipe(fs.createWriteStream(vid))
         .on("finish", async () => {
          
-          ffmpeg(`./${vid}`)
-            .screenshots({
-              count: 1,
-              filename: thumb,
-              folder: "./media/temp/"
-            }).on("end", async () => {
+         
               await client.sendMessage(from, fs.readFileSync(vid), video,
                 {
                   quoted: xxx,
                   caption: msg,
-                  thumbnail: fs.readFileSync(path.join(__dirname, `../media/temp/${thumb}`)),
+                  thumbnail: fs.readFileSync(thumb)
                 });
-              fs.unlinkSync(vid);
-              fs.unlinkSync(path.join(__dirname, `../media/temp/${thumb}`));
+          fs.unlinkSync(vid);
+          fs.unlinkSync(thumb);
             });
 
-        });
 
       resolve();
 
     } catch (err) {
       fs.unlinkSync(vid);
-      fs.unlinkSync(path.join(__dirname, `../media/temp/${thumb}`));
+      fs.unlinkSync(thumb);
 
       reject(infor5)
     }
