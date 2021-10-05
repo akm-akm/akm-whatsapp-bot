@@ -9,7 +9,7 @@ const { shorturl } = require(path.join(__dirname, "../plugins/shorturl"));
 const { savedsticker } = require(path.join(__dirname, "../plugins/savedsticker"));
 const { sourcecode } = require(path.join(__dirname, "../plugins/sourcecode"));
 const { stickermaker } = require(path.join(__dirname, "../plugins/sticker"));
-const { googlesearchsticker } = require(path.join(__dirname, "../plugins/googleSearchSticker"));
+const { searchSticker } = require(path.join(__dirname, "../plugins/searchSticker"));
 const { pinterest } = require(path.join(__dirname, "../plugins/pinterest"));
 const { coderunner } = require(path.join(__dirname, "../plugins/coderunner"));
 const { grp } = require(path.join(__dirname, "../plugins/groupsettings"));
@@ -161,7 +161,7 @@ async function switchcase(infor2, client, xxx4) {
     case "sticker":
       stickermaker(infor3, client, xxx3)
         .then(() => {
-          
+
           count(infor3)
         })
         .catch((infor5) => {
@@ -170,7 +170,7 @@ async function switchcase(infor2, client, xxx4) {
       break;
 
     case "ss":
-      googlesearchsticker(infor3, client, xxx3)
+      searchSticker(infor3, client, xxx3)
         .then(() => {
 
           count(infor3)
@@ -302,19 +302,19 @@ async function switchcase(infor2, client, xxx4) {
     case "heyy":
     case "heyyyy":
     case "heyyy":
-      client.sendMessage(from, ["👋 ```Hello```",  "👋 ```Hi```", "👋 ```Hey```"][Math.floor(Math.random() * 3)], text, {
+      client.sendMessage(from, ["👋 ```Hello```", "👋 ```Hi```", "👋 ```Hey```"][Math.floor(Math.random() * 3)], text, {
         quoted: xxx3,
       });
       count(infor3)
       break;
-    
+
     case "goodmorning":
-      client.sendMessage(from,"👋 ```Goodmorning```", text, {
+      client.sendMessage(from, "👋 ```Goodmorning```", text, {
         quoted: xxx3,
       });
       count(infor3)
       break;
-    
+
     case "goodnight":
       client.sendMessage(from, "👋 ```Goodnight```", text, {
         quoted: xxx3,

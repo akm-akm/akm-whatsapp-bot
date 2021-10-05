@@ -51,7 +51,7 @@ SEARCH_STICKER=
 
 `DEEPAI` The api key for nsfw detection in images from deepai.org. (optional)
 
-`SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/contextualwebsearch/api/web-search) if you want to use the search sticker (ss) feature. (optional)
+`SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
 
 - Now click on Deploy tab and scroll to the bottom and click on deploy.
  <br/><img width = "500px" src='images/deploy.png'></img>

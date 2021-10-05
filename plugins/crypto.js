@@ -61,7 +61,7 @@ const crypto = (infor4, client, xxx3) =>
         .then(function (response) {
           response.data.data.forEach((element) => {
             if (element.symbol == arg[1].toUpperCase()) {
-              c = element.quoted.USD;
+              c = element.quote.USD;
               message =
                 "*" +
                 arg[1].toUpperCase() +

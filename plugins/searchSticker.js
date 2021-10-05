@@ -10,7 +10,7 @@ const path = require("path");
 
 const { help } = require(path.join(__dirname, "./help"));
 
-const googlesearchsticker = (infor4, client, xxx3) =>
+const searchSticker = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
         const infor5 = { ...infor4 };
         const xxx = { ...xxx3 };
@@ -57,29 +57,29 @@ const googlesearchsticker = (infor4, client, xxx3) =>
                 `512:512`,
             ];
         }
-        const a = arg.slice(1).filter(z => z !== 'crop').join(' ');
-        if (a.length == 0) {
+        const searchthis = arg.slice(1).filter(z => z !== 'crop').join(' ');
+        if (searchthis.length == 0) {
             infor5.arg = ["help", arg[0]]
             help(infor5, client, xxx, 1);
             resolve();
             return;
         }
-        let options = {
+
+
+        const options = {
             method: 'GET',
-            url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
-            params: {
-                q: a, pageNumber: '1', pageSize: 100, autoCorrect: 'true', safeSearch: infor5.groupdata.nsfw
-            },
+            url: 'https://bing-image-search1.p.rapidapi.com/images/search',
+            params: { q: searchthis, count: '100', mkt: 'en-IN' },
             headers: {
-                'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
+                'x-rapidapi-host': 'bing-image-search1.p.rapidapi.com',
                 'x-rapidapi-key': process.env.SEARCH_STICKER
             }
         };
 
         axios.request(options).then(async response1 => {
             const random = Math.floor(Math.random() * (response1.data.value.length >= 20 ? 19 : response1.data.value.length));
-            const packName = a + " - " + random;
-            const imageurl = response1.data.value[random].url;
+            const packName = searchthis + " - " + random;
+            const imageurl = response1.data.value[random].thumbnailUrl;
             const media = getRandom(".jpg");
             const file = fs.createWriteStream(media);
 
@@ -98,9 +98,11 @@ const googlesearchsticker = (infor4, client, xxx3) =>
                             .on("error", function (err) {
                                 fs.unlinkSync(media);
                                 //  console.log(`Error : ${err}`);
-                                client.sendMessage(from, "🤖 ```failed to convert image into sticker!```", text, { quoted: xxx });
-                                // googlesearchsticker(infor5, client, xxx)
-                            })
+                                fs.unlinkSync(media);
+                                fs.unlinkSync(ran);
+                                reject(infor5);
+                                return
+                                   })
                             .on("end", function () {
                                 buildSticker();
                             })
@@ -130,10 +132,10 @@ const googlesearchsticker = (infor4, client, xxx3) =>
             });
         }
         ).catch(e => {
-
+            console.log(e);
             reject(infor5)
 
         });
 
     });
-module.exports.googlesearchsticker = googlesearchsticker;
+module.exports.searchSticker = searchSticker;

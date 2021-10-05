@@ -20,13 +20,3 @@ String.prototype.hash1 = function () {
     }
     return hash;
 }
-
-const ytdl = require("ytdl-core");
-
-
-(async () => {
-    const info = await ytdl.getInfo(ytdl.getURLVideoID('https://youtu.be/7Y6mroomv5M'));
-    console.log(info.videoDetails.thumbnails);
-    const a = info.videoDetails.thumbnails.pop().url;
-    console.log(a);
-})();

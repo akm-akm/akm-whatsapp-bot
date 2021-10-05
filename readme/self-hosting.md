@@ -60,7 +60,7 @@ SEARCH_STICKER=
 
 `LOCAL_DATABASE_URL` The url of the database if the bot is running locallly on your system. (required)
 
-`SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/contextualwebsearch/api/web-search) if you want to use the search sticker (ss) feature. (optional)
+`SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
 
 #### Step 2 > 💾 Setting up the database
 
