@@ -24,9 +24,4 @@ const chatbot = (text,number) => new Promise(async (resolve, reject) => {
     });
 });
 
-chatbot("hello","akm").then(function (response) {
-    console.log(response);
-});
-
-
 module.exports.chatbot = chatbot;

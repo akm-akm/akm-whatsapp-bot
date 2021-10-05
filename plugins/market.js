@@ -13,7 +13,12 @@ const { help } = require(path.join(__dirname, "./help"));
 function stripTags(string) {
   return string.replace(/<(.|\n)*?>/g, "").trim();
 }
-
+const proxy = {
+  proxy: {
+    host: '103.35.134.30',
+    port: 83
+  }
+}
 function searchTransformer(isIndex) {
   let matcher = "";
   if (isIndex) {
@@ -53,6 +58,7 @@ const market = (infor4, client, xxx3) =>
         axios
           .get(
             "https://www1.nseindia.com//emerge/homepage/smeNormalMktStatus.json"
+            , proxy
           )
           .then((response) => {
             if (response.error) {
@@ -81,7 +87,7 @@ const market = (infor4, client, xxx3) =>
         axios
           .get(
             "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json"
-          )
+            , proxy  )
           .then((response) => {
             let msg = "*Gainers* 📈";
 
@@ -130,7 +136,7 @@ const market = (infor4, client, xxx3) =>
         axios
           .get(
             "https://www1.nseindia.com/live_market/dynaContent/live_watch/stock_watch/nifty"
-          )
+            , proxy   )
           .then((response) => {
             let msg = "*Index Stocks NIFTY* 📈";
             if (response.error) {
@@ -181,7 +187,7 @@ const market = (infor4, client, xxx3) =>
         axios
           .get(
             "https://www1.nseindia.com/live_market/dynaContent/live_analysis/losers/niftyLosers1.json"
-          )
+            , proxy  )
           .then((response) => {
             let msg = "*Losers* 📈";
 
@@ -245,7 +251,7 @@ const market = (infor4, client, xxx3) =>
             },
             transformResponse: searchTransformer(false),
           }
-          )
+            , proxy )
           .then((response) => {
             if (response.error) {
               console.log("err");
@@ -302,7 +308,7 @@ const market = (infor4, client, xxx3) =>
               "X-Requested-With": "XMLHttpRequest",
             },
           }
-          )
+            , proxy   )
           .then((response) => {
             if (response.error) {
               console.log("err");
