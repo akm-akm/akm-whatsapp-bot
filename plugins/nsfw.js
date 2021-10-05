@@ -37,7 +37,7 @@ const nsfw = (infor4, client, xxx3) =>
                 xxx;
             const media = await client.downloadAndSaveMediaMessage(encmedia);
             ai(media).then((result) => {
-                let zz = result.output.detections.length !== 0 ? "\n👙 *Detections* :\n" : " "
+                const zz = result.output.detections.length !== 0 ? "\n👙 *Detections* :\n" : " "
                 let nsfw = "🔞 *Probability* :  ```" + (result.output.nsfw_score * 100).toFixed(1) + "%```\n" + zz;
                 result.output.detections.forEach(function (element) {
                     nsfw = nsfw + "\nName : " + element.name + "\n" +
