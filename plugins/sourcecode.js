@@ -25,15 +25,15 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
                 "📄 *License:*         ```" + data.license.key + " ```\n" +
                 "\n🤖 🤖 *_Bot made by AKM_* 🤖 🤖"
             client.sendMessage(from,
-               // fs.readFileSync(path.join(__dirname, "../readme/images/xxxlogo.jpeg"))
+                // fs.readFileSync(path.join(__dirname, "../docs/images/xxxlogo.jpeg"))
                 msg, text,
                 // image,
                 {
-                quoted: xxx,
-                detectLinks: false,
-             //   caption: msg,
-               // mimetype: Mimetype.jpeg
-            })
+                    quoted: xxx,
+                    detectLinks: false,
+                    //   caption: msg,
+                    // mimetype: Mimetype.jpeg
+                })
             resolve();
 
         })

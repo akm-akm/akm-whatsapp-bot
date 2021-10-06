@@ -9,15 +9,15 @@ const {
 const client = new WAConnection();
 const path = require("path");
 const fs = require("fs");
-const settingread = require(path.join(__dirname, "../snippets/settingcheck"));
+const settingread = require(path.join(__dirname, "../utils/settingcheck"));
 const {
   switchcase
-} = require(path.join(__dirname, "../snippets/case"));
+} = require(path.join(__dirname, "../utils/case"));
 let qri = require("qr-image");
-const sql = require(path.join(__dirname, "../snippets/ps"));
+const sql = require(path.join(__dirname, "../utils/ps"));
 const {
   count
-} = require(path.join(__dirname, "../snippets/count"));
+} = require(path.join(__dirname, "../utils/count"));
 const chalk = require('chalk');
 
 
@@ -122,7 +122,7 @@ async function main() {
     if (qqr.rows[0].count === 0) {
       console.log("New bot!, changing its dp and name!");
       client.updateProfileName("xxx-bot");
-      client.updateProfilePicture(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, fs.readFileSync(path.join(__dirname, "../readme/images/logo.jpeg")));
+      client.updateProfilePicture(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, fs.readFileSync(path.join(__dirname, "../docs/images/logo.jpeg")));
     }
   })();
 

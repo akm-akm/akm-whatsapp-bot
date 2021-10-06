@@ -10,7 +10,7 @@ const {
 const {
     text
 } = MessageType;
-const sql = require(path.join(__dirname, "../snippets/ps"));
+const sql = require(path.join(__dirname, "../utils/ps"));
 const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
     const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
@@ -109,7 +109,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve()
                 return
             }
-          
+
             if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 1000) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily user limit.```', text, {
                     quoted: xxx,

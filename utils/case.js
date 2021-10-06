@@ -25,7 +25,7 @@ const { chatbot } = require(path.join(__dirname, "../plugins/chatbot"));
 
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
-errorSticker = path.join(__dirname, "../media/stickers/error.webp");
+errorSticker = path.join(__dirname, "../assets/stickers/error.webp");
 
 async function switchcase(infor2, client, xxx4) {
   let infor3 = { ...infor2 };
@@ -325,15 +325,14 @@ async function switchcase(infor2, client, xxx4) {
       break;
 
     default:
-      if (infor3.groupdata == 0) {
-        chatbot(infor3.arg.splice(1).join(" "), infor3.number.toString()).then((resolve) => {
+    //  if (infor3.groupdata == 0) {
+      chatbot(infor3.arg.splice(1).join(" "), infor3.number.toString())
+        .then((resolve) => {
           client.sendMessage(from, "```" + resolve + "```", text, {
             quoted: xxx3,
           })
-        })
-          .catch(() => {
-          })
-      }
+        }).catch(() => { })
+  //}
 
       break;
   }

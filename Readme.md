@@ -1,7 +1,7 @@
 <h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
 
 <p align="center">
-<img src="readme/images/xxxlogo.jpeg" width=400px alt="xxxlogo" />
+<img src="docs/images/xxxlogo.jpeg" width=400px alt="xxxlogo" />
 </p>
 
 ## ✨ Highlights
@@ -23,29 +23,29 @@
      <td> </td>
   </tr>
   <tr>
-    <td><img src="readme/demo/help.jpg" width=300></td>
-    <td><img src="readme/demo/help1.jpg" width=300></td>
-    <td><img src="readme/demo/help2.jpg" width=300></td>
+    <td><img src="docs/demo/help.jpg" width=300></td>
+    <td><img src="docs/demo/help1.jpg" width=300></td>
+    <td><img src="docs/demo/help2.jpg" width=300></td>
 
   </tr>
    <tr>
-    <td><img src="readme/demo/sticker.jpg" width=300></td>
-    <td><img src="readme/demo/ss.jpg" width=300></td>
-    <td><img src="readme/demo/ytv.jpg" width=300></td>
+    <td><img src="docs/demo/sticker.jpg" width=300></td>
+    <td><img src="docs/demo/ss.jpg" width=300></td>
+    <td><img src="docs/demo/ytv.jpg" width=300></td>
 
   </tr> <tr>
-    <td><img src="readme/demo/crypto.jpg" width=300></td>
-    <td><img src="readme/demo/run.jpg" width=300></td>
-    <td><img src="readme/demo/help.jpg" width=300></td>
+    <td><img src="docs/demo/crypto.jpg" width=300></td>
+    <td><img src="docs/demo/run.jpg" width=300></td>
+    <td><img src="docs/demo/help.jpg" width=300></td>
 
   </tr>
  </table>
 
 ## 💮 Want your bot?
 
-#### 💻 See the [Self-Hosting Guide](/readme/self-hosting.md)
+#### 💻 See the [Self-Hosting Guide](/docs/self-hosting.md)
 
-#### 🛰️ See the [Heroku Deploy Guide](/readme/heroku-hosting.md)
+#### 🛰️ See the [Heroku Deploy Guide](/docs/heroku-hosting.md)
 
 ## 💪 Contribution
 

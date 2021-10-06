@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const http = require("https");
-const sql = require(path.join(__dirname, "../snippets/ps"));
+const sql = require(path.join(__dirname, "../utils/ps"));
 const settings = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/settings.json"))
 );
@@ -10,7 +10,7 @@ const mess = JSON.parse(
 );
 const {
   newgroup
-} = require(path.join(__dirname, "../snippets/newgroup"));
+} = require(path.join(__dirname, "../utils/newgroup"));
 const {
   help
 } = require(path.join(__dirname, "./help"));
