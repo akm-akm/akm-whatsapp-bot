@@ -328,7 +328,7 @@ async function switchcase(infor2, client, xxx4) {
     //  if (infor3.groupdata == 0) {
       chatbot(infor3.arg.splice(1).join(" "), infor3.number.toString())
         .then((resolve) => {
-          client.sendMessage(from, "```" + resolve + "```", text, {
+          client.sendMessage(from, "🤖  ```" + resolve + "```", text, {
             quoted: xxx3,
           })
         }).catch(() => { })
