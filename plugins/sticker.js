@@ -105,7 +105,7 @@ const stickermaker = (infor4, client, xxx3) =>
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia);
       const ran = getRandom(".webp");
-      if (infor5.groupdata==0 || infor.groupdata.nsfw==true) {
+      if (infor5.groupdata==0 || infor5.groupdata.nsfw==true) {
         const nsfw = await ai(media)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
@@ -167,7 +167,7 @@ const stickermaker = (infor4, client, xxx3) =>
           .extendedTextMessage.contextInfo
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia);
-      if (infor5.groupdata == 0 || infor.groupdata.nsfw == true) {
+      if (infor5.groupdata == 0 || infor5.groupdata.nsfw == true) {
         const nsfw = await ai(media)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
@@ -233,7 +233,7 @@ const stickermaker = (infor4, client, xxx3) =>
           .extendedTextMessage.contextInfo
         : xxx;
       const media1 = await client.downloadAndSaveMediaMessage(encmedia);
-      if (infor5.groupdata == 0 || infor.groupdata.nsfw == true) {
+      if (infor5.groupdata == 0 || infor5.groupdata.nsfw == true) {
         const nsfw = await ai(media1)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
