@@ -1,13 +1,13 @@
 const express = require("express");
 const server = new express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 const path = require("path");
 const node = require('node-cron');
 
 setTimeout(() => {
   require(path.join(__dirname, "./utils/config"));
   sql = require(path.join(__dirname, "./utils/ps"));
-}, 3000)
+}, 1)
 
 const {
   main,

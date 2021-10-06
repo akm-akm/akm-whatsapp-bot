@@ -58,15 +58,10 @@ const {
 } = require("./plugins/deepai");
 
 
-ai(path.join(__dirname,'./assets/stickers/allsticker/s (1).webp')).then((result) => {
+ai('6492.jpg').then((result) => {
     
     console.log(result);
-    const zz = result.output.detections.length !== 0 ? "\n👙 *Detections* :\n" : " "
-    let nsfw = "🔞 *Probability* :  ```" + (result.output.nsfw_score * 100).toFixed(1) + "%```\n" + zz;
-    result.output.detections.forEach(function (element) {
-        nsfw = nsfw + "\nName : " + element.name + "\n" +
-            "Confidence : " + (element.confidence * 100).toFixed(0) + " %\n";
-    })
+    
 })
 
 

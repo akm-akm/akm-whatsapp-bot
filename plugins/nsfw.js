@@ -43,6 +43,7 @@ const nsfw = (infor4, client, xxx3) =>
             ai(media).then((result) => {
                 const zz = result.output.detections.length !== 0 ? "\n👙 *Detections* :\n" : " "
                 let nsfw = "🔞 *Probability* :  ```" + (result.output.nsfw_score * 100).toFixed(1) + "%```\n" + zz;
+                
                 result.output.detections.forEach(function (element) {
                     nsfw = nsfw + "\nName : " + element.name + "\n" +
                         "Confidence : " + (element.confidence * 100).toFixed(0) + " %\n";
@@ -52,7 +53,7 @@ const nsfw = (infor4, client, xxx3) =>
                     quoted: xxx
                 });
                 resolve();
-                fs.unlinkSync(media);
+          //      fs.unlinkSync(media);
                 return;
 
             }).catch((err) => {
