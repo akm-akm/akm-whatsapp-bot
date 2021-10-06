@@ -62,7 +62,7 @@ const pinterest = (infor4, client, xxx3) =>
           quoted: xxx,
         });
         reject(infor5)
-
+        fs.unlinkSync(ran)
       });
   });
 module.exports.pinterest = pinterest;

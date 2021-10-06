@@ -10,8 +10,7 @@ const stickermaker = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
     const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-
-    arg = infor5.arg;
+    const arg = infor5.arg;
     const content = JSON.stringify(xxx.message);
     const from = xxx.key.remoteJid;
     const type = Object.keys(xxx.message)[0];
@@ -105,8 +104,8 @@ const stickermaker = (infor4, client, xxx3) =>
           .extendedTextMessage.contextInfo
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia);
-      ran = getRandom(".webp");
-      if (infor5.groupdata.nsfw) {
+      const ran = getRandom(".webp");
+      if (infor5.groupdata==0 || infor.groupdata.nsfw==true) {
         const nsfw = await ai(media)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
@@ -121,7 +120,7 @@ const stickermaker = (infor4, client, xxx3) =>
         .input(media)
         .on("error", function (err) {
           fs.unlinkSync(media);
-         reject()
+          reject(infor5)
         })
         .on("end", function () {
           buildSticker();
@@ -149,6 +148,7 @@ const stickermaker = (infor4, client, xxx3) =>
           });
 
           resolve();
+          fs.unlinkSync(media);
           fs.unlinkSync(ran);
         }
       }
@@ -167,7 +167,7 @@ const stickermaker = (infor4, client, xxx3) =>
           .extendedTextMessage.contextInfo
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia);
-      if (infor5.groupdata.nsfw) {
+      if (infor5.groupdata == 0 || infor.groupdata.nsfw == true) {
         const nsfw = await ai(media)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
@@ -175,16 +175,21 @@ const stickermaker = (infor4, client, xxx3) =>
           });
           resolve();
           fs.unlinkSync(media);
+          fs.unlinkSync(ran);
           return;
         }
       }
-      ran = getRandom(".webp");
+      const   ran = getRandom(".webp");
+
 
       ffmpeg(`./${media}`)
         .inputFormat(media.split(".")[1])
         .on("error", function (err) {
           fs.unlinkSync(media);
-         reject()
+          reject(infor5)
+          fs.unlinkSync(media);
+          fs.unlinkSync(ran);
+          return;
         })
         .on("end", function () {
           buildSticker();
@@ -213,6 +218,7 @@ const stickermaker = (infor4, client, xxx3) =>
           resolve();
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
+          return;
         }
       }
     }
@@ -222,8 +228,92 @@ const stickermaker = (infor4, client, xxx3) =>
         xxx.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage
           .seconds > 11)
     ) {
-      client.sendMessage(from, "🤖 ```Video should not be longer than 11 seconds.```", text, { quoted: xxx });
-      resolve();
+      const encmedia = isQuotedVideo
+        ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
+          .extendedTextMessage.contextInfo
+        : xxx;
+      const media1 = await client.downloadAndSaveMediaMessage(encmedia);
+      if (infor5.groupdata == 0 || infor.groupdata.nsfw == true) {
+        const nsfw = await ai(media1)
+        if (nsfw.output.nsfw_score > 0.6) {
+          client.sendMessage(from, "🌚 🔞", text, {
+            quoted: xxx
+          });
+          resolve();
+          fs.unlinkSync(media1);
+         
+          fs.unlinkSync(ran);
+          return;
+        }
+      }
+      const   ran = getRandom(".webp");
+      const  media = getRandom(".mp4");
+      ffmpeg(`./${media1}`)
+        .setStartTime('00:00:00')
+        .setDuration('9')
+        .output(media)
+        .on('end', function (err) {
+          if (err) {
+            reject(inofr5);
+            fs.unlinkSync(media);
+            fs.unlinkSync(ran);
+            fs.unlinkSync(media1);
+
+            return;
+          }
+          ffmpeg(`./${media}`)
+            .inputFormat(media.split(".")[1])
+            .on("error", function (err) {
+              fs.unlinkSync(media);
+              reject(infor5)
+              fs.unlinkSync(media);
+              fs.unlinkSync(ran);
+              return;
+            })
+            .on("end", function () {
+              buildSticker();
+            })
+            .addOutputOptions(outputOptions)
+            .toFormat("webp")
+            .save(ran);
+
+        })
+        .on('error', function (err) {
+          reject(inofr5);
+          fs.unlinkSync(media);
+          fs.unlinkSync(ran);
+          fs.unlinkSync(media1);
+
+          return;
+        })
+        .run()
+
+
+      async function buildSticker() {
+        if (arg.includes("nodata") == true) {
+          client.sendMessage(from, fs.readFileSync(ran), sticker, {
+            quoted: xxx,
+          });
+          resolve();
+          fs.unlinkSync(media);
+          fs.unlinkSync(ran);
+          fs.unlinkSync(media1);
+        } else {
+          const webpWithMetadata = await WSF.setMetadata(
+            packName,
+            authorName,
+            ran
+          );
+          client.sendMessage(from, webpWithMetadata, sticker, {
+            quoted: xxx,
+          });
+          resolve();
+          fs.unlinkSync(media);
+          fs.unlinkSync(ran);
+          fs.unlinkSync(media1);
+          return;
+        }
+      }
     }
     else {
       client.sendMessage(from, "🤖 ```Tag the image or send it with the command.```", text, { quoted: xxx });

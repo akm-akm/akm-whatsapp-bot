@@ -28,9 +28,11 @@ const { text, sticker } = MessageType;
 errorSticker = path.join(__dirname, "../assets/stickers/error.webp");
 
 async function switchcase(infor2, client, xxx4) {
-  let infor3 = { ...infor2 };
-  arg = infor3.arg;
-  from = infor3.from;
+  const infor3 = { ...infor2 };
+  const arg = infor3.arg;
+  const from = infor3.from;
+  const groupdata = infor3.groupdata;
+  const isMedia = infor3.isMedia;
   const xxx3 = {
     ...xxx4
   };
@@ -42,7 +44,7 @@ async function switchcase(infor2, client, xxx4) {
     count(infor3, 1)
     return;
   }
-  if (infor3.from.endsWith("@g.us") && infor3.isMedia && infor3.groupdata.autosticker && infor3.arg[0] !== "sticker") {
+  if (from.endsWith("@g.us") && isMedia && groupdata.autosticker && arg[0] !== "sticker") {
     console.log("making auto sticker");
     stickermaker(infor3, client, xxx3).then(() => {
       count(infor3, 2)

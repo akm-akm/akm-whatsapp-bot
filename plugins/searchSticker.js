@@ -98,11 +98,11 @@ const searchSticker = (infor4, client, xxx3) =>
                             .on("error", function (err) {
                                 fs.unlinkSync(media);
                                 //  console.log(`Error : ${err}`);
-                                fs.unlinkSync(media);
+
                                 fs.unlinkSync(ran);
                                 reject(infor5);
                                 return
-                                   })
+                            })
                             .on("end", function () {
                                 buildSticker();
                             })
@@ -123,7 +123,7 @@ const searchSticker = (infor4, client, xxx3) =>
                             resolve();
                             fs.unlinkSync(media);
                             fs.unlinkSync(ran);
-
+                            return
                         }
 
                         resolve();
@@ -134,7 +134,6 @@ const searchSticker = (infor4, client, xxx3) =>
         ).catch(e => {
             console.log(e);
             reject(infor5)
-
         });
 
     });

@@ -24,8 +24,8 @@ String.prototype.hash1 = function () {
     return hash;
 }
 
-console.log(("behnchod".hash()));
 /*
+console.log(("behnchod".hash()));
 
 const shell = require('any-shell-escape')
 const { exec } = require('child_process')
@@ -49,3 +49,14 @@ exec(ss, (err) => {
 })
 
 */
+
+
+const infor ={
+    groupdata: {
+        name: "",
+        id: "",
+        nsfw: false
+    }
+}
+
+console.log(infor.groupdata!=0 && infor.groupdata.nsfw);

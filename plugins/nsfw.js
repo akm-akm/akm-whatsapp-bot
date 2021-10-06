@@ -53,12 +53,14 @@ const nsfw = (infor4, client, xxx3) =>
                     quoted: xxx
                 });
                 resolve();
-          //      fs.unlinkSync(media);
+                fs.unlinkSync(media);
                 return;
 
             }).catch((err) => {
                 console.log(err);
                 reject(infor5)
+                fs.unlinkSync(media);
+
                 return;
 
             });
@@ -94,6 +96,8 @@ const nsfw = (infor4, client, xxx3) =>
 
             }).catch((err) => {
                 console.log(err);
+                fs.unlinkSync(media);
+
                 reject(infor5)
                 return;
 
@@ -131,6 +135,8 @@ const nsfw = (infor4, client, xxx3) =>
             }).catch((err) => {
                 console.log(err);
                 reject(infor5)
+                fs.unlinkSync(media);
+
                 return;
 
 
