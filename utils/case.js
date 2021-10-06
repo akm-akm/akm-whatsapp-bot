@@ -325,14 +325,14 @@ async function switchcase(infor2, client, xxx4) {
       break;
 
     default:
-    //  if (infor3.groupdata == 0) {
-      chatbot(infor3.arg.splice(1).join(" "), infor3.number.toString())
-        .then((resolve) => {
-          client.sendMessage(from, "🤖  ```" + resolve + "```", text, {
-            quoted: xxx3,
-          })
-        }).catch(() => { })
-  //}
+      if (infor3.groupdata == 0) {
+        chatbot(infor3.arg.splice(1).join(" "), infor3.number.toString())
+          .then((resolve) => {
+            client.sendMessage(from, "🤖  ```" + resolve + "```", text, {
+              quoted: xxx3,
+            })
+          }).catch(() => { })
+      }
 
       break;
   }
