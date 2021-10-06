@@ -79,7 +79,7 @@ const ai = (input) => new Promise((resolve, reject) => {
                 return;
             } else {
                 deepai.callStandardApi("nsfw-detector", {
-                    image: fs.createReadStream(path.join(__dirname, '../assets/temp/temp01.jpg')),
+                    image: fs.createReadStream(path.join(__dirname, '../assets/temp/temp02.jpg')),
                 }).then((resp) => {
                     resolve(resp);
                     return

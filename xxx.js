@@ -1,4 +1,4 @@
-/*
+
 
 
 String.prototype.hash = function () {
@@ -24,8 +24,8 @@ String.prototype.hash1 = function () {
     return hash;
 }
 
-
-
+console.log(("behnchod".hash()));
+/*
 
 const shell = require('any-shell-escape')
 const { exec } = require('child_process')
@@ -49,19 +49,3 @@ exec(ss, (err) => {
 })
 
 */
-
-const path = require('path');
-
-
-const {
-    ai
-} = require("./plugins/deepai");
-
-
-ai('6492.jpg').then((result) => {
-    
-    console.log(result);
-    
-})
-
-
