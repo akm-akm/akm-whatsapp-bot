@@ -62,27 +62,27 @@ const youtube = (infor4, client, xxx3) =>
       ytdl(url)
         .pipe(fs.createWriteStream(vid))
         .on("finish", async () => {
-         
-         
-              await client.sendMessage(from, fs.readFileSync(vid), video,
-                {
-                  quoted: xxx,
-                  caption: msg,
-                  thumbnail: fs.readFileSync(thumb)
-                });
+
+
+          await client.sendMessage(from, fs.readFileSync(vid), video,
+            {
+              quoted: xxx,
+              caption: msg,
+              thumbnail: fs.readFileSync(thumb)
+            });
           fs.unlinkSync(vid);
           fs.unlinkSync(thumb);
-            });
+        });
 
 
       resolve();
 
     } catch (err) {
-      fs.unlinkSync(vid);
+
       fs.unlinkSync(thumb);
 
       reject(infor5)
     }
   });
 
-module.exports.youtube = youtube;
+module.exports.youtube = youtube

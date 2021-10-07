@@ -39,7 +39,7 @@
     },
     "mdr": {
         "usage": "mdr <@tag-member>",
-        "desc": "```The bot will prmoote the tagged user a moderator of the bot.```",
+        "desc": "```The bot will promote the tagged user a moderator of the bot.```",
         "eg": [
             "mdr @ankit",
             "mdr @messi",
@@ -97,7 +97,7 @@
     },
     "nsfw": {
         "usage": "nsfw <condition>",
-        "desc": "```Scans the image for nudity before converting it to sticker.```",
+        "desc": "```Scans the image for nudity before converting it to sticker in the group.```",
         "eg": [
             "nsfw on",
             "nsfw off"

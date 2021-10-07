@@ -24,39 +24,3 @@ String.prototype.hash1 = function () {
     return hash;
 }
 
-/*
-console.log(("behnchod".hash()));
-
-const shell = require('any-shell-escape')
-const { exec } = require('child_process')
-const ffmpeg = require('ffmpeg-static')
-console.log(ffmpeg);
-const f = path.join(__dirname, './node_modules/ffmpeg-static/ffmpeg');
-
-
-const ss = shell([
-    f,'-i', '/home/aditya/Videos/tasm.mkv',
-    '-y', '-vf', 'fps=1/2', './h/temp%02d.jpg'
-])
-
-exec(ss, (err) => {
-    if (err) {
-        console.error(err)
-        process.exit(1)
-    } else {
-        console.info('done!')
-    }
-})
-
-*/
-
-
-const infor ={
-    groupdata: {
-        name: "",
-        id: "",
-        nsfw: false
-    }
-}
-
-console.log(infor.groupdata!=0 && infor.groupdata.nsfw);
