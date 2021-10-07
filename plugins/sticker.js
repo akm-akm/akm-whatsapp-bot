@@ -175,7 +175,7 @@ const stickermaker = (infor4, client, xxx3) =>
           });
           resolve();
           fs.unlinkSync(media);
-          fs.unlinkSync(ran);
+       
           return;
         }
       }

@@ -209,14 +209,15 @@ async function main() {
         const groupName = isGroup ? groupMetadata.subject : "inbox";
         const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
 
-        if (!
-          ((infor.canmemberusebot || isGroupAdmins) &&
-            !isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
+        if (!(!isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
             (infor.arg.length !== 0 || (isGroup && infor.groupdata.autosticker)))
         ) return
 
         if (infor.isnumberblockedingroup) return
 
+      //  if (infor.arg.length === 0 && (isGroup && infor.groupdata.autosticker)) return
+
+        if (infor.groupdata.canmemberusebot ===false && !isGroupAdmins && infor.number !== process.env.OWNER_NUMBER && !infor.botdata.moderators.includes(infor.number)) return
         if (
           infor.noofmsgtoday >= infor.botdata.dailylimit &&
           infor.number !== process.env.OWNER_NUMBER &&
