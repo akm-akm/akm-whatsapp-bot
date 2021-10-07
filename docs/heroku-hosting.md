@@ -13,7 +13,7 @@
 - Create a [new app](https://dashboard.heroku.com/new-app).
 - Now select github under deployment method.
  <br/><img width = "500px" src='images/connectgithub.png' ></img>
-- input xxx-bot and search and connect the repo displayed.
+- input xxx-whatsapp-bot and search and connect the repo displayed.
 - now under resources tab select add addons.
  <br/><img width = "500px"  src='images/herokupostgres.png'></img>
 - Search heroku postgres and click on the result.

@@ -8,12 +8,12 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
     const xxx = { ...xxx3 };
 
     const from = infor5.from;
-    axios.get(`https://api.github.com/repos/akm-akm/xxx-bot`)
+    axios.get(`https://api.github.com/repos/akm-akm/xxx-whatsapp-bot`)
         .then((response) => {
             let data = response.data;
 
             msg = "\n🤖🤖🤖  *Sourcecode*  🤖🤖🤖\n\n" +
-                "🐱 *Github*\n```github.com/akm-akm/xxx-bot```\n\n" +
+                "🐱 *Github*\n```github.com/akm-akm/xxx-whatsapp-bot```\n\n" +
                 "👨‍💻 *Repo Owner:* ```" + data.owner.login + "```\n" +
                 "💻 *Repo Name:*  ```" + data.name + "```\n" +
                 "🉐 *Language:*     ```" + data.language + "```\n" +

@@ -121,7 +121,7 @@ async function main() {
     qqr = await sql.query("SELECT count(*) from messagecount;")
     if (qqr.rows[0].count === 0) {
       console.log("New bot!, changing its dp and name!");
-      client.updateProfileName("xxx-bot");
+      client.updateProfileName("xxx-whatsapp-bot");
       client.updateProfilePicture(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, fs.readFileSync(path.join(__dirname, "../docs/images/logo.jpeg")));
     }
   })();

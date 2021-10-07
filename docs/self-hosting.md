@@ -13,8 +13,8 @@
 - Run the following code to clone the repository.
 
 ```SH
-> git clone https://github.com/akm-akm/xxx-bot.git
-> cd xxx-bot
+> git clone https://github.com/akm-akm/xxx-whatsapp-bot.git
+> cd xxx-whatsapp-bot
 ```
 
 - Run this to install the dependencies
