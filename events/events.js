@@ -210,7 +210,7 @@ async function main() {
         const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
 
         if (!(!isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
-          (infor.arg.length !== 0 || (isGroup && isMedis && infor.groupdata.autosticker)))
+          (infor.arg.length !== 0 || (isGroup && isMedia && infor.groupdata.autosticker)))
         ) return
 
         if (infor.groupdata.banned_users.includes(infor.number)) return
