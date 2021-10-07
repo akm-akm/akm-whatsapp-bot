@@ -360,7 +360,7 @@ const grp = (infor4, client, xxx3) =>
             return
           }
           if (z === `${client.user.jid}`.split("@")[0]) {
-            client.sendMessage(from, "🙂", text, {
+            client.sendMessage(from, mess.success, text, {
               quoted: xxx,
             })
             resolve();
@@ -368,7 +368,7 @@ const grp = (infor4, client, xxx3) =>
           }
           await client.groupRemove(from, mentioned);
 
-          client.sendMessage(from, "🥲", text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
@@ -439,7 +439,7 @@ const grp = (infor4, client, xxx3) =>
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, true);
-        client.sendMessage(from, "🤫", text, {
+        client.sendMessage(from, mess.success, text, {
           quoted: xxx,
         });
         resolve();
@@ -454,7 +454,7 @@ const grp = (infor4, client, xxx3) =>
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, false);
-        client.sendMessage(from, "🗣️", text, {
+        client.sendMessage(from, mess.success, text, {
           quoted: xxx,
         });
         resolve();
