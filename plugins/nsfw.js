@@ -33,6 +33,12 @@ const nsfw = (infor4, client, xxx3) =>
             resolve()
             return;
         }
+
+
+
+        const getRandom = (ext) => {
+            return `${Math.floor(Math.random() * 10000)}${ext}`;
+        };
         if ((isMedia && xxx.message.imageMessage) || isQuotedImage) {
             const encmedia = isQuotedImage ?
                 JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
