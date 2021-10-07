@@ -2,7 +2,10 @@ const axios = require("axios");
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
 const path = require("path");
-
+const fs = require('fs');
+const mess = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 const { help } = require(path.join(__dirname, "./help"));
 
 const shorturl = (infor4, client, xxx3) =>
@@ -25,7 +28,7 @@ const shorturl = (infor4, client, xxx3) =>
         })
             .then((response) => {
                 if (response.data == 'Invalid URL') {
-                    client.sendMessage(from, "🤖 ```Wrong URL```", text, {
+                    client.sendMessage(from, mess.error.invalid , text, {
                         quoted: xxx
                     });
                     resolve()
@@ -47,7 +50,7 @@ const shorturl = (infor4, client, xxx3) =>
 
             })
             .catch(() => {
-                client.sendMessage(from, "🤖  ```Server error.```", text, {
+                client.sendMessage(from, mess.error.error, text, {
                     quoted: xxx,
 
                 });

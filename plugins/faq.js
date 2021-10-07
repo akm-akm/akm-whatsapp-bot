@@ -9,9 +9,10 @@ const faq = JSON.parse(
 msgl = "🤖🤖🤖 *XXX-BOT FAQs* 🤖🤖🤖\n";
 const faqs = (infor4, client, xxx3) =>
   new Promise((resolve, reject) => {
-    let infor5 = { ...infor4 };
-    let xxx = { ...xxx3 };
-
+    const infor5 = { ...infor4 };
+    const xxx = { ...xxx3 };
+    const from = infor5.from;
+    let msgl = "";
     faq.forEach((element) => {
      
       msgl +=
@@ -22,7 +23,7 @@ const faqs = (infor4, client, xxx3) =>
         element.answer +
         "```\n";
     });
-    client.sendMessage(infor5.from, msgl, MessageType.text, {
+    client.sendMessage(from, msgl, MessageType.text, {
       quoted: xxx,
     });
     resolve();

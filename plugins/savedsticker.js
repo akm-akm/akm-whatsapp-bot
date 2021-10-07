@@ -6,7 +6,6 @@ const { sticker } = MessageType;
 const savedsticker = (infor4, client, xxx3) => new Promise((resolve, reject) => {
     const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-
     const arg = infor5.arg
     const from = infor5.from;
     let random;

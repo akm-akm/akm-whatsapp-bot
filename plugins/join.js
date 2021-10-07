@@ -11,24 +11,25 @@ const joingroup = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
         const infor5 = { ...infor4 };
         const xxx = { ...xxx3 };
-        const code = infor5.arg[1];
+        const arg = infor5.arg;
+        const from = infor5.from;
 
         if (arg.length == 1) {
             infor5.arg = ["help", arg[0]]
             help(infor5, client, xxx, 1);
-            reject()
+            resolve()
             return
         }
-        if (!code.includes("https://chat.whatsapp.com/")) {
-            client.sendMessage(infor5.from, mess.error.invalid, MessageType.text, {
+        if (!arg[1].includes("https://chat.whatsapp.com/")) {
+            client.sendMessage(from, mess.error.invalid, MessageType.text, {
                 quoted: xxx,
             });
             resolve()
             return
         }
         try {
-            await client.acceptInvite(code.split(".com/")[1]);
-            client.sendMessage(infor5.from, mess.success, MessageType.text, {
+            await client.acceptInvite(arg[1].split(".com/")[1]);
+            client.sendMessage(from, mess.success, MessageType.text, {
                 quoted: xxx,
             });
             resolve();

@@ -69,7 +69,7 @@ const crypto = (infor4, client, xxx3) =>
                 "/" +
                 " " +
                 "*USDT*" +
-                " 💹" +
+                " 💹 *Coinmarketcap*" +
                 "\n\n" +
                 "```Buy price  : ```" +
                 c.price.toFixed(3) +
@@ -84,9 +84,7 @@ const crypto = (infor4, client, xxx3) =>
                 "\n" +
                 "```market cap : ```" +
                 c.market_cap.toFixed(2) +
-                "\n\n" +
-                "```CoinMarketCap API```" +
-                "\n";
+                "\n\n";
 
               client.sendMessage(from, message, text, {
                 quoted: xxx,

@@ -36,13 +36,12 @@ const coderunner = (infor4, client, xxx3) =>
         if (arg.length === 1) {
             infor5.arg = ["help", arg[0]]
             help(infor5, client, xxx, 1);
-            reject()
+            resolve()
             return
         } if (!languagecode.includes(arg[1])) {
-            client.sendMessage(from, "🤖 ```No such language. See help to understand the syntax.```", text, {
-                quoted: xxx,
-            });
-            resolve();
+            infor5.arg = ["help", arg[0]]
+            help(infor5, client, xxx, 1);
+            resolve()
             return
         }
         try {

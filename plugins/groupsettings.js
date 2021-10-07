@@ -127,14 +127,14 @@ const grp = (infor4, client, xxx3) =>
         }
         if (arg[1] == "off") {
           sql.query(`UPDATE groupdata SET autosticker = false WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```Automatic sticker turned off.```", text, {
+          client.sendMessage(from,mess.success, text, {
             quoted: xxx,
           });
           resolve();
           return;
         } else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET autosticker = true WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```Automatic sticker turned on.```", text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
@@ -156,14 +156,14 @@ const grp = (infor4, client, xxx3) =>
         }
         if (arg[1] == "off") {
           sql.query(`UPDATE groupdata SET nsfw = false WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```NSFW detection turned off.```", text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
           return;
         } else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET nsfw = true WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```NSFW detection turned on.```", text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
@@ -212,14 +212,14 @@ const grp = (infor4, client, xxx3) =>
         }
         if (arg[1] == "off") {
           sql.query(`UPDATE groupdata SET membercanusebot= false WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```Bot access disabled for non admins.```", text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
           return;
         } else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET membercanusebot= true WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```Bot access enabled for non admins.```", text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
@@ -273,14 +273,14 @@ const grp = (infor4, client, xxx3) =>
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
         if (z === `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from, "🤖 ```Any Logic?```", text, {
+          client.sendMessage(from, mess.error.error, text, {
             quoted: xxx,
           });
           resolve()
           return;
         }
         client.groupMakeAdmin(from, mentioned);
-        client.sendMessage(from, "👮 ```Promoted```", text, {
+        client.sendMessage(from, mess.success, text, {
           quoted: xxx,
         });
         resolve();
@@ -304,28 +304,28 @@ const grp = (infor4, client, xxx3) =>
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
         if (z === `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from, "🤖 ```I can't demote myself```", text, {
+          client.sendMessage(from,mess.error.error, text, {
             quoted: xxx,
           });
           resolve()
           return;
         }
         if (z === `${groupMetadata.owner}`.split("@")[0]) {
-          client.sendMessage(from, "🤖 ```You can't demote the group creator.```", text, {
+          client.sendMessage(from, mess.error.error, text, {
             quoted: xxx,
           })
           resolve();
           return
         }
         if (z === `${client.user.jid}`.split("@")) {
-          client.sendMessage(from, "🤖 ```I can't demote myself.```", text, {
+          client.sendMessage(from, mess.error.error, text, {
             quoted: xxx,
           })
           resolve();
           return
         }
         client.groupDemoteAdmin(from, mentioned);
-        client.sendMessage(from, "😐 ```Demoted```", text, {
+        client.sendMessage(from,mess.success, text, {
           quoted: xxx,
         });
         resolve();
@@ -353,7 +353,7 @@ const grp = (infor4, client, xxx3) =>
           z = mentioned[0].split("@")[0];
 
           if (z === `${groupMetadata.owner}`.split("@")[0]) {
-            client.sendMessage(from, "🤖 ```You can't kick the group creator.```", text, {
+            client.sendMessage(from, mess.error.error , text, {
               quoted: xxx,
             })
             resolve();
@@ -417,7 +417,7 @@ const grp = (infor4, client, xxx3) =>
           xxx;
         const media = await client.downloadAndSaveMediaMessage(encmedia);
         await client.updateProfilePicture(from, media);
-        client.sendMessage(from, "```success```", text, {
+        client.sendMessage(from, mess.success, text, {
           quoted: xxx,
         });
         resolve();
@@ -481,7 +481,7 @@ const grp = (infor4, client, xxx3) =>
           }
           client.groupAdd(from, arg);
         } catch (e) {
-          client.sendMessage(from, "```Unable to add due to privacy setting```", text, {
+          client.sendMessage(from, mess.error.error, text, {
             quoted: xxx,
           });
           resolve();
@@ -552,7 +552,7 @@ const grp = (infor4, client, xxx3) =>
           sql.query(
             `UPDATE groupdata SET allowabuse = 'true' WHERE groupid = '${from}';`
           );
-          client.sendMessage(from, "🤬 ```Now the bot will not abuse back if it is abused!```", text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
@@ -561,7 +561,7 @@ const grp = (infor4, client, xxx3) =>
           sql.query(
             `UPDATE groupdata SET allowabuse = 'false' WHERE groupid = '${from}';`
           );
-          client.sendMessage(from, "🙏 ```Now the bot will abuse back if it is abused!```", text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
@@ -595,14 +595,14 @@ const grp = (infor4, client, xxx3) =>
           return;
         }
         if (infor5.botdata.moderators.includes(z) || z == process.env.OWNER_NUMBER) {
-          client.sendMessage(from, "🤖 ```Can not ban the bot moderator.```", text, {
+          client.sendMessage(from, mess.error.error, text, {
             quoted: xxx,
           });
           resolve()
           return;
         }
         if (z == infor5.number) {
-          client.sendMessage(from, "🤖 ```You cannot ban yourself.```", text, {
+          client.sendMessage(from, mess.error.error, text, {
             quoted: xxx,
           });
           resolve()
@@ -615,7 +615,7 @@ const grp = (infor4, client, xxx3) =>
           `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
         );
 
-        client.sendMessage(from, "🥲 ```He can not use me now!```", text, {
+        client.sendMessage(from, mess.success, text, {
           quoted: xxx,
         });
         resolve();
@@ -634,7 +634,7 @@ const grp = (infor4, client, xxx3) =>
         sql.query(
           `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
         );
-        client.sendMessage(from, "🙂 ```Unbanned```", text, {
+        client.sendMessage(from, mess.success, text, {
           quoted: xxx,
         });
         resolve();

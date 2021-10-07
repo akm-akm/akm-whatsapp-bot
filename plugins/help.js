@@ -36,7 +36,7 @@ const help = (infor4, client, xxx3, syntax) =>
         "🎩 *Owner only* :\n```rst, dul, dgl, mgs, sql, mdr, rtrt, stp```\n\n"
         : "";
 
-      const grpcmds = isGroupAdmins ? "👑 *Group Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
+      const grpcmds = isGroupAdmins ? "👑 *Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +

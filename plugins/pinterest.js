@@ -7,7 +7,9 @@ const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}.${ext}`;
 };
 const path = require("path");
-
+const mess = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 const { help } = require(path.join(__dirname, "./help"));
 
 const pinterest = (infor4, client, xxx3) =>
@@ -15,6 +17,7 @@ const pinterest = (infor4, client, xxx3) =>
     const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
     const arg = infor5.arg;
+    const from = infor5.from;
     if (arg.length == 1) {
       infor5.arg = ["help", arg[0]]
       help(infor5, client, xxx, 1);
@@ -44,9 +47,9 @@ const pinterest = (infor4, client, xxx3) =>
           file.on("finish", function () {
             file.close(async () => {
               console.log("filesaved");
-              title.startsWith("<div") ? client.sendMessage(infor5.from, '🤖 ```Cannot download status.```', text, {
+              title.startsWith("<div") ? client.sendMessage(from,mess.error.error, text, {
                 quoted: xxx
-              }) : await client.sendMessage(infor5.from, fs.readFileSync(ran), video, {
+              }) : await client.sendMessage(from, fs.readFileSync(ran), video, {
                 quoted: xxx,
                 caption: "```" + title + "```"
               });
@@ -58,7 +61,7 @@ const pinterest = (infor4, client, xxx3) =>
       })
       .catch((err) => {
         console.log(err);
-        client.sendMessage(from, '🤖 ```Cannot download status.```', text, {
+        client.sendMessage(from, mess.error.error, text, {
           quoted: xxx,
         });
         reject(infor5)

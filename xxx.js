@@ -24,3 +24,4 @@ String.prototype.hash1 = function () {
     return hash;
 }
 
+console.log("behnchd".hash());

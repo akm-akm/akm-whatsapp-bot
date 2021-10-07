@@ -1,6 +1,7 @@
 {
-    "wait"       : "⏱️ ```Processing```",
+    "salutations"       : ["```Hey```","```Hello```","```hi```"],
     "success"    : "✅``` Successful```",
+    "noenv"             : "```Environment variable not set.```",
     "error      ": {
         "sticker": "❌ ```Failed while converting the image to a sticker.```",
         "invalid": "🌐 ```Invalid link```",

@@ -3,27 +3,30 @@ const { text } = MessageType;
 
 const deleteit = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
-        let infor5 = { ...infor4 };
-        let xxx = { ...xxx3 };
+        const infor5 = { ...infor4 };
+        const xxx = { ...xxx3 };
+        const from = infor5.from;
 
         const type = Object.keys(xxx.message)[0];
-       if(type !== "extendedTextMessage") {
-           client.sendMessage(infor5.from,"🤖  ```Tag the message to be deleted.```", text, { quoted: xxx });
+        if (type !== "extendedTextMessage") {
+            client.sendMessage(from, "🤖  ```Reply to my message that is to be deleted.```", text, { quoted: xxx });
             resolve()
-            return}
+            return
+        }
         try {
-            await client.deleteMessage(infor5.from, {
+            await client.deleteMessage(from, {
                 id: infor5.stanzaId,
-                remoteJid: infor5.from,
-            fromMe: true
-        })
-        resolve()
+                remoteJid: from,
+                fromMe: true
+            })
+            resolve()
         } catch (error) {
-           
-            reject(infor5)
+            client.sendMessage(from, "🤖  ```Reply to my message that is to be deleted.```", text, { quoted: xxx });
+            resolve()
+         
 
         }
-       
+
 
     })
 module.exports.deleteit = deleteit;

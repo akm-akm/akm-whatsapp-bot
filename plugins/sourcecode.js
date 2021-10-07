@@ -14,8 +14,8 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
 
             msg = "\n🤖🤖🤖  *Sourcecode*  🤖🤖🤖\n\n" +
                 "🐱 *Github*\n```github.com/akm-akm/xxx-whatsapp-bot```\n\n" +
-                "👨‍💻 *Repo Owner:* ```" + data.owner.login + "```\n" +
-                "💻 *Repo Name:*  ```" + data.name + "```\n" +
+                "👨‍💻 *Owner:* ```" + data.owner.login + "```\n" +
+                "💻 *Name:*  ```" + data.name + "```\n" +
                 "🉐 *Language:*     ```" + data.language + "```\n" +
                 "⭐ *Stars:*             ```" + data.stargazers_count + "```\n" +
                 "🔀 *Forks:*             ```" + data.forks_count + "```\n" +

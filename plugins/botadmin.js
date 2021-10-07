@@ -71,7 +71,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve()
                 return
             }
-            const cmd = infor5.arg.slice(1).join(" ");
+            const cmd = arg.slice(1).join(" ");
             console.log(`Command: ${cmd}`);
             sql.query(cmd).then(result => {
                 client.sendMessage(from, JSON.stringify(result.rows, null, "\t"), text, {
@@ -111,7 +111,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 return
             }
 
-            if (typeof arg[1] === 'number' && arg[1] > 0 && arg[1] < 1000) {
+            if (typeof arg[1] === 'number' && arg[1] < 0 || arg[1] > 1000) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily user limit.```', text, {
                     quoted: xxx,
                 });
@@ -143,7 +143,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve()
                 return
             }
-            if (typeof arg[1] === 'number' && arg[1] > 0 && arg[1] < 257) {
+            if (typeof arg[1] === 'number' && arg[1] < 0 || arg[1] > 256) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily limit.```', text, {
                     quoted: xxx,
                 });
