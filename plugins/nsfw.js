@@ -9,7 +9,6 @@ const {
 const {
     ai
 } = require("./deepai");
-const e = require("express");
 const nsfw = (infor4, client, xxx3) =>
 
     new Promise(async (resolve, reject) => {
@@ -39,7 +38,7 @@ const nsfw = (infor4, client, xxx3) =>
                 JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
                     .extendedTextMessage.contextInfo :
                 xxx;
-            const media = await client.downloadAndSaveMediaMessage(encmedia);
+            const media = await client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
             ai(media).then((result) => {
                 const zz = result.output.detections.length !== 0 ? "\n👙 *Detections* :\n" : " "
                 let nsfw = "🔞 *Probability* :  ```" + (result.output.nsfw_score * 100).toFixed(1) + "%```\n" + zz;
@@ -77,7 +76,7 @@ const nsfw = (infor4, client, xxx3) =>
                 JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
                     .extendedTextMessage.contextInfo :
                 xxx;
-            const media = await client.downloadAndSaveMediaMessage(encmedia);
+            const media = await client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
             ai(media).then((result) => {
                 const zz = result.output.detections.length !== 0 ? "\n👙 *Detections* :\n" : " "
                 let nsfw = "🔞 *Probability* :  ```" + (result.output.nsfw_score * 100).toFixed(1) + "%```\n" + zz;
@@ -114,7 +113,7 @@ const nsfw = (infor4, client, xxx3) =>
             const encmedia =
                 JSON.parse(JSON.stringify(xxx).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
 
-            const media = await client.downloadAndSaveMediaMessage(encmedia);
+            const media = await client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
 
             ai(media).then((result) => {
 
