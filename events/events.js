@@ -213,7 +213,7 @@ async function main() {
           (infor.arg.length !== 0 || (isGroup && isMedia && infor.groupdata.autosticker)))
         ) return
 
-        if (infor.groupdata.banned_users.includes(infor.number)) return
+        if (isGroup && infor.groupdata.banned_users.includes(infor.number)) return
 
         //  if (infor.arg.length === 0 && (isGroup && infor.groupdata.autosticker)) return
 

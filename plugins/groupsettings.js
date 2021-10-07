@@ -84,6 +84,7 @@ const grp = (infor4, client, xxx3) =>
         ran = getRandom(".jpeg");
         const file = fs.createWriteStream(ran);
         http.get(ppUrl, function (response) {
+          
           response.pipe(file);
           file.on("finish", function () {
             file.close(async () => {

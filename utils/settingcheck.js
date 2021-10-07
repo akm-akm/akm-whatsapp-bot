@@ -89,7 +89,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
     }
 
 
-    return (data = {
+    const inform = {
 
       from: from,
       arg: from.endsWith("@g.us") ? data1.rows[0].useprefix ? arg.replace(/\s+/g, " ").toLowerCase().startsWith(data1.rows[0].prefix) ?
@@ -101,14 +101,14 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       totalmsg: data2.rows[0].totalmsg,
       dailylimitover: data2.rows[0].dailylimitover,
       abusepresent: from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? arg.detecta() : [] : arg.detecta(),
-    //  canmemberusebot: from.endsWith("@g.us") ? data1.rows[0].membercanusebot == false ? false : true : true,
-     // isnumberblockedingroup: from.endsWith("@g.us") ? data1.rows[0].banned_users.includes(number) ? 1 : 0 : 0,
       groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,
       botdata: botdata.rows[0],
       sender: sender,
       stanzaId: stanzaId,
       isMedia: isMedia
-    })
+    };
+
+    return inform;
 
   } catch (error) {
     console.log(error);
