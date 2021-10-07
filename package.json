@@ -9,7 +9,6 @@
   "scripts": {
     "dev": "NODE_ENV='development' node -r dotenv/config app.js ",
     "prod": "NODE_ENV='production' node -r dotenv/config app.js ",
-    "docker": "NODE_ENV='development'  node -r dotenv/config app.js ",
     "start": "node app.js"
   },
   "repository": {

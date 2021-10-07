@@ -43,7 +43,7 @@ async function switchcase(infor2, client, xxx4) {
     count(infor3, 1)
     return;
   }
-  if (from.endsWith("@g.us") && groupdata.autosticker && arg[0] !== "sticker" && arg[0] !== "testnsfw") {
+  if (from.endsWith("@g.us") && groupdata.autosticker && infor3.isMedia && arg[0] !== "sticker" && arg[0] !== "testnsfw") {
     console.log("making auto sticker");
     stickermaker(infor3, client, xxx3).then(() => {
       count(infor3, 2)
