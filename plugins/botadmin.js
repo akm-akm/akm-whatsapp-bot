@@ -15,6 +15,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
     const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
     const from = infor5.from;
+    const arg = infor5.arg;
     if (infor5.number !== process.env.OWNER_NUMBER) {
         client.sendMessage(from, mess.only.ownerB, text, {
             quoted: xxx,
@@ -22,7 +23,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
         resolve()
         return;
     }
-    switch (infor5.arg[0]) {
+    switch (arg[0]) {
 
 
         case "xxx":
@@ -110,14 +111,14 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 return
             }
 
-            if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 1000) {
+            if (typeof arg[1] === 'number' && arg[1] > 0 && arg[1] < 1000) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily user limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
                 return;
             }
-            sql.query(`update botdata set dailylimit = '${infor5.arg[1]}'`).then(result => {
+            sql.query(`update botdata set dailylimit = '${arg[1]}'`).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
                 }).catch(err => {
@@ -142,14 +143,14 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve()
                 return
             }
-            if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 257) {
+            if (typeof arg[1] === 'number' && arg[1] > 0 && arg[1] < 257) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
                 return;
             }
-            sql.query(`update botdata set mingroupsize = '${infor5.arg[1]}'`).then(result => {
+            sql.query(`update botdata set mingroupsize = '${arg[1]}'`).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
                 }).catch(err => {
@@ -174,14 +175,14 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve()
                 return
             }
-            if (typeof infor5.arg[1] === 'number' && infor5.arg[1] > 0 && infor5.arg[1] < 1000) {
+            if (typeof arg[1] !== 'number' && arg[1] < 0 || arg[1] > 1000) {
                 client.sendMessage(from, '🤖 ```Enter a valid integer to be set as daily group limit.```', text, {
                     quoted: xxx,
                 });
                 resolve();
                 return;
             }
-            sql.query(`update botdata set dailygrouplimit = '${infor5.arg[1]}'`).then(result => {
+            sql.query(`update botdata set dailygrouplimit = '${arg[1]}'`).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
                 }).catch(err => {
@@ -204,7 +205,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve()
                 return
             }
-            const z = infor5.arg[1].replace('@', '').replace('+', '');
+            const z = arg[1].replace('@', '').replace('+', '');
             sql.query(
                 `UPDATE botdata SET moderators = array_append(moderators, '${z}');`);
             sql.query(

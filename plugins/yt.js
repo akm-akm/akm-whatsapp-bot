@@ -16,6 +16,9 @@ const youtube = (infor4, client, xxx3) =>
     const from = infor5.from;
     const arg = infor5.arg;
     const url = arg[1];
+    const vid = getRandom(".mp4");
+    const thumb = getRandom(".jpg");
+
     try {
 
       if (infor5.arg.length == 1) {
@@ -25,7 +28,6 @@ const youtube = (infor4, client, xxx3) =>
         return;
       }
       const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
-      const thumb = getRandom(".jpg");
       const file = fs.createWriteStream(thumb);
 
       axios.request({
@@ -39,7 +41,6 @@ const youtube = (infor4, client, xxx3) =>
           });
         });
       })
-      const vid = getRandom(".mp4");
       const msg = "🎪 *Title  :*\n" + "```" +
         info.videoDetails.title +
         "```\n\n" +
@@ -78,8 +79,9 @@ const youtube = (infor4, client, xxx3) =>
       resolve();
 
     } catch (err) {
-
+      fs.unlinkSync(vid);
       fs.unlinkSync(thumb);
+
 
       reject(infor5)
     }
