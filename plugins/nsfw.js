@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require('path');
 const {
     MessageType
 } = require("@adiwajshing/baileys");
@@ -9,6 +10,9 @@ const {
 const {
     ai
 } = require("./deepai");
+const mess = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 const nsfw = (infor4, client, xxx3) =>
 
     new Promise(async (resolve, reject) => {
@@ -148,7 +152,7 @@ const nsfw = (infor4, client, xxx3) =>
             });
         }
         else {
-            client.sendMessage(infor5.from, "🤖 ```Tag the media or send it with the command.```", text, {
+            client.sendMessage(infor5.from,mess.tag, text, {
                 quoted: xxx
             });
         }

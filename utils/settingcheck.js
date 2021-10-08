@@ -53,7 +53,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
       if (data1.rows.length == 0) {
         if (process.env.NODE_ENV === 'development') {
-          console.log("👪 " + chalk.bgCyan("Prefix assigned is / for group " + groupname));
+          console.log("👪  " + chalk.bgCyan("Prefix assigned is / for group " + groupname));
           await sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','/','false','true', '{''}',0,0,false,true);`
           );
@@ -63,12 +63,13 @@ module.exports = async function settingread(arg, from, sender, groupname, client
           if (
             groupMetadata.participants.length < botdata.rows[0].mingroupsize
           ) {
-            await client.sendMessage(from, "```Minimum participants required is: ```" + botdata.rows[0].mingroupsize, text);
+            await client.sendMessage(from, "*Minimum participants required is* " + botdata.rows[0].mingroupsize, text);
             client.groupLeave(from);
             return
           }
-         newgroup(from, client, random).then(() => console.log("New group!"));
-           sql.query(
+          console.log("👪  " + chalk.bgCyan(`Prefix assigned is '${random}' for group ` + groupname));
+          newgroup(from, client, random).then(() => console.log("New group!"));
+          sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
           );
           return settingread(arg, from, sender, groupname)
@@ -83,7 +84,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
     data2 = await sql.query(
       `select * from messagecount where phonenumber='${number}';`)
     if (data2.rows.length == 0) {
-      console.log("👨 " + chalk.bgBlueBright("Entering data for  number -" + number));
+      console.log("👨  " + chalk.bgBlueBright("Entering data for  number -" + number));
       await sql.query(`INSERT INTO messagecount VALUES ('${number}', 0, 0, false);`)
       return settingread(arg, from, sender, groupname)
     }

@@ -249,7 +249,7 @@ const grp = (infor4, client, xxx3) =>
           return;
         }
         if (!settings.prefixchoice.split("").includes(arg[1])) {
-          client.sendMessage(from, "🤖 ```Select prefix from ```" + settings.prefixchoice, text, {
+          client.sendMessage(from, "🤖 ```Select prefix from ```" + settings.prefixchoice.split('').join(" "), text, {
             quoted: xxx,
           });
           resolve();

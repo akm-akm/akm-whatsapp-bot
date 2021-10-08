@@ -3,6 +3,10 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
+const path = require('path');
+const mess = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
 const { ai } = require("./deepai");
@@ -316,7 +320,7 @@ const stickermaker = (infor4, client, xxx3) =>
       }
     }
     else {
-      client.sendMessage(from, "🤖 ```Tag the image or send it with the command.```", text, { quoted: xxx });
+      client.sendMessage(from,mess.tag, text, { quoted: xxx });
       resolve();
     }
   });

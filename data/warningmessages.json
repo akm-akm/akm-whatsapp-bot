@@ -1,9 +1,9 @@
 {
     "salutations"       : ["```Hey```","```Hello```","```hi```"],
-    "success"    : "✅``` Successful```",
+    "success"           : "✅``` Successful```",
     "noenv"             : "```Environment variable not set.```",
+    "tag"               : "```Reply to a media message.```",
     "error      ": {
-        "sticker": "❌ ```Failed while converting the image to a sticker.```",
         "invalid": "🌐 ```Invalid link```",
         "error"  :"❌ ```Error```"
     },
@@ -13,6 +13,6 @@
         "ownerB": "🎩 ```This command can only be used by the owner of the bot!```",
         "modB"  : "👮 ```This command can only be used by the moderators of the bot!```",
         "admin" : "🛡️ ```This command can only be used by the admins!```",
-        "Badmin": "🤖 ```This command can only be used when the bot has admin rights!```"
+        "Badmin": "🤖 ```This command can only be used when the bot is admin!```"
     }
 }

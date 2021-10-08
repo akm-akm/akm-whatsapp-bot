@@ -137,13 +137,12 @@ async function main() {
     sql.query('UPDATE botdata SET isconnected = true;')
 
     client.on('CB:Call', async json => {
-      let number = json[1]['from'];
-      let isOffer = json[1]["type"] == "offer";
-
+      const number = json[1]['from'];
+      const isOffer = json[1]["type"] == "offer";
       if (number && isOffer && json[1]["data"]) {
         console.log(json)
-        let tag = client.generateMessageTag();
-        let jsjs = ["action", "call", ["call", {
+        const tag = client.generateMessageTag();
+        const jsjs = ["action", "call", ["call", {
           "from": client.user.jid,
           "to": number.split("@")[0] + "@s.whatsapp.net",
           "id": tag
@@ -156,7 +155,6 @@ async function main() {
             }, null]
           ]
         ]];
-        console.log(jsjs)
         client.send(`${tag},${JSON.stringify(jsjs)}`)
         client.sendMessage(number, "🤖 ```Cannot receive call!```", MessageType.text);
       }
@@ -245,7 +243,7 @@ async function main() {
         const xxx4 = {
           ...xxx5
         };
-        console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + infor1.arg.join(" ") + ']'));
+        console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + infor1.arg.splice(0, 6).join(" ") + ']'));
 
         switchcase(infor1, client, xxx4);
 

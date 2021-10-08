@@ -12,7 +12,9 @@ const {
 const {
     text
 } = MessageType
-
+const mess = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 const coderunner = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
         const infor5 = { ...infor4 };
@@ -22,7 +24,7 @@ const coderunner = (infor4, client, xxx3) =>
 
         const type = Object.keys(xxx.message)[0];
         if (type !== "extendedTextMessage") {
-            client.sendMessage(from, "🤖  ```Tag the code to run. See help to understand the syntax.```", text, { quoted: xxx });
+            client.sendMessage(from, mess.tag, text, { quoted: xxx });
             resolve()
             return
         } if (process.env.clientId === undefined && process.env.clientSecret === undefined) {
