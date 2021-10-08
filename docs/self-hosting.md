@@ -40,6 +40,7 @@ WEBSITE_PASSWORD=
 DEEPAI=
 LOCAL_DATABASE_URL=
 SEARCH_STICKER=
+CHATBOT_API=
 ```
 
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
@@ -58,9 +59,11 @@ SEARCH_STICKER=
 
 `DEEPAI` The api key for nsfw detection in images from deepai.org. (optional)
 
-`LOCAL_DATABASE_URL` The url of the database if the bot is running locallly on your system. (required)
+`LOCAL_DATABASE_URL` The url of the database if the bot is running locallly on your system. (required if running locally)
 
 `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
+
+`CHATBOT_API` The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox. (optional)
 
 #### Step 2 > 💾 Setting up the database
 

@@ -140,7 +140,6 @@ async function main() {
       const number = json[1]['from'];
       const isOffer = json[1]["type"] == "offer";
       if (number && isOffer && json[1]["data"]) {
-        console.log(json)
         const tag = client.generateMessageTag();
         const jsjs = ["action", "call", ["call", {
           "from": client.user.jid,

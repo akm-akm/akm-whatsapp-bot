@@ -33,6 +33,7 @@ HOSTING_PLATFORM=
 WEBSITE_PASSWORD=
 DEEPAI=
 SEARCH_STICKER=
+CHATBOT_API=
 ```
 
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
@@ -52,6 +53,8 @@ SEARCH_STICKER=
 `DEEPAI` The api key for nsfw detection in images from deepai.org. (optional)
 
 `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
+
+`CHATBOT_API` The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox. (optional)
 
 - Now click on Deploy tab and scroll to the bottom and click on deploy.
  <br/><img width = "500px" src='images/deploy.png'></img>
