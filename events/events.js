@@ -243,7 +243,7 @@ async function main() {
         const xxx4 = {
           ...xxx5
         };
-        console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + infor1.arg.splice(0, 6).join(" ") + ']'));
+        console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + infor1.arg.join(" ") + ']'));
 
         switchcase(infor1, client, xxx4);
 
