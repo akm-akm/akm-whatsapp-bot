@@ -80,41 +80,51 @@ const grp = (infor4, client, xxx3) =>
 
 
       case "groupinfo":
-        const ppUrl = await client.getProfilePicture(from);
-        ran = getRandom(".jpeg");
-        const file = fs.createWriteStream(ran);
-        http.get(ppUrl, function (response) {
-          
-          response.pipe(file);
-          file.on("finish", function () {
-            file.close(async () => {
-              console.log("filesaved");
-              let grpdata =
-                "\n💮 *Title* : " + "*" + groupMetadata.subject + "*" +
-                "\n\n🏊 *Member* : " + "```" + groupMetadata.participants.length + "```" +
-                "\n🏅 *Admins*  :  " + "```" + groupAdmins.length + "```" +
-                "\n🎀 *Prefix* :       " + "```" + infor5.groupdata.prefix + "```" +
-                "\n💡 *Useprefix* :   " + "```" + infor5.groupdata.useprefix + "```" +
-                "\n🐶 *Autosticker* : " + "```" + infor5.groupdata.autosticker + "```" +
-                "\n🤖 *Botaccess* :   " + "```" + infor5.groupdata.membercanusebot + "```" +
-                "\n🌏 *Abusefilter* :   " + "```" + infor5.groupdata.allowabuse + "```" +
-                "\n⚠️ *NSFW detect* : " + "```" + infor5.groupdata.nsfw + "```" +
-                "\n🎫 *Credits used* : " + "```" + infor5.groupdata.totalmsgtoday + "```" +
-                "\n🧶 *Total credits* : " + "```" + infor5.botdata.dailygrouplimit + "```" +
-                "\n🚨 *Banned users* : " + "```" + (Number(infor5.groupdata.banned_users.length) - 1) + "```\n";
+        const grpdata =
+          "\n💮 *Title* : " + "*" + groupMetadata.subject + "*" +
+          "\n\n🏊 *Member* : " + "```" + groupMetadata.participants.length + "```" +
+          "\n🏅 *Admins*  : " + "```" + groupAdmins.length + "```" +
+          "\n🎀 *Prefix*      : " + "```" + infor5.groupdata.prefix + "```" +
+          "\n💡 *Useprefix*        : " + "```" + infor5.groupdata.useprefix + "```" +
+          "\n🐶 *Autosticker*    : " + "```" + infor5.groupdata.autosticker + "```" +
+          "\n🤖 *Botaccess*      : " + "```" + infor5.groupdata.membercanusebot + "```" +
+          "\n🌏 *Filterabuse*     : " + "```" + infor5.groupdata.allowabuse + "```" +
+          "\n⚠️ *NSFW detect*  : " + "```" + infor5.groupdata.nsfw + "```" +
+          "\n🎫 *Credits used*  : " + "```" + infor5.groupdata.totalmsgtoday + "```" +
+          "\n🧶 *Total credits*  : " + "```" + infor5.botdata.dailygrouplimit + "```" +
+          "\n🚨 *Banned users* : " + "```" + (Number(infor5.groupdata.banned_users.length) - 1) + "```\n";
 
+        try {
 
-              await client.sendMessage(from, fs.readFileSync(ran), image, {
-                quoted: xxx,
-                caption: grpdata,
-                mimetype: Mimetype.jpeg
-              });
+          const ppUrl = await client.getProfilePicture(from);
+          ran = getRandom(".jpeg");
+          const file = fs.createWriteStream(ran);
+          http.get(ppUrl, function (response) {
 
-              resolve();
-              fs.unlinkSync(ran);
-            })
+            response.pipe(file);
+            file.on("finish", function () {
+              file.close(async () => {
+                await client.sendMessage(from, fs.readFileSync(ran), image, {
+                  quoted: xxx,
+                  caption: grpdata,
+                  mimetype: Mimetype.jpeg
+                });
+
+                resolve();
+                fs.unlinkSync(ran);
+              })
+            });
+          })
+
+        } catch (error) {
+
+          client.sendMessage(from, grpdata, text, {
+            quoted: xxx,
           });
-        })
+          resolve();
+          return;
+
+        }
 
         break;
 
@@ -127,7 +137,7 @@ const grp = (infor4, client, xxx3) =>
         }
         if (arg[1] == "off") {
           sql.query(`UPDATE groupdata SET autosticker = false WHERE groupid = '${from}'`);
-          client.sendMessage(from,mess.success, text, {
+          client.sendMessage(from, mess.success, text, {
             quoted: xxx,
           });
           resolve();
@@ -304,13 +314,13 @@ const grp = (infor4, client, xxx3) =>
         mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
         if (z === `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from,mess.error.error, text, {
+          client.sendMessage(from, mess.error.error, text, {
             quoted: xxx,
           });
           resolve()
           return;
         }
-        if (z === `${groupMetadata.owner}`.split("@")[0]) {
+        if (z === isSuperAdmin) {
           client.sendMessage(from, mess.error.error, text, {
             quoted: xxx,
           })
@@ -325,7 +335,7 @@ const grp = (infor4, client, xxx3) =>
           return
         }
         client.groupDemoteAdmin(from, mentioned);
-        client.sendMessage(from,mess.success, text, {
+        client.sendMessage(from, mess.success, text, {
           quoted: xxx,
         });
         resolve();
@@ -349,11 +359,11 @@ const grp = (infor4, client, xxx3) =>
             resolve();
             return;
           }
-          mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
-          z = mentioned[0].split("@")[0];
+          const mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
+          const z = mentioned[0].split("@")[0];
 
-          if (z === `${groupMetadata.owner}`.split("@")[0]) {
-            client.sendMessage(from, mess.error.error , text, {
+          if (z === isSuperAdmin) {
+            client.sendMessage(from, mess.error.error, text, {
               quoted: xxx,
             })
             resolve();
@@ -643,12 +653,12 @@ const grp = (infor4, client, xxx3) =>
       case "banlist":
         bannedlist = infor5.groupdata.banned_users;
         if (bannedlist.length == 1) {
-          client.sendMessage(from, "🤔 ```No members banned.```", text, {
+          client.sendMessage(from, "🤖 *No users banned*", text, {
             quoted: xxx,
           });
           resolve();
         } else {
-          msg = "🤣 ```Members banned -```\n";
+          msg = "🤖 *Users banned:*\n";
           bannedlist.shift()
           bannedlist.forEach((currentItem) => {
             msg += "\n🚨 " + currentItem;

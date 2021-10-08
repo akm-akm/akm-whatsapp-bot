@@ -61,10 +61,10 @@
 
 ## 🔧 Default Configuration
 
-- Default daily limit for a normal user is `100` messages.
+- Default daily limit for a normal user is `70` messages.
 - Owner and bot moderators have no limit and they cannot be banned in groups.
 - Owner and bot moderators have access to all group commands even if they are not admin in any group.
-- Default daily group limit is `300` messages.
+- Default daily group limit is `100` messages.
 - By default, abuse detection and nudity detection is on.
 - Default minimum group size for the bot to work in it is `1` members.
 - These values can be changed only by the bot owner.

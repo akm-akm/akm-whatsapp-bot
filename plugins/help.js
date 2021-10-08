@@ -14,21 +14,19 @@ const getGroupAdmins = (participants) => {
 };
 const help = (infor4, client, xxx3, syntax) =>
   new Promise(async (resolve, reject) => {
-    let infor5 = { ...infor4 };
-    let xxx = { ...xxx3 };
-    arg = infor5.arg;
-    from = infor5.from;
+    const infor5 = { ...infor4 };
+    const xxx = { ...xxx3 };
+    const arg = infor5.arg;
+    const from = infor5.from;
     const isGroup = from.endsWith("@g.us");
-
     const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
     const groupMembers = isGroup ? groupMetadata.participants : "";
     const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
     const isGroupAdmins = groupAdmins.includes(infor5.sender) || false;
-
-    prefix = infor5.groupdata.prefix;
-    useprefix = infor5.groupdata.useprefix;
+    let prefix = infor5.groupdata.prefix;
+    let useprefix = infor5.groupdata.useprefix;
     let msg;
-    c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "```Disabled```";
+    c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "( " + prefix + " )" + " ```Disabled```";
     if (prefix == undefined || !useprefix) prefix = "🎀";
 
     if (arg.length == 1) {
@@ -54,7 +52,8 @@ const help = (infor4, client, xxx3, syntax) =>
         prefix + "help sticker\n" +
         prefix + "help run\n" +
         "\n📃 *Bot Updates* :" +
-        "\n‼️ _ss added_" +
+        "\n‼️ _testnsfw added_" +
+        "\n‼️ _ss not working_" +
         "\n‼️ _groupinfo added_";
 
       client.sendMessage(from, msg, text, {
