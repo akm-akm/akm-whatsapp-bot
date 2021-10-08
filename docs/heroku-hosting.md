@@ -50,7 +50,7 @@ CHATBOT_API=
 
 `WEBSITE_PASSWORD` The password you want to keep for the bot website. (required)
 
-`DEEPAI` The api key for nsfw detection in images from deepai.org. (optional)
+`DEEPAI` The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector). (optional)
 
 `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
 
