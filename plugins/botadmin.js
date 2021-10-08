@@ -46,17 +46,17 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
 
 
-        case "xstp":
-            let data = await sql.query('select * from botdata');
-            client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, "‼️‼️ ```Bot stopped ‼️‼️\nTo start the bot log in the website and click on Start bot button.\n```" + "```" + data.rows[0].boturl + "```", text, {
+        case "stp":
+            let data = await sql.query('update botdata set isconnected = false;');
+            await client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, "‼️‼️ ```Bot stopped ‼️‼️\nTo start the bot log in the website and click on Start bot button.\n```" + "```" + data.rows[0].boturl + "```", text, {
                 quoted: xxx,
                 detectlink: false
             });
             setTimeout(() => {
-                client.close()
+
                 process.exit(1)
-                // client.destroy();
-            }, 4000);
+
+            }, 1000);
             console.log("Stopped");
 
             break;

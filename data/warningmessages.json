@@ -1,11 +1,11 @@
 {
-    "salutations"       : ["```Hey```","```Hello```","```hi```"],
-    "success"           : "✅``` Successful```",
-    "noenv"             : "```Environment variable not set.```",
-    "tag"               : "```Reply to a media message.```",
+    "salutations"       : ["👋 ```Hey```","👋 ```Hello```","👋 ```hi```"],
+    "success"           : "✅ ```Successful```",
+    "noenv"             : "🔧 ```Environment variable not set.```",
+    "tag"               : "🖼 ```Reply to a media message.```",
     "error      ": {
         "invalid": "🌐 ```Invalid link```",
-        "error"  :"❌ ```Error```"
+        "error"  : "❌ ```Error```"
     },
     "only": {
         "group" : "👩‍👩‍👦‍👦 ```This command can only be used in groups!```",

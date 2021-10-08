@@ -13,6 +13,13 @@
             "rst"
         ]
     },
+    "stp": {
+        "usage": "stp",
+        "desc": "```Stops the bot, To restart it you have to login to the bot website.```",
+        "eg": [
+            "stp"
+        ]
+    },
     "sql": {
         "usage": "sql <query>",
         "desc": "```The bot will perform the given sqlquery on its postgres databse.```",
