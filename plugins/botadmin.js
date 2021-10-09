@@ -220,6 +220,27 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 });
             })
             break;
+        
+        case "rmdr":
+            if (arg.length == 1) {
+                infor5.arg = ["help", arg[0]]
+                help(infor5, client, xxx, 1);
+                resolve()
+                return
+            }
+            const z = arg[1].replace('@', '').replace('+', '');
+               sql.query(
+                `UPDATE botdata SET moderators = array_remove(moderators, '${z}');`
+            ).then(result => {
+                client.sendMessage(from, mess.success, text, {
+                    quoted: xxx,
+                }).catch(err => {
+                    client.sendMessage(from, mess.error.error, text, {
+                        quoted: xxx,
+                    });
+                });
+            })
+            break;
 
 
 

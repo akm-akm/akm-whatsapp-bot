@@ -53,6 +53,15 @@
             "mdr 15123479768"
         ]
     },
+    "rmdr": {
+        "usage": "rmdr <@tag-member>",
+        "desc": "```The bot will remove the tagged user a moderator of the bot.```",
+        "eg": [
+            "rmdr @ankit",
+            "rmdr @messi",
+            "rmdr 15123479768"
+        ]
+    },
     "mgs": {
         "usage": "mgs <argument>",
         "desc": "```The bot will change the minimum group size for the bot to work in it.```",
