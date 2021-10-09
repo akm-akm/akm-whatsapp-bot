@@ -6,9 +6,11 @@ const getRandom = (ext) => {
 };
 const path = require("path");
 const { MessageType } = require("@adiwajshing/baileys");
-const { video } = MessageType;
+const {text, video } = MessageType;
 const { help } = require(path.join(__dirname, "./help"));
-
+const mess = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 const youtube = (infor4, client, xxx3) =>
   new Promise(async (resolve, reject) => {
     const infor5 = { ...infor4 };
