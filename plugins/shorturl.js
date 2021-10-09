@@ -4,7 +4,7 @@ const { text } = MessageType;
 const path = require("path");
 const fs = require('fs');
 const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 const { help } = require(path.join(__dirname, "./help"));
 const urlregex =
@@ -22,7 +22,7 @@ const shorturl = (infor4, client, xxx3) =>
             resolve()
             return
         }
-        if (urlregex.test(arg[1])===false) {
+        if (urlregex.test(arg[1]) === false) {
             client.sendMessage(from, mess.error.invalid, text, {
                 quoted: xxx
             });
@@ -35,7 +35,7 @@ const shorturl = (infor4, client, xxx3) =>
         })
             .then((response) => {
                 if (response.data == 'Invalid URL') {
-                    client.sendMessage(from, mess.error.invalid , text, {
+                    client.sendMessage(from, mess.error.invalid, text, {
                         quoted: xxx
                     });
                     resolve()

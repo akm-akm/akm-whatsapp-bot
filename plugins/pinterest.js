@@ -8,7 +8,7 @@ const getRandom = (ext) => {
 };
 const path = require("path");
 const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 const { help } = require(path.join(__dirname, "./help"));
 
@@ -47,7 +47,7 @@ const pinterest = (infor4, client, xxx3) =>
           file.on("finish", function () {
             file.close(async () => {
               console.log("filesaved");
-              title.startsWith("<div") ? client.sendMessage(from,mess.error.error, text, {
+              title.startsWith("<div") ? client.sendMessage(from, mess.error.error, text, {
                 quoted: xxx
               }) : await client.sendMessage(from, fs.readFileSync(ran), video, {
                 quoted: xxx,

@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const { help } = require(path.join(__dirname, "./help"));
 const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 const {
     MessageType

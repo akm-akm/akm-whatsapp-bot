@@ -27,7 +27,7 @@ const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
 errorSticker = path.join(__dirname, "../assets/stickers/error.webp");
 const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 async function switchcase(infor2, client, xxx4) {
   const infor3 = { ...infor2 };
@@ -264,7 +264,7 @@ async function switchcase(infor2, client, xxx4) {
 
     case "limit":
       x =
-       mess.limit + infor3.noofmsgtoday + " / *" + infor3.botdata.dailylimit + "*";
+        mess.limit + infor3.noofmsgtoday + " / *" + infor3.botdata.dailylimit + "*";
       client.sendMessage(from, x, text, {
         quoted: xxx3,
       });

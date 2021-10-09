@@ -20,7 +20,7 @@ const {
 } = require(path.join(__dirname, "../utils/count"));
 const chalk = require('chalk');
 const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 
 
@@ -259,7 +259,7 @@ async function main() {
 ////////////////////////////////////////////////////////////////////
 async function stop() {
   client.close();
-  
+
   console.log("Stopped");
   await sql.query('UPDATE botdata SET isconnected = false;')
   process.exit();

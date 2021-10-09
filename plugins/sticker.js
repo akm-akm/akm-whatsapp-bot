@@ -5,7 +5,7 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
 const path = require('path');
 const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
@@ -107,9 +107,9 @@ const stickermaker = (infor4, client, xxx3) =>
         ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
           .extendedTextMessage.contextInfo
         : xxx;
-      const media = await client.downloadAndSaveMediaMessage(encmedia,getRandom(''));
+      const media = await client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
       const ran = getRandom(".webp");
-      if (infor5.groupdata==0 || infor5.groupdata.nsfw==true) {
+      if (infor5.groupdata == 0 || infor5.groupdata.nsfw == true) {
         const nsfw = await ai(media)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
@@ -179,11 +179,11 @@ const stickermaker = (infor4, client, xxx3) =>
           });
           resolve();
           fs.unlinkSync(media);
-       
+
           return;
         }
       }
-      const   ran = getRandom(".webp");
+      const ran = getRandom(".webp");
 
 
       ffmpeg(`./${media}`)
@@ -245,13 +245,13 @@ const stickermaker = (infor4, client, xxx3) =>
           });
           resolve();
           fs.unlinkSync(media1);
-         
+
           fs.unlinkSync(ran);
           return;
         }
       }
-      const   ran = getRandom(".webp");
-      const  media = getRandom(".mp4");
+      const ran = getRandom(".webp");
+      const media = getRandom(".mp4");
       ffmpeg(`./${media1}`)
         .setStartTime('00:00:00')
         .setDuration('9')
@@ -320,7 +320,7 @@ const stickermaker = (infor4, client, xxx3) =>
       }
     }
     else {
-      client.sendMessage(from,mess.tag, text, { quoted: xxx });
+      client.sendMessage(from, mess.tag, text, { quoted: xxx });
       resolve();
     }
   });

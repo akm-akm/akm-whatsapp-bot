@@ -13,7 +13,7 @@ const {
     text
 } = MessageType
 const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 const coderunner = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {

@@ -6,7 +6,7 @@ const settings = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/settings.json"))
 );
 const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 const {
   newgroup

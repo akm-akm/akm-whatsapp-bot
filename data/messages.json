@@ -6,8 +6,8 @@
     ],
 
     "success":     "✅ ```Successful```",
-    "noenv":       "🔧 ```Environment variable not set.```",
-    "tag":         "🖼 ```Reply to a media message.```",
+    "noenv":       "🛠️ ```Environment variable not set.```",
+    "tag":         "🌌 ```Reply to a media.```",
     "tagtext"   :  "📑 ```Reply to a code.```",
     "grouplimit":  "🎫 ```Daily group credits exhausetd.```",
     "userlimit" :  "💳 ```Daily credits exhausetd.```",

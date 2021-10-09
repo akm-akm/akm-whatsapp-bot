@@ -11,7 +11,7 @@ const {
     ai
 } = require("./deepai");
 const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 const nsfw = (infor4, client, xxx3) =>
 
@@ -52,7 +52,7 @@ const nsfw = (infor4, client, xxx3) =>
             ai(media).then((result) => {
                 const zz = result.output.detections.length !== 0 ? "\n👙 *Detections* :\n" : " "
                 let nsfw = "🔞 *Probability* :  ```" + (result.output.nsfw_score * 100).toFixed(1) + "%```\n" + zz;
-                
+
                 result.output.detections.forEach(function (element) {
                     nsfw = nsfw + "\nName : " + element.name + "\n" +
                         "Confidence : " + (element.confidence * 100).toFixed(0) + " %\n";
@@ -152,7 +152,7 @@ const nsfw = (infor4, client, xxx3) =>
             });
         }
         else {
-            client.sendMessage(infor5.from,mess.tag, text, {
+            client.sendMessage(infor5.from, mess.tag, text, {
                 quoted: xxx
             });
         }
