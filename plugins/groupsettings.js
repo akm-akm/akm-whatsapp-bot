@@ -417,7 +417,7 @@ const grp = (infor4, client, xxx3) =>
         const isQuotedImage =
           type === "extendedTextMessage" && content.includes("imageMessage");
         if (!(isMedia || isQuotedImage))
-          client.sendMessage(from, "🤖 ```Tag the image or send it with the the command.```", text, {
+          client.sendMessage(from, mess.tag, text, {
             quoted: xxx,
           });
         resolve();

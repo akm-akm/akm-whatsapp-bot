@@ -26,7 +26,9 @@ const { chatbot } = require(path.join(__dirname, "../plugins/chatbot"));
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
 errorSticker = path.join(__dirname, "../assets/stickers/error.webp");
-
+const mess = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 async function switchcase(infor2, client, xxx4) {
   const infor3 = { ...infor2 };
   const arg = infor3.arg;
@@ -81,7 +83,7 @@ async function switchcase(infor2, client, xxx4) {
     case "delete":
       deleteit(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(infor3, 2)
         })
         .catch((infor5) => {
           client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
@@ -100,7 +102,7 @@ async function switchcase(infor2, client, xxx4) {
 
       owner(infor3, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+
         })
         .catch((infor5) => {
           client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
@@ -262,7 +264,7 @@ async function switchcase(infor2, client, xxx4) {
 
     case "limit":
       x =
-        "🤖 ```Daily credit used:``` " + infor3.noofmsgtoday + "/ *" + infor3.botdata.dailylimit + "*";
+       mess.limit + infor3.noofmsgtoday + " / *" + infor3.botdata.dailylimit + "*";
       client.sendMessage(from, x, text, {
         quoted: xxx3,
       });
@@ -305,7 +307,7 @@ async function switchcase(infor2, client, xxx4) {
     case "heyy":
     case "heyyyy":
     case "heyyy":
-      client.sendMessage(from, ["👋 ```Hello```", "👋 ```Hi```", "👋 ```Hey```"][Math.floor(Math.random() * 3)], text, {
+      client.sendMessage(from, mess.salutations[Math.floor(Math.random() * mess.salutations.length)], text, {
         quoted: xxx3,
       });
       count(infor3)

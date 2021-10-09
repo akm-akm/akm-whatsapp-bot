@@ -21,64 +21,68 @@ const youtube = (infor4, client, xxx3) =>
 
     try {
 
-      if (infor5.arg.length == 1) {
+      if (arg.length == 1) {
         infor5.arg = ["help", arg[0]]
         help(infor5, client, xxx, 1);
         resolve();
         return;
       }
-      const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
-      const file = fs.createWriteStream(thumb);
-
-      axios.request({
-        url: info.videoDetails.thumbnails.pop().url,
-        method: 'GET',
-        responseType: 'stream'
-      }).then(response => {
-        response.data.pipe(file);
-        file.on('finish', () => {
-          file.close(async () => {
-          });
-        });
-      })
-      const msg = "🎪 *Title  :*\n" + "```" +
-        info.videoDetails.title +
-        "```\n\n" +
-        "🍟 *Author :*  " +
-        "```" +
-        info.videoDetails.author.name +
-        "```\n" +
-        "🎥 *Views  :*  " +
-        "```" +
-        info.videoDetails.viewCount +
-        "```\n" +
-        "👍 *Likes   :*  " +
-        "```" +
-        info.videoDetails.likes +
-        "```\n" +
-        "👎 *Disikes:*  " +
-        "```" +
-        info.videoDetails.dislikes +
-        "```";
-      ytdl(url)
-        .pipe(fs.createWriteStream(vid))
-        .on("finish", async () => {
-
-
-          await client.sendMessage(from, fs.readFileSync(vid), video,
-            {
-              quoted: xxx,
-              caption: msg,
-              thumbnail: fs.readFileSync(thumb)
+      if (ytdl.validateURL(url)) {
+        const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
+        const file = fs.createWriteStream(thumb);
+        axios.request({
+          url: info.videoDetails.thumbnails.pop().url,
+          method: 'GET',
+          responseType: 'stream'
+        }).then(response => {
+          response.data.pipe(file);
+          file.on('finish', () => {
+            file.close(async () => {
             });
-          fs.unlinkSync(vid);
-          fs.unlinkSync(thumb);
-        });
+          });
+        })
+        const msg = "🎪 *Title  :*\n" + "```" +
+          info.videoDetails.title +
+          "```\n\n" +
+          "🍟 *Author :*  " +
+          "```" +
+          info.videoDetails.author.name +
+          "```\n" +
+          "🎥 *Views  :*  " +
+          "```" +
+          info.videoDetails.viewCount +
+          "```\n" +
+          "👍 *Likes   :*  " +
+          "```" +
+          info.videoDetails.likes +
+          "```\n" +
+          "👎 *Disikes:*  " +
+          "```" +
+          info.videoDetails.dislikes +
+          "```";
+        ytdl(url)
+          .pipe(fs.createWriteStream(vid))
+          .on("finish", async () => {
+
+            await client.sendMessage(from, fs.readFileSync(vid), video,
+              {
+                quoted: xxx,
+                caption: msg,
+                thumbnail: fs.readFileSync(thumb)
+              });
+            fs.unlinkSync(vid);
+            fs.unlinkSync(thumb);
+          });
 
 
-      resolve();
-
+        resolve();
+      } else {
+        client.sendMessage(from, mess.error.invalid, text, { quoted: xxx });
+        resolve();
+      }
     } catch (err) {
+      console.log(err);
+
       fs.unlinkSync(vid);
       fs.unlinkSync(thumb);
 

@@ -1,18 +1,29 @@
 {
-    "salutations"       : ["👋 ```Hey```","👋 ```Hello```","👋 ```hi```"],
-    "success"           : "✅ ```Successful```",
-    "noenv"             : "🔧 ```Environment variable not set.```",
-    "tag"               : "🖼 ```Reply to a media message.```",
-    "error      ": {
+    "salutations": [
+        "👋 ```Hey```",
+        "👋 ```Hello```",
+        "👋 ```hi```"
+    ],
+
+    "success":     "✅ ```Successful```",
+    "noenv":       "🔧 ```Environment variable not set.```",
+    "tag":         "🖼 ```Reply to a media message.```",
+    "tagtext"   :  "📑 ```Reply to a code.```",
+    "grouplimit":  "🎫 ```Daily group credits exhausetd.```",
+    "userlimit" :  "💳 ```Daily credits exhausetd.```",
+    "limit"     :  "💳 ```Daily credits used = ```",
+  
+    "error": {
         "invalid": "🌐 ```Invalid link```",
-        "error"  : "❌ ```Error```"
+        "error":   "❌ ```Error```"
     },
+    
     "only": {
-        "group" : "👩‍👩‍👦‍👦 ```This command can only be used in groups!```",
+        "group":  "👩‍👩‍👦‍👦 ```This command can only be used in groups!```",
         "ownerG": "💎 ```This command can only be used by the owner of the group!```",
         "ownerB": "🎩 ```This command can only be used by the owner of the bot!```",
-        "modB"  : "👮 ```This command can only be used by the moderators of the bot!```",
-        "admin" : "🛡️ ```This command can only be used by the admins!```",
+        "modB":   "👮 ```This command can only be used by the moderators of the bot!```",
+        "admin":  "🛡️ ```This command can only be used by the admins!```",
         "Badmin": "🤖 ```This command can only be used when the bot is admin!```"
     }
 }

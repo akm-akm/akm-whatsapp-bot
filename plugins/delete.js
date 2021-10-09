@@ -1,6 +1,11 @@
 const { MessageType } = require("@adiwajshing/baileys");
 const { text } = MessageType;
+const path = require("path");
+const fs = require('fs');
 
+const mess = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 const deleteit = (infor4, client, xxx3) =>
     new Promise(async (resolve, reject) => {
         const infor5 = { ...infor4 };
@@ -9,7 +14,7 @@ const deleteit = (infor4, client, xxx3) =>
 
         const type = Object.keys(xxx.message)[0];
         if (type !== "extendedTextMessage") {
-            client.sendMessage(from, "🤖  ```Reply to my message that is to be deleted.```", text, { quoted: xxx });
+            client.sendMessage(from, mess.error.error, text, { quoted: xxx });
             resolve()
             return
         }
@@ -21,9 +26,9 @@ const deleteit = (infor4, client, xxx3) =>
             })
             resolve()
         } catch (error) {
-            client.sendMessage(from, "🤖  ```Reply to my message that is to be deleted.```", text, { quoted: xxx });
+            client.sendMessage(from, mess.error.error, text, { quoted: xxx });
             resolve()
-         
+
 
         }
 

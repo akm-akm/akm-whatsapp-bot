@@ -24,7 +24,7 @@ const coderunner = (infor4, client, xxx3) =>
 
         const type = Object.keys(xxx.message)[0];
         if (type !== "extendedTextMessage") {
-            client.sendMessage(from, mess.tag, text, { quoted: xxx });
+            client.sendMessage(from, mess.tagtext, text, { quoted: xxx });
             resolve()
             return
         } if (process.env.clientId === undefined && process.env.clientSecret === undefined) {

@@ -19,7 +19,9 @@ const {
   count
 } = require(path.join(__dirname, "../utils/count"));
 const chalk = require('chalk');
-
+const mess = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/warningmessages.json"))
+);
 
 
 
@@ -122,7 +124,7 @@ async function main() {
     if (qqr.rows[0].count === 0) {
       console.log("New bot!, changing its dp and name!");
       client.updateProfileName("xxx-whatsapp-bot");
-      client.updateProfilePicture(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, fs.readFileSync(path.join(__dirname, "../docs/images/logo.jpeg")));
+      client.updateProfilePicture(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, fs.readFileSync(path.join(__dirname, "../docs/images/xxxlogo.jpeg")));
     }
   })();
 
@@ -223,7 +225,7 @@ async function main() {
           infor.dailylimitover === false
         ) {
           sql.query(`UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${infor.number}';`)
-          client.sendMessage(infor.sender, "🤖 ```You have exhausted your daily limit, the bot will not reply you anymore.```", text, {
+          client.sendMessage(infor.sender, mess.userlimit, text, {
             quoted: xxx5,
           });
           return
@@ -231,7 +233,7 @@ async function main() {
         if (infor.dailylimitover === true) return
 
         if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit) {
-          client.sendMessage(infor.from, "🤖 ```Daily group limit exhausted, the bot will not reply today anymore.```", text);
+          client.sendMessage(infor.from, mess.grouplimit, text);
 
           count(infor)
           return
@@ -257,8 +259,10 @@ async function main() {
 ////////////////////////////////////////////////////////////////////
 async function stop() {
   client.close();
+  
   console.log("Stopped");
   await sql.query('UPDATE botdata SET isconnected = false;')
+  process.exit();
 }
 async function isconnected() {
   return client.state;
