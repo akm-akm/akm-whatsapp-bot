@@ -228,9 +228,9 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 resolve()
                 return
             }
-            const z = arg[1].replace('@', '').replace('+', '');
+            const za = arg[1].replace('@', '').replace('+', '');
                sql.query(
-                `UPDATE botdata SET moderators = array_remove(moderators, '${z}');`
+                `UPDATE botdata SET moderators = array_remove(moderators, '${za}');`
             ).then(result => {
                 client.sendMessage(from, mess.success, text, {
                     quoted: xxx,
