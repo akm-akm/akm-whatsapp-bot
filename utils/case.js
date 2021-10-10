@@ -99,6 +99,7 @@ async function switchcase(infor2, client, xxx4) {
     case "stp":
     case "mgs":
     case "rtrt":
+    case "rmdr":
 
       owner(infor3, client, xxx3)
         .then((resolve) => {
