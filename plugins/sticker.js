@@ -227,10 +227,10 @@ const stickermaker = (infor4, client, xxx3) =>
       }
     }
     else if (
-      (isMedia && xxx.message.videoMessage.seconds > 11) ||
+      (isMedia && xxx.message.videoMessage.seconds >=11) ||
       (isQuotedVideo &&
         xxx.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage
-          .seconds > 11)
+          .seconds >= 11)
     ) {
       const encmedia = isQuotedVideo
         ? JSON.parse(JSON.stringify(xxx).replace("quotedM", "m")).message
