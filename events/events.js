@@ -232,7 +232,7 @@ async function main() {
         }
         if (infor.dailylimitover === true) return
 
-        if (isGroup && infor.groupdata.totalmsgtoday === infor.botdata.dailygrouplimit) {
+        if (isGroup && infor.groupdata.totalmsgtoday > infor.botdata.dailygrouplimit) {
           client.sendMessage(infor.from, mess.grouplimit, text);
 
           count(infor)

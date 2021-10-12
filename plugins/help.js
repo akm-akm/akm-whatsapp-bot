@@ -31,7 +31,7 @@ const help = (infor4, client, xxx3, syntax) =>
 
     if (arg.length == 1) {
       cas = infor5.number === process.env.OWNER_NUMBER ?
-        "🎩 *Owner only* :\n```rst, dul, dgl, mgs, sql, mdr, rmdr, rtrt, stp```\n\n"
+        "🎩 *Owner* :\n```rst, dul, dgl, mgs, sql, mdr, rmdr, rtrt, stp```\n\n"
         : "";
 
       const grpcmds = isGroupAdmins ? "👑 *Admin* :\n```groupinfo, promote, demote, kick, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
