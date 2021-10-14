@@ -22,9 +22,9 @@ setTimeout(() => {
       data.forEach(obj => {
         total += obj.total;
       });
-      console.log(total);
+    
       version = total.toString().split("").join(".");
-      console.log(version);
+      console.log("v",version);
     });
 }, 20000);
 
