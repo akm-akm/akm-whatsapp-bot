@@ -24,19 +24,31 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
                 "💾 *Size:*               ```" + (data.size / 1024).toFixed(0) + " KB```\n" +
                 "📄 *License:*         ```" + data.license.key + " ```\n" +
                 "\n🤖 🤖 *_Bot made by AKM_* 🤖 🤖"
-            client.sendMessage(from,
-                fs.readFileSync(path.join(__dirname, "../docs/images/xxxlogo.jpeg")),
-                // msg,
-                // text,
-                image,
-                {
-                    quoted: xxx,
-                    detectLinks: false,
-                    caption: msg,
-                    mimetype: Mimetype.jpeg
-                })
-            resolve();
 
+            try {
+
+                client.sendMessage(from,
+                    fs.readFileSync(path.join(__dirname, "../docs/images/xxxlogo.jpeg")),
+                
+                    image,
+                    {
+                        quoted: xxx,
+                        detectLinks: false,
+                        caption: msg,
+                        mimetype: Mimetype.jpeg
+                    })
+                resolve();
+            } catch (error) {
+                client.sendMessage(from,
+                    msg,
+                    text,
+                    {
+                        quoted: xxx,
+                        detectLinks: false,
+                    })
+                resolve();
+
+            }
         })
         .catch((e) => {
             console.log(e);
