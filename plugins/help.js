@@ -50,7 +50,7 @@ const help = (infor4, client, xxx3, syntax) =>
         "🎩 *Owner* :\n```rst, dul, dgl, mgs, sql, mdr, rmdr, rtrt, stp```\n\n"
         : "";
 
-      const grpcmds = isGroupAdmins ? "👑 *Admin* :\n```groupinfo, promote, demote, kick, removeall, changedp, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
+      const grpcmds = (isGroupAdmins || infor5.number === process.env.OWNER_NUMBER || infor5.botdata.moderators.includes(infor5.number) )? "👑 *Admin* :\n```groupinfo, promote, demote, kick, removeall, changedp, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
