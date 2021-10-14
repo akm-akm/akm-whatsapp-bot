@@ -12,7 +12,7 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
         .then((response) => {
             let data = response.data;
 
-            msg = "\n🤖🤖🤖  *Sourcecode*  🤖🤖🤖\n\n" +
+            msg = "\n🤖🤖🤖 *Sourcecode* 🤖🤖🤖\n\n" +
                 "🐱 *Github*\n```github.com/akm-akm/xxx-whatsapp-bot```\n\n" +
                 "👨‍💻 *Owner:* ```" + data.owner.login + "```\n" +
                 "💻 *Name:*  ```" + data.name + "```\n" +
