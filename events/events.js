@@ -208,7 +208,7 @@ async function main() {
         const groupName = isGroup ? groupMetadata.subject : "inbox";
         const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
 
-        if (!(!isGroup || (isGroup && (infor.groupdata.totalmsgtoday < infor.botdata.dailygrouplimit)) &&
+        if (!(!isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
           (infor.arg.length !== 0 || (isGroup && isMedia && infor.groupdata.autosticker)))
         ) return
 
