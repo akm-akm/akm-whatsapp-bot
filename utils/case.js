@@ -207,7 +207,6 @@ async function switchcase(infor2, client, xxx4) {
         });
       break;
 
-      break;
     case "testnsfw":
       nsfw(infor3, client, xxx3)
         .then(() => {

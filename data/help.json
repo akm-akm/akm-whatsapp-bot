@@ -225,11 +225,11 @@
             "groupinfo"
         ]
     },
-    "purge": {
-        "usage": "purge confirm",
+    "removeall": {
+        "usage": "removeall",
         "desc": "```Removes all the members from the group.```",
         "eg": [
-            "purge confirm"
+            "removeall"
         ]
     },
     "grouplink": {
