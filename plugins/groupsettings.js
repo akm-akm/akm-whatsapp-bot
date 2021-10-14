@@ -534,10 +534,10 @@ const grp = (infor4, client, xxx3) =>
 
         if (arg.length > 1) {
           arg.shift();
-          msg = arg.join(" ") + "\n"
+          msg = "👋  ```" + arg.join(" ").charAt(0).toUpperCase() + arg.join(" ").slice(1) + "```";
         } else msg = "👋 ```Hello Everyone```";
         for (let member of groupMembers) {
-         // msg += `\n🤖 @${member.jid.split("@")[0]}`;
+          // msg += `\n🤖 @${member.jid.split("@")[0]}`;
           memberslist.push(member.jid);
         }
         client.sendMessage(from, msg, extendedText, {

@@ -11,11 +11,11 @@
     "tagtext"   :  "📑 ```Reply to a code.```",
     "grouplimit":  "🎫 ```Daily group credits exhausetd.```",
     "userlimit" :  "💳 ```Daily credits exhausetd.```",
-    "limit"     :  "💳 ```Daily credits used = ```",
+    "limit"     :  "💳 ```Daily credit used: ```",
   
     "error": {
         "invalid": "🌐 ```Invalid link```",
-        "error":   "❌ ```Error```"
+        "error":   "❎ ```Error```"
     },
     
     "only": {

@@ -208,13 +208,12 @@ async function main() {
         const groupName = isGroup ? groupMetadata.subject : "inbox";
         const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
 
-        if (!(!isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
+        if (!(!isGroup || (isGroup && (infor.groupdata.totalmsgtoday < infor.botdata.dailygrouplimit)) &&
           (infor.arg.length !== 0 || (isGroup && isMedia && infor.groupdata.autosticker)))
         ) return
 
         if (isGroup && infor.groupdata.banned_users.includes(infor.number)) return
 
-        //  if (infor.arg.length === 0 && (isGroup && infor.groupdata.autosticker)) return
 
         if (isGroup && infor.groupdata.membercanusebot === false && !isGroupAdmins && infor.number !== process.env.OWNER_NUMBER && !infor.botdata.moderators.includes(infor.number)) return
 
@@ -232,7 +231,7 @@ async function main() {
         }
         if (infor.dailylimitover === true) return
 
-        if (isGroup && infor.groupdata.totalmsgtoday > infor.botdata.dailygrouplimit) {
+        if (isGroup && infor.groupdata.totalmsgtoday >= infor.botdata.dailygrouplimit) {
           client.sendMessage(infor.from, mess.grouplimit, text);
 
           count(infor)

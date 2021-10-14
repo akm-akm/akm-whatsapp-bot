@@ -38,7 +38,7 @@ async function switchcase(infor2, client, xxx4) {
     ...xxx4
   };
 
-  if (infor3.abusepresent.length != 0) {
+  if (infor3.abusepresent.length != 0 && infor3.number !== process.env.OWNER_NUMBER && !infor3.botdata.moderators.includes(infor3.number)) {
     client.sendMessage(from, "⚠️  ```chup " + infor3.abusepresent.join(" ") + "```", text, {
       quoted: xxx3,
     });
