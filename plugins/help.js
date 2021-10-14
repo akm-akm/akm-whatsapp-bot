@@ -12,19 +12,22 @@ const getGroupAdmins = (participants) => {
   }
   return admins;
 };
- total = 0, version="";
+total = 0, version = "";
 const axios = require('axios');
-axios.get(`https://api.github.com/repos/akm-akm/xxx-whatsapp-bot/stats/commit_activity`)
-  .then((response) => {
-    let data = response.data;
+setTimeout(() => {
+  axios.get(`https://api.github.com/repos/akm-akm/xxx-whatsapp-bot/stats/commit_activity`)
+    .then((response) => {
+      let data = response.data;
 
-    data.forEach(obj => {
-      total += obj.total;
+      data.forEach(obj => {
+        total += obj.total;
+      });
+      console.log(total);
+      version = total.toString().split("").join(".");
+      console.log(version);
     });
-    console.log(total);
-    version = total.toString().split("").join(".");
-    console.log(version);
-  });
+}, 20000);
+
 const help = (infor4, client, xxx3, syntax) =>
   new Promise(async (resolve, reject) => {
     const infor5 = { ...infor4 };
@@ -68,9 +71,9 @@ const help = (infor4, client, xxx3, syntax) =>
         "\n‼️ _testnsfw feature added_" +
         "\n‼️ _ss is not working_" +
         "\n‼️ _groupinfo added_"
-      +
+        +
         "\n\n⚙️ *Bot version* : " + version;
-        
+
 
       client.sendMessage(from, msg, text, {
         quoted: xxx,

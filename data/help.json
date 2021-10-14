@@ -212,7 +212,7 @@
     },
     "tagall": {
         "usage": "tagall <text>",
-        "desc": "```Tags all the members in the group.```",
+        "desc": "```Tags all the members in the group invisibely.```",
         "eg": [
             "tagall class at 7am",
             "tagall holiday today"
@@ -345,7 +345,7 @@
     },
     "shorturl": {
         "usage": "shorturl <link>",
-        "desc": "```Generates a short url uf the given link using lenk.cf API.```",
+        "desc": "```Generates a short url of the given link using lenk.cf API.```",
         "eg": [
             "shorturl https://www.hindustantimes.com/world-nes"
         ]
@@ -354,8 +354,8 @@
         "usage": "add <number>",
         "desc": "```Adds the given number to the group.```",
         "eg": [
-            "add 9876543210",
-            "add 9012345678"
+            "add 19876543210",
+            "add 919012345678"
         ]
     },
     "lyrics": {
