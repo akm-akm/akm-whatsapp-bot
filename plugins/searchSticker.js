@@ -132,7 +132,7 @@ const searchSticker = (infor4, client, xxx3) =>
             });
         }
         ).catch(e => {
-            console.log(e);
+           // console.log(e);
             reject(infor5)
         });
 

@@ -499,7 +499,7 @@ const grp = (infor4, client, xxx3) =>
 
         break;
 
-      case "purge":
+      case "removeall":
         if (!isSuperAdmin) {
           client.sendMessage(from, mess.only.ownerG, text, {
             quoted: xxx,
@@ -515,7 +515,7 @@ const grp = (infor4, client, xxx3) =>
           return;
         }
         if (arg[1] != "confirm") {
-          client.sendMessage(from, "```Type confirm after purge.```", text, {
+          client.sendMessage(from, "```Type confirm after removeall.```", text, {
             quoted: xxx,
           });
           resolve();

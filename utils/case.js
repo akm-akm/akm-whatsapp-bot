@@ -45,7 +45,7 @@ async function switchcase(infor2, client, xxx4) {
     count(infor3, 1)
     return;
   }
-  if (from.endsWith("@g.us") && groupdata.autosticker && infor3.isMedia && arg[0] !== "sticker" && arg[0] !== "testnsfw") {
+  if (infor3.groupdata!==0 && groupdata.autosticker && infor3.isMedia && arg[0] !== "sticker" && arg[0] !== "testnsfw") {
     console.log("making auto sticker");
     stickermaker(infor3, client, xxx3).then(() => {
       count(infor3, 2)
@@ -103,7 +103,7 @@ async function switchcase(infor2, client, xxx4) {
 
       owner(infor3, client, xxx3)
         .then((resolve) => {
-
+          count(infor3)
         })
         .catch((infor5) => {
           client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
@@ -227,12 +227,12 @@ async function switchcase(infor2, client, xxx4) {
     case "remove":
     case "useprefix":
     case "grouplink":
-    //case "changedp":
+    case "changedp":
     case "botleave":
     case "close":
     case "open":
     // case "add":
-    // case "purge":
+    case "removeall":
     case "autosticker":
     case "tagall":
     case "nsfw":
