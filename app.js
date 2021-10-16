@@ -58,7 +58,6 @@ server.get("/login", async (req, res) => {
 
 server.get("/logout", async (req, res) => {
   logout();
-  autoconnect = false;
   res.send("1")
 });
 
@@ -78,7 +77,6 @@ server.get("/qr", async (req, res) => {
 
 
 server.post("/sql", async (req, res) => {
-  console.log("query - " + req.body.query);
   sql
     .query(req.body.query)
     .then((result) => {
@@ -91,15 +89,11 @@ server.post("/sql", async (req, res) => {
 
 
 server.post("/auth", async (req, res) => {
-  console.log('siteurl', req.body.siteurl);
   sql.query(`UPDATE botdata SET boturl='${req.body.siteurl}';`)
   if (req.body.pass != process.env.WEBSITE_PASSWORD) {
-    console.log(false);
     res.send("false");
   } else {
-    console.log(true);
     res.send("true");
-    console.log("sent");
   }
 });
 
@@ -112,7 +106,6 @@ server.get("/restart", async (req, res) => {
 
 server.get("/isconnected", async (req, res) => {
   let state = await isconnected()
-  console.log("server is sending connection state - " + state);
   if (state == "close") res.send("close")
   else if (state == "connecting") res.send("connecting")
   else if (state == "open") res.send("open")

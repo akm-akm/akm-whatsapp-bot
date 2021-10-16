@@ -501,7 +501,6 @@ const grp = (infor4, client, xxx3) =>
       /*
       This feature bans the bot instantly!
             case "removeall":
-              console.log(groupMetadata.owner);
               if (!isSuperAdmin) {
                 client.sendMessage(from, mess.only.ownerG, text, {
                   quoted: xxx,
@@ -539,7 +538,6 @@ const grp = (infor4, client, xxx3) =>
           msg = "👋  ```" + arg.join(" ").charAt(0).toUpperCase() + arg.join(" ").slice(1) + "```";
         } else msg = "👋 ```Hello Everyone```";
         for (let member of groupMembers) {
-          // msg += `\n🤖 @${member.jid.split("@")[0]}`;
           memberslist.push(member.jid);
         }
         client.sendMessage(from, msg, extendedText, {

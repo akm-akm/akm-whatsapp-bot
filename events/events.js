@@ -53,7 +53,6 @@ async function connect() {
           type: "png"
         })
         .pipe(fs.createWriteStream("./public/qr.png"));
-      console.log("scan the qr above ");
     });
     client.on("connecting", () => {
       console.log("connecting...");
@@ -119,6 +118,7 @@ async function connect() {
   }
 }
 async function main() {
+  
   (async function () {
     qqr = await sql.query("SELECT count(*) from messagecount;")
     if (qqr.rows[0].count === 0) {
