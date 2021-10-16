@@ -79,6 +79,7 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
                 }).catch(err => {
                     client.sendMessage(from, mess.error.error, text, {
                         quoted: xxx,
+                        detectLinks: false
                     });
                 });
                 resolve();
