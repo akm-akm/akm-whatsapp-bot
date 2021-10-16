@@ -59,7 +59,7 @@ const grp = (infor4, client, xxx3) =>
     const ownerNumber = [`${process.env.OWNER_NUMBER}@s.whatsapp.net`];
     const isBotGroupAdmins = groupAdmins.includes(botNumber) || false;
     const isOwner = ownerNumber.includes(sender);
-    const isSuperAdmin = `${groupMetadata.owner}`.split('@') === sender.split('@');
+    const isSuperAdmin = `${groupMetadata.owner}`.split('@')[0] === infor5.number;
     if (!isGroup) {
       client.sendMessage(from, mess.only.group, text, {
         quoted: xxx,
@@ -498,37 +498,39 @@ const grp = (infor4, client, xxx3) =>
         }
 
         break;
-
-      case "removeall":
-        if (!isSuperAdmin) {
-          client.sendMessage(from, mess.only.ownerG, text, {
-            quoted: xxx,
-          });
-          resolve();
-          return;
-        }
-        if (!isBotGroupAdmins) {
-          client.sendMessage(from, mess.only.Badmin, text, {
-            quoted: xxx,
-          });
-          resolve();
-          return;
-        }
-        if (arg[1] != "confirm") {
-          client.sendMessage(from, "```Type confirm after removeall.```", text, {
-            quoted: xxx,
-          });
-          resolve();
-          return;
-        }
-        numbers = [];
-        groupMembers.forEach((element) => {
-          numbers.push(element.jid);
-        });
-        client.groupRemove(from, numbers);
-        resolve();
-        break;
-
+      /*
+      This feature bans the bot instantly!
+            case "removeall":
+              console.log(groupMetadata.owner);
+              if (!isSuperAdmin) {
+                client.sendMessage(from, mess.only.ownerG, text, {
+                  quoted: xxx,
+                });
+                resolve();
+                return;
+              }
+              if (!isBotGroupAdmins) {
+                client.sendMessage(from, mess.only.Badmin, text, {
+                  quoted: xxx,
+                });
+                resolve();
+                return;
+              }
+              if (arg[1] != "confirm") {
+                client.sendMessage(from, "```Type confirm after removeall.```", text, {
+                  quoted: xxx,
+                });
+                resolve();
+                return;
+              }
+              numbers = [];
+              groupMembers.forEach((element) => {
+                numbers.push(element.jid);
+              });
+              client.groupRemove(from, numbers);
+              resolve();
+              break;
+      */
       case "tagall":
         memberslist = [];
 

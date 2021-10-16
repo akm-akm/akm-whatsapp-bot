@@ -65,7 +65,7 @@ const help = (infor4, client, xxx3, syntax) =>
         "🎩 *Owner* :\n```rst, dul, dgl, mgs, sql, mdr, rmdr, rtrt, stp```\n\n"
         : "";
 
-      const grpcmds = (isGroup && (isGroupAdmins || infor5.number === process.env.OWNER_NUMBER || infor5.botdata.moderators.includes(infor5.number))) ? "👑 *Admin* :\n```groupinfo, promote, demote, kick, removeall, changedp, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
+      const grpcmds = (isGroup && (isGroupAdmins || infor5.number === process.env.OWNER_NUMBER || infor5.botdata.moderators.includes(infor5.number))) ? "👑 *Admin* :\n```groupinfo, promote, demote, kick, changedp, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +
@@ -84,9 +84,7 @@ const help = (infor4, client, xxx3, syntax) =>
         prefix + "help run\n" +
         "\n📃 *Bot News* :" +
         "\n‼️ _changedp feature is added in group command_" +
-        "\n‼️ _removeall feature is added in group command_" +
         "\n‼️ _ss feature will not work_" +
-
         "\n\n⚙️ *Bot version* : " + version;
 
 
@@ -99,7 +97,7 @@ const help = (infor4, client, xxx3, syntax) =>
       try {
         msg =
           syntax == undefined ? "🔖 *Description* :\n" +
-            data[arg[1]].desc : "‼️ *Error* :\n```syntax error in the given command.```";
+          data[arg[1]].desc : "❎ *Error* :\n```syntax error in the given command.```";
         msg += "\n\n" +
           "📕 *Usage* :\n" +
           prefix + "```" +
