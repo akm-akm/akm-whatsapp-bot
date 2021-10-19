@@ -4,7 +4,7 @@
         "👋 ```Hello```",
         "👋 ```hi```"
     ],
-
+    "disabled":    "😢 ```Disabled```",
     "success":     "✅ ```Successful```",
     "noenv":       "🛠️ ```Environment variable not set.```",
     "tag":         "🌌 ```Reply to a media.```",

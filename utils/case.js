@@ -45,7 +45,7 @@ async function switchcase(infor2, client, xxx4) {
     count(infor3, 1)
     return;
   }
-  if (infor3.groupdata!==0 && groupdata.autosticker && infor3.isMedia && arg[0] !== "sticker" && arg[0] !== "testnsfw") {
+  if (infor3.groupdata !== 0 && groupdata.autosticker && infor3.isMedia && arg[0] !== "sticker" && arg[0] !== "testnsfw") {
     console.log("making auto sticker");
     stickermaker(infor3, client, xxx3).then(() => {
       count(infor3, 2)
@@ -54,20 +54,28 @@ async function switchcase(infor2, client, xxx4) {
         console.log(err);
       });
   }
+  if (arg[0] === "invite" || arg[0] === "kick" || arg[0] === "remove" || arg[0] === "add" || arg[0] === "open" || arg[0] === "close" || arg[0] === "changedp" || arg[0] === "grouplink") {
 
+
+    return client.sendMessage(from, mess.disabled, text, {
+      quoted: xxx3,
+    });
+
+  }
   switch (arg[0]) {
-/*
+
 
     case "invite":
+
       joingroup(infor3, client, xxx3)
         .then((resolve) => {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
-*/
+
 
     case "run":
       coderunner(infor3, client, xxx3)
@@ -75,7 +83,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -86,7 +94,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3, 2)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -106,7 +114,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -119,7 +127,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -129,7 +137,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -140,7 +148,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -150,7 +158,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -160,7 +168,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -171,7 +179,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -182,7 +190,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -193,7 +201,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -203,7 +211,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -213,24 +221,24 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
     case "setprefix":
     case "groupinfo":
     case "botaccess":
- //   case "promote":
-   // case "demote":
-   // case "kick":
-   // case "remove":
+    case "promote":
+    case "demote":
+    case "kick":
+    case "remove":
     case "useprefix":
-   // case "grouplink":
-   // case "changedp":
+    case "grouplink":
+    case "changedp":
     case "botleave":
-   // case "close":
-   // case "open":
-    // case "add":
+    case "close":
+    case "open":
+    case "add":
     case "removeall":
     case "autosticker":
     case "tagall":
@@ -244,7 +252,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3, 3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -258,7 +266,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -277,7 +285,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
@@ -288,7 +296,7 @@ async function switchcase(infor2, client, xxx4) {
 
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
         });
       break;
 
