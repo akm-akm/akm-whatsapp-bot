@@ -56,7 +56,7 @@ async function switchcase(infor2, client, xxx4) {
   }
 
   switch (arg[0]) {
-
+/*
 
     case "invite":
       joingroup(infor3, client, xxx3)
@@ -67,7 +67,7 @@ async function switchcase(infor2, client, xxx4) {
           client.sendMessage(infor5.from, fs.readFileSync(errorSticker), sticker, { quoted: xxx4 })
         });
       break;
-
+*/
 
     case "run":
       coderunner(infor3, client, xxx3)
@@ -220,16 +220,16 @@ async function switchcase(infor2, client, xxx4) {
     case "setprefix":
     case "groupinfo":
     case "botaccess":
-    case "promote":
-    case "demote":
-    case "kick":
-    case "remove":
+ //   case "promote":
+   // case "demote":
+   // case "kick":
+   // case "remove":
     case "useprefix":
-    case "grouplink":
-    case "changedp":
+   // case "grouplink":
+   // case "changedp":
     case "botleave":
-    case "close":
-    case "open":
+   // case "close":
+   // case "open":
     // case "add":
     case "removeall":
     case "autosticker":
