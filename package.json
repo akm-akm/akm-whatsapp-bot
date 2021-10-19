@@ -43,6 +43,7 @@
     "pg": "^8.6.0",
     "qr-image": "^3.2.0",
     "request": "^2.88.2",
+    "solenolyrics": "^5.0.0",
     "twitter": "^1.7.1",
     "wa-sticker-formatter": "^3.6.0",
     "webp-converter": "^2.3.3",

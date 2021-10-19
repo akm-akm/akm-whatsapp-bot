@@ -22,6 +22,7 @@ const { youtube } = require(path.join(__dirname, "../plugins/yt"));
 const { faqs } = require(path.join(__dirname, "../plugins/faq"));
 const { nsfw } = require(path.join(__dirname, "../plugins/nsfw"));
 const { chatbot } = require(path.join(__dirname, "../plugins/chatbot"));
+const { lyrics } = require(path.join(__dirname, "../plugins/lyrics"));
 
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
@@ -63,6 +64,17 @@ async function switchcase(infor2, client, xxx4) {
 
   }
   switch (arg[0]) {
+
+    case "lyrics":
+
+      lyrics(infor3, client, xxx3)
+        .then((resolve) => {
+          count(infor3)
+        })
+        .catch((infor5) => {
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        });
+      break;
 
 
     case "invite":

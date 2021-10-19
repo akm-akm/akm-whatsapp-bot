@@ -72,7 +72,7 @@ const help = (infor4, client, xxx3, syntax) =>
         "\n\n" +
         "📗 *General* :\n ```help, faq, limit, delete, sourcecode, invite```\n\n" +
         grpcmds +
-        "📱 *Media* :\n```ss, sticker, rs, ytv, shorturl, testnsfw, run, crypto, pin, rashmika```\n\n" +
+        "📱 *Media* :\n```ss, sticker, rs, lyrics, ytv, shorturl, testnsfw, run, crypto, pin, rashmika```\n\n" +
         cas +
         "🎁 *For detailed info :*\n" +
         prefix +
