@@ -1,5 +1,4 @@
 const path = require("path");
-const fs = require("fs");
 const { help } = require(path.join(__dirname, "./help"));
 
 const solenolyrics = require("solenolyrics");
@@ -24,7 +23,7 @@ const lyrics = (infor4, client, xxx3) =>
         solenolyrics.requestLyricsFor(arg.splice(1).join(" ")).then(async (lyrics) => {
             client.sendMessage(
                 from,
-               "```"+ lyrics+"```",
+                lyrics,
                 MessageType.text, {
                 quoted: xxx
             })
