@@ -57,7 +57,7 @@ const help = (infor4, client, xxx3, syntax) =>
     let prefix = infor5.groupdata.prefix;
     let useprefix = infor5.groupdata.useprefix;
     let msg;
-    c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "( " + prefix + " )" + " ```Disabled```";
+    const c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "( " + prefix + " )" + " ```Disabled```";
     if (prefix == undefined || !useprefix) prefix = "🎀";
 
     if (arg.length == 1) {
@@ -83,7 +83,7 @@ const help = (infor4, client, xxx3, syntax) =>
         prefix + "help sticker\n" +
         prefix + "help run\n" +
         "\n📃 *Bot News* :" +
-        "\n‼️ _changedp feature is added in group command_" +
+        "\n‼️ _Few admin commands are down_" +
         "\n‼️ _ss feature will not work_" +
         "\n\n⚙️ *Bot version* : " + version;
 
@@ -97,7 +97,8 @@ const help = (infor4, client, xxx3, syntax) =>
       try {
         msg =
           syntax == undefined ? "🔖 *Description* :\n" +
-          data[arg[1]].desc : "❎ *Error* :\n```syntax error in the given command.```";
+            data[arg[1]].desc : "❎ *Error* :\n```syntax error in the given command.```\n" + "\n🔖 *Description* :\n" +
+          data[arg[1]].desc
         msg += "\n\n" +
           "📕 *Usage* :\n" +
           prefix + "```" +
