@@ -220,7 +220,7 @@ async function main() {
           const x =
             mess.limit + infor.noofmsgtoday + " / *" + infor.botdata.dailylimit + "*";
           client.sendMessage(infor.sender, x, text, {
-            quoted: xxx,
+            quoted: xxx5,
           });
           return;
         }
