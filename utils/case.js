@@ -84,7 +84,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -95,7 +95,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -106,7 +106,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3, 2)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -126,7 +126,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -139,7 +139,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -149,7 +149,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -160,7 +160,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -170,7 +170,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -180,7 +180,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -191,7 +191,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -202,7 +202,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -213,7 +213,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -223,7 +223,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -233,7 +233,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -264,7 +264,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3, 3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -278,12 +278,12 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "limit":
-      x =
+      const x =
         mess.limit + infor3.noofmsgtoday + " / *" + infor3.botdata.dailylimit + "*";
       client.sendMessage(from, x, text, {
         quoted: xxx3,
@@ -297,7 +297,7 @@ async function switchcase(infor2, client, xxx4) {
           count(infor3)
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -308,7 +308,7 @@ async function switchcase(infor2, client, xxx4) {
 
         })
         .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error,text, { quoted: xxx4 })
+          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 

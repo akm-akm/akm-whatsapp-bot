@@ -216,7 +216,15 @@ async function main() {
 
 
         if (isGroup && infor.groupdata.membercanusebot === false && !isGroupAdmins && infor.number !== process.env.OWNER_NUMBER && !infor.botdata.moderators.includes(infor.number)) return
-
+        if (infor.arg[0] === "limit") {
+          const x =
+            mess.limit + infor.noofmsgtoday + " / *" + infor.botdata.dailylimit + "*";
+          client.sendMessage(infor.sender, x, text, {
+            quoted: xxx,
+          });
+          return;
+        }
+          
         if (
           infor.noofmsgtoday >= infor.botdata.dailylimit &&
           infor.number !== process.env.OWNER_NUMBER &&
