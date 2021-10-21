@@ -25,30 +25,17 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
                 "📄 *License:*         ```" + data.license.key + " ```\n" +
                 "\n🤖 🤖 *_Bot made by AKM_* 🤖 🤖"
 
-            try {
 
-                client.sendMessage(from,
-                    fs.readFileSync(path.join(__dirname, "../docs/images/xxxlogo.jpeg")),
-                
-                    image,
-                    {
-                        quoted: xxx,
-                        detectLinks: false,
-                        caption: msg,
-                        mimetype: Mimetype.jpeg
-                    })
-                resolve();
-            } catch (error) {
-                client.sendMessage(from,
-                    msg,
-                    text,
-                    {
-                        quoted: xxx,
-                        detectLinks: false,
-                    })
-                resolve();
+            client.sendMessage(from,
+                msg,
+                text,
+                {
+                    quoted: xxx,
+                    detectLinks: false,
+                })
+            resolve();
 
-            }
+
         })
         .catch((e) => {
             console.log(e);

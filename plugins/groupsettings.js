@@ -591,44 +591,55 @@ const grp = (infor4, client, xxx3) =>
           resolve();
           return;
         }
-        mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
-        z = mentioned[0].split("@")[0];
 
-        if (z === `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from, "🤖 ```I can't ban myself, but I can ban you! There you go!``` _BANNED_", text, {
-            quoted: xxx,
-          });
-          sql.query(
-            `UPDATE groupdata SET banned_users = array_append(banned_users, '${infor5.number}') where groupid = '${from}';`
+        try {
+
+
+          mentioned = xxx.message.extendedTextMessage.contextInfo.mentionedJid;
+          z = mentioned[0].split("@")[0];
+
+          if (z === `${client.user.jid}`.split("@")[0]) {
+            client.sendMessage(from, "🤖 ```I can't ban myself, but I can ban you! There you go!``` _BANNED_", text, {
+              quoted: xxx,
+            });
+            sql.query(
+              `UPDATE groupdata SET banned_users = array_append(banned_users, '${infor5.number}') where groupid = '${from}';`
+            );
+            resolve()
+            return;
+          }
+          if (infor5.botdata.moderators.includes(z) || z == process.env.OWNER_NUMBER) {
+            client.sendMessage(from, mess.error.error, text, {
+              quoted: xxx,
+            });
+            resolve()
+            return;
+          }
+          if (z == infor5.number) {
+            client.sendMessage(from, mess.error.error, text, {
+              quoted: xxx,
+            });
+            resolve()
+            return;
+          }
+          await sql.query(
+            `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
           );
-          resolve()
-          return;
-        }
-        if (infor5.botdata.moderators.includes(z) || z == process.env.OWNER_NUMBER) {
-          client.sendMessage(from, mess.error.error, text, {
-            quoted: xxx,
-          });
-          resolve()
-          return;
-        }
-        if (z == infor5.number) {
-          client.sendMessage(from, mess.error.error, text, {
-            quoted: xxx,
-          });
-          resolve()
-          return;
-        }
-        await sql.query(
-          `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
-        );
-        sql.query(
-          `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
-        );
+          sql.query(
+            `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
+          );
 
-        client.sendMessage(from, mess.success, text, {
-          quoted: xxx,
-        });
-        resolve();
+          client.sendMessage(from, mess.success, text, {
+            quoted: xxx,
+          });
+          resolve();
+
+        } catch (error) {
+          infor5.arg = ["help", arg[0]]
+          help(infor5, client, xxx, 1);
+          resolve();
+          return;
+        }
         break;
 
       case "unban":

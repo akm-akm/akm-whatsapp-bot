@@ -68,7 +68,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
             return
           }
           console.log("👪  " + chalk.bgCyan(`Prefix assigned is '${random}' for group ` + groupname));
-          newgroup(from, client, random).then(() => console.log("New group!"));
+          newgroup(from, client, random)
           sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
           );

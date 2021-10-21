@@ -3,10 +3,7 @@
         "question": "How many replies will the bot give back?",
         "answer": "Every number has a limit of x replies. This means when the bot has given x successful replies to any number, it will not respond  to that number anymore."
     },
-    {
-        "question": "When is the bot active?",
-        "answer": "The bot is active from anywhere between 10 AM to 3 AM. Since it is hosted on Heroku, it needs to sleep."
-    },
+   
     {
         "question": "Why is the bot not replying to someone?",
         "answer": "The number may have used its daily limit of x replies or the bot may be down due to heavy traffic."

@@ -8,7 +8,7 @@
     },
     "rst": {
         "usage": "rst",
-        "desc": "```The bot will reset daily session.```",
+        "desc": "```The bot will reset daily session. Daily cedits will be reset back to 0.```",
         "eg": [
             "rst"
         ]
@@ -25,7 +25,9 @@
         "desc": "```The bot will perform the given sqlquery on its postgres databse.```",
         "eg": [
             "sql select * from groupdata;",
-            "sql select * from messagecount;","sql select * from botdata;","update botdata set "
+            "sql select * from messagecount;",
+            "sql select * from botdata;",
+            "sql update botdata set totalmessage = 0;"
         ]
     },
     "dul": {
@@ -113,7 +115,7 @@
     },
     "nsfw": {
         "usage": "nsfw <condition>",
-        "desc": "```Scans the image for nudity before converting it to sticker in the group.```",
+        "desc": "```If it is turned on, the bot will scan the image for nudity before converting it to sticker in the group.```",
         "eg": [
             "nsfw on",
             "nsfw off"
@@ -146,7 +148,7 @@
     },
     "botaccess": {
         "usage": "botaccess <condition>",
-        "desc": "```If turned off, members other than the group admins cannot use the bot.```",
+        "desc": "```Non admins will not be able to use the bot if it is turned off.```",
         "eg": [
             "botaccess off",
             "botaccess on"
