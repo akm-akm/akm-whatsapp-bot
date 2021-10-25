@@ -55,14 +55,10 @@ async function switchcase(infor2, client, xxx4) {
         console.log(err);
       });
   }
-  if (arg[0] === "invite" || arg[0] === "ss" || arg[0] === "kick" || arg[0] === "remove" || arg[0] === "add" || arg[0] === "open" || arg[0] === "close" || arg[0] === "changedp" || arg[0] === "demote" || arg[0] === "promote" || arg[0] === "grouplink") {
 
+ // if (arg[0] === "invite" || arg[0] === "ss" || arg[0] === "kick" || arg[0] === "remove" || arg[0] === "add" || arg[0] === "open" || arg[0] === "close" || arg[0] === "changedp" || arg[0] === "demote" || arg[0] === "promote" || arg[0] === "grouplink")  return client.sendMessage(from, mess.disabled, text, { quoted: xxx3,});
 
-    return client.sendMessage(from, mess.disabled, text, {
-      quoted: xxx3,
-    });
-
-  }
+  
   switch (arg[0]) {
 
     case "lyrics":
