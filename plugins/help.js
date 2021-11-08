@@ -43,29 +43,28 @@ try {
 
 
 
-const help = (infor4, client, xxx3, syntax) =>
+const help = (Infor, client, xxx3, syntax) =>
   new Promise(async (resolve, reject) => {
-    const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-    const arg = infor5.arg;
-    const from = infor5.from;
+    const arg = Infor.arg;
+    const from = Infor.from;
     const isGroup = from.endsWith("@g.us");
     const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
     const groupMembers = isGroup ? groupMetadata.participants : "";
     const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
-    const isGroupAdmins = groupAdmins.includes(infor5.sender) || false;
-    let prefix = infor5.groupdata.prefix;
-    let useprefix = infor5.groupdata.useprefix;
+    const isGroupAdmins = groupAdmins.includes(Infor.sender) || false;
+    let prefix = Infor.groupdata.prefix;
+    let useprefix = Infor.groupdata.useprefix;
     let msg;
     const c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "( " + prefix + " )" + " ```Disabled```";
     if (prefix == undefined || !useprefix) prefix = "🎀";
 
     if (arg.length == 1) {
-      cas = infor5.number === process.env.OWNER_NUMBER ?
+      cas = Infor.number === process.env.OWNER_NUMBER ?
         "🎩 *Owner* :\n```rst, dul, dgl, mgs, sql, mdr, rmdr, rtrt, stp```\n\n"
         : "";
 
-      const grpcmds = (isGroup && (isGroupAdmins || infor5.number === process.env.OWNER_NUMBER || infor5.botdata.moderators.includes(infor5.number))) ? "👑 *Admin* :\n```groupinfo, promote, demote, kick, changedp, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
+      const grpcmds = (isGroup && (isGroupAdmins || Infor.number === process.env.OWNER_NUMBER || Infor.botdata.moderators.includes(Infor.number))) ? "👑 *Admin* :\n```groupinfo, promote, demote, kick, changedp, grouplink, botleave, setprefix, useprefix, autosticker, nsfw, close, open, tagall, ban, unban, banlist, filterabuse, botaccess```\n\n" : "";
       msg =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
         c +

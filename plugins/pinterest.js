@@ -12,15 +12,14 @@ const mess = JSON.parse(
 );
 const { help } = require(path.join(__dirname, "./help"));
 
-const pinterest = (infor4, client, xxx3) =>
+const pinterest = (Infor, client, xxx3) =>
   new Promise((resolve, reject) => {
-    const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-    const arg = infor5.arg;
-    const from = infor5.from;
+    const arg = Infor.arg;
+    const from = Infor.from;
     if (arg.length == 1) {
-      infor5.arg = ["help", arg[0]]
-      help(infor5, client, xxx, 1);
+      Infor.arg = ["help", arg[0]]
+      help(Infor, client, xxx, 1);
       resolve();
       return;
     }
@@ -64,7 +63,7 @@ const pinterest = (infor4, client, xxx3) =>
         client.sendMessage(from, mess.error.error, text, {
           quoted: xxx,
         });
-        reject(infor5)
+        reject(Infor)
         fs.unlinkSync(ran)
       });
   });

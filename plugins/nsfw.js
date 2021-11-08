@@ -13,12 +13,11 @@ const {
 const mess = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
-const nsfw = (infor4, client, xxx3) =>
+const nsfw = (Infor, client, xxx3) =>
 
     new Promise(async (resolve, reject) => {
-        const infor5 = { ...infor4 };
         const xxx = { ...xxx3 };
-        const from = infor5.from;
+        const from = Infor.from;
         const content = JSON.stringify(xxx.message);
         const type = Object.keys(xxx.message)[0];
         const isMedia = type === "imageMessage" || type === "videoMessage" || type === "stickerMessage";
@@ -67,7 +66,7 @@ const nsfw = (infor4, client, xxx3) =>
 
             }).catch((err) => {
                 console.log(err);
-                reject(infor5)
+                reject(Infor)
                 fs.unlinkSync(media);
 
                 return;
@@ -107,7 +106,7 @@ const nsfw = (infor4, client, xxx3) =>
                 console.log(err);
                 fs.unlinkSync(media);
 
-                reject(infor5)
+                reject(Infor)
                 return;
 
 
@@ -143,7 +142,7 @@ const nsfw = (infor4, client, xxx3) =>
 
             }).catch((err) => {
                 console.log(err);
-                reject(infor5)
+                reject(Infor)
                 fs.unlinkSync(media);
 
                 return;
@@ -152,7 +151,7 @@ const nsfw = (infor4, client, xxx3) =>
             });
         }
         else {
-            client.sendMessage(infor5.from, mess.tag, text, {
+            client.sendMessage(Infor.from, mess.tag, text, {
                 quoted: xxx
             });
         }

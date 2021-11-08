@@ -6,11 +6,10 @@ const fs = require('fs');
 const mess = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
-const deleteit = (infor4, client, xxx3) =>
+const deleteit = (Infor, client, xxx3) =>
     new Promise(async (resolve, reject) => {
-        const infor5 = { ...infor4 };
         const xxx = { ...xxx3 };
-        const from = infor5.from;
+        const from = Infor.from;
 
         const type = Object.keys(xxx.message)[0];
         if (type !== "extendedTextMessage") {
@@ -20,7 +19,7 @@ const deleteit = (infor4, client, xxx3) =>
         }
         try {
             await client.deleteMessage(from, {
-                id: infor5.stanzaId,
+                id: Infor.stanzaId,
                 remoteJid: from,
                 fromMe: true
             })

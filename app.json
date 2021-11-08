@@ -18,7 +18,6 @@
     "addons": [
         {
             "plan": "heroku-postgresql"
-           
         }
     ],
     "environments": {
@@ -29,16 +28,13 @@
         }
     },
     "env": {
-       
         "OWNER_NUMBER": {
             "description": "Your whatsapp number with which you will send command to the bot. It must start with the country code without + sign.",
             "value": "919709094733"
-           
         },
         "WEBSITE_PASSWORD": {
             "description": "The password you want to use for the bot website that will be used to login.",
             "value": "1234"
-           
         },
         "COINMARKETCAP_API_KEY": {
             "description": "The API key of CoinMarketCap for crypto market data.",

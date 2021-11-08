@@ -13,22 +13,21 @@ const { help } = require(path.join(__dirname, "./help"));
 
 
 
-const template = (infor4, client, xxx3) =>
+const template = (Infor, client, xxx3) =>
 
     new Promise(async (resolve, reject) => {
 
 
 
-        const infor5 = { ...infor4 };
         const xxx = { ...xxx3 };
-        const from = infor5.from;
-        const arg = infor5.arg;
+        const from = Infor.from;
+        const arg = Infor.arg;
 
         // your code here 
 
         // resolve() after success
 
-        // reject(infor5) after failure
+        // reject(Infor) after failure
 
 
 

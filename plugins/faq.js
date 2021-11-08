@@ -7,11 +7,11 @@ const faq = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/faq.json"))
 );
 msgl = "🤖🤖🤖 *XXX-BOT FAQs* 🤖🤖🤖\n";
-const faqs = (infor4, client, xxx3) =>
+const faqs = (Infor, client, xxx3) =>
   new Promise((resolve, reject) => {
-    const infor5 = { ...infor4 };
+    
     const xxx = { ...xxx3 };
-    const from = infor5.from;
+    const from = Infor.from;
     let msgl = "";
     faq.forEach((element) => {
      

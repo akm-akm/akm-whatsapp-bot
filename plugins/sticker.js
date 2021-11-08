@@ -10,11 +10,10 @@ const mess = JSON.parse(
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
 const { ai } = require("./deepai");
-const stickermaker = (infor4, client, xxx3) =>
+const stickermaker = (Infor, client, xxx3) =>
   new Promise(async (resolve, reject) => {
-    const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-    const arg = infor5.arg;
+    const arg = Infor.arg;
     const content = JSON.stringify(xxx.message);
     const from = xxx.key.remoteJid;
     const type = Object.keys(xxx.message)[0];
@@ -109,7 +108,7 @@ const stickermaker = (infor4, client, xxx3) =>
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
       const ran = getRandom(".webp");
-      if (infor5.groupdata == 0 || infor5.groupdata.nsfw == true) {
+      if (Infor.groupdata == 0 || Infor.groupdata.nsfw == true) {
         const nsfw = await ai(media)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
@@ -124,7 +123,7 @@ const stickermaker = (infor4, client, xxx3) =>
         .input(media)
         .on("error", function (err) {
           fs.unlinkSync(media);
-          reject(infor5)
+          reject(Infor)
         })
         .on("end", function () {
           buildSticker();
@@ -171,7 +170,7 @@ const stickermaker = (infor4, client, xxx3) =>
           .extendedTextMessage.contextInfo
         : xxx;
       const media = await client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
-      if (infor5.groupdata == 0 || infor5.groupdata.nsfw == true) {
+      if (Infor.groupdata == 0 || Infor.groupdata.nsfw == true) {
         const nsfw = await ai(media)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
@@ -190,7 +189,7 @@ const stickermaker = (infor4, client, xxx3) =>
         .inputFormat(media.split(".")[1])
         .on("error", function (err) {
           fs.unlinkSync(media);
-          reject(infor5)
+          reject(Infor)
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
           return;
@@ -237,7 +236,7 @@ const stickermaker = (infor4, client, xxx3) =>
           .extendedTextMessage.contextInfo
         : xxx;
       const media1 = await client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
-      if (infor5.groupdata == 0 || infor5.groupdata.nsfw == true) {
+      if (Infor.groupdata == 0 || Infor.groupdata.nsfw == true) {
         const nsfw = await ai(media1)
         if (nsfw.output.nsfw_score > 0.6) {
           client.sendMessage(from, "🌚 🔞", text, {
@@ -269,7 +268,7 @@ const stickermaker = (infor4, client, xxx3) =>
             .inputFormat(media.split(".")[1])
             .on("error", function (err) {
               fs.unlinkSync(media);
-              reject(infor5)
+              reject(Infor)
               fs.unlinkSync(media);
               fs.unlinkSync(ran);
               return;

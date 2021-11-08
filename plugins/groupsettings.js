@@ -36,18 +36,16 @@ const getGroupAdmins = (participants) => {
 const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}.${ext}`;
 };
-const grp = (infor4, client, xxx3) =>
+const grp = (Infor, client, xxx3) =>
   new Promise(async (resolve, reject) => {
-    const infor5 = {
-      ...infor4
-    };
+   
     const xxx = {
       ...xxx3
     };
 
-    const arg = infor5.arg;
-    const from = infor5.from;
-    const sender = infor5.sender;
+    const arg = Infor.arg;
+    const from = Infor.from;
+    const sender = Infor.sender;
     const isGroup = from.endsWith("@g.us");
     const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
     const groupMembers = isGroup ? groupMetadata.participants : "";
@@ -59,7 +57,7 @@ const grp = (infor4, client, xxx3) =>
     const ownerNumber = [`${process.env.OWNER_NUMBER}@s.whatsapp.net`];
     const isBotGroupAdmins = groupAdmins.includes(botNumber) || false;
     const isOwner = ownerNumber.includes(sender);
-    const isSuperAdmin = `${groupMetadata.owner}`.split('@')[0] === infor5.number;
+    const isSuperAdmin = `${groupMetadata.owner}`.split('@')[0] === Infor.number;
     if (!isGroup) {
       client.sendMessage(from, mess.only.group, text, {
         quoted: xxx,
@@ -67,7 +65,7 @@ const grp = (infor4, client, xxx3) =>
       resolve();
       return;
     }
-    if (!(isGroupAdmins || isOwner || infor5.botdata.moderators.includes(infor5.number))) {
+    if (!(isGroupAdmins || isOwner || Infor.botdata.moderators.includes(Infor.number))) {
       client.sendMessage(from, mess.only.admin, text, {
         quoted: xxx,
       });
@@ -84,15 +82,15 @@ const grp = (infor4, client, xxx3) =>
           "\n💮 *Title* : " + "*" + groupMetadata.subject + "*" +
           "\n\n🏊 *Member* : " + "```" + groupMetadata.participants.length + "```" +
           "\n🏅 *Admins*  : " + "```" + groupAdmins.length + "```" +
-          "\n🎀 *Prefix*      : " + "```" + infor5.groupdata.prefix + "```" +
-          "\n💡 *Useprefix*        : " + "```" + infor5.groupdata.useprefix + "```" +
-          "\n🐶 *Autosticker*    : " + "```" + infor5.groupdata.autosticker + "```" +
-          "\n🤖 *Botaccess*      : " + "```" + infor5.groupdata.membercanusebot + "```" +
-          "\n🌏 *Filterabuse*     : " + "```" + infor5.groupdata.allowabuse + "```" +
-          "\n⚠️ *NSFW detect*  : " + "```" + infor5.groupdata.nsfw + "```" +
-          "\n🎫 *Credits used*  : " + "```" + infor5.groupdata.totalmsgtoday + "```" +
-          "\n🧶 *Total credits*  : " + "```" + infor5.botdata.dailygrouplimit + "```" +
-          "\n🚨 *Banned users* : " + "```" + (Number(infor5.groupdata.banned_users.length) - 1) + "```\n";
+          "\n🎀 *Prefix*      : " + "```" + Infor.groupdata.prefix + "```" +
+          "\n💡 *Useprefix*        : " + "```" + Infor.groupdata.useprefix + "```" +
+          "\n🐶 *Autosticker*    : " + "```" + Infor.groupdata.autosticker + "```" +
+          "\n🤖 *Botaccess*      : " + "```" + Infor.groupdata.membercanusebot + "```" +
+          "\n🌏 *Filterabuse*     : " + "```" + Infor.groupdata.allowabuse + "```" +
+          "\n⚠️ *NSFW detect*  : " + "```" + Infor.groupdata.nsfw + "```" +
+          "\n🎫 *Credits used*  : " + "```" + Infor.groupdata.totalmsgtoday + "```" +
+          "\n🧶 *Total credits*  : " + "```" + Infor.botdata.dailygrouplimit + "```" +
+          "\n🚨 *Banned users* : " + "```" + (Number(Infor.groupdata.banned_users.length) - 1) + "```\n";
 
         try {
 
@@ -130,8 +128,8 @@ const grp = (infor4, client, xxx3) =>
 
       case "autosticker":
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -150,8 +148,8 @@ const grp = (infor4, client, xxx3) =>
           resolve();
           return;
         } else {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
         }
         break;
@@ -159,8 +157,8 @@ const grp = (infor4, client, xxx3) =>
 
       case "nsfw":
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -179,16 +177,16 @@ const grp = (infor4, client, xxx3) =>
           resolve();
           return;
         } else {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
         }
         break;
 
       case "useprefix":
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -201,22 +199,22 @@ const grp = (infor4, client, xxx3) =>
           return;
         } else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET useprefix = true WHERE groupid = '${from}'`);
-          client.sendMessage(from, "🤖 ```The bot will only listen for commands starting with ```" + infor5.groupdata.prefix, text, {
+          client.sendMessage(from, "🤖 ```The bot will only listen for commands starting with ```" + Infor.groupdata.prefix, text, {
             quoted: xxx,
           });
           resolve();
           return;
         } else {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
         }
         break;
 
       case "botaccess":
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -235,16 +233,16 @@ const grp = (infor4, client, xxx3) =>
           resolve();
           return;
         } else {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
         }
         break;
 
       case "setprefix":
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -261,7 +259,7 @@ const grp = (infor4, client, xxx3) =>
         client.sendMessage(from, "🚨 ```Prefix set to " + arg[1] + "```", text, {
           quoted: xxx,
         });
-        newgroup(infor5.from, client, arg[1]);
+        newgroup(Infor.from, client, arg[1]);
         resolve();
         break;
 
@@ -274,8 +272,8 @@ const grp = (infor4, client, xxx3) =>
           return;
         }
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -305,8 +303,8 @@ const grp = (infor4, client, xxx3) =>
           return;
         }
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -354,8 +352,8 @@ const grp = (infor4, client, xxx3) =>
             return;
           }
           if (arg.length == 1) {
-            infor5.arg = ["help", arg[0]]
-            help(infor5, client, xxx, 1);
+            Infor.arg = ["help", arg[0]]
+            help(Infor, client, xxx, 1);
             resolve();
             return;
           }
@@ -383,8 +381,8 @@ const grp = (infor4, client, xxx3) =>
           });
           resolve();
         } catch (error) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve()
         }
 
@@ -472,8 +470,8 @@ const grp = (infor4, client, xxx3) =>
 
       case "add":
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -553,8 +551,8 @@ const grp = (infor4, client, xxx3) =>
 
 
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -577,8 +575,8 @@ const grp = (infor4, client, xxx3) =>
           resolve();
           return;
         } else {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
         }
 
@@ -586,8 +584,8 @@ const grp = (infor4, client, xxx3) =>
 
       case "ban":
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -603,19 +601,19 @@ const grp = (infor4, client, xxx3) =>
               quoted: xxx,
             });
             sql.query(
-              `UPDATE groupdata SET banned_users = array_append(banned_users, '${infor5.number}') where groupid = '${from}';`
+              `UPDATE groupdata SET banned_users = array_append(banned_users, '${Infor.number}') where groupid = '${from}';`
             );
             resolve()
             return;
           }
-          if (infor5.botdata.moderators.includes(z) || z == process.env.OWNER_NUMBER) {
+          if (Infor.botdata.moderators.includes(z) || z == process.env.OWNER_NUMBER) {
             client.sendMessage(from, mess.error.error, text, {
               quoted: xxx,
             });
             resolve()
             return;
           }
-          if (z == infor5.number) {
+          if (z == Infor.number) {
             client.sendMessage(from, mess.error.error, text, {
               quoted: xxx,
             });
@@ -635,8 +633,8 @@ const grp = (infor4, client, xxx3) =>
           resolve();
 
         } catch (error) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -644,8 +642,8 @@ const grp = (infor4, client, xxx3) =>
 
       case "unban":
         if (arg.length == 1) {
-          infor5.arg = ["help", arg[0]]
-          help(infor5, client, xxx, 1);
+          Infor.arg = ["help", arg[0]]
+          help(Infor, client, xxx, 1);
           resolve();
           return;
         }
@@ -662,7 +660,7 @@ const grp = (infor4, client, xxx3) =>
         break;
 
       case "banlist":
-        bannedlist = infor5.groupdata.banned_users;
+        bannedlist = Infor.groupdata.banned_users;
         if (bannedlist.length == 1) {
           client.sendMessage(from, "🤖 *No users banned*", text, {
             quoted: xxx,

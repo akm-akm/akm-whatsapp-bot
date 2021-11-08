@@ -40,16 +40,15 @@ function searchTransformer(isIndex) {
   };
 }
 
-const market = (infor4, client, xxx3) =>
+const market = (Infor, client, xxx3) =>
   new Promise((resolve, reject) => {
-    const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-    const arg = infor5.arg
-    const from = infor5.from;
+    const arg = Infor.arg
+    const from = Infor.from;
 
     if (arg.length == 1) {
-      infor5.arg = ["help", arg[0]]
-      help(infor5, client, xxx, 1);
+      Infor.arg = ["help", arg[0]]
+      help(Infor, client, xxx, 1);
       resolve()
       return
     }
@@ -79,7 +78,7 @@ const market = (infor4, client, xxx3) =>
           })
           .catch((err) => {
             console.log(err);
-            reject(infor5);
+            reject(Infor);
           });
         break;
       case "gainer":
@@ -127,7 +126,7 @@ const market = (infor4, client, xxx3) =>
           })
           .catch((err) => {
             console.log(err);
-            reject(infor5);
+            reject(Infor);
           });
 
         break;
@@ -176,7 +175,7 @@ const market = (infor4, client, xxx3) =>
 
             console.log(err);
 
-            reject(infor5);
+            reject(Infor);
 
           });
 
@@ -221,7 +220,7 @@ const market = (infor4, client, xxx3) =>
           })
           .catch((err) => {
             console.log(err);
-            reject(infor5);
+            reject(Infor);
           });
 
         break;
@@ -280,7 +279,7 @@ const market = (infor4, client, xxx3) =>
           })
           .catch((err) => {
             console.log(err);
-            reject(infor5);
+            reject(Infor);
           });
         break;
 
@@ -390,13 +389,13 @@ const market = (infor4, client, xxx3) =>
           })
           .catch((err) => {
             console.log(err);
-            reject(infor5);
+            reject(Infor);
           });
         break;
 
       default:
-        infor5.arg = ["help", arg[0]]
-        help(infor5, client, xxx);
+        Infor.arg = ["help", arg[0]]
+        help(Infor, client, xxx);
         resolve();
     }
 

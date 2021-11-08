@@ -11,12 +11,11 @@ const { help } = require(path.join(__dirname, "./help"));
 const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
-const youtube = (infor4, client, xxx3) =>
+const youtube = (Infor, client, xxx3) =>
   new Promise(async (resolve, reject) => {
-    const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-    const from = infor5.from;
-    const arg = infor5.arg;
+    const from = Infor.from;
+    const arg = Infor.arg;
     const url = arg[1];
     const vid = getRandom(".mp4");
     const thumb = getRandom(".jpg");
@@ -24,8 +23,8 @@ const youtube = (infor4, client, xxx3) =>
     try {
 
       if (arg.length == 1) {
-        infor5.arg = ["help", arg[0]]
-        help(infor5, client, xxx, 1);
+        Infor.arg = ["help", arg[0]]
+        help(Infor, client, xxx, 1);
         resolve();
         return;
       }
@@ -89,7 +88,7 @@ const youtube = (infor4, client, xxx3) =>
       fs.unlinkSync(thumb);
 
 
-      reject(infor5)
+      reject(Infor)
     }
   });
 

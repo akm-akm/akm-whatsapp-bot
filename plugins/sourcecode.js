@@ -3,11 +3,10 @@ const { MessageType, Mimetype } = require("@adiwajshing/baileys");
 const { text, image } = MessageType;
 const fs = require("fs");
 const path = require("path");
-const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
-    const infor5 = { ...infor4 };
+const sourcecode = (Infor, client, xxx3) => new Promise((resolve, reject) => {
     const xxx = { ...xxx3 };
 
-    const from = infor5.from;
+    const from = Infor.from;
     axios.get(`https://api.github.com/repos/akm-akm/xxx-whatsapp-bot`)
         .then((response) => {
             let data = response.data;
@@ -39,7 +38,7 @@ const sourcecode = (infor4, client, xxx3) => new Promise((resolve, reject) => {
         })
         .catch((e) => {
             console.log(e);
-            reject(infor5)
+            reject(Infor)
 
         })
 })

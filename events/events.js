@@ -7,6 +7,9 @@ const {
   text
 } = MessageType;
 const client = new WAConnection();
+client.version = [3, 3234, 9];
+
+
 const path = require("path");
 const fs = require("fs");
 const settingread = require(path.join(__dirname, "../utils/settingcheck"));
@@ -206,54 +209,52 @@ async function main() {
         const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
         const isGroupAdmins = groupAdmins.includes(sender) || false;
         const groupName = isGroup ? groupMetadata.subject : "inbox";
-        const infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
+        const Infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
 
-        if (!(!isGroup || (isGroup && (infor.groupdata.totalmsgtoday <= infor.botdata.dailygrouplimit)) &&
-          (infor.arg.length !== 0 || (isGroup && isMedia && infor.groupdata.autosticker)))
+        if (!(!isGroup || (isGroup && (Infor.groupdata.totalmsgtoday <= Infor.botdata.dailygrouplimit)) &&
+          (Infor.arg.length !== 0 || (isGroup && isMedia && Infor.groupdata.autosticker)))
         ) return
 
-        if (isGroup && infor.groupdata.banned_users.includes(infor.number)) return
+        if (isGroup && Infor.groupdata.banned_users.includes(Infor.number)) return
 
 
-        if (isGroup && infor.groupdata.membercanusebot === false && !isGroupAdmins && infor.number !== process.env.OWNER_NUMBER && !infor.botdata.moderators.includes(infor.number)) return
-        if (infor.arg[0] === "limit") {
+        if (isGroup && Infor.groupdata.membercanusebot === false && !isGroupAdmins && Infor.number !== process.env.OWNER_NUMBER && !Infor.botdata.moderators.includes(Infor.number)) return
+        if (Infor.arg[0] === "limit") {
           const x =
-            mess.limit + infor.noofmsgtoday + " / *" + infor.botdata.dailylimit + "*";
-          client.sendMessage(infor.sender, x, text, {
+            mess.limit + Infor.noofmsgtoday + " / *" + Infor.botdata.dailylimit + "*";
+          client.sendMessage(Infor.sender, x, text, {
             quoted: xxx5,
           });
           return;
         }
           
         if (
-          infor.noofmsgtoday >= infor.botdata.dailylimit &&
-          infor.number !== process.env.OWNER_NUMBER &&
-          !infor.botdata.moderators.includes(infor.number) &&
-          infor.dailylimitover === false
+          Infor.noofmsgtoday >= Infor.botdata.dailylimit &&
+          Infor.number !== process.env.OWNER_NUMBER &&
+          !Infor.botdata.moderators.includes(Infor.number) &&
+          Infor.dailylimitover === false
         ) {
-          sql.query(`UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${infor.number}';`)
-          client.sendMessage(infor.sender, mess.userlimit, text, {
+          sql.query(`UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${Infor.number}';`)
+          client.sendMessage(Infor.sender, mess.userlimit, text, {
             quoted: xxx5,
           });
           return
         }
-        if (infor.dailylimitover === true) return
+        if (Infor.dailylimitover === true) return
 
-        if (isGroup && infor.groupdata.totalmsgtoday >= infor.botdata.dailygrouplimit) {
-          client.sendMessage(infor.from, mess.grouplimit, text);
+        if (isGroup && Infor.groupdata.totalmsgtoday >= Infor.botdata.dailygrouplimit) {
+          client.sendMessage(Infor.from, mess.grouplimit, text);
 
-          count(infor)
+          count(Infor)
           return
         }
-        const infor1 = {
-          ...infor
-        };
+       
         const xxx4 = {
           ...xxx5
         };
-        console.log("🤖  " + chalk.bgRed("[" + infor1.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + infor1.arg.slice(0, 6).join(" ") + ']'));
+        console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
 
-        switchcase(infor1, client, xxx4);
+        switchcase(Infor, client, xxx4);
 
       } catch (error) {
         console.log(error);

@@ -28,17 +28,16 @@ const requestOptions = {
 
 let message;
 
-const crypto = (infor4, client, xxx3) =>
+const crypto = (Infor, client, xxx3) =>
   new Promise((resolve, reject) => {
     let c = 0;
-    const infor5 = { ...infor4 };
     const xxx = { ...xxx3 };
-    const arg = infor5.arg;
-    const from = infor5.from;
+    const arg = Infor.arg;
+    const from = Infor.from;
 
     if (arg.length == 1) {
-      infor5.arg = ["help", arg[0]]
-      help(infor5, client, xxx, 1);
+      Infor.arg = ["help", arg[0]]
+      help(Infor, client, xxx, 1);
       reject()
       return
     }
@@ -96,7 +95,7 @@ const crypto = (infor4, client, xxx3) =>
         .catch(function (error) {
           console.log(error);
 
-          reject(infor5)
+          reject(Infor)
         });
     }
   });

@@ -10,6 +10,7 @@ const {
   newgroup
 } = require(path.join(__dirname, "./newgroup"));
 
+
 const {
   MessageType
 } = require("@adiwajshing/baileys");
@@ -37,9 +38,30 @@ Array.prototype.detecta = function () {
   return returnarray;
 }
 
+class InforClass {
+  constructor(
+    from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia) {
+    this.from = from;
+    this.arg = arg;
+    this.number = number;
+    this.noofmsgtoday = noofmsgtoday;
+    this.totalmsg = totalmsg;
+    this.dailylimitover = dailylimitover;
+    this.abusepresent = abusepresent;
+    this.groupdata = groupdata;
+    this.botdata = botdata;
+    this.sender = sender;
+    this.stanzaId = stanzaId;
+    this.isMedia = isMedia;
+
+
+  }
+}
 
 
 module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId, isMedia) {
+  const Infor = new InforClass();
+
   random = settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))
   try {
@@ -90,26 +112,25 @@ module.exports = async function settingread(arg, from, sender, groupname, client
     }
 
 
-    const inform = {
 
-      from: from,
-      arg: from.endsWith("@g.us") ? data1.rows[0].useprefix ? arg.replace(/\s+/g, " ").toLowerCase().startsWith(data1.rows[0].prefix) ?
-        arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").slice(1).replace(/^\s+|\s+$/g, "").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase()) :
-        arg = [] : arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").split(" ")).map(xa =>
-          urlregex.test(xa) ? xa : xa.toLowerCase()) : arg.replace(/\s+/g, " ").startsWith('!') || arg.replace(/\s+/g, " ").startsWith('.') || arg.replace(/\s+/g, " ").startsWith('#') || arg.replace(/\s+/g, " ").startsWith('-') ? arg = (arg.slice(1).replace(/^\s+|\s+$/g, "").replace(/\s+/g, " ").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase()) : arg = (arg.replace(/\s+/g, " ").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase()),
-      number: number,
-      noofmsgtoday: data2.rows[0].totalmsgtoday,
-      totalmsg: data2.rows[0].totalmsg,
-      dailylimitover: data2.rows[0].dailylimitover,
-      abusepresent: from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? arg.detecta() : [] : arg.detecta(),
-      groupdata: from.endsWith("@g.us") ? data1.rows[0] : 0,
-      botdata: botdata.rows[0],
-      sender: sender,
-      stanzaId: stanzaId,
-      isMedia: isMedia
-    };
+    Infor.from = from;
+    Infor.arg = from.endsWith("@g.us") ? data1.rows[0].useprefix ? arg.replace(/\s+/g, " ").toLowerCase().startsWith(data1.rows[0].prefix) ?
+      arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").slice(1).replace(/^\s+|\s+$/g, "").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase()) :
+      arg = [] : arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").split(" ")).map(xa =>
+        urlregex.test(xa) ? xa : xa.toLowerCase()) : arg.replace(/\s+/g, " ").startsWith('!') || arg.replace(/\s+/g, " ").startsWith('.') || arg.replace(/\s+/g, " ").startsWith('#') || arg.replace(/\s+/g, " ").startsWith('-') ? arg = (arg.slice(1).replace(/^\s+|\s+$/g, "").replace(/\s+/g, " ").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase()) : arg = (arg.replace(/\s+/g, " ").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase());
+    Infor.number = number;
+    Infor.noofmsgtoday = data2.rows[0].totalmsgtoday;
+    Infor.totalmsg = data2.rows[0].totalmsg;
+    Infor.dailylimitover = data2.rows[0].dailylimitover;
+    Infor.abusepresent = from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? arg.detecta() : [] : arg.detecta();
+    Infor.groupdata = from.endsWith("@g.us") ? data1.rows[0] : 0;
+    Infor.botdata = botdata.rows[0];
+    Infor.sender = sender;
+    Infor.stanzaId = stanzaId;
+    Infor.isMedia = isMedia;
 
-    return inform;
+
+    return Infor;
 
   } catch (error) {
     console.log(error);

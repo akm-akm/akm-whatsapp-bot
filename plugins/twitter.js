@@ -17,15 +17,14 @@ const twit = new twitter({
     access_token_key: process.env.accesstoken,
     access_token_secret: process.env.accesstokensecret,
 });
-const xdafootball = (infor4, client, xxx3) =>
+const xdafootball = (Infor, client, xxx3) =>
     new Promise(async (resolve, reject) => {
-        let infor5 = { ...infor4 };
         let xxx = { ...xxx3 };
         let msg = "⚽ *Name* : ```Fabrizio Romano```\n\n"
 
 
-        if (!(infor5.botdata.moderators.includes(infor5.number) || infor5.number === process.env.OWNER_NUMBER)) {
-            client.sendMessage(infor5.from, mess.only.modB, text, {
+        if (!(Infor.botdata.moderators.includes(Infor.number) || Infor.number === process.env.OWNER_NUMBER)) {
+            client.sendMessage(Infor.from, mess.only.modB, text, {
                 quoted: xxx
             });
             resolve();
@@ -59,7 +58,7 @@ const xdafootball = (infor4, client, xxx3) =>
 
                     i++;
                 }
-                client.sendMessage(infor5.from, msg, text, { quoted: xxx }); resolve()
+                client.sendMessage(Infor.from, msg, text, { quoted: xxx }); resolve()
 
             }
         );

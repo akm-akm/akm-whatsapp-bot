@@ -1,6 +1,6 @@
 const express = require("express");
 const server = new express();
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5554;
 const path = require("path");
 const node = require('node-cron');
 

@@ -11,12 +11,11 @@ const {
     text
 } = MessageType;
 const sql = require(path.join(__dirname, "../utils/ps"));
-const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
-    const infor5 = { ...infor4 };
+const owner = (Infor, client, xxx3) => new Promise(async (resolve, reject) => {
     const xxx = { ...xxx3 };
-    const from = infor5.from;
-    const arg = infor5.arg;
-    if (infor5.number !== process.env.OWNER_NUMBER) {
+    const from = Infor.from;
+    const arg = Infor.arg;
+    if (Infor.number !== process.env.OWNER_NUMBER) {
         client.sendMessage(from, mess.only.ownerB, text, {
             quoted: xxx,
         });
@@ -66,8 +65,8 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
         case 'sql':
             if (arg.length == 1) {
-                infor5.arg = ["help", arg[0]]
-                help(infor5, client, xxx, 1);
+                Infor.arg = ["help", arg[0]]
+                help(Infor, client, xxx, 1);
                 resolve()
                 return
             }
@@ -106,8 +105,8 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
         case "dul":
             if (arg.length == 1) {
-                infor5.arg = ["help", arg[0]]
-                help(infor5, client, xxx, 1);
+                Infor.arg = ["help", arg[0]]
+                help(Infor, client, xxx, 1);
                 resolve()
                 return
             }
@@ -139,8 +138,8 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
         case "mgs":
             if (arg.length == 1) {
-                infor5.arg = ["help", arg[0]]
-                help(infor5, client, xxx, 1);
+                Infor.arg = ["help", arg[0]]
+                help(Infor, client, xxx, 1);
                 resolve()
                 return
             }
@@ -171,8 +170,8 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
         case "dgl":
             if (arg.length == 1) {
-                infor5.arg = ["help", arg[0]]
-                help(infor5, client, xxx, 1);
+                Infor.arg = ["help", arg[0]]
+                help(Infor, client, xxx, 1);
                 resolve()
                 return
             }
@@ -201,8 +200,8 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
 
         case "mdr":
             if (arg.length == 1) {
-                infor5.arg = ["help", arg[0]]
-                help(infor5, client, xxx, 1);
+                Infor.arg = ["help", arg[0]]
+                help(Infor, client, xxx, 1);
                 resolve()
                 return
             }
@@ -224,8 +223,8 @@ const owner = (infor4, client, xxx3) => new Promise(async (resolve, reject) => {
         
         case "rmdr":
             if (arg.length == 1) {
-                infor5.arg = ["help", arg[0]]
-                help(infor5, client, xxx, 1);
+                Infor.arg = ["help", arg[0]]
+                help(Infor, client, xxx, 1);
                 resolve()
                 return
             }

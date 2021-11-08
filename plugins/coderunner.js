@@ -15,12 +15,11 @@ const {
 const mess = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
-const coderunner = (infor4, client, xxx3) =>
+const coderunner = (Infor, client, xxx3) =>
     new Promise(async (resolve, reject) => {
-        const infor5 = { ...infor4 };
         const xxx = { ...xxx3 };
-        const from = infor5.from;
-        const arg = infor5.arg;
+        const from = Infor.from;
+        const arg = Infor.arg;
 
         const type = Object.keys(xxx.message)[0];
         if (type !== "extendedTextMessage") {
@@ -36,13 +35,13 @@ const coderunner = (infor4, client, xxx3) =>
             return;
         }
         if (arg.length === 1) {
-            infor5.arg = ["help", arg[0]]
-            help(infor5, client, xxx, 1);
+            Infor.arg = ["help", arg[0]]
+            help(Infor, client, xxx, 1);
             resolve()
             return
         } if (!languagecode.includes(arg[1])) {
-            infor5.arg = ["help", arg[0]]
-            help(infor5, client, xxx, 1);
+            Infor.arg = ["help", arg[0]]
+            help(Infor, client, xxx, 1);
             resolve()
             return
         }
@@ -68,7 +67,7 @@ const coderunner = (infor4, client, xxx3) =>
             resolve()
         } catch (error) {
 
-            reject(infor5)
+            reject(Infor)
         }
 
 

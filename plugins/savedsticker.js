@@ -3,11 +3,10 @@ const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
 const { sticker } = MessageType;
 
-const savedsticker = (infor4, client, xxx3) => new Promise((resolve, reject) => {
-    const infor5 = { ...infor4 };
+const savedsticker = (Infor, client, xxx3) => new Promise((resolve, reject) => {
     const xxx = { ...xxx3 };
-    const arg = infor5.arg
-    const from = infor5.from;
+    const arg = Infor.arg
+    const from = Infor.from;
     let random;
     if (arg[0] == "rashmika") {
         random = Math.floor(Math.random() * 304 + 1);

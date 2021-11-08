@@ -10,12 +10,11 @@ const path = require("path");
 
 const { help } = require(path.join(__dirname, "./help"));
 
-const searchSticker = (infor4, client, xxx3) =>
+const searchSticker = (Infor, client, xxx3) =>
     new Promise(async (resolve, reject) => {
-        const infor5 = { ...infor4 };
         const xxx = { ...xxx3 };
-        const arg = infor5.arg;
-        const from = infor5.from;
+        const arg = Infor.arg;
+        const from = Infor.from;
 
         if (process.env.SEARCH_STICKER === undefined) {
             client.sendText(from, "🤖 ```SEARCH_STICKER environment variable is not set. Contact the bot owner.```"
@@ -59,8 +58,8 @@ const searchSticker = (infor4, client, xxx3) =>
         }
         const searchthis = arg.slice(1).filter(z => z !== 'crop').join(' ');
         if (searchthis.length == 0) {
-            infor5.arg = ["help", arg[0]]
-            help(infor5, client, xxx, 1);
+            Infor.arg = ["help", arg[0]]
+            help(Infor, client, xxx, 1);
             resolve();
             return;
         }
@@ -100,7 +99,7 @@ const searchSticker = (infor4, client, xxx3) =>
                                 //  console.log(`Error : ${err}`);
 
                                 fs.unlinkSync(ran);
-                                reject(infor5);
+                                reject(Infor);
                                 return
                             })
                             .on("end", function () {
@@ -133,7 +132,7 @@ const searchSticker = (infor4, client, xxx3) =>
         }
         ).catch(e => {
            // console.log(e);
-            reject(infor5)
+            reject(Infor)
         });
 
     });

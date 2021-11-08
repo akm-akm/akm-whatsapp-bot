@@ -30,26 +30,25 @@ errorSticker = path.join(__dirname, "../assets/stickers/error.webp");
 const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
-async function switchcase(infor2, client, xxx4) {
-  const infor3 = { ...infor2 };
-  const arg = infor3.arg;
-  const from = infor3.from;
-  const groupdata = infor3.groupdata;
+async function switchcase(Infor, client, xxx4) {
+  const arg = Infor.arg;
+  const from = Infor.from;
+  const groupdata = Infor.groupdata;
   const xxx3 = {
     ...xxx4
   };
 
-  if (infor3.abusepresent.length != 0 && infor3.number !== process.env.OWNER_NUMBER && !infor3.botdata.moderators.includes(infor3.number)) {
-    client.sendMessage(from, "⚠️  ```Tu " + infor3.abusepresent.join(" ") + "```", text, {
+  if (Infor.abusepresent.length != 0 && Infor.number !== process.env.OWNER_NUMBER && !Infor.botdata.moderators.includes(Infor.number)) {
+    client.sendMessage(from, "⚠️  ```Tu " + Infor.abusepresent.join(" ") + "```", text, {
       quoted: xxx3,
     });
-    count(infor3, 1)
+    count(Infor, 1)
     return;
   }
-  if (infor3.groupdata !== 0 && groupdata.autosticker && infor3.isMedia && arg[0] !== "sticker" && arg[0] !== "testnsfw") {
+  if (Infor.groupdata !== 0 && groupdata.autosticker && Infor.isMedia && arg[0] !== "sticker" && arg[0] !== "testnsfw") {
     console.log("making auto sticker");
-    stickermaker(infor3, client, xxx3).then(() => {
-      count(infor3, 2)
+    stickermaker(Infor, client, xxx3).then(() => {
+      count(Infor, 2)
     })
       .catch((err) => {
         console.log(err);
@@ -63,46 +62,46 @@ async function switchcase(infor2, client, xxx4) {
 
     case "lyrics":
 
-      lyrics(infor3, client, xxx3)
+      lyrics(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
 
     case "invite":
 
-      joingroup(infor3, client, xxx3)
+      joingroup(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
 
     case "run":
-      coderunner(infor3, client, xxx3)
+      coderunner(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
 
     case "delete":
-      deleteit(infor3, client, xxx3)
+      deleteit(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3, 2)
+          count(Infor, 2)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -117,12 +116,12 @@ async function switchcase(infor2, client, xxx4) {
     case "rtrt":
     case "rmdr":
 
-      owner(infor3, client, xxx3)
+      owner(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -130,106 +129,106 @@ async function switchcase(infor2, client, xxx4) {
 
     case "sourcecode":
 
-      sourcecode(infor3, client, xxx3)
+      sourcecode(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "crypto":
-      crypto(infor3, client, xxx3)
+      crypto(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
 
     case "tweet":
-      xdafootball(infor3, client, xxx3)
+      xdafootball(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "shorturl":
-      shorturl(infor3, client, xxx3)
+      shorturl(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "market":
-      market(infor3, client, xxx3)
+      market(Infor, client, xxx3)
         .then(() => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "sticker":
-      stickermaker(infor3, client, xxx3)
+      stickermaker(Infor, client, xxx3)
         .then(() => {
 
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "ss":
-      searchSticker(infor3, client, xxx3)
+      searchSticker(Infor, client, xxx3)
         .then(() => {
 
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "rs":
     case "rashmika":
-      savedsticker(infor3, client, xxx3)
+      savedsticker(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "pin":
-      pinterest(infor3, client, xxx3)
+      pinterest(Infor, client, xxx3)
         .then(() => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "testnsfw":
-      nsfw(infor3, client, xxx3)
+      nsfw(Infor, client, xxx3)
         .then(() => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -255,12 +254,12 @@ async function switchcase(infor2, client, xxx4) {
     case "unban":
     case "banlist":
     case "filterabuse":
-      grp(infor3, client, xxx3)
+      grp(Infor, client, xxx3)
         .then(() => {
-          count(infor3, 3)
+          count(Infor, 3)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
@@ -269,18 +268,18 @@ async function switchcase(infor2, client, xxx4) {
     case "menus":
     case "command":
     case "commands":
-      help(infor3, client, xxx3)
+      help(Infor, client, xxx3)
         .then(() => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "limit":
       const x =
-        mess.limit + infor3.noofmsgtoday + " / *" + infor3.botdata.dailylimit + "*";
+        mess.limit + Infor.noofmsgtoday + " / *" + Infor.botdata.dailylimit + "*";
       client.sendMessage(from, x, text, {
         quoted: xxx3,
       });
@@ -288,29 +287,29 @@ async function switchcase(infor2, client, xxx4) {
       break;
 
     case "ytv":
-      youtube(infor3, client, xxx3)
+      youtube(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
     case "faq":
-      faqs(infor3, client, xxx3)
+      faqs(Infor, client, xxx3)
         .then((resolve) => {
-          count(infor3)
+          count(Infor)
 
         })
-        .catch((infor5) => {
-          client.sendMessage(infor5.from, mess.error.error, text, { quoted: xxx4 })
+        .catch((Infor) => {
+          client.sendMessage(Infor.from, mess.error.error, text, { quoted: xxx4 })
         });
       break;
 
 
     case "newg":
-      newgroup(infor3.from, client);
+      newgroup(Infor.from, client);
       break;
 
     case "hello":
@@ -326,26 +325,26 @@ async function switchcase(infor2, client, xxx4) {
       client.sendMessage(from, mess.salutations[Math.floor(Math.random() * mess.salutations.length)], text, {
         quoted: xxx3,
       });
-      count(infor3)
+      count(Infor)
       break;
 
     case "goodmorning":
       client.sendMessage(from, "👋 ```Goodmorning```", text, {
         quoted: xxx3,
       });
-      count(infor3)
+      count(Infor)
       break;
 
     case "goodnight":
       client.sendMessage(from, "👋 ```Goodnight```", text, {
         quoted: xxx3,
       });
-      count(infor3)
+      count(Infor)
       break;
 
     default:
-      if (infor3.groupdata == 0) {
-        chatbot(infor3.arg.splice(1).join(" "), infor3.number.toString())
+      if (Infor.groupdata == 0) {
+        chatbot(Infor.arg.splice(1).join(" "), Infor.number.toString())
           .then((resolve) => {
             client.sendMessage(from, "🤖  ```" + resolve + "```", text, {
               quoted: xxx3,
