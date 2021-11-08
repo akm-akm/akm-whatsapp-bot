@@ -1,8 +1,6 @@
 # 🤖️ Heroku Deployment Guide 🤖️
 
-## 🎅 Just press the button below
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master)
+## 🎅 Just right click on the button below and open in a new tab
 
 <a href="https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master"  target="_blank">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
@@ -14,29 +12,29 @@
 
 ### 🔑 Enter these config vars according to your needs
 
-`COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
+- `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
 
-`KEEPSAVEIT_API` The API key of KeepSaveIt for downloading the Pinterest videos. (optional)
+- `KEEPSAVEIT_API` The API key of KeepSaveIt for downloading the Pinterest videos. (optional)
 
-`clientId` The client id from jdoodle.com for the run feature to compile code. (optional)
+- `clientId` The client id from jdoodle.com for the run feature to compile code. (optional)
 
-`clientSecret` The client secret from jdoodle.com for the run feature to compile code. (optional)
+- `clientSecret` The client secret from jdoodle.com for the run feature to compile code. (optional)
 
-`OWNER_NUMBER` Your whatsapp number along with country code without + sign. (required)
+- `OWNER_NUMBER` Your whatsapp number along with country code without + sign. (required)
 
-`HOSTING_PLATFORM` Add heroku there. (required)
+- `HOSTING_PLATFORM` Add heroku there. (required)
 
-`WEBSITE_PASSWORD` The password you want to keep for the bot website. (required)
+- `WEBSITE_PASSWORD` The password you want to keep for the bot website. (required)
 
-`DEEPAI` The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector). (optional)
+- `DEEPAI` The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector). (optional)
 
-`SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
+- `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
 
-`CHATBOT_API` The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox. (optional)
+- `CHATBOT_API` The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox. (optional)
 
-- Now scroll to the bottom and click on deploy app.
+ Now scroll to the bottom and click on deploy app.
 
-- Now the bot will be deployed in under a minute and the bot website will open.
+ Now the bot will be deployed in under a minute and the bot website will open.
 
 ### ‼️ FAiling to do the below step will stop the bot from working
 
