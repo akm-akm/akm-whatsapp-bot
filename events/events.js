@@ -6,8 +6,6 @@ const {
 const {
   text
 } = MessageType;
-const client = new WAConnection();
-client.version = [3, 3234, 9];
 
 
 const path = require("path");
@@ -25,8 +23,10 @@ const chalk = require('chalk');
 const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
+const {messagehandler} = require(path.join(__dirname, "../utils/messagehandler"));
 
-
+const client = new WAConnection();
+client.version = [3, 3234, 9];
 
 
 async function connect() {
@@ -135,7 +135,6 @@ async function main() {
   try {
     client.logger.level = "fatal";
     await connect();
-    client.browserDescription = ["chrome", "xXx BOT", "10.0"];
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
     console.log("Hello " + client.user.name);
@@ -172,58 +171,22 @@ async function main() {
         if (!xxx5.message) return;
         if (xxx5.key && xxx5.key.remoteJid == "status@broadcast") return;
         if (xxx5.key.fromMe) return;
-        const from = xxx5.key.remoteJid;
-        const type = Object.keys(xxx5.message)[0];
-        try {
-          stanzaId =
-            type == "extendedTextMessage" ?
-              xxxx.messages.all()[0].message.extendedTextMessage.contextInfo
-                .stanzaId || null :
-              0;
-        } catch (error) {
-          stanzaId = 0;
-        }
 
-        body =
-          type === "conversation" ?
-            xxx5.message.conversation :
-            type === "imageMessage" ?
-              xxx5.message.imageMessage.caption :
-              type === "videoMessage" ?
-                xxx5.message.videoMessage.caption :
-                type == "extendedTextMessage" ?
-                  xxx5.message.extendedTextMessage.text :
-                  "";
-        const getGroupAdmins = (participants) => {
-          admins = [];
-          for (let i of participants) {
-            i.isAdmin ? admins.push(i.jid) : "";
-          }
-          return admins;
-        };
-        const isGroup = from.endsWith("@g.us");
-        const sender = isGroup ? xxx5.participant : xxx5.key.remoteJid;
-        const isMedia = type === "imageMessage" || type === "videoMessage";
-        const groupMetadata = isGroup ? await client.groupMetadata(from) : "";
-        const groupMembers = isGroup ? groupMetadata.participants : "";
-        const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
-        const isGroupAdmins = groupAdmins.includes(sender) || false;
-        const groupName = isGroup ? groupMetadata.subject : "inbox";
-        const Infor = await settingread(body, from, sender, groupName, client, groupMetadata, stanzaId, isMedia);
+        const Infor = await settingread(xxx5, client);
+        //console.log(Infor);
 
-        if (!(!isGroup || (isGroup && (Infor.groupdata.totalmsgtoday <= Infor.botdata.dailygrouplimit)) &&
-          (Infor.arg.length !== 0 || (isGroup && isMedia && Infor.groupdata.autosticker)))
+        if (!(!Infor.isGroup || (Infor.isGroup && (Infor.groupdata.totalmsgtoday <= Infor.botdata.dailygrouplimit)) &&
+          (Infor.arg.length !== 0 || (Infor.isGroup && Infor.isMedia && Infor.groupdata.autosticker)))
         ) return
 
-        if (isGroup && Infor.groupdata.banned_users.includes(Infor.number)) return
+        if (Infor.isGroup && Infor.groupdata.banned_users.includes(Infor.number)) return
 
-
-        if (isGroup && Infor.groupdata.membercanusebot === false && !isGroupAdmins && Infor.number !== process.env.OWNER_NUMBER && !Infor.botdata.moderators.includes(Infor.number)) return
+        if (Infor.isGroup && Infor.groupdata.membercanusebot === false && !Infor.isGroupAdmins && Infor.number !== process.env.OWNER_NUMBER && !Infor.botdata.moderators.includes(Infor.number)) return
         if (Infor.arg[0] === "limit") {
           const x =
             mess.limit + Infor.noofmsgtoday + " / *" + Infor.botdata.dailylimit + "*";
-          client.sendMessage(Infor.sender, x, text, {
-            quoted: xxx5,
+          client.sendMessage(Infor.from, x, text, {
+            quoted: Infor.reply //xxx5,
           });
           return;
         }
@@ -242,7 +205,7 @@ async function main() {
         }
         if (Infor.dailylimitover === true) return
 
-        if (isGroup && Infor.groupdata.totalmsgtoday >= Infor.botdata.dailygrouplimit) {
+        if (Infor.isGroup && Infor.groupdata.totalmsgtoday >= Infor.botdata.dailygrouplimit) {
           client.sendMessage(Infor.from, mess.grouplimit, text);
 
           count(Infor)
@@ -252,9 +215,9 @@ async function main() {
         const xxx4 = {
           ...xxx5
         };
-        console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + groupName + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
-
-        switchcase(Infor, client, xxx4);
+        console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + Infor.groupName + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
+        messagehandler(Infor,client)
+     //   switchcase(Infor, client, xxx4);
 
       } catch (error) {
         console.log(error);
@@ -267,7 +230,6 @@ async function main() {
 ////////////////////////////////////////////////////////////////////
 async function stop() {
   client.close();
-
   console.log("Stopped");
   await sql.query('UPDATE botdata SET isconnected = false;')
   process.exit();

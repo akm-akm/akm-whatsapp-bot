@@ -39,8 +39,9 @@ Array.prototype.detecta = function () {
 }
 
 class InforClass {
-  constructor(
-    from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia) {
+  constructor(client, isGroup, groupMetadata, groupMembers, groupAdmins, isGroupAdmins, groupName,
+    from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia, reply) {
+    this.client = client;
     this.from = from;
     this.arg = arg;
     this.number = number;
@@ -53,15 +54,30 @@ class InforClass {
     this.sender = sender;
     this.stanzaId = stanzaId;
     this.isMedia = isMedia;
-
+    this.isGroup = isGroup;
+    this.groupMetadata = groupMetadata;
+    this.groupMembers = groupMembers;
+    this.groupAdmins = groupAdmins;
+    this.isGroupAdmins = isGroupAdmins;
+    this.groupName = groupName;
+    this.reply = reply;
 
   }
 }
 
 
-module.exports = async function settingread(arg, from, sender, groupname, client, groupMetadata, stanzaId, isMedia) {
+module.exports = async function settingread(xxx, client) {
   const Infor = new InforClass();
-
+  const from = xxx.key.remoteJid;
+  Infor.isGroup = from.endsWith("@g.us");
+  Infor.sender = Infor.isGroup ? xxx.participant : xxx.key.remoteJid;
+ 
+  Infor.groupMetadata = Infor.isGroup ? await client.groupMetadata(from) : "";
+  Infor.groupMembers = Infor.isGroup ? Infor.groupMetadata.participants : "";
+  Infor.groupAdmins = Infor.isGroup ? getGroupAdmins(Infor.groupMembers) : "";
+  Infor.isGroupAdmins = Infor.groupAdmins.includes(Infor.sender) || false;
+  Infor.groupName = Infor.isGroup ? Infor.groupMetadata.subject : "inbox";
+  Infor.from = from;
   random = settings.prefixchoice.charAt(
     Math.floor(Math.random() * settings.prefixchoice.length))
   try {
@@ -75,15 +91,15 @@ module.exports = async function settingread(arg, from, sender, groupname, client
       data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
       if (data1.rows.length == 0) {
         if (process.env.NODE_ENV === 'development') {
-          console.log("👪  " + chalk.bgCyan("Prefix assigned is / for group " + groupname));
+          console.log("👪  " + chalk.bgCyan("Prefix assigned is / for group " + Infor.groupname));
           await sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','/','false','true', '{''}',0,0,false,true);`
           );
-          return settingread(arg, from, sender, groupname)
+          return settingread(xxx, client)
         }
         if (process.env.NODE_ENV === 'production') {
           if (
-            groupMetadata.participants.length < botdata.rows[0].mingroupsize
+            Infor.groupMetadata.participants.length < botdata.rows[0].mingroupsize
           ) {
             await client.sendMessage(from, "*Minimum participants required is* " + botdata.rows[0].mingroupsize, text);
             client.groupLeave(from);
@@ -94,7 +110,7 @@ module.exports = async function settingread(arg, from, sender, groupname, client
           sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
           );
-          return settingread(arg, from, sender, groupname)
+          return settingread(xxx, client)
         }
       }
     }
@@ -113,7 +129,36 @@ module.exports = async function settingread(arg, from, sender, groupname, client
 
 
 
-    Infor.from = from;
+    const type = Object.keys(xxx.message)[0];
+    try {
+      stanzaId =
+        type == "extendedTextMessage" ?
+          xxx.message.extendedTextMessage.contextInfo
+            .stanzaId || null :
+          0;
+    } catch (error) {
+      stanzaId = 0;
+    }
+
+    arg =
+      type === "conversation" ?
+        xxx.message.conversation :
+        type === "imageMessage" ?
+          xxx.message.imageMessage.caption :
+          type === "videoMessage" ?
+            xxx.message.videoMessage.caption :
+            type == "extendedTextMessage" ?
+              xxx.message.extendedTextMessage.text :
+              "";
+    const getGroupAdmins = (participants) => {
+      const admins = [];
+      for (let i of participants) {
+        i.isAdmin ? admins.push(i.jid) : "";
+      }
+      return admins;
+    };
+   // Infor.client = client;
+    Infor.isMedia = type === "imageMessage" || type === "videoMessage";
     Infor.arg = from.endsWith("@g.us") ? data1.rows[0].useprefix ? arg.replace(/\s+/g, " ").toLowerCase().startsWith(data1.rows[0].prefix) ?
       arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").slice(1).replace(/^\s+|\s+$/g, "").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase()) :
       arg = [] : arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").split(" ")).map(xa =>
@@ -125,9 +170,8 @@ module.exports = async function settingread(arg, from, sender, groupname, client
     Infor.abusepresent = from.endsWith("@g.us") ? data1.rows[0].allowabuse == 0 ? arg.detecta() : [] : arg.detecta();
     Infor.groupdata = from.endsWith("@g.us") ? data1.rows[0] : 0;
     Infor.botdata = botdata.rows[0];
-    Infor.sender = sender;
     Infor.stanzaId = stanzaId;
-    Infor.isMedia = isMedia;
+    Infor.reply = xxx;
 
 
     return Infor;

@@ -23,7 +23,7 @@ const { faqs } = require(path.join(__dirname, "../plugins/faq"));
 const { nsfw } = require(path.join(__dirname, "../plugins/nsfw"));
 const { chatbot } = require(path.join(__dirname, "../plugins/chatbot"));
 const { lyrics } = require(path.join(__dirname, "../plugins/lyrics"));
-
+require(path.join(__dirname, "../utils/messagehandler"));
 const { MessageType } = require("@adiwajshing/baileys");
 const { text, sticker } = MessageType;
 errorSticker = path.join(__dirname, "../assets/stickers/error.webp");
@@ -323,7 +323,7 @@ async function switchcase(Infor, client, xxx4) {
     case "heyyyy":
     case "heyyy":
       client.sendMessage(from, mess.salutations[Math.floor(Math.random() * mess.salutations.length)], text, {
-        quoted: xxx3,
+        quoted: Infor.reply,
       });
       count(Infor)
       break;
