@@ -1,0 +1,32 @@
+{
+    "name": "xxx-whatsapp-bot",
+    "description": "Whatsapp bot that can convert images and videos into sticker, send crypto price updates, stock market updates, search internet for any stickers and send random stickers, download youtube and pinterest videos and do many more things.",
+    "repository": "https://github.com/akm-akm/xxx-whatsapp-bot",
+    "logo": "https://raw.githubusercontent.com/akm-akm/xxx-whatsapp-bot/master/docs/images/xxxlogo.jpeg",
+    "keywords": [
+        "whatsapp",
+        "baileys",
+        "stickers",
+        "whatsapp-stickers",
+        "bot",
+        "whatsapp bot"
+    ],
+    "addons": [
+        {
+            "plan": "heroku-postgresql",
+            "options": {
+                "version": "9.5"
+            }
+        }
+    ],
+    "env": {
+        "HOSTING_PLATFORM": {
+            "description": "HOSTING_PLATFORM.",
+            "value": "heroku"
+        },
+        "OWNER_NUMBER": {
+            "description": "OWNER_NUMBER.",
+            "value": ""
+        }
+    }
+}

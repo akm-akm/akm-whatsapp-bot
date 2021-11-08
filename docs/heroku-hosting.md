@@ -8,6 +8,10 @@
 
 ## 🍀 Deployment
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master&env[HOSTING_PLATFORM]=heroku&env[OWNER_NUMBER]=)
+
+
+
 - Fork this repository.
 - Create an account [Heroku](https://signup.heroku.com/login).
 - Create a [new app](https://dashboard.heroku.com/new-app).
