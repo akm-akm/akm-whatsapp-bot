@@ -3,11 +3,11 @@
 ## 🎅 Just press the button below
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master)
+### 📝 Enter a unique App name in the field below
 
  <br/><img width = "500px"  src='images/deployapp.png'></img>
 
-### Enter a unique App name in the field below
-### Enter th config vars according to your needs
+### 🔑 Enter these config vars according to your needs
 
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
 
@@ -31,11 +31,9 @@
 
 - Now scroll to the bottom and click on deploy app.
 
-<br/><img width = "500px" src='images/deploy.png'></img>
+- Now the bot will be deployed in under a minute and the bot website will open.
 
-- Now the bot will be deployed in under a minute.
-
-## ‼️‼️ FAiling to do the below step will stop the bot from working
+### ‼️ FAiling to do the below step will stop the bot from working
 
 - Since heroku uses Dyno sleeping in which if an app has a free web dyno, and that dyno receives no web traffic in a 30-minute period, it will sleep. In addition to the web dyno sleeping, the worker dyno (if present) will also sleep. and if a sleeping web dyno receives web traffic, it will become active again after a short delay (assuming your account has free dyno hours available) You can use [Cron job](https://console.cron-job.org) to ping the heroku app every 30 minutes to prevent it from sleeping. Heroku will stop the bot if the website does not receive any traffic.
 - Create an account on [cron job](https://console.cron-job.org/signup).
