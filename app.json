@@ -12,7 +12,7 @@
         "whatsapp bot"
     ],
     "scripts": {
-        "postdeploy": "node start"
+        "postdeploy": "npm start"
     },
     "success_url": "/",
     "addons": [
