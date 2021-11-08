@@ -12,7 +12,7 @@
         "whatsapp bot"
     ],
     "scripts": {
-        "postdeploy": "bundle exec rake bootstrap"
+        "postdeploy": "node start"
     },
     "addons": [
         {
@@ -25,15 +25,43 @@
     "env": {
         "HOSTING_PLATFORM": {
             "description": "Do not change this.",
-            "value": "heroku"
+            "value": "heroku",
+            "required": true
         },
         "OWNER_NUMBER": {
             "description": "Your whatsapp number with which you will send command to the bot. It must start with the country code without + sign.",
-            "value": ""
+            "value": "919709094733",
+            "required": false
         },
         "WEBSITE_PASSWORD": {
             "description": "The password you want to use for the bot website that will be used to login.",
-            "value": ""
+            "value": "1234",
+            "required": false
+        },
+        "COINMARKETCAP_API_KEY": {
+            "description": "The API key of CoinMarketCap for crypto market data.",
+            "value": "",
+            "required": false
+        },
+        "KEEPSAVEIT_API": {
+            "description": "The API key of KeepSaveIt for downloading the Pinterest videos.",
+            "value": "",
+            "required": false
+        },
+        "DEEPAI": {
+            "description": "The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector)",
+            "value": "",
+            "required": false
+        },
+        "SEARCH_STICKER": {
+            "description": "The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector)",
+            "value": "",
+            "required": false
+        },
+        "CHATBOT_API": {
+            "description": "The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox.",
+            "value": "",
+            "required": false
         }
     }
 }
