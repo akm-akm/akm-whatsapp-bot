@@ -8,7 +8,7 @@
 
 ## 🍀 Deployment
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master&env[HOSTING_PLATFORM]=heroku&env[OWNER_NUMBER]=)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master)
 
 
 

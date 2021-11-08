@@ -11,6 +11,9 @@
         "bot",
         "whatsapp bot"
     ],
+    "scripts": {
+        "postdeploy": "bundle exec rake bootstrap"
+    },
     "addons": [
         {
             "plan": "heroku-postgresql",
@@ -21,11 +24,15 @@
     ],
     "env": {
         "HOSTING_PLATFORM": {
-            "description": "HOSTING_PLATFORM.",
+            "description": "Do not change this.",
             "value": "heroku"
         },
         "OWNER_NUMBER": {
-            "description": "OWNER_NUMBER.",
+            "description": "Your whatsapp number with which you will send command to the bot. It must start with the country code without + sign.",
+            "value": ""
+        },
+        "WEBSITE_PASSWORD": {
+            "description": "The password you want to use for the bot website that will be used to login.",
             "value": ""
         }
     }
