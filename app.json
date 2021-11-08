@@ -23,12 +23,15 @@
             }
         }
     ],
+    "environments": {
+        "production": {
+            "env": {
+                "HOSTING_PLATFORM": "heroku"
+            }
+        }
+    },
     "env": {
-        "HOSTING_PLATFORM": {
-            "description": "Do not change this.",
-            "value": "heroku"
-          
-        },
+       
         "OWNER_NUMBER": {
             "description": "Your whatsapp number with which you will send command to the bot. It must start with the country code without + sign.",
             "value": "919709094733"
