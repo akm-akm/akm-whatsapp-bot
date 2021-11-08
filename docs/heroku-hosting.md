@@ -5,7 +5,7 @@
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master)
 
 <a href="https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master">
-  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy" target="">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy" target="_blank">
 </a>
 
 ### 📝 Enter a unique App name in the field below
