@@ -2,9 +2,10 @@
 
 ## 🎅 Just right click on the button below and open in a new tab
 
+<p align="center">
 <a href="https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master"  target="_blank">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
-</a>
+</a></p>
 
 ### 📝 Enter a unique App name in the field below
 

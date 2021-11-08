@@ -6,13 +6,13 @@
 
 ## 💮 Want your own bot?
 
-#### 💻 Test on your computer [Guide](/docs/self-hosting.md)
+- #### 💻 Test on your computer [Guide](/docs/self-hosting.md)
 
-#### 🛰️ Host on a free server [Heroku Guide](/docs/heroku-hosting.md)
+- #### 🛰️ Host on a free server [Heroku Guide](/docs/heroku-hosting.md)
 
 ## ✨ Highlights
 
-- 💻 4000 lines of code
+- 💻 5000 lines of code
 - 💖 open source
 - 💙 Written in Javascript
 - 💛 Event-Based
