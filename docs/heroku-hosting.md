@@ -3,6 +3,11 @@
 ## 🎅 Just press the button below
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master)
+
+<a href="https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy" target="_">
+</a>
+
 ### 📝 Enter a unique App name in the field below
 
  <br/><img width = "500px"  src='images/deployapp.png'></img>
@@ -46,7 +51,7 @@
 - The website will open in your browser. Login using the password you entered in the previous step.
  <br/><img  width = "500px" src='images/sitelogin.png'></img>
 - Click on start and scan the qr code shown on the website using the WA-Web Scanner on your WhatsApp.
- <br/><img  width = "500px" src='images/scan.png'></img>
+ <br/><img  width = "500px" src='images/scanit.png'></img>
 - On successful login you will see connected written on the button.
  <br/><img width = "500px"  src='images/connected.png'></img>
 - Now close the browser.
