@@ -1,44 +1,13 @@
 # 🤖️ Heroku Deployment Guide 🤖️
 
-## ⛵ Pre-requisite
-
-- 🌐️ Internet 🌐️️
-- 🧠️ Brain 🧠️
-- 🎵️ Music 🎵️
-
-## 🍀 Deployment
+## 🎅 Just press the button below
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/akm-akm/xxx-whatsapp-bot/tree/master)
 
+ <br/><img width = "500px"  src='images/deployapp.png'></img>
 
-
-- Fork this repository.
-- Create an account [Heroku](https://signup.heroku.com/login).
-- Create a [new app](https://dashboard.heroku.com/new-app).
-- Now select github under deployment method.
- <br/><img width = "500px" src='images/connectgithub.png' ></img>
-- input xxx-whatsapp-bot and search and connect the repo displayed.
-- now under resources tab select add addons.
- <br/><img width = "500px"  src='images/herokupostgres.png'></img>
-- Search heroku postgres and click on the result.
-- Then click on submit order form on the pop up.
-- Now under settinngs tab click on reveal config vars.
- <br/><img  width = "500px" src='images/herokuconfigvars.png'></img>
-- Now under config vars input the values shown in `.env.example`.
- <br/><img width = "500px"  src='images/herokuenv.png'></img>
-
-```env
-COINMARKETCAP_API_KEY=
-KEEPSAVEIT_API=
-clientId=
-clientSecret=
-OWNER_NUMBER=
-HOSTING_PLATFORM=
-WEBSITE_PASSWORD=
-DEEPAI=
-SEARCH_STICKER=
-CHATBOT_API=
-```
+### Enter a unique App name in the field below
+### Enter th config vars according to your needs
 
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
 
@@ -60,11 +29,13 @@ CHATBOT_API=
 
 `CHATBOT_API` The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox. (optional)
 
-- Now click on Deploy tab and scroll to the bottom and click on deploy.
- <br/><img width = "500px" src='images/deploy.png'></img>
+- Now scroll to the bottom and click on deploy app.
+
+<br/><img width = "500px" src='images/deploy.png'></img>
+
 - Now the bot will be deployed in under a minute.
 
-# ‼️‼️ FAiling to do the below step will stop the bot from working
+## ‼️‼️ FAiling to do the below step will stop the bot from working
 
 - Since heroku uses Dyno sleeping in which if an app has a free web dyno, and that dyno receives no web traffic in a 30-minute period, it will sleep. In addition to the web dyno sleeping, the worker dyno (if present) will also sleep. and if a sleeping web dyno receives web traffic, it will become active again after a short delay (assuming your account has free dyno hours available) You can use [Cron job](https://console.cron-job.org) to ping the heroku app every 30 minutes to prevent it from sleeping. Heroku will stop the bot if the website does not receive any traffic.
 - Create an account on [cron job](https://console.cron-job.org/signup).
@@ -74,8 +45,6 @@ CHATBOT_API=
 
 ## 🤖 Running
 
-- Now click on view.
- <br/><img  width = "500px" src='images/viewheroku.png'></img>
 - The website will open in your browser. Login using the password you entered in the previous step.
  <br/><img  width = "500px" src='images/sitelogin.png'></img>
 - Click on start and scan the qr code shown on the website using the WA-Web Scanner on your WhatsApp.
