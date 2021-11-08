@@ -17,10 +17,8 @@
     "success_url": "/",
     "addons": [
         {
-            "plan": "heroku-postgresql",
-            "options": {
-                "version": "9.5"
-            }
+            "plan": "heroku-postgresql"
+           
         }
     ],
     "environments": {
