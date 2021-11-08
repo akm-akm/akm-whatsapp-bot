@@ -4,6 +4,12 @@
 <img src="docs/images/xxxlogo.jpeg" width=300px alt="xxxlogo" />
 </p>
 
+## 💮 Want your own bot?
+
+#### 💻 Test on your computer [Guide](/docs/self-hosting.md)
+
+#### 🛰️ Host on a free server [Heroku Guide](/docs/heroku-hosting.md)
+
 ## ✨ Highlights
 
 - 💻 4000 lines of code
@@ -41,12 +47,6 @@
   </tr>
  </table>
 
-## 💮 Want your bot?
-
-#### 💻 See the [Self-Hosting Guide](/docs/self-hosting.md)
-
-#### 🛰️ See the [Heroku Deploy Guide](/docs/heroku-hosting.md)
-
 ## 💪 Contribution
 
 - Feel free to open issues regarding any problems or if you have any feature requests
@@ -69,7 +69,7 @@
 - Default minimum group size for the bot to work in it is `1` members.
 - These values can be changed only by the bot owner.
 - When the bot is added to any group, it will auto assign any random prefix to it, which can be changed by group admins using `setprefix` command or prefix can be turned off using `useprefix` command.
-- If deepai api key is added to the bot, the bot will detect nudity in the image and if it detectss 50% nudity, it will not make a sticker.
+- If deepai api key is added to the bot, the bot will detect nudity in the image and if it detects 50% nudity, it will not make a sticker.
 
 ## ⚠️ Troubleshooting
 

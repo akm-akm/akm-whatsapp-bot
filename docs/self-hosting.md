@@ -25,23 +25,9 @@
 
 ## ✍ Configuration
 
-#### Step 1 > 🚂 Setting up the enviroment
+### 🚂 Setting up the enviroment
 
- Create a file named `.env` then add the following fields
-
-```env
-COINMARKETCAP_API_KEY=
-KEEPSAVEIT_API=
-clientId=
-clientSecret=
-OWNER_NUMBER=
-HOSTING_PLATFORM=
-WEBSITE_PASSWORD=
-DEEPAI=
-LOCAL_DATABASE_URL=
-SEARCH_STICKER=
-CHATBOT_API=
-```
+Edit file named `.env.example` and replace the values with your own.
 
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
 
@@ -65,7 +51,8 @@ CHATBOT_API=
 
 `CHATBOT_API` The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox. (optional)
 
-#### Step 2 > 💾 Setting up the database
+Now save the file with the name `.env`
+### 💾 Setting up the database
 
 #### To get a database, there are two ways
 
@@ -104,5 +91,24 @@ CHATBOT_API=
 - Scan the qr code shown in the terminal using the WA-Web Scanner on your WhatsApp
 - The bot will work in group in development mode if the commands start with /.
 - eg. `/help`, `/limit`, `/rs`
+
+## 💡 How to use the bot
+
+- Send `hi` to the bot in the inbox or hi along with prefix if in a group.
+- The bot will respond with `👋 hello`.
+- Send `help` to the bot in the inbox or help along with prefix if in a group.
+- The bot will respond with the menu.
+
+## 🔧 Default Configuration
+
+- Default daily limit for a normal user is `70` messages.
+- Owner and bot moderators have no limit and they cannot be banned in groups.
+- Owner and bot moderators have access to all group commands even if they are not admin in any group.
+- Default daily group limit is `100` messages.
+- By default, abuse detection and nudity detection is on.
+- Default minimum group size for the bot to work in it is `1` members.
+- These values can be changed only by the bot owner.
+- When the bot is added to any group, it will auto assign any random prefix to it, which can be changed by group admins using `setprefix` command or prefix can be turned off using `useprefix` command.
+- If deepai api key is added to the bot, the bot will detect nudity in the image and if it detects 50% nudity, it will not make a sticker.
 
 ### 🔗 Want to host on server ? Click [here](heroku-hosting.md)
