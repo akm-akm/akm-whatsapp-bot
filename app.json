@@ -26,18 +26,18 @@
     "env": {
         "HOSTING_PLATFORM": {
             "description": "Do not change this.",
-            "value": "heroku",
-            "required": true
+            "value": "heroku"
+          
         },
         "OWNER_NUMBER": {
             "description": "Your whatsapp number with which you will send command to the bot. It must start with the country code without + sign.",
-            "value": "919709094733",
-            "required": true
+            "value": "919709094733"
+           
         },
         "WEBSITE_PASSWORD": {
             "description": "The password you want to use for the bot website that will be used to login.",
-            "value": "1234",
-            "required": true
+            "value": "1234"
+           
         },
         "COINMARKETCAP_API_KEY": {
             "description": "The API key of CoinMarketCap for crypto market data.",
