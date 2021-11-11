@@ -15,10 +15,10 @@ module.exports = {
   "eg": [
     "faq"
   ],
-  handle(Infor, client) {
+  "group": false,
+  handle(Infor) {
     new Promise((resolve, reject) => {
     
-      const from = Infor.from;
       let msgl = "";
       faq.forEach((element) => {
      
@@ -30,9 +30,7 @@ module.exports = {
           element.answer +
           "```\n";
       });
-      client.sendMessage(from, msgl, MessageType.text, {
-        quoted: Infor.reply,
-      });
+      Infor.replytext( msgl)
       resolve();
     })
   }

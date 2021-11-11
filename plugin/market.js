@@ -52,7 +52,8 @@ module.exports = {
     "market losers",
     "market gainers"
   ],
-  handle(Infor, client) {
+  "group": false,
+  handle(Infor) {
     new Promise((resolve, reject) => {
       const arg = Infor.arg
       const from = Infor.from;
@@ -72,15 +73,13 @@ module.exports = {
             )
             .then((response) => {
               if (response.error) {
-                client.sendMessage(from, "```Error```", text, {
-                  quoted: Infor.reply,
-                });
+                Infor.replytext(mess.error.error)
                 resolve();
 
               } else {
                 let msg =
                   "Market status : ```" + response.data.NormalMktStatus + "```";
-                client.sendMessage(from, msg, text, {
+                Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
                 resolve();
@@ -103,7 +102,7 @@ module.exports = {
 
               if (response.error) {
                 console.log("err");
-                client.sendMessage(from, "```Error```", text, {
+                Infor.replytext(from, "```Error```", text, {
                   quoted: Infor.reply,
                 });
                 reject();
@@ -129,7 +128,7 @@ module.exports = {
                     element.previousPrice +
                     "```";
                 });
-                client.sendMessage(from, msg, text, {
+                Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
                 resolve();
@@ -176,7 +175,7 @@ module.exports = {
                     element.ltP +
                     "```";
                 });
-                client.sendMessage(from, msg, text, {
+                Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
                 resolve();
@@ -223,7 +222,7 @@ module.exports = {
                     "```\n"; +
                       "```turnoverInLakhs : " + element.turnoverInLakhs + "```";
                 });
-                client.sendMessage(from, msg, text, {
+                Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
                 resolve();
@@ -239,14 +238,14 @@ module.exports = {
         case "search":
 
           if (arg.length < 3) {
-            client.sendMessage(from, "```Enter stocks name to search.```", text, {
+            Infor.replytext(from, "```Enter stocks name to search.```", text, {
               quoted: Infor.reply,
             });
             resolve();
             return
           }
           if (arg.length > 3) {
-            client.sendMessage(from, "```Searching only the first word.```", text, {
+            Infor.replytext(from, "```Searching only the first word.```", text, {
               quoted: Infor.reply,
             });
           }
@@ -282,7 +281,7 @@ module.exports = {
                     element.symbol +
                     "```";
                 });
-                client.sendMessage(from, msg, text, {
+                Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
                 resolve();
@@ -297,14 +296,14 @@ module.exports = {
         case "details":
         case "detail":
           if (arg.length < 3) {
-            client.sendMessage(from, "```Enter stock symbol to get details.```", text, {
+            Infor.replytext(from, "```Enter stock symbol to get details.```", text, {
               quoted: Infor.reply,
             });
             resolve();
             return
           }
           if (arg.length > 3) {
-            client.sendMessage(from, "```Searching only the first symbol.```", text, {
+            Infor.replytext(from, "```Searching only the first symbol.```", text, {
               quoted: Infor.reply,
             });
           }
@@ -392,7 +391,7 @@ module.exports = {
                   "```Update Time   : " +
                   response.data.lastUpdateTime.split(" ")[1] +
                   "```";
-                client.sendMessage(from, msg, text, {
+                Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
                 resolve();

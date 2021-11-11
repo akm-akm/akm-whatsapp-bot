@@ -3,9 +3,6 @@ const {
   ReconnectMode,
   MessageType
 } = require("@adiwajshing/baileys");
-const {
-  text
-} = MessageType;
 
 
 const path = require("path");
@@ -103,7 +100,6 @@ async function connect() {
   } catch (err) {
     console.error(err);
     if (err.message.startsWith("Unexpected error in login")) {
-      console.log("Please check your credentials")
       await sql.query('UPDATE botdata SET isconnected = false;')
       console.log("isconnected set to false");
       await sql.query("DROP TABLE auth;");
@@ -122,16 +118,7 @@ async function connect() {
 }
 async function main() {
   
-  (async function () {
-    qqr = await sql.query("SELECT count(*) from messagecount;")
-    if (qqr.rows[0].count === 0) {
-      console.log("New bot!, changing its dp and name!");
-      client.updateProfileName("xxx-whatsapp-bot");
-      client.updateProfilePicture(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, fs.readFileSync(path.join(__dirname, "../docs/images/xxxlogo.jpeg")));
-    }
-  })();
-
-
+ 
   try {
     client.logger.level = "fatal";
     await connect();
@@ -165,59 +152,18 @@ async function main() {
 
 
     client.on("chat-update", async (xxxx) => {
+
       try {
         if (!xxxx.hasNewMessage) return;
         xxx5 = xxxx.messages.all()[0];
         if (!xxx5.message) return;
         if (xxx5.key && xxx5.key.remoteJid == "status@broadcast") return;
+
         if (xxx5.key.fromMe) return;
-
         const Infor = await settingread(xxx5, client);
-        //console.log(Infor);
 
-        if (!(!Infor.isGroup || (Infor.isGroup && (Infor.groupdata.totalmsgtoday <= Infor.botdata.dailygrouplimit)) &&
-          (Infor.arg.length !== 0 || (Infor.isGroup && Infor.isMedia && Infor.groupdata.autosticker)))
-        ) return
-
-        if (Infor.isGroup && Infor.groupdata.banned_users.includes(Infor.number)) return
-
-        if (Infor.isGroup && Infor.groupdata.membercanusebot === false && !Infor.isGroupAdmins && Infor.number !== process.env.OWNER_NUMBER && !Infor.botdata.moderators.includes(Infor.number)) return
-        if (Infor.arg[0] === "limit") {
-          const x =
-            mess.limit + Infor.noofmsgtoday + " / *" + Infor.botdata.dailylimit + "*";
-          client.sendMessage(Infor.from, x, text, {
-            quoted: Infor.reply //xxx5,
-          });
-          return;
-        }
-          
-        if (
-          Infor.noofmsgtoday >= Infor.botdata.dailylimit &&
-          Infor.number !== process.env.OWNER_NUMBER &&
-          !Infor.botdata.moderators.includes(Infor.number) &&
-          Infor.dailylimitover === false
-        ) {
-          sql.query(`UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${Infor.number}';`)
-          client.sendMessage(Infor.sender, mess.userlimit, text, {
-            quoted: xxx5,
-          });
-          return
-        }
-        if (Infor.dailylimitover === true) return
-
-        if (Infor.isGroup && Infor.groupdata.totalmsgtoday >= Infor.botdata.dailygrouplimit) {
-          client.sendMessage(Infor.from, mess.grouplimit, text);
-
-          count(Infor)
-          return
-        }
-       
-        const xxx4 = {
-          ...xxx5
-        };
-        console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + Infor.groupName + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
-        messagehandler(Infor,client)
-     //   switchcase(Infor, client, xxx4);
+        messagehandler(Infor)
+       // switchcase(Infor, client, xxx4);
 
       } catch (error) {
         console.log(error);

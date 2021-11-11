@@ -25,7 +25,6 @@ try {
       });
 
       version = total.toString().split("").join(".");
-      console.log("v", version);
     });
 } catch (error) {
   axios.get(`https://api.github.com/repos/akm-akm/xxx-whatsapp-bot/stats/commit_activity`)
@@ -37,7 +36,6 @@ try {
       });
 
       version = total.toString().split("").join(".");
-      console.log("v", version);
     });
 }
 

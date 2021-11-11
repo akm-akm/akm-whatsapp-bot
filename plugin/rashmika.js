@@ -10,16 +10,10 @@ module.exports = {
     "eg": [
         "rashmika"
     ],
-    handle(Infor, client) {
-        new Promise((resolve, reject) => {
-            const from = Infor.from;
-            const random = Math.floor(Math.random() * 304 + 1);
-            const ran = path.join(__dirname, "../assets/stickers/rashmika/rashmika (") + random + ").webp";
-
-            client.sendMessage(from, fs.readFileSync(ran), sticker, {
-                quoted: Infor.reply,
-            });
-            resolve();
-        })
+    "group": false,
+    handle(Infor) {
+        const random = Math.floor(Math.random() * 304 + 1);
+        const ran = path.join(__dirname, "../assets/stickers/rashmika/rashmika (") + random + ").webp";
+        Infor.replysticker(ran)
     }
 }

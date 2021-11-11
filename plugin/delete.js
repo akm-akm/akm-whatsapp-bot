@@ -1,5 +1,3 @@
-const { MessageType } = require("@adiwajshing/baileys");
-const { text } = MessageType;
 const path = require("path");
 const fs = require('fs');
 
@@ -14,31 +12,23 @@ module.exports = {
     "eg": [
         "delete"
     ],
-    handle(Infor, client) {
-        new Promise(async (resolve, reject) => {
-            const from = Infor.from;
+    "group": false,
+    async handle(Infor) {
 
-            const type = Object.keys(Infor.reply.message)[0];
-            if (type !== "extendedTextMessage") {
-                client.sendMessage(from, mess.error.error, text, { quoted: Infor.reply });
-                resolve()
-                return
-            }
-            try {
-                await client.deleteMessage(from, {
-                    id: Infor.stanzaId,
-                    remoteJid: from,
-                    fromMe: true
-                })
-                resolve()
-            } catch (error) {
-                client.sendMessage(from, mess.error.error, text, { quoted: Infor.reply });
-                resolve()
+        if (!Infor.stanzaId) {
+            Infor.replytext(mess.tagtext);
+            return
+        }
+        try {
+            await Infor.client.deleteMessage(Infor.from, {
+                id: Infor.stanzaId,
+                remoteJid: Infor.from,
+                fromMe: true
+            })
+        } catch (error) {
+            Infor.replytext(mess.error.error);
 
+        }
 
-            }
-
-
-        })
     }
 }

@@ -5,21 +5,14 @@ const sql = require(path.join(__dirname, "./ps"));
 const settings = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/settings.json"))
 );
-
 const {
   newgroup
 } = require(path.join(__dirname, "./newgroup"));
 
+const InforClass = require('./Infor');
 
-const {
-  MessageType
-} = require("@adiwajshing/baileys");
 
-const {
-  text
-} = MessageType;
-
-let data1, data2, data3 = JSON.parse(
+let data3 = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/data3.json")));
 const urlregex =
   /^(?:(?:https?|http|www):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
@@ -38,58 +31,42 @@ Array.prototype.detecta = function () {
   return returnarray;
 }
 
-class InforClass {
-  constructor(client, isGroup, groupMetadata, groupMembers, groupAdmins, isGroupAdmins, groupName,
-    from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia, reply) {
-    this.client = client;
-    this.from = from;
-    this.arg = arg;
-    this.number = number;
-    this.noofmsgtoday = noofmsgtoday;
-    this.totalmsg = totalmsg;
-    this.dailylimitover = dailylimitover;
-    this.abusepresent = abusepresent;
-    this.groupdata = groupdata;
-    this.botdata = botdata;
-    this.sender = sender;
-    this.stanzaId = stanzaId;
-    this.isMedia = isMedia;
-    this.isGroup = isGroup;
-    this.groupMetadata = groupMetadata;
-    this.groupMembers = groupMembers;
-    this.groupAdmins = groupAdmins;
-    this.isGroupAdmins = isGroupAdmins;
-    this.groupName = groupName;
-    this.reply = reply;
-
-  }
-}
-
 
 module.exports = async function settingread(xxx, client) {
+
   const Infor = new InforClass();
-  const from = xxx.key.remoteJid;
-  Infor.isGroup = from.endsWith("@g.us");
-  Infor.sender = Infor.isGroup ? xxx.participant : xxx.key.remoteJid;
- 
-  Infor.groupMetadata = Infor.isGroup ? await client.groupMetadata(from) : "";
-  Infor.groupMembers = Infor.isGroup ? Infor.groupMetadata.participants : "";
-  Infor.groupAdmins = Infor.isGroup ? getGroupAdmins(Infor.groupMembers) : "";
-  Infor.isGroupAdmins = Infor.groupAdmins.includes(Infor.sender) || false;
-  Infor.groupName = Infor.isGroup ? Infor.groupMetadata.subject : "inbox";
-  Infor.from = from;
-  random = settings.prefixchoice.charAt(
-    Math.floor(Math.random() * settings.prefixchoice.length))
+  Infor.client = client;
+  Infor.reply = xxx;
+
+
   try {
 
-    botdata = await sql.query(
+    const random = settings.prefixchoice.charAt(
+      Math.floor(Math.random() * settings.prefixchoice.length))
+
+
+    const from = xxx.key.remoteJid;
+    Infor.from = from;
+    Infor.isGroup = from.endsWith("@g.us");
+    Infor.sender = Infor.isGroup ? xxx.participant : xxx.key.remoteJid;
+    Infor.groupMetadata = Infor.isGroup ? await client.groupMetadata(from) : undefined;
+    Infor.groupMembers = Infor.isGroup ? Infor.groupMetadata.participants : undefined;
+    Infor.groupAdmins = Infor.isGroup ? getGroupAdmins(Infor.groupMembers) : undefined;
+    Infor.isGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(Infor.sender) || false : undefined;
+    Infor.groupName = Infor.isGroup ? Infor.groupMetadata.subject : undefined;
+
+    const botdata = await sql.query(
       "select * from botdata;"
     );
 
-    if (from.endsWith("@g.us")) {
+    if (Infor.isGroup) {
 
-      data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
+      const data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
       if (data1.rows.length == 0) {
+
+        const groupMetadata = await client.groupMetadata(from);
+
+
         if (process.env.NODE_ENV === 'development') {
           console.log("👪  " + chalk.bgCyan("Prefix assigned is / for group " + Infor.groupname));
           await sql.query(
@@ -99,7 +76,7 @@ module.exports = async function settingread(xxx, client) {
         }
         if (process.env.NODE_ENV === 'production') {
           if (
-            Infor.groupMetadata.participants.length < botdata.rows[0].mingroupsize
+            groupMetadata.participants.length < botdata.rows[0].mingroupsize
           ) {
             await client.sendMessage(from, "*Minimum participants required is* " + botdata.rows[0].mingroupsize, text);
             client.groupLeave(from);
@@ -115,32 +92,31 @@ module.exports = async function settingread(xxx, client) {
       }
     }
 
-    from.endsWith("@g.us") ?
-      (number = sender.split("@")[0]) :
-      (number = from.split("@")[0]);
 
-    data2 = await sql.query(
+    const number = Infor.isGroup ? Infor.sender.split("@")[0] : from.split("@")[0];
+    const data2 = await sql.query(
       `select * from messagecount where phonenumber='${number}';`)
     if (data2.rows.length == 0) {
       console.log("👨  " + chalk.bgBlueBright("Entering data for  number -" + number));
       await sql.query(`INSERT INTO messagecount VALUES ('${number}', 0, 0, false);`)
-      return settingread(arg, from, sender, groupname)
+      return settingread(xxx, client)
     }
 
 
 
     const type = Object.keys(xxx.message)[0];
+    const content = JSON.stringify(xxx.message);
     try {
       stanzaId =
         type == "extendedTextMessage" ?
           xxx.message.extendedTextMessage.contextInfo
-            .stanzaId || null :
+            .stanzaId || undefined :
           0;
     } catch (error) {
       stanzaId = 0;
     }
 
-    arg =
+    let arg =
       type === "conversation" ?
         xxx.message.conversation :
         type === "imageMessage" ?
@@ -150,16 +126,9 @@ module.exports = async function settingread(xxx, client) {
             type == "extendedTextMessage" ?
               xxx.message.extendedTextMessage.text :
               "";
-    const getGroupAdmins = (participants) => {
-      const admins = [];
-      for (let i of participants) {
-        i.isAdmin ? admins.push(i.jid) : "";
-      }
-      return admins;
-    };
-   // Infor.client = client;
+
     Infor.isMedia = type === "imageMessage" || type === "videoMessage";
-    Infor.arg = from.endsWith("@g.us") ? data1.rows[0].useprefix ? arg.replace(/\s+/g, " ").toLowerCase().startsWith(data1.rows[0].prefix) ?
+    Infor.arg = Infor.isGroup ? data1.rows[0].useprefix ? arg.replace(/\s+/g, " ").toLowerCase().startsWith(data1.rows[0].prefix) ?
       arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").slice(1).replace(/^\s+|\s+$/g, "").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase()) :
       arg = [] : arg = (arg.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "").split(" ")).map(xa =>
         urlregex.test(xa) ? xa : xa.toLowerCase()) : arg.replace(/\s+/g, " ").startsWith('!') || arg.replace(/\s+/g, " ").startsWith('.') || arg.replace(/\s+/g, " ").startsWith('#') || arg.replace(/\s+/g, " ").startsWith('-') ? arg = (arg.slice(1).replace(/^\s+|\s+$/g, "").replace(/\s+/g, " ").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase()) : arg = (arg.replace(/\s+/g, " ").split(" ")).map(xa => urlregex.test(xa) ? xa : xa.toLowerCase());
@@ -171,12 +140,14 @@ module.exports = async function settingread(xxx, client) {
     Infor.groupdata = from.endsWith("@g.us") ? data1.rows[0] : 0;
     Infor.botdata = botdata.rows[0];
     Infor.stanzaId = stanzaId;
-    Infor.reply = xxx;
-
+    Infor.isQuotedImage = type === "extendedTextMessage" && content.includes("imageMessage");
+    Infor.isQuotedVideo = type === "extendedTextMessage" && content.includes("videoMessage");
+    Infor.isQuotedText = type === "extendedTextMessage" && content.includes("extendedTextMessage");
+    Infor.quotedMessage = Infor.isQuotedText ? Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage.conversation : undefined;
 
     return Infor;
 
   } catch (error) {
-    console.log(error);
+    Infor.errorlog(error);
   }
 };

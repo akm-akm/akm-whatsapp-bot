@@ -2,12 +2,6 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 const { help } = require(path.join(__dirname, "../utils/help"));
-const {
-  MessageType
-} = require("@adiwajshing/baileys");
-const {
-  text
-} = MessageType
 const coins = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/coins.json"))
 );
@@ -26,7 +20,6 @@ const requestOptions = {
   gzip: true,
 };
 
-let message;
 
 
 module.exports = {
@@ -38,76 +31,61 @@ module.exports = {
     "crypto xrp",
     "crypto eth"
   ],
-  handle(Infor, client) {
-    new Promise((resolve, reject) => {
-      let c = 0;
-      const arg = Infor.arg;
-      const from = Infor.from;
+  "group": false,
+  handle(Infor) {
+    let c = 0;
+    const arg = Infor.arg;
+    let message;
 
-      if (arg.length == 1) {
-        Infor.arg = ["help", arg[0]]
-        help(Infor, client, Infor.reply, 1);
-        reject()
-        return
-      }
-      console.log(process.env.COINMARKETCAP_API_KEY);
-      if (process.env.COINMARKETCAP_API_KEY === null) {
-        client.sendMessage(from, "🤖 ```COINMARKETCAP_API_KEY environment variable is not set. Contact the bot owner.```"
-          , text, {
-          quoted: Infor.reply
-        })
-        resolve()
-        return;
-      }
-      if (!coins.includes(arg[1].toUpperCase())) {
+    if (arg.length == 1) {
+      Infor.arg = ["help", arg[0]]
+      help(Infor, client, Infor.reply, 1);
+      return
+    }
+    if (!process.env.COINMARKETCAP_API_KEY) {
+      Infor.replytext("🤖 ```COINMARKETCAP_API_KEY environment variable is not set. Contact the bot owner.```");
+      return;
+    }
+    if (!coins.includes(arg[1].toUpperCase())) {
 
-        client.sendMessage(from, "🤖 ```Not in coinmarketcap.```", text, {
-          quoted: Infor.reply,
-        });
-        resolve();
-      } else {
-        axios(requestOptions)
-          .then(function (response) {
-            response.data.data.forEach((element) => {
-              if (element.symbol == arg[1].toUpperCase()) {
-                c = element.quote.USD;
-                message =
-                  "*" +
-                  arg[1].toUpperCase() +
-                  "* " +
-                  "/" +
-                  " " +
-                  "*USDT*" +
-                  " 💹 *Coinmarketcap*" +
-                  "\n\n" +
-                  "```Buy price  : ```" +
-                  c.price.toFixed(3) +
-                  "\n" +
-                  "```1h change  : ```" +
-                  c.percent_change_1h.toFixed(2) +
-                  " ```%```" +
-                  "\n" +
-                  "```24h change : ```" +
-                  c.percent_change_24h.toFixed(2) +
-                  " ```%```" +
-                  "\n" +
-                  "```market cap : ```" +
-                  c.market_cap.toFixed(2) +
-                  "\n";
+      Infor.replytext("🤖 ```Not in coinmarketcap.```")
+    } else {
+      axios(requestOptions)
+        .then(function (response) {
+          response.data.data.forEach((element) => {
+            if (element.symbol == arg[1].toUpperCase()) {
+              c = element.quote.USD;
+              message =
+                "*" +
+                arg[1].toUpperCase() +
+                "* " +
+                "/" +
+                " " +
+                "*USDT*" +
+                " 💹 *Coinmarketcap*" +
+                "\n\n" +
+                "```Buy price  : ```" +
+                c.price.toFixed(3) +
+                "\n" +
+                "```1h change  : ```" +
+                c.percent_change_1h.toFixed(2) +
+                " ```%```" +
+                "\n" +
+                "```24h change : ```" +
+                c.percent_change_24h.toFixed(2) +
+                " ```%```" +
+                "\n" +
+                "```market cap : ```" +
+                c.market_cap.toFixed(2) +
+                "\n";
 
-                client.sendMessage(from, message, text, {
-                  quoted: Infor.reply,
-                });
-                resolve();
-              }
-            });
-          })
-          .catch(function (error) {
-            console.log(error);
-
-            reject(Infor)
+              Infor.replytext(message);
+            }
           });
-      }
-    })
+        })
+        .catch((error) => {
+          Infor.errorlog(error)
+        });
+    }
   }
 }
