@@ -7,7 +7,7 @@ const mess = JSON.parse(
 );
 const pluginsinfo = require(path.join(__dirname, './pluginInfo'));
 module.exports = class InforClass {
-    constructor(isGroup, from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia, reply, client, isQuotedImage, isQuotedVideo, isQuotedText, quotedMessage, groupMetadata, groupMembers, groupAdmins, isGroupAdmins, groupName) {
+    constructor(botNumber, isBotGroupAdmins, isGroup, from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia, reply, client, isQuotedImage, isQuotedVideo, isQuotedText, quotedMessage, groupMetadata, groupMembers, groupAdmins, isGroupAdmins, groupName, isOwner, isSuperAdmin, isBotModerator, taggedUser,isUserTagged) {
         this.client = client;
         this.from = from;
         this.arg = arg;
@@ -32,7 +32,13 @@ module.exports = class InforClass {
         this.groupMembers = groupMembers;
         this.groupAdmins = groupAdmins;
         this.isGroupAdmins = isGroupAdmins;
-
+        this.botNumber = botNumber;
+        this.isBotGroupAdmins = isBotGroupAdmins;
+        this.isOwner = isOwner;
+        this.isSuperAdmin = isSuperAdmin;
+        this.isBotModerator = isBotModerator;
+        this.isUserTagged = isUserTagged;
+        this.taggedUser = taggedUser;
 
     }
     mess = mess;
@@ -92,7 +98,7 @@ module.exports = class InforClass {
 
     wrongCommand() {
         var prefix = this.groupdata.prefix;
-        if (this.groupdata.prefix == undefined || !this.groupdata.useprefix)  prefix = "🎀";
+        if (this.groupdata.prefix == undefined || !this.groupdata.useprefix) prefix = "🎀";
 
         var body = "❎ *Error* :\n```syntax error in the given command.```\n\n" + "🔖 *Description* :\n" + "```" + pluginsinfo[this.arg[0]].desc + "```\n\n" + "📕 *Usage* :\n" +
             prefix + "```" +
@@ -105,5 +111,5 @@ module.exports = class InforClass {
 
     }
 
-  
+
 }

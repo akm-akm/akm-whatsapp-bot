@@ -10,7 +10,7 @@ module.exports = {
     "eg": [
         "shorturl https://www.hindustantimes.com/world-nes"
     ],
-    "group": true,
+    "group": false,
     "owner": false,
     async handle(Infor) {
         const arg = Infor.arg

@@ -9,7 +9,7 @@ module.exports = {
         "rs"
     ],
     "group": false,
-    "owner": true,
+    "owner": false,
     handle(Infor) {
         const random = Math.floor(Math.random() * 500);
         const ran = path.join(__dirname, "../assets/stickers/allsticker/s (") + random + ").webp";

@@ -28,7 +28,7 @@ for (let file of plugins) {
   }
 
 }
-const builtInPlugins = fs.readdirSync(path.join(__dirname, '../builtInPlugins')).filter(file=>file!='help.js')
+const builtInPlugins = fs.readdirSync(path.join(__dirname, '../builtInPlugins')).filter(file => file != 'help.js')
 for (let file of builtInPlugins) {
   const command = require(path.join(__dirname, '../builtInPlugins/', `${file}`));
   if (command.name && command.usage && command.desc && typeof command.handle === "function" && command.eg && typeof command.group === "boolean" && typeof command.owner === "boolean") {
@@ -50,18 +50,16 @@ for (let file of builtInPlugins) {
 
 }
 
-const userCommands = "📱 *Users* :\n```" + "help, " + user.sort().join(", ") +  "```\n\n";
+const userCommands = "📱 *Users* :\n```" + "help, limit, " + user.sort().join(", ") + "```\n\n";
 const adminCommands = "👑 *Admin* :\n```" + admin.sort().join(", ") + " " + "```\n\n";
 const ownerCommands = "🎩 *Owner* :\n```" + owner.sort().join(", ") + " " + "```\n\n";
 
 module.exports = {
   "name": "help",
-  "usage": "template <arguments>",
-  "desc": "template the template of template template template from template template its template.",
+  "usage": "help <arguments>",
+  "desc": "Shows the help menu.",
   "eg": [
-    "template btc",
-    "template xrp",
-    "template eth"
+    "help",
   ],
   "group": false,
   "owner": false,
@@ -75,14 +73,14 @@ module.exports = {
     const useprefix = Infor.groupdata.useprefix;
 
     if (Infor.arg.length === 1) {
-      
+
       const c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "( " + prefix + " )" + " ```Disabled```";
       if (prefix == undefined || !useprefix) prefix = "🎀";
       const grpcmds = (Infor.isGroup && (Infor.isGroupAdmins || Infor.number === process.env.OWNER_NUMBER || Infor.botdata.moderators.includes(Infor.number))) ? adminCommands : "";
       const owncmds = Infor.number === process.env.OWNER_NUMBER ? ownerCommands : "";
-   
-   
-  
+
+
+
       let help = "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " + c + "\n\n" + userCommands + grpcmds + owncmds + "🎁 *For detailed info :*\n" +
         prefix +
         "```help <command>```\n\n" +
@@ -97,16 +95,16 @@ module.exports = {
         "\n‼️ _ss feature will not work_" +
         "\n\n⚙️ *Bot version* : " + version;
       Infor.replytext(help);
-      
+
     }
     else {
-      if(!pluginsinfo[Infor.arg[1]]) return Infor.replytext(Infor.mess.unknowncommand)
+      if (!pluginsinfo[Infor.arg[1]]) return Infor.replytext(Infor.mess.unknowncommand)
       if (prefix == undefined || !useprefix) prefix = "🎀";
       let body = "🔖 *Description* :\n" + "```" + pluginsinfo[Infor.arg[1]].desc + "```\n\n" + "📕 *Usage* :\n" +
         prefix + "```" +
         pluginsinfo[Infor.arg[1]].usage + "```\n\n" +
         "📚 *Example* :";
-      
+
       pluginsinfo[Infor.arg[1]].eg.forEach(currentItem => {
         body += "\n```" + prefix + currentItem + "```";
       });

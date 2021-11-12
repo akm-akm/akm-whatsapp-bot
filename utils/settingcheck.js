@@ -43,7 +43,7 @@ module.exports = async function settingread(xxx, client) {
   const Infor = new InforClass();
   Infor.client = client;
   Infor.reply = xxx;
-    try {
+  try {
 
     const random = settings.prefixchoice.charAt(
       Math.floor(Math.random() * settings.prefixchoice.length))
@@ -58,7 +58,13 @@ module.exports = async function settingread(xxx, client) {
     Infor.groupAdmins = Infor.isGroup ? getGroupAdmins(Infor.groupMembers) : undefined;
     Infor.isGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(Infor.sender) || false : undefined;
     Infor.groupName = Infor.isGroup ? Infor.groupMetadata.subject : undefined;
-
+    Infor.botNumber = client.user.jid.split("@")[0];
+    Infor.isBotGroupAdmins = Infor.groupAdmins.includes(`${Infor.botNumber}@s.whatsapp.net`) || false;
+    Infor.isOwner = Infor.from == `${process.env.OWNER_NUMBER}@s.whatsapp.net`;
+    Infor.isSuperAdmin = Infor.groupMetadata.owner == Infor.from;
+  
+  
+  
     const botdata = await sql.query(
       "select * from botdata;"
     );
@@ -148,6 +154,9 @@ module.exports = async function settingread(xxx, client) {
     Infor.isQuotedVideo = type === "extendedTextMessage" && content.includes("videoMessage");
     Infor.isQuotedText = type == "extendedTextMessage" && content.includes("text") && content.includes("stanzaId");
     Infor.quotedMessage = Infor.isQuotedText ? Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage.conversation : undefined;
+    Infor.isUserTagged = type == "extendedTextMessage" && content.includes("text") && content.includes("mentionedJid");
+    Infor.taggedUser = Infor.isUserTagged ? xxx.message.extendedTextMessage.contextInfo.mentionedJid : undefined;
+    Infor.isBotModerator = Infor.botdata.moderators.includes(Infor.number)
 
     return Infor;
 
