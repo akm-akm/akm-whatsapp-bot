@@ -14,37 +14,11 @@ module.exports = {
     "group": true,
     "owner": false,
     async handle(Infor) {
-
-
-
-
-
-
-
         if (!Infor.isBotGroupAdmins) {
             Infor.replytext(Infor.mess.only.Badmin);
-
             return;
         }
-
         Infor.client.groupSettingChange(Infor.from, GroupSettingChange.messageSend, true);
-
-
-
         Infor.replytext(Infor.mess.success);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

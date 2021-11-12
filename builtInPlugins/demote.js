@@ -27,14 +27,14 @@ module.exports = {
 
 
 
-        const mentioned = Infor.reply.message.extendedTextMessage.contextInfo.mentionedJid;
+        const mentioned = Infor.taggedUser;
 
         if (!mentioned) {
             Infor.wrongCommand();
             return
         }
         const z = mentioned[0].split("@")[0];
-        if (z === `${Infor.client.user.jid}`.split("@")[0]) {
+        if (z === Infor.botNumber) {
             Infor.replytext(Infor.mess.error.error)
             return;
         }

@@ -113,20 +113,37 @@ exports.messagehandler = async (Infor) => {
     }
     console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + Infor.groupName + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
 
+
+    if (Infor.abusepresent.length != 0 && !Infor.isOwner && !Infor.isBotModerator) {
+        Infor.replytext("⚠️  ```Tu " + Infor.abusepresent.join(" ") + "```")
+        return;
+    }
+
+
+    if (Infor.isGroup && Infor.groupdata.autosticker && Infor.isMedia && Infor.arg[0] !== "sticker" && Infor.arg[0] !== "testnsfw") {
+        commandHandler.get('sticker').handle(Infor);
+
+    }
+
+
+
+
+
+
     if (commandHandler.has(Infor.arg[0])) {
 
-        if (commandHandler.get(Infor.arg[0]).owner && Infor.number !== process.env.OWNER_NUMBER) {
+        if (commandHandler.get(Infor.arg[0]).owner && Infor.isOwner) {
             Infor.replytext(Infor.mess.only.ownerB)
             return
-        } else if (commandHandler.get(Infor.arg[0]).owner && Infor.number === process.env.OWNER_NUMBER) {
+        } else if (commandHandler.get(Infor.arg[0]).owner && Infor.isOwner) {
             commandHandler.get(Infor.arg[0]).handle(Infor);
             return
         } else if (commandHandler.get(Infor.arg[0]).group && (!Infor.isGroup)) {
             Infor.replytext(Infor.mess.only.group)
             return;
-        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && !(Infor.isGroupAdmins || Infor.number === process.env.OWNER_NUMBER || Infor.botdata.moderators.includes(Infor.number))) {
+        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && !(Infor.isGroupAdmins || Infor.isOwner || Infor.isBotModerator)) {
             Infor.replytext(Infor.mess.only.admin)
-        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && (Infor.isGroupAdmins || Infor.number === process.env.OWNER_NUMBER || Infor.botdata.moderators.includes(Infor.number))) {
+        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && (Infor.isGroupAdmins || Infor.isOwner || Infor.isBotModerator)) {
             commandHandler.get(Infor.arg[0]).handle(Infor);
         } else {
             commandHandler.get(Infor.arg[0]).handle(Infor);
