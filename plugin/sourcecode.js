@@ -9,6 +9,7 @@ module.exports = {
         "sourcecode"
     ],
     "group": false,
+    "owner": false,
     async handle(Infor) {
 
         axios.get(`https://api.github.com/repos/akm-akm/xxx-whatsapp-bot`)

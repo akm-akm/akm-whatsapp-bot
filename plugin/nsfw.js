@@ -1,18 +1,6 @@
 const fs = require("fs");
 const path = require('path');
-const {
-    MessageType
-} = require("@adiwajshing/baileys");
-const {
-    text,
-
-} = MessageType;
-const {
-    ai
-} = require("../utils/deepai");
-const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
+const { ai } = require(path.join(__dirname, "../utils/deepai"));
 
 module.exports = {
     "name": "testnsfw",
@@ -22,6 +10,7 @@ module.exports = {
         "testnsfw"
     ],
     "group": false,
+    "owner": false,
     async handle(Infor) {
 
         const content = JSON.stringify(Infor.reply.message);
@@ -144,7 +133,7 @@ module.exports = {
             });
         }
         else {
-            Infor.reply(mess.tag)
+            Infor.reply(Infor.mess.tag)
         }
 
 

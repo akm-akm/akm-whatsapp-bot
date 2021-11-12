@@ -1,7 +1,6 @@
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
-const { help } = require(path.join(__dirname, "../utils/help"));
 const coins = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/coins.json"))
 );
@@ -32,18 +31,18 @@ module.exports = {
     "crypto eth"
   ],
   "group": false,
+  "owner": false,
   handle(Infor) {
     let c = 0;
     const arg = Infor.arg;
     let message;
 
     if (arg.length == 1) {
-      Infor.arg = ["help", arg[0]]
-      help(Infor, client, Infor.reply, 1);
+      Infor.wrongCommand()
       return
     }
     if (!process.env.COINMARKETCAP_API_KEY) {
-      Infor.replytext("🤖 ```COINMARKETCAP_API_KEY environment variable is not set. Contact the bot owner.```");
+      Infor.noapi()
       return;
     }
     if (!coins.includes(arg[1].toUpperCase())) {
@@ -89,3 +88,5 @@ module.exports = {
     }
   }
 }
+
+

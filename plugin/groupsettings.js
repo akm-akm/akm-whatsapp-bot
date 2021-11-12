@@ -5,15 +5,10 @@ const sql = require(path.join(__dirname, "../utils/ps"));
 const settings = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/settings.json"))
 );
-const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
+
 const {
   newgroup
 } = require(path.join(__dirname, "../utils/newgroup"));
-const {
-  help
-} = require(path.join(__dirname, "../utils/help"));
 
 const {
   GroupSettingChange,
@@ -57,14 +52,14 @@ const grp = (Infor, client) =>
     const isOwner = ownerNumber.includes(sender);
     const isSuperAdmin = `${groupMetadata.owner}`.split('@')[0] === Infor.number;
     if (!isGroup) {
-      client.sendMessage(from, mess.only.group, text, {
+      client.sendMessage(from, Infor.mess.only.group, text, {
         quoted: Infor.reply,
       });
       resolve();
       return;
     }
     if (!(isGroupAdmins || isOwner || Infor.botdata.moderators.includes(Infor.number))) {
-      client.sendMessage(from, mess.only.admin, text, {
+      client.sendMessage(from, Infor.mess.only.admin, text, {
         quoted: Infor.reply,
       });
       resolve();
@@ -133,14 +128,14 @@ const grp = (Infor, client) =>
         }
         if (arg[1] == "off") {
           sql.query(`UPDATE groupdata SET autosticker = false WHERE groupid = '${from}'`);
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
           return;
         } else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET autosticker = true WHERE groupid = '${from}'`);
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -162,14 +157,14 @@ const grp = (Infor, client) =>
         }
         if (arg[1] == "off") {
           sql.query(`UPDATE groupdata SET nsfw = false WHERE groupid = '${from}'`);
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
           return;
         } else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET nsfw = true WHERE groupid = '${from}'`);
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -218,14 +213,14 @@ const grp = (Infor, client) =>
         }
         if (arg[1] == "off") {
           sql.query(`UPDATE groupdata SET membercanusebot= false WHERE groupid = '${from}'`);
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
           return;
         } else if (arg[1] == "on") {
           sql.query(`UPDATE groupdata SET membercanusebot= true WHERE groupid = '${from}'`);
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -263,7 +258,7 @@ const grp = (Infor, client) =>
 
       case "promote":
         if (!isBotGroupAdmins) {
-          client.sendMessage(from, mess.only.Badmin, text, {
+          client.sendMessage(from, Infor.mess.only.Badmin, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -279,14 +274,14 @@ const grp = (Infor, client) =>
         mentioned = Infor.reply.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
         if (z === `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from, mess.error.error, text, {
+          client.sendMessage(from, Infor.mess.error.error, text, {
             quoted: Infor.reply,
           });
           resolve()
           return;
         }
         client.groupMakeAdmin(from, mentioned);
-        client.sendMessage(from, mess.success, text, {
+        client.sendMessage(from, Infor.mess.success, text, {
           quoted: Infor.reply,
         });
         resolve();
@@ -294,7 +289,7 @@ const grp = (Infor, client) =>
 
       case "demote":
         if (!isBotGroupAdmins) {
-          client.sendMessage(from, mess.only.Badmin, text, {
+          client.sendMessage(from, Infor.mess.only.Badmin, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -310,28 +305,28 @@ const grp = (Infor, client) =>
         mentioned = Infor.reply.message.extendedTextMessage.contextInfo.mentionedJid;
         z = mentioned[0].split("@")[0];
         if (z === `${client.user.jid}`.split("@")[0]) {
-          client.sendMessage(from, mess.error.error, text, {
+          client.sendMessage(from, Infor.mess.error.error, text, {
             quoted: Infor.reply,
           });
           resolve()
           return;
         }
         if (z === isSuperAdmin) {
-          client.sendMessage(from, mess.error.error, text, {
+          client.sendMessage(from, Infor.mess.error.error, text, {
             quoted: Infor.reply,
           })
           resolve();
           return
         }
         if (z === `${client.user.jid}`.split("@")) {
-          client.sendMessage(from, mess.error.error, text, {
+          client.sendMessage(from, Infor.mess.error.error, text, {
             quoted: Infor.reply,
           })
           resolve();
           return
         }
         client.groupDemoteAdmin(from, mentioned);
-        client.sendMessage(from, mess.success, text, {
+        client.sendMessage(from, Infor.mess.success, text, {
           quoted: Infor.reply,
         });
         resolve();
@@ -343,7 +338,7 @@ const grp = (Infor, client) =>
 
 
           if (!isBotGroupAdmins) {
-            client.sendMessage(from, mess.only.Badmin, text, {
+            client.sendMessage(from, Infor.mess.only.Badmin, text, {
               quoted: Infor.reply,
             });
             resolve();
@@ -359,14 +354,14 @@ const grp = (Infor, client) =>
           const z = mentioned[0].split("@")[0];
 
           if (z === isSuperAdmin) {
-            client.sendMessage(from, mess.error.error, text, {
+            client.sendMessage(from, Infor.mess.error.error, text, {
               quoted: Infor.reply,
             })
             resolve();
             return
           }
           if (z === `${client.user.jid}`.split("@")[0]) {
-            client.sendMessage(from, mess.success, text, {
+            client.sendMessage(from, Infor.mess.success, text, {
               quoted: Infor.reply,
             })
             resolve();
@@ -374,7 +369,7 @@ const grp = (Infor, client) =>
           }
           await client.groupRemove(from, mentioned);
 
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -388,7 +383,7 @@ const grp = (Infor, client) =>
 
       case "grouplink":
         if (!isBotGroupAdmins) {
-          client.sendMessage(from, mess.only.Badmin, text, {
+          client.sendMessage(from, Infor.mess.only.Badmin, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -403,7 +398,7 @@ const grp = (Infor, client) =>
 
       case "changedp":
         if (!isBotGroupAdmins) {
-          client.sendMessage(from, mess.only.Badmin, text, {
+          client.sendMessage(from, Infor.mess.only.Badmin, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -413,7 +408,7 @@ const grp = (Infor, client) =>
         const isQuotedImage =
           type === "extendedTextMessage" && content.includes("imageMessage");
         if (!(isMedia || isQuotedImage))
-          client.sendMessage(from, mess.tag, text, {
+          client.sendMessage(from, Infor.mess.tag, text, {
             quoted: Infor.reply,
           });
         resolve();
@@ -423,7 +418,7 @@ const grp = (Infor, client) =>
           Infor.reply;
         const media = await client.downloadAndSaveMediaMessage(encmedia);
         await client.updateProfilePicture(from, media);
-        client.sendMessage(from, mess.success, text, {
+        client.sendMessage(from, Infor.mess.success, text, {
           quoted: Infor.reply,
         });
         resolve();
@@ -438,14 +433,14 @@ const grp = (Infor, client) =>
 
       case "close":
         if (!isBotGroupAdmins) {
-          client.sendMessage(from, mess.only.Badmin, text, {
+          client.sendMessage(from, Infor.mess.only.Badmin, text, {
             quoted: Infor.reply,
           });
           resolve();
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, true);
-        client.sendMessage(from, mess.success, text, {
+        client.sendMessage(from, Infor.mess.success, text, {
           quoted: Infor.reply,
         });
         resolve();
@@ -453,14 +448,14 @@ const grp = (Infor, client) =>
 
       case "open":
         if (!isBotGroupAdmins) {
-          client.sendMessage(from, mess.only.Badmin, text, {
+          client.sendMessage(from, Infor.mess.only.Badmin, text, {
             quoted: Infor.reply,
           });
           resolve();
           return;
         }
         client.groupSettingChange(from, GroupSettingChange.messageSend, false);
-        client.sendMessage(from, mess.success, text, {
+        client.sendMessage(from, Infor.mess.success, text, {
           quoted: Infor.reply,
         });
         resolve();
@@ -475,7 +470,7 @@ const grp = (Infor, client) =>
         }
 
         if (!isBotGroupAdmins) {
-          client.sendMessage(from, mess.only.Badmin, text, {
+          client.sendMessage(from, Infor.mess.only.Badmin, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -487,7 +482,7 @@ const grp = (Infor, client) =>
           }
           client.groupAdd(from, arg);
         } catch (e) {
-          client.sendMessage(from, mess.error.error, text, {
+          client.sendMessage(from, Infor.mess.error.error, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -498,14 +493,14 @@ const grp = (Infor, client) =>
       This feature bans the bot instantly!
             case "removeall":
               if (!isSuperAdmin) {
-                client.sendMessage(from, mess.only.ownerG, text, {
+                client.sendMessage(from, Infor.mess.only.ownerG, text, {
                   quoted: Infor.reply,
                 });
                 resolve();
                 return;
               }
               if (!isBotGroupAdmins) {
-                client.sendMessage(from, mess.only.Badmin, text, {
+                client.sendMessage(from, Infor.mess.only.Badmin, text, {
                   quoted: Infor.reply,
                 });
                 resolve();
@@ -558,7 +553,7 @@ const grp = (Infor, client) =>
           sql.query(
             `UPDATE groupdata SET allowabuse = 'true' WHERE groupid = '${from}';`
           );
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -567,7 +562,7 @@ const grp = (Infor, client) =>
           sql.query(
             `UPDATE groupdata SET allowabuse = 'false' WHERE groupid = '${from}';`
           );
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -605,14 +600,14 @@ const grp = (Infor, client) =>
             return;
           }
           if (Infor.botdata.moderators.includes(z) || z == process.env.OWNER_NUMBER) {
-            client.sendMessage(from, mess.error.error, text, {
+            client.sendMessage(from, Infor.mess.error.error, text, {
               quoted: Infor.reply,
             });
             resolve()
             return;
           }
           if (z == Infor.number) {
-            client.sendMessage(from, mess.error.error, text, {
+            client.sendMessage(from, Infor.mess.error.error, text, {
               quoted: Infor.reply,
             });
             resolve()
@@ -625,7 +620,7 @@ const grp = (Infor, client) =>
             `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
           );
 
-          client.sendMessage(from, mess.success, text, {
+          client.sendMessage(from, Infor.mess.success, text, {
             quoted: Infor.reply,
           });
           resolve();
@@ -651,7 +646,7 @@ const grp = (Infor, client) =>
         sql.query(
           `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
         );
-        client.sendMessage(from, mess.success, text, {
+        client.sendMessage(from, Infor.mess.success, text, {
           quoted: Infor.reply,
         });
         resolve();

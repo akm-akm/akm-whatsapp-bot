@@ -1,26 +1,34 @@
 const path = require("path");
 const fs = require('fs');
 const { count } = require(path.join(__dirname, "./count"));
-const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
+
 const chalk = require('chalk');
 const sql = require(path.join(__dirname, "./ps"));
+
 const commandHandler = new Map();
-const plugins = fs.readdirSync(path.join(__dirname, '../plugin')).filter((file) => file.endsWith('.js'))
+const plugins = fs.readdirSync(path.join(__dirname, '../plugin'))
 for (let file of plugins) {
-    try {
-        const command = require(path.join(__dirname, '../plugin/', `${file}`));
+    const command = require(path.join(__dirname, '../plugin/', `${file}`));
+    if (command.name && command.usage && command.desc && typeof command.handle === "function" && command.eg && typeof command.group === "boolean" && typeof command.owner === "boolean") {
         commandHandler.set(command.name, command);
-    } catch (error) {
+    } 
+}
+const builtInPlugins = fs.readdirSync(path.join(__dirname, '../builtInPlugins'))
+for (let file of builtInPlugins) {
+    const command = require(path.join(__dirname, '../builtInPlugins/', `${file}`));
+    if (command.name && command.usage && command.desc && typeof command.handle === "function" && command.eg && typeof command.group === "boolean" && typeof command.owner === "boolean") {
+        commandHandler.set(command.name, command);
+    } else {
         console.log(
             chalk.blueBright.bold("Could not import plugin  "),
             chalk.redBright.bold(`${file}`)
         )
-        console.log(`[ERROR] `, error);
         continue;
     }
+
 }
+
+
 
 exports.messagehandler = async (Infor) => {
 
@@ -63,7 +71,7 @@ exports.messagehandler = async (Infor) => {
     */
     if (Infor.arg[0] === "limit") {
         const x =
-            mess.limit + Infor.noofmsgtoday + " / *" + Infor.botdata.dailylimit + "*";
+            Infor.mess.limit + Infor.noofmsgtoday + " / *" + Infor.botdata.dailylimit + "*";
         Infor.replytext(x)
         return;
     }
@@ -84,10 +92,7 @@ exports.messagehandler = async (Infor) => {
         Infor.dailylimitover === false
     ) {
         sql.query(`UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${Infor.number}';`)
-        client.sendMessage(Infor.sender, mess.userlimit, text, {
-            quoted: xxx5,
-        });
-        return
+        Infor.replytext(Infor.mess.userlimit)
     }
 
 
@@ -102,12 +107,33 @@ exports.messagehandler = async (Infor) => {
 
 
     if (Infor.isGroup && Infor.groupdata.totalmsgtoday >= Infor.botdata.dailygrouplimit) {
-        client.sendMessage(Infor.from, mess.grouplimit, text);
+        Infor.client.sendMessage(Infor.from, Infor.mess.grouplimit, text);
         count(Infor)
         return
     }
     console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + Infor.groupName + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
 
-    commandHandler.has(Infor.arg[0]) ? commandHandler.get(Infor.arg[0]).handle(Infor) : "";
+    if (commandHandler.has(Infor.arg[0])) {
+
+        if (commandHandler.get(Infor.arg[0]).owner && Infor.number !== process.env.OWNER_NUMBER) {
+            Infor.replytext(Infor.mess.only.ownerB)
+            return
+        } else if (commandHandler.get(Infor.arg[0]).owner && Infor.number === process.env.OWNER_NUMBER) {
+            commandHandler.get(Infor.arg[0]).handle(Infor);
+            return
+        } else if (commandHandler.get(Infor.arg[0]).group && (!Infor.isGroup)) {
+            Infor.replytext(Infor.mess.only.group)
+            return;
+        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && !(Infor.isGroupAdmins || Infor.number === process.env.OWNER_NUMBER || Infor.botdata.moderators.includes(Infor.number))) {
+            Infor.replytext(Infor.mess.only.admin)
+        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && (Infor.isGroupAdmins || Infor.number === process.env.OWNER_NUMBER || Infor.botdata.moderators.includes(Infor.number))) {
+            commandHandler.get(Infor.arg[0]).handle(Infor);
+        } else {
+            commandHandler.get(Infor.arg[0]).handle(Infor);
+            return;
+        }
+    } else if ((Infor.isGroup && Infor.groupdata.useprefix) || !Infor.isGroup) {
+        Infor.replytext(Infor.mess.unknowncommand)
+    }
 
 }

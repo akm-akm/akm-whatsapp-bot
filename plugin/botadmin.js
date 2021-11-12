@@ -1,9 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
-const { help } = require(path.join(__dirname, "../utils/help"));
 
 const {
     MessageType
@@ -16,7 +12,7 @@ const owner = (Infor, client) => new Promise(async (resolve, reject) => {
     const from = Infor.from;
     const arg = Infor.arg;
     if (Infor.number !== process.env.OWNER_NUMBER) {
-        client.sendMessage(from, mess.only.ownerB, text, {
+        client.sendMessage(from, Infor.mess.only.ownerB, text, {
             quoted: Infor.reply,
         });
         resolve()
@@ -76,7 +72,7 @@ const owner = (Infor, client) => new Promise(async (resolve, reject) => {
                 client.sendMessage(from, JSON.stringify(result.rows, null, "\t"), text, {
                     quoted: Infor.reply,
                 }).catch(err => {
-                    client.sendMessage(from, mess.error.error, text, {
+                    client.sendMessage(from, Infor.mess.error.error, text, {
                         quoted: Infor.reply,
                         detectLinks: false
                     });
@@ -93,7 +89,7 @@ const owner = (Infor, client) => new Promise(async (resolve, reject) => {
             sql.query('UPDATE groupdata SET totalmsgtoday=0;')
             sql.query('UPDATE botdata SET totalmsgtoday=0;')
             sql.query('UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;')
-            client.sendMessage(from, mess.success, text, {
+            client.sendMessage(from, Infor.mess.success, text, {
                 quoted: Infor.reply,
             });
             resolve();
@@ -119,10 +115,10 @@ const owner = (Infor, client) => new Promise(async (resolve, reject) => {
                 return;
             }
             sql.query(`update botdata set dailylimit = '${arg[1]}'`).then(result => {
-                client.sendMessage(from, mess.success, text, {
+                client.sendMessage(from, Infor.mess.success, text, {
                     quoted: Infor.reply,
                 }).catch(err => {
-                    client.sendMessage(from, mess.error.error, text, {
+                    client.sendMessage(from, Infor.mess.error.error, text, {
                         quoted: Infor.reply,
                     });
                 })
@@ -151,10 +147,10 @@ const owner = (Infor, client) => new Promise(async (resolve, reject) => {
                 return;
             }
             sql.query(`update botdata set mingroupsize = '${arg[1]}'`).then(result => {
-                client.sendMessage(from, mess.success, text, {
+                client.sendMessage(from, Infor.mess.success, text, {
                     quoted: Infor.reply,
                 }).catch(err => {
-                    client.sendMessage(from, mess.error.error, text, {
+                    client.sendMessage(from, Infor.mess.error.error, text, {
                         quoted: Infor.reply,
                     });
                 })
@@ -183,10 +179,10 @@ const owner = (Infor, client) => new Promise(async (resolve, reject) => {
                 return;
             }
             sql.query(`update botdata set dailygrouplimit = '${arg[1]}'`).then(result => {
-                client.sendMessage(from, mess.success, text, {
+                client.sendMessage(from, Infor.mess.success, text, {
                     quoted: Infor.reply,
                 }).catch(err => {
-                    client.sendMessage(from, mess.error.error, text, {
+                    client.sendMessage(from, Infor.mess.error.error, text, {
                         quoted: Infor.reply,
                     });
                 });
@@ -211,10 +207,10 @@ const owner = (Infor, client) => new Promise(async (resolve, reject) => {
             sql.query(
                 `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}');`
             ).then(result => {
-                client.sendMessage(from, mess.success, text, {
+                client.sendMessage(from, Infor.mess.success, text, {
                     quoted: Infor.reply,
                 }).catch(err => {
-                    client.sendMessage(from, mess.error.error, text, {
+                    client.sendMessage(from, Infor.mess.error.error, text, {
                         quoted: Infor.reply,
                     });
                 });
@@ -232,10 +228,10 @@ const owner = (Infor, client) => new Promise(async (resolve, reject) => {
             sql.query(
                 `UPDATE botdata SET moderators = array_remove(moderators, '${za}');`
             ).then(result => {
-                client.sendMessage(from, mess.success, text, {
+                client.sendMessage(from, Infor.mess.success, text, {
                     quoted: Infor.reply,
                 }).catch(err => {
-                    client.sendMessage(from, mess.error.error, text, {
+                    client.sendMessage(from, Infor.mess.error.error, text, {
                         quoted: Infor.reply,
                     });
                 });

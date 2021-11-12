@@ -3,10 +3,7 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
-const path = require('path');
-const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
+
 const { MessageType } = require("@adiwajshing/baileys");
 const { sticker } = MessageType;
 const {
@@ -25,6 +22,7 @@ module.exports = {
     "sticker crop pack cheems"
   ],
   "group": false,
+  "owner": false,
   async handle(Infor) {
 
     const arg = Infor.arg;
@@ -303,7 +301,7 @@ module.exports = {
       }
     }
     else {
-      Infor.replytext(mess.tag);
+      Infor.replytext(Infor.mess.tag);
     }
   }
 }

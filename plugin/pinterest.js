@@ -10,7 +10,6 @@ const path = require("path");
 const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
-const { help } = require(path.join(__dirname, "../utils/help"));
 
 
 module.exports = {
@@ -22,12 +21,12 @@ module.exports = {
     "pint https://pin.it/dd4f"
   ],
   "group": false,
+  "owner": false,
   handle(Infor) {
     const arg = Infor.arg;
     const from = Infor.from;
     if (arg.length == 1) {
-      Infor.arg = ["help", arg[0]]
-      help(Infor, client, Infor.reply, 1);
+      Infor.wrongCommand()
       return;
     }
     if (!process.env.KEEPSAVEIT_API) {
@@ -49,7 +48,7 @@ module.exports = {
           file.on("finish", function () {
             file.close(async () => {
               console.log("filesaved");
-              title.startsWith("<div") ? Infor.replytext(mess.error.error) : await Infor.client.sendMessage(from, fs.readFileSync(ran), video, {
+              title.startsWith("<div") ? Infor.replytext(Infor.mess.error.error) : await Infor.client.sendMessage(from, fs.readFileSync(ran), video, {
                 quoted: Infor.reply,
                 caption: "```" + title + "```"
               });
@@ -59,7 +58,7 @@ module.exports = {
         });
       })
       .catch((err) => {
-        Infor.replytext(mess.error.error)
+        Infor.replytext(Infor.mess.error.error)
         fs.unlinkSync(ran)
       });
   }

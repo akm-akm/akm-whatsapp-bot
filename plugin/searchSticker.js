@@ -4,11 +4,9 @@ const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
 const { MessageType } = require("@adiwajshing/baileys");
-const { text, sticker } = MessageType;
+const { sticker } = MessageType;
 const axios = require("axios").default;
-const path = require("path");
 
-const { help } = require(path.join(__dirname, "../utils/help"));
 
 
 module.exports = {
@@ -21,6 +19,7 @@ module.exports = {
         "ss crop Emma Watson"
     ],
     "group": false,
+    "owner": false,
     async handle(Infor) {
         const arg = Infor.arg;
         const from = Infor.from;
@@ -63,8 +62,7 @@ module.exports = {
         }
         const searchthis = arg.slice(1).filter(z => z !== 'crop').join(' ');
         if (searchthis.length == 0) {
-            Infor.arg = ["help", arg[0]]
-            help(Infor, client, Infor.reply, 1);
+            Infor.wrongCommand()
             return;
         }
 

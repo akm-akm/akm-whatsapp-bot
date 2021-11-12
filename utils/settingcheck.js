@@ -12,7 +12,7 @@ const {
 const InforClass = require('./Infor');
 
 
-let data3 = JSON.parse(
+let data1, data3 = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/data3.json")));
 const urlregex =
   /^(?:(?:https?|http|www):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
@@ -30,16 +30,20 @@ Array.prototype.detecta = function () {
   })
   return returnarray;
 }
-
+const getGroupAdmins = (participants) => {
+  admins = [];
+  for (let i of participants) {
+    i.isAdmin ? admins.push(i.jid) : "";
+  }
+  return admins;
+};
 
 module.exports = async function settingread(xxx, client) {
 
   const Infor = new InforClass();
   Infor.client = client;
   Infor.reply = xxx;
-
-
-  try {
+    try {
 
     const random = settings.prefixchoice.charAt(
       Math.floor(Math.random() * settings.prefixchoice.length))
@@ -61,7 +65,7 @@ module.exports = async function settingread(xxx, client) {
 
     if (Infor.isGroup) {
 
-      const data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
+      data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
       if (data1.rows.length == 0) {
 
         const groupMetadata = await client.groupMetadata(from);
@@ -142,12 +146,13 @@ module.exports = async function settingread(xxx, client) {
     Infor.stanzaId = stanzaId;
     Infor.isQuotedImage = type === "extendedTextMessage" && content.includes("imageMessage");
     Infor.isQuotedVideo = type === "extendedTextMessage" && content.includes("videoMessage");
-    Infor.isQuotedText = type === "extendedTextMessage" && content.includes("extendedTextMessage");
+    Infor.isQuotedText = type == "extendedTextMessage" && content.includes("text") && content.includes("stanzaId");
     Infor.quotedMessage = Infor.isQuotedText ? Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage.conversation : undefined;
 
     return Infor;
 
   } catch (error) {
-    Infor.errorlog(error);
+    console.log(error);
+    // Infor.errorlog(error);
   }
 };

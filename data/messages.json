@@ -12,6 +12,7 @@
     "grouplimit":  "🎫 ```Daily group credits exhausetd.```",
     "userlimit" :  "💳 ```Daily credits exhausetd.```",
     "limit"     :  "💳 ```Daily credit used: ```",
+    "unknowncommand":"🤖 ```Unknown command```",
   
     "error": {
         "invalid": "🌐 ```Invalid link```",

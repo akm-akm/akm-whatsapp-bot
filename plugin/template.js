@@ -9,6 +9,7 @@ module.exports = {
         "template eth"
     ],
     "group": false,
+    "owner": false,
     async handle(Infor) {
 
         const arg = Infor.arg;

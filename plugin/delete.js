@@ -1,10 +1,3 @@
-const path = require("path");
-const fs = require('fs');
-
-const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
-
 module.exports = {
     "name": "delete",
     "usage": "delete",
@@ -13,10 +6,11 @@ module.exports = {
         "delete"
     ],
     "group": false,
+    "owner": false,
     async handle(Infor) {
 
         if (!Infor.stanzaId) {
-            Infor.replytext(mess.tagtext);
+            Infor.wrongCommand()
             return
         }
         try {
@@ -26,7 +20,7 @@ module.exports = {
                 fromMe: true
             })
         } catch (error) {
-            Infor.replytext(mess.error.error);
+            Infor.replytext(Infor.mess.error.error);
 
         }
 

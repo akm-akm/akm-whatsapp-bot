@@ -8,7 +8,6 @@ const {
 const {
   text
 } = MessageType;
-const { help } = require(path.join(__dirname, "../utils/help"));
 
 function stripTags(string) {
   return string.replace(/<(.|\n)*?>/g, "").trim();
@@ -53,6 +52,7 @@ module.exports = {
     "market gainers"
   ],
   "group": false,
+  "owner": false,
   handle(Infor) {
     new Promise((resolve, reject) => {
       const arg = Infor.arg
@@ -61,7 +61,7 @@ module.exports = {
       if (arg.length == 1) {
         Infor.arg = ["help", arg[0]]
         help(Infor, client, Infor.reply, 1);
-        resolve()
+
         return
       }
       switch (arg[1]) {
@@ -73,8 +73,8 @@ module.exports = {
             )
             .then((response) => {
               if (response.error) {
-                Infor.replytext(mess.error.error)
-                resolve();
+                Infor.replytext(Infor.mess.error.error)
+                  ;
 
               } else {
                 let msg =
@@ -82,7 +82,7 @@ module.exports = {
                 Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
-                resolve();
+                ;
 
               }
             })
@@ -131,7 +131,7 @@ module.exports = {
                 Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
-                resolve();
+                ;
               }
             })
             .catch((err) => {
@@ -178,7 +178,7 @@ module.exports = {
                 Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
-                resolve();
+                ;
               }
             })
             .catch((err) => {
@@ -225,7 +225,7 @@ module.exports = {
                 Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
-                resolve();
+                ;
               }
             })
             .catch((err) => {
@@ -241,7 +241,7 @@ module.exports = {
             Infor.replytext(from, "```Enter stocks name to search.```", text, {
               quoted: Infor.reply,
             });
-            resolve();
+            ;
             return
           }
           if (arg.length > 3) {
@@ -284,7 +284,7 @@ module.exports = {
                 Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
-                resolve();
+                ;
               }
             })
             .catch((err) => {
@@ -299,7 +299,7 @@ module.exports = {
             Infor.replytext(from, "```Enter stock symbol to get details.```", text, {
               quoted: Infor.reply,
             });
-            resolve();
+            ;
             return
           }
           if (arg.length > 3) {
@@ -394,7 +394,7 @@ module.exports = {
                 Infor.replytext(from, msg, text, {
                   quoted: Infor.reply,
                 });
-                resolve();
+                ;
               }
             })
             .catch((err) => {
@@ -406,7 +406,7 @@ module.exports = {
         default:
           Infor.arg = ["help", arg[0]]
           help(Infor, client, Infor.reply);
-          resolve();
+          ;
       }
 
 

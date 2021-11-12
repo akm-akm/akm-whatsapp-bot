@@ -1,7 +1,4 @@
 const path = require("path");
-const fs = require("fs");
-const { MessageType } = require("@adiwajshing/baileys");
-const { sticker } = MessageType;
 
 module.exports = {
     "name": "rashmika",
@@ -11,6 +8,7 @@ module.exports = {
         "rashmika"
     ],
     "group": false,
+    "owner": false,
     handle(Infor) {
         const random = Math.floor(Math.random() * 304 + 1);
         const ran = path.join(__dirname, "../assets/stickers/rashmika/rashmika (") + random + ").webp";

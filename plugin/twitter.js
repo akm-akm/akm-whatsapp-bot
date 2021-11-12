@@ -1,9 +1,3 @@
-const path = require("path");
-const fs = require("fs");
-
-const mess = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
 const twitter = require("twitter");
 const twit = new twitter({
     consumer_key: process.env.apiKey,
@@ -21,6 +15,7 @@ module.exports = {
         "tweet"
     ],
     "group": false,
+    "owner": false,
     async handle(Infor) {
         new Promise(async (resolve, reject) => {
             let msg = "⚽ *Name* : ```Fabrizio Romano```\n\n"

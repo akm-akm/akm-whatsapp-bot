@@ -1,9 +1,13 @@
 const { Mimetype, MessageType } = require("@adiwajshing/baileys");
 const fs = require('fs');
 const chalk = require('chalk');
-
+const path = require('path');
+const mess = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "../data/messages.json"))
+);
+const pluginsinfo = require(path.join(__dirname, './pluginInfo'));
 module.exports = class InforClass {
-    constructor(isGroup, from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia, reply, client, isQuotedImage, isQuotedVideo, isQuotedText, quotedMessage, groupMetadata, groupMembers, groupAdmins, isGroupAdmins, groupName ) {
+    constructor(isGroup, from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia, reply, client, isQuotedImage, isQuotedVideo, isQuotedText, quotedMessage, groupMetadata, groupMembers, groupAdmins, isGroupAdmins, groupName) {
         this.client = client;
         this.from = from;
         this.arg = arg;
@@ -31,6 +35,8 @@ module.exports = class InforClass {
 
 
     }
+    mess = mess;
+
 
     noapi() {
         this.client.sendMessage(this.from, "🔑  ```API key not set```", MessageType.text, {
@@ -84,9 +90,20 @@ module.exports = class InforClass {
     }
 
 
+    wrongCommand() {
+        var prefix = this.groupdata.prefix;
+        if (this.groupdata.prefix == undefined || !this.groupdata.useprefix)  prefix = "🎀";
 
+        var body = "❎ *Error* :\n```syntax error in the given command.```\n\n" + "🔖 *Description* :\n" + "```" + pluginsinfo[this.arg[0]].desc + "```\n\n" + "📕 *Usage* :\n" +
+            prefix + "```" +
+            pluginsinfo[this.arg[0]].usage + "```\n\n" +
+            "📚 *Example* :";
+        pluginsinfo[this.arg[0]].eg.forEach(currentItem => {
+            body += "\n```" + prefix + currentItem + "```";
+        });
+        this.replytext(body)
 
-    help() {
-        
     }
+
+  
 }

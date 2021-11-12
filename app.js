@@ -3,7 +3,6 @@ const server = new express();
 const port = process.env.PORT || 7554;
 const path = require("path");
 const node = require('node-cron');
-console.log(typeof process.env.COINMARKETCAP_API_KEY);
 setTimeout(() => {
   require(path.join(__dirname, "./utils/config"));
   sql = require(path.join(__dirname, "./utils/ps"));

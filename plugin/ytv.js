@@ -4,11 +4,6 @@ const axios = require('axios');
 const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}${ext}`;
 };
-const path = require("path");
-const { help } = require(path.join(__dirname, "../utils/help"));
-const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
 
 
 module.exports = {
@@ -19,7 +14,8 @@ module.exports = {
     "ytv youtu.be/JJWE3-Q6s", "ytv youtu.be/Tjdu4-yhd"
   ],
   "group": false,
-  
+  "owner": false,
+
 
   async handle(Infor) {
     const arg = Infor.arg;
@@ -30,8 +26,7 @@ module.exports = {
     try {
 
       if (arg.length == 1) {
-        Infor.arg = ["help", arg[0]]
-        help(Infor, client, Infor.reply, 1);
+        Infor.wrongCommand()
         return;
       }
       if (ytdl.validateURL(url)) {
@@ -77,7 +72,7 @@ module.exports = {
 
 
       } else {
-        Infor.replytext(mess.error.invalid);
+        Infor.replytext(Infor.mess.error.invalid);
       }
     } catch (err) {
       Infor.errorlog(err)
