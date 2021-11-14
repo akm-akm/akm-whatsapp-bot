@@ -59,10 +59,9 @@ module.exports = async function settingread(xxx, client) {
     Infor.groupName = Infor.isGroup ? Infor.groupMetadata.subject : undefined;
     Infor.botNumber = client.user.jid.split("@")[0];
     Infor.isBotGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(`${Infor.botNumber}@s.whatsapp.net`) || false : undefined;
-    Infor.isOwner =Infor.isGroup?
-      Infor.sender === `${process.env.OWNER_NUMBER}@s.whatsapp.net` : Infor.from === `${process.env.OWNER_NUMBER}@s.whatsapp.net` ;
+    Infor.isOwner = Infor.isGroup ?
+      Infor.sender.split("@")[0] === process.env.OWNER_NUMBER : Infor.from.split("@")[0] === process.env.OWNER_NUMBER;
     Infor.isSuperAdmin = Infor.isGroup ? Infor.groupMetadata.owner == Infor.from : undefined;
-
 
 
     const botdata = await sql.query(
@@ -155,7 +154,7 @@ module.exports = async function settingread(xxx, client) {
     Infor.isUserTagged = type == "extendedTextMessage" && content.includes("text") && content.includes("mentionedJid");
     Infor.taggedUser = Infor.isUserTagged ? xxx.message.extendedTextMessage.contextInfo.mentionedJid : undefined;
     Infor.isBotModerator = Infor.botdata.moderators.includes(Infor.number) || Infor.isOwner;
-    Infor.isGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(Infor.sender) || Infor.isBotModerator|| false : undefined;
+    Infor.isGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(Infor.sender) || Infor.isBotModerator || false : undefined;
 
     return Infor;
 

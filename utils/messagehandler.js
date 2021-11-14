@@ -134,7 +134,7 @@ exports.messagehandler = async (Infor) => {
 
     if (commandHandler.has(Infor.arg[0])) {
 
-        if (commandHandler.get(Infor.arg[0]).owner && Infor.isOwner) {
+        if (commandHandler.get(Infor.arg[0]).owner && !Infor.isOwner) {
             Infor.replytext(Infor.mess.only.ownerB);
             count(Infor);
             return
