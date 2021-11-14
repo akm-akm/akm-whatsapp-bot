@@ -62,9 +62,9 @@ module.exports = async function settingread(xxx, client) {
     Infor.isBotGroupAdmins = Infor.groupAdmins.includes(`${Infor.botNumber}@s.whatsapp.net`) || false;
     Infor.isOwner = Infor.from == `${process.env.OWNER_NUMBER}@s.whatsapp.net`;
     Infor.isSuperAdmin = Infor.groupMetadata.owner == Infor.from;
-  
-  
-  
+
+
+
     const botdata = await sql.query(
       "select * from botdata;"
     );
@@ -153,6 +153,7 @@ module.exports = async function settingread(xxx, client) {
     Infor.isQuotedImage = type === "extendedTextMessage" && content.includes("imageMessage");
     Infor.isQuotedVideo = type === "extendedTextMessage" && content.includes("videoMessage");
     Infor.isQuotedText = type == "extendedTextMessage" && content.includes("text") && content.includes("stanzaId");
+    Infor.isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
     Infor.quotedMessage = Infor.isQuotedText ? Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage.conversation : undefined;
     Infor.isUserTagged = type == "extendedTextMessage" && content.includes("text") && content.includes("mentionedJid");
     Infor.taggedUser = Infor.isUserTagged ? xxx.message.extendedTextMessage.contextInfo.mentionedJid : undefined;

@@ -24,7 +24,10 @@ module.exports = {
     handle(Infor) {
         const arg = Infor.arg;
 
-
+        if (arg.length === 1) {
+            Infor.wrongCommand()
+            return
+        }
         if (!Infor.isQuotedText) {
             Infor.wrongCommand()
 
@@ -33,10 +36,7 @@ module.exports = {
             Infor.noapi()
             return;
         }
-        if (arg.length === 1) {
-            Infor.wrongCommand()
-            return
-        } if (!languagecode.includes(arg[1])) {
+       if (!languagecode.includes(arg[1])) {
             Infor.wrongCommand()
             return
         }

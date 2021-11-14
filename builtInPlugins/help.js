@@ -92,7 +92,7 @@ module.exports = {
 
         "\n📃 *Bot News* :" +
         "\n‼️ _Few admin commands are down_" +
-        "\n‼️ _ss feature will not work_" +
+      
         "\n\n⚙️ *Bot version* : " + version;
       Infor.replytext(help);
 

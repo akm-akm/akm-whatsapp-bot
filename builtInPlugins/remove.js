@@ -1,6 +1,6 @@
 module.exports = {
     "name": 'remove',
-    "usage": "remove <tag-member>",
+    "usage": "remove <@user>",
     "desc": "Removes the tagged member from the group.",
     "eg": [
         "remove @ankit",

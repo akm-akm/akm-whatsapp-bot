@@ -32,7 +32,7 @@ module.exports = {
             return `${Math.floor(Math.random() * 10000)}${ext}`;
         };
 
-        const authorName = "BOT";
+        const authorName = "xxx whatsapp bot";
         outputOptions = [
             `-vcodec`,
             `libwebp`,
@@ -130,7 +130,6 @@ module.exports = {
         }
         ).catch(e => {
             Infor.errorlog(e)
-
         });
 
     }

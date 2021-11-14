@@ -7,7 +7,7 @@ const mess = JSON.parse(
 );
 const pluginsinfo = require(path.join(__dirname, './pluginInfo'));
 module.exports = class InforClass {
-    constructor(botNumber, isBotGroupAdmins, isGroup, from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia, reply, client, isQuotedImage, isQuotedVideo, isQuotedText, quotedMessage, groupMetadata, groupMembers, groupAdmins, isGroupAdmins, groupName, isOwner, isSuperAdmin, isBotModerator, taggedUser,isUserTagged) {
+    constructor(isQuotedSticker, botNumber, isBotGroupAdmins, isGroup, from, arg, number, noofmsgtoday, totalmsg, dailylimitover, abusepresent, groupdata, botdata, sender, stanzaId, isMedia, reply, client, isQuotedImage, isQuotedVideo, isQuotedText, quotedMessage, groupMetadata, groupMembers, groupAdmins, isGroupAdmins, groupName, isOwner, isSuperAdmin, isBotModerator, taggedUser, isUserTagged) {
         this.client = client;
         this.from = from;
         this.arg = arg;
@@ -39,6 +39,7 @@ module.exports = class InforClass {
         this.isBotModerator = isBotModerator;
         this.isUserTagged = isUserTagged;
         this.taggedUser = taggedUser;
+        this.isQuotedSticker = isQuotedSticker;
 
     }
     mess = mess;

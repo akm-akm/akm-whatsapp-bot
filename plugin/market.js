@@ -1,14 +1,6 @@
 const axios = require("axios");
-const path = require("path");
 
 let msg = '';
-const {
-  MessageType
-} = require("@adiwajshing/baileys");
-const {
-  text
-} = MessageType;
-
 function stripTags(string) {
   return string.replace(/<(.|\n)*?>/g, "").trim();
 }
@@ -54,362 +46,332 @@ module.exports = {
   "group": false,
   "owner": false,
   handle(Infor) {
-    new Promise((resolve, reject) => {
-      const arg = Infor.arg
-      const from = Infor.from;
 
-      if (arg.length == 1) {
-        Infor.arg = ["help", arg[0]]
-        help(Infor, client, Infor.reply, 1);
+    const arg = Infor.arg
 
-        return
-      }
-      switch (arg[1]) {
-        case "status":
-          axios
-            .get(
-              "https://www1.nseindia.com//emerge/homepage/smeNormalMktStatus.json"
-              , proxy
-            )
-            .then((response) => {
-              if (response.error) {
-                Infor.replytext(Infor.mess.error.error)
-                  ;
+    if (arg.length == 1) {
+      Infor.wrongCommand()
 
-              } else {
-                let msg =
-                  "Market status : ```" + response.data.NormalMktStatus + "```";
-                Infor.replytext(from, msg, text, {
-                  quoted: Infor.reply,
-                });
+      return
+    }
+    switch (arg[1]) {
+      case "status":
+        axios
+          .get(
+            "https://www1.nseindia.com//emerge/homepage/smeNormalMktStatus.json"
+            , proxy
+          )
+          .then((response) => {
+            if (response.error) {
+              Infor.replytext(Infor.mess.error.error)
                 ;
 
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              reject(Infor);
-            });
-          break;
-        case "gainer":
-        case "gainers":
-          axios
-            .get(
-              "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json"
-              , proxy)
-            .then((response) => {
-              let msg = "*Gainers* 📈";
+            } else {
+              let msg =
+                "Market status : ```" + response.data.NormalMktStatus + "```";
+              Infor.replytext(msg)
 
-              if (response.error) {
-                console.log("err");
-                Infor.replytext(from, "```Error```", text, {
-                  quoted: Infor.reply,
-                });
-                reject();
-              } else {
-                response.data.data.forEach((element) => {
-                  msg +=
-                    "\n\n\n📈 " +
-                    "*" +
-                    element.symbol +
-                    "*\n```Open Price: " +
-                    element.openPrice +
-                    "```\n" +
-                    "```High Price: " +
-                    element.highPrice +
-                    "```\n" +
-                    "```Low Price : " +
-                    element.lowPrice +
-                    "```\n" +
-                    "```turnoverInLakhs : " +
-                    element.turnoverInLakhs +
-                    "```\n" +
-                    "```Prev Price: " +
-                    element.previousPrice +
-                    "```";
-                });
-                Infor.replytext(from, msg, text, {
-                  quoted: Infor.reply,
-                });
-                ;
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              reject(Infor);
-            });
 
-          break;
-        case "stock":
-        case "stocks":
-          axios
-            .get(
-              "https://www1.nseindia.com/live_market/dynaContent/live_watch/stock_watch/nifty"
-              , proxy)
-            .then((response) => {
-              let msg = "*Index Stocks NIFTY* 📈";
-              if (response.error) {
-                console.log("err");
-              } else {
-                response.data.data.forEach((element) => {
-                  msg +=
-                    "\n\n\n📈 " +
-                    "*" +
-                    element.symbol +
-                    "*\n```Open Price: " +
-                    element.open +
-                    "```\n" +
-                    "```High Price: " +
-                    element.high +
-                    "```\n" +
-                    "```Low Price : " +
-                    element.low +
-                    "```\n" +
-                    "```Prev Close: " +
-                    element.previousClose +
-                    "```\n" +
-                    "```Traded vol: " +
-                    element.trdVol +
-                    "```\n" +
-                    "```last tP   : " +
-                    element.ltP +
-                    "```";
-                });
-                Infor.replytext(from, msg, text, {
-                  quoted: Infor.reply,
-                });
-                ;
-              }
-            })
-            .catch((err) => {
 
-              console.log(err);
-
-              reject(Infor);
-
-            });
-
-          break;
-
-        case "losers":
-        case "loser":
-          axios
-            .get(
-              "https://www1.nseindia.com/live_market/dynaContent/live_analysis/losers/niftyLosers1.json"
-              , proxy)
-            .then((response) => {
-              let msg = "*Losers* 📈";
-
-              if (response.error) {
-                console.log("err");
-              } else {
-                response.data.data.forEach((element) => {
-                  msg +=
-                    "\n\n📈 " +
-                    "*" +
-                    element.symbol +
-                    "*\n```Open Price: " +
-                    element.openPrice +
-                    "```\n" +
-                    "```High Price: " +
-                    element.highPrice +
-                    "```\n" +
-                    "```Low Price : " +
-                    element.lowPrice +
-                    "```\n" +
-                    "```Prev Price: " +
-                    element.previousPrice +
-                    "```\n"; +
-                      "```turnoverInLakhs : " + element.turnoverInLakhs + "```";
-                });
-                Infor.replytext(from, msg, text, {
-                  quoted: Infor.reply,
-                });
-                ;
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              reject(Infor);
-            });
-
-          break;
-
-        case "search":
-
-          if (arg.length < 3) {
-            Infor.replytext(from, "```Enter stocks name to search.```", text, {
-              quoted: Infor.reply,
-            });
-            ;
-            return
-          }
-          if (arg.length > 3) {
-            Infor.replytext(from, "```Searching only the first word.```", text, {
-              quoted: Infor.reply,
-            });
-          }
-          axios
-            .get(
-              "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxCompanySearch.jsp?search=" +
-              arg[2].toUpperCase(), {
-              headers: {
-                "X-Requested-With": "XMLHttpRequest",
-                Referer: "https://www.nseindia.com/ChartApp/install/charts/mainpage.jsp",
-                Host: "www.nseindia.com",
-              },
-              transformResponse: searchTransformer(false),
             }
-              , proxy)
-            .then((response) => {
-              if (response.error) {
-                console.log("err");
-              } else {
-                msg =
-                  "*Search Result* 🔎\n"
-                response.data.forEach((element) => {
-                  msg = msg +
+          })
+          .catch((err) => {
+            console.log(err);
 
-                    "\n\n📈 " +
-                    "*" +
-                    element.symbol +
-                    "*\n" +
-                    "NAME      : ```" +
-                    element.name +
-                    "```\n" +
-                    "SYMBOL  : ```" +
-                    element.symbol +
-                    "```";
-                });
-                Infor.replytext(from, msg, text, {
-                  quoted: Infor.reply,
-                });
-                ;
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              reject(Infor);
-            });
-          break;
+          });
+        break;
+      case "gainer":
+      case "gainers":
+        axios
+          .get(
+            "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json"
+            , proxy)
+          .then((response) => {
+            let msg = "*Gainers* 📈";
 
-        case "details":
-        case "detail":
-          if (arg.length < 3) {
-            Infor.replytext(from, "```Enter stock symbol to get details.```", text, {
-              quoted: Infor.reply,
-            });
-            ;
-            return
-          }
-          if (arg.length > 3) {
-            Infor.replytext(from, "```Searching only the first symbol.```", text, {
-              quoted: Infor.reply,
-            });
-          }
-          axios
-            .get(
-              "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=" +
-              arg[2].toUpperCase(), {
-              headers: {
-                Referer: "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=" +
-                  arg[2].toUpperCase(),
-                "X-Requested-With": "XMLHttpRequest",
-              },
+            if (response.error) {
+              console.log("err");
+              Infor.replytext(Infor.mess.error.error)
+
+            } else {
+              response.data.data.forEach((element) => {
+                msg +=
+                  "\n\n\n📈 " +
+                  "*" +
+                  element.symbol +
+                  "*\n```Open Price: " +
+                  element.openPrice +
+                  "```\n" +
+                  "```High Price: " +
+                  element.highPrice +
+                  "```\n" +
+                  "```Low Price : " +
+                  element.lowPrice +
+                  "```\n" +
+                  "```turnoverInLakhs : " +
+                  element.turnoverInLakhs +
+                  "```\n" +
+                  "```Prev Price: " +
+                  element.previousPrice +
+                  "```";
+              });
+              Infor.replytext(msg)
             }
-              , proxy)
-            .then((response) => {
-              if (response.error) {
-                console.log("err");
-              } else if (response.data.data.length == 0) {
-                msg = "```Not Found```";
+          })
+          .catch((err) => {
+            Infor.replytext(Infor.mess.error.error)
 
-              } else {
-                element = response.data.data[0];
+          });
 
-                msg =
-                  "📈 " +
-                  element.companyName +
-                  "\n" +
-                  "\n```pricebandupr  : " +
-                  element.pricebandupper +
-                  "```\n" +
-                  "```applcblMargin : " +
-                  element.applicableMargin +
-                  "```\n" +
-                  "```dayHigh       : " +
-                  element.dayHigh +
-                  "```\n" +
-                  "```dayLow        : " +
-                  element.dayLow +
-                  "```\n" +
-                  "```basePrice     : " +
-                  element.basePrice +
-                  "```\n" +
-                  "```securityVar   : " +
-                  element.securityVar +
-                  "```\n" +
-                  "```pricebandlower: " +
-                  element.pricebandlower +
-                  "```\n" +
-                  "```lastPrice     : " +
-                  element.lastPrice +
-                  "```\n" +
-                  "```varMargin     : " +
-                  element.varMargin +
-                  "```\n" +
-                  "```totalTradedVol: " +
-                  element.totalTradedVolume +
-                  "```\n" +
-                  "```open          : " +
+        break;
+      case "stock":
+      case "stocks":
+        axios
+          .get(
+            "https://www1.nseindia.com/live_market/dynaContent/live_watch/stock_watch/nifty"
+            , proxy)
+          .then((response) => {
+            let msg = "*Index Stocks NIFTY* 📈";
+            if (response.error) {
+              console.log("err");
+            } else {
+              response.data.data.forEach((element) => {
+                msg +=
+                  "\n\n\n📈 " +
+                  "*" +
+                  element.symbol +
+                  "*\n```Open Price: " +
                   element.open +
                   "```\n" +
-                  "```closePrice    : " +
-                  element.closePrice +
+                  "```High Price: " +
+                  element.high +
                   "```\n" +
-                  "```faceValue     : " +
-                  element.faceValue +
+                  "```Low Price : " +
+                  element.low +
                   "```\n" +
-                  "```sellPrice1    : " +
-                  element.sellPrice1 +
+                  "```Prev Close: " +
+                  element.previousClose +
                   "```\n" +
-                  "```sellPrice2    : " +
-                  element.sellPrice2 +
+                  "```Traded vol: " +
+                  element.trdVol +
                   "```\n" +
-                  "```buyPrice1     : " +
-                  element.buyPrice1 +
-                  "```\n" +
-                  "```buyPrice2     : " +
-                  element.buyPrice2 +
-                  "```\n" +
-                  "```high52        : " +
-                  element.high52 +
-                  "```\n" +
-                  "```low52         : " +
-                  element.low52 +
-                  "```\n" +
-                  "```Update Time   : " +
-                  response.data.lastUpdateTime.split(" ")[1] +
+                  "```last tP   : " +
+                  element.ltP +
                   "```";
-                Infor.replytext(from, msg, text, {
-                  quoted: Infor.reply,
-                });
-                ;
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              reject(Infor);
-            });
-          break;
+              });
+              Infor.replytext(msg)
 
-        default:
-          Infor.arg = ["help", arg[0]]
-          help(Infor, client, Infor.reply);
-          ;
-      }
+            }
+          })
+          .catch((err) => {
+
+            Infor.replytext(Infor.mess.error.error)
 
 
-    })
+          });
+
+        break;
+
+      case "losers":
+      case "loser":
+        axios
+          .get(
+            "https://www1.nseindia.com/live_market/dynaContent/live_analysis/losers/niftyLosers1.json"
+            , proxy)
+          .then((response) => {
+            let msg = "*Losers* 📈";
+
+            if (response.error) {
+              console.log("err");
+            } else {
+              response.data.data.forEach((element) => {
+                msg +=
+                  "\n\n📈 " +
+                  "*" +
+                  element.symbol +
+                  "*\n```Open Price: " +
+                  element.openPrice +
+                  "```\n" +
+                  "```High Price: " +
+                  element.highPrice +
+                  "```\n" +
+                  "```Low Price : " +
+                  element.lowPrice +
+                  "```\n" +
+                  "```Prev Price: " +
+                  element.previousPrice +
+                  "```\n"; +
+                    "```turnoverInLakhs : " + element.turnoverInLakhs + "```";
+              });
+              Infor.replytext(msg)
+
+            }
+          })
+          .catch((err) => {
+            Infor.replytext(Infor.mess.error.error)
+
+          });
+
+        break;
+
+      case "search":
+
+        if (arg.length < 3) {
+          Infor.replytext("```Enter stocks name to search.```")
+          return
+        }
+        if (arg.length > 3) {
+          Infor.replytext("```Searching only the first word.```")
+        }
+        axios
+          .get(
+            "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxCompanySearch.jsp?search=" +
+            arg[2].toUpperCase(), {
+            headers: {
+              "X-Requested-With": "XMLHttpRequest",
+              Referer: "https://www.nseindia.com/ChartApp/install/charts/mainpage.jsp",
+              Host: "www.nseindia.com",
+            },
+            transformResponse: searchTransformer(false),
+          }
+            , proxy)
+          .then((response) => {
+            if (response.error) {
+              console.log("err");
+            } else {
+              msg =
+                "*Search Result* 🔎\n"
+              response.data.forEach((element) => {
+                msg = msg +
+
+                  "\n\n📈 " +
+                  "*" +
+                  element.symbol +
+                  "*\n" +
+                  "NAME      : ```" +
+                  element.name +
+                  "```\n" +
+                  "SYMBOL  : ```" +
+                  element.symbol +
+                  "```";
+              });
+              Infor.replytext(msg)
+
+            }
+          })
+          .catch((err) => {
+            Infor.replytext(Infor.mess.error.error)
+
+          });
+        break;
+
+      case "details":
+      case "detail":
+        if (arg.length < 3) {
+          Infor.replytext("```Enter stock symbol to get details.```")
+          return
+        }
+        if (arg.length > 3) {
+          Infor.replytext("```Searching only the first symbol.```")
+        }
+        axios
+          .get(
+            "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=" +
+            arg[2].toUpperCase(), {
+            headers: {
+              Referer: "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=" +
+                arg[2].toUpperCase(),
+              "X-Requested-With": "XMLHttpRequest",
+            },
+          }
+            , proxy)
+          .then((response) => {
+            if (response.error) {
+              console.log("err");
+            } else if (response.data.data.length == 0) {
+              msg = "```Not Found```";
+
+            } else {
+              element = response.data.data[0];
+
+              msg =
+                "📈 " +
+                element.companyName +
+                "\n" +
+                "\n```pricebandupr  : " +
+                element.pricebandupper +
+                "```\n" +
+                "```applcblMargin : " +
+                element.applicableMargin +
+                "```\n" +
+                "```dayHigh       : " +
+                element.dayHigh +
+                "```\n" +
+                "```dayLow        : " +
+                element.dayLow +
+                "```\n" +
+                "```basePrice     : " +
+                element.basePrice +
+                "```\n" +
+                "```securityVar   : " +
+                element.securityVar +
+                "```\n" +
+                "```pricebandlower: " +
+                element.pricebandlower +
+                "```\n" +
+                "```lastPrice     : " +
+                element.lastPrice +
+                "```\n" +
+                "```varMargin     : " +
+                element.varMargin +
+                "```\n" +
+                "```totalTradedVol: " +
+                element.totalTradedVolume +
+                "```\n" +
+                "```open          : " +
+                element.open +
+                "```\n" +
+                "```closePrice    : " +
+                element.closePrice +
+                "```\n" +
+                "```faceValue     : " +
+                element.faceValue +
+                "```\n" +
+                "```sellPrice1    : " +
+                element.sellPrice1 +
+                "```\n" +
+                "```sellPrice2    : " +
+                element.sellPrice2 +
+                "```\n" +
+                "```buyPrice1     : " +
+                element.buyPrice1 +
+                "```\n" +
+                "```buyPrice2     : " +
+                element.buyPrice2 +
+                "```\n" +
+                "```high52        : " +
+                element.high52 +
+                "```\n" +
+                "```low52         : " +
+                element.low52 +
+                "```\n" +
+                "```Update Time   : " +
+                response.data.lastUpdateTime.split(" ")[1] +
+                "```";
+              Infor.replytext(msg)
+
+            }
+          })
+          .catch((err) => {
+            Infor.replytext(Infor.mess.error.error)
+
+          });
+        break;
+
+      default:
+        Infor.wrongCommand();
+
+    }
+
   }
 }

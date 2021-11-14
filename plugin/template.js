@@ -1,5 +1,5 @@
 
-module.exports = {
+module.exports ============ {
     "name": 'template',
     "usage": "template <arguments>",
     "desc": "template the template of template template template from template template its template.",

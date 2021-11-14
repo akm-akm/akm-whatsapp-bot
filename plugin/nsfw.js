@@ -13,29 +13,17 @@ module.exports = {
     "owner": false,
     async handle(Infor) {
 
-        const content = JSON.stringify(Infor.reply.message);
-        const type = Object.keys(Infor.reply.message)[0];
-        const isMedia = type === "imageMessage" || type === "videoMessage" || type === "stickerMessage";
-        const isQuotedImage =
-            type === "extendedTextMessage" && content.includes("imageMessage");
-        const isQuotedVideo =
-            type === "extendedTextMessage" && content.includes("videoMessage");
-        const isQuotedSticker =
-            type === 'extendedTextMessage' && content.includes('stickerMessage')
-
-
         if (!process.env.DEEPAI) {
             Infor.noapi()
             return;
         }
 
 
-
         const getRandom = (ext) => {
             return `${Math.floor(Math.random() * 10000)}${ext}`;
         };
-        if ((isMedia && Infor.reply.message.imageMessage) || isQuotedImage) {
-            const encmedia = isQuotedImage ?
+        if ((isMedia && Infor.reply.message.imageMessage) || Infor.isQuotedImage) {
+            const encmedia = Infor.isQuotedImage ?
                 JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m")).message
                     .extendedTextMessage.contextInfo :
                 Infor.reply;
@@ -64,12 +52,12 @@ module.exports = {
 
 
         }
-        else if ((isMedia && Infor.reply.message.videoMessage) || isQuotedVideo) {
+        else if ((Infor.isMedia && Infor.reply.message.videoMessage) || Infor.isQuotedVideo) {
 
             ///////////////////////////////////////////////////////
 
 
-            const encmedia = isQuotedVideo ?
+            const encmedia = Infor.isQuotedVideo ?
                 JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m")).message
                     .extendedTextMessage.contextInfo :
                 Infor.reply;
@@ -83,7 +71,6 @@ module.exports = {
                 })
 
                 Infor.replytext(nsfw)
-
                 fs.unlinkSync(media);
                 return;
 
@@ -102,7 +89,7 @@ module.exports = {
             ///////////////////////////////////////////////////////
 
         }
-        else if (isQuotedSticker) {
+        else if (Infor.isQuotedSticker) {
 
             const encmedia =
                 JSON.parse(JSON.stringify(Infor.reply).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
