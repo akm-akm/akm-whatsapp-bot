@@ -5,27 +5,27 @@ module.exports = {
   eg: ["prefix on", "prefix off"],
   group: true,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
 
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
       return;
     }
     if (arg[1] == "off") {
       sql.query(
-        `UPDATE groupdata SET useprefix = false WHERE groupid = '${Infor.from}'`
+        `UPDATE groupdata SET useprefix = false WHERE groupid = '${Xxxbot.from}'`
       );
-      Infor.replytext(Infor.mess.success);
+      Xxxbot.replytext(Xxxbot.mess.success);
       return;
     } else if (arg[1] == "on") {
       sql.query(
-        `UPDATE groupdata SET useprefix = true WHERE groupid = '${Infor.from}'`
+        `UPDATE groupdata SET useprefix = true WHERE groupid = '${Xxxbot.from}'`
       );
-      Infor.replytext(Infor.mess.success);
+      Xxxbot.replytext(Xxxbot.mess.success);
       return;
     } else {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
     }
   },
 };

@@ -33,7 +33,7 @@ function searchTransformer(isIndex) {
 
 module.exports = {
   name: "market",
-  usage: "market <arguments>",
+ // usage: "market <arguments>",
   desc: "Fetches the information of given symbol from NSE. Arguments it can take are,\n📱 status - It will give the status of the market.\n📱 search <name> - It will search all the companies with this name.\n📱 details <key> - It will give all the details of the stock from NSE.\n📱 losers - It will give top 10 loosers of NSE.\n📱 gainers - It will give top 10 gainers of NSE.",
   eg: [
     "market status",
@@ -44,11 +44,11 @@ module.exports = {
   ],
   group: false,
   owner: false,
-  handle(Infor) {
-    const arg = Infor.arg;
+  handle(Xxxbot) {
+    const arg = Xxxbot.arg;
 
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
 
       return;
     }
@@ -61,11 +61,11 @@ module.exports = {
           )
           .then((response) => {
             if (response.error) {
-              Infor.replytext(Infor.mess.error.error);
+              Xxxbot.replytext(Xxxbot.mess.error.error);
             } else {
               let msg =
                 "Market status : ```" + response.data.NormalMktStatus + "```";
-              Infor.replytext(msg);
+              Xxxbot.replytext(msg);
             }
           })
           .catch((err) => {
@@ -84,7 +84,7 @@ module.exports = {
 
             if (response.error) {
               console.log("err");
-              Infor.replytext(Infor.mess.error.error);
+              Xxxbot.replytext(Xxxbot.mess.error.error);
             } else {
               response.data.data.forEach((element) => {
                 msg +=
@@ -107,11 +107,11 @@ module.exports = {
                   element.previousPrice +
                   "```";
               });
-              Infor.replytext(msg);
+              Xxxbot.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error);
+            Xxxbot.replytext(Xxxbot.mess.error.error);
           });
 
         break;
@@ -151,11 +151,11 @@ module.exports = {
                   element.ltP +
                   "```";
               });
-              Infor.replytext(msg);
+              Xxxbot.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error);
+            Xxxbot.replytext(Xxxbot.mess.error.error);
           });
 
         break;
@@ -192,22 +192,22 @@ module.exports = {
                   "```\n";
                 +"```turnoverInLakhs : " + element.turnoverInLakhs + "```";
               });
-              Infor.replytext(msg);
+              Xxxbot.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error);
+            Xxxbot.replytext(Xxxbot.mess.error.error);
           });
 
         break;
 
       case "search":
         if (arg.length < 3) {
-          Infor.replytext("```Enter stocks name to search.```");
+          Xxxbot.replytext("```Enter stocks name to search.```");
           return;
         }
         if (arg.length > 3) {
-          Infor.replytext("```Searching only the first word.```");
+          Xxxbot.replytext("```Searching only the first word.```");
         }
         axios
           .get(
@@ -243,22 +243,22 @@ module.exports = {
                   element.symbol +
                   "```";
               });
-              Infor.replytext(msg);
+              Xxxbot.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error);
+            Xxxbot.replytext(Xxxbot.mess.error.error);
           });
         break;
 
       case "details":
       case "detail":
         if (arg.length < 3) {
-          Infor.replytext("```Enter stock symbol to get details.```");
+          Xxxbot.replytext("```Enter stock symbol to get details.```");
           return;
         }
         if (arg.length > 3) {
-          Infor.replytext("```Searching only the first symbol.```");
+          Xxxbot.replytext("```Searching only the first symbol.```");
         }
         axios
           .get(
@@ -346,16 +346,16 @@ module.exports = {
                 "```Update Time   : " +
                 response.data.lastUpdateTime.split(" ")[1] +
                 "```";
-              Infor.replytext(msg);
+              Xxxbot.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error);
+            Xxxbot.replytext(Xxxbot.mess.error.error);
           });
         break;
 
       default:
-        Infor.wrongCommand();
+        Xxxbot.wrongCommand();
     }
   },
 };

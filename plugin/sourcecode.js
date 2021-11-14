@@ -8,7 +8,7 @@ module.exports = {
   eg: ["sourcecode"],
   group: false,
   owner: false,
-  async handle(Infor) {
+  async handle(Xxxbot) {
     axios
       .get(`https://api.github.com/repos/akm-akm/xxx-whatsapp-bot`)
       .then((response) => {
@@ -46,10 +46,10 @@ module.exports = {
           " ```\n" +
           "\n🤖 🤖 *_Bot made by AKM_* 🤖 🤖";
 
-        Infor.replyimage(logo, msg);
+        Xxxbot.replyimage(logo, msg);
       })
       .catch((e) => {
-        Infor.errorlog(e);
+        Xxxbot.errorlog(e);
       });
   },
 };

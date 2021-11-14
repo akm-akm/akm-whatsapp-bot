@@ -5,8 +5,8 @@ module.exports = {
   eg: ["template btc", "template xrp", "template eth"],
   group: false,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
 
     // your code here
   },

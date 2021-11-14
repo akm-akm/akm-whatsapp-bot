@@ -5,19 +5,19 @@ module.exports = {
   eg: ["delete"],
   group: false,
   owner: false,
-  async handle(Infor) {
-    if (!Infor.stanzaId) {
-      Infor.wrongCommand();
+  async handle(Xxxbot) {
+    if (!Xxxbot.stanzaId) {
+      Xxxbot.wrongCommand();
       return;
     }
     try {
-      await Infor.client.deleteMessage(Infor.from, {
-        id: Infor.stanzaId,
-        remoteJid: Infor.from,
+      await Xxxbot.client.deleteMessage(Xxxbot.from, {
+        id: Xxxbot.stanzaId,
+        remoteJid: Xxxbot.from,
         fromMe: true,
       });
     } catch (error) {
-      Infor.replytext(Infor.mess.error.error);
+      Xxxbot.replytext(Xxxbot.mess.error.error);
     }
   },
 };

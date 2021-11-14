@@ -8,42 +8,42 @@ module.exports = {
   eg: ["unban @ankit", "unban @dibyam", "unban @saket"],
   group: true,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
-    const from = Infor.from;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
+    const from = Xxxbot.from;
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
       return;
     }
 
     try {
       const mentioned =
-        Infor.reply.message.extendedTextMessage.contextInfo.mentionedJid;
+        Xxxbot.reply.message.extendedTextMessage.contextInfo.mentionedJid;
 
       if (!mentioned) {
-        Infor.wrongCommand();
+        Xxxbot.wrongCommand();
         return;
       }
       const z = mentioned[0].split("@")[0];
 
-      if (z === Infor.botNumber) {
-        Infor.replytext(Infor.mess.error.error);
+      if (z === Xxxbot.botNumber) {
+        Xxxbot.replytext(Xxxbot.mess.error.error);
         return;
       }
 
-      if (z == Infor.number) {
-        Infor.replytext(Infor.mess.error.error);
+      if (z == Xxxbot.number) {
+        Xxxbot.replytext(Xxxbot.mess.error.error);
         return;
       }
       sql.query(
         `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
       );
 
-      Infor.replytext(Infor.mess.success);
+      Xxxbot.replytext(Xxxbot.mess.success);
     } catch (error) {
       console.log(error);
-      Infor.replytext(Infor.mess.error.error);
-      Infor.errorlog();
+      Xxxbot.replytext(Xxxbot.mess.error.error);
+      Xxxbot.errorlog();
     }
   },
 };

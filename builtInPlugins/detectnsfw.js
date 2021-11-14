@@ -5,31 +5,31 @@ module.exports = {
   eg: ["detectnsfw on", "detectnsfw off"],
   group: true,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
 
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
       return;
     }
     if (arg[1] == "off") {
       sql.query(
-        `UPDATE groupdata SET nsfw = false WHERE groupid = '${Infor.from}'`
+        `UPDATE groupdata SET nsfw = false WHERE groupid = '${Xxxbot.from}'`
       );
-      client.sendMessage(from, Infor.mess.success, text, {
-        quoted: Infor.reply,
+      client.sendMessage(from, Xxxbot.mess.success, text, {
+        quoted: Xxxbot.reply,
       });
       return;
     } else if (arg[1] == "on") {
       sql.query(
-        `UPDATE groupdata SET nsfw = true WHERE groupid = '${Infor.from}'`
+        `UPDATE groupdata SET nsfw = true WHERE groupid = '${Xxxbot.from}'`
       );
-      client.sendMessage(from, Infor.mess.success, text, {
-        quoted: Infor.reply,
+      client.sendMessage(from, Xxxbot.mess.success, text, {
+        quoted: Xxxbot.reply,
       });
       return;
     } else {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
     }
   },
 };

@@ -8,10 +8,10 @@ module.exports = {
   eg: ["rst"],
   group: false,
   owner: true,
-  async handle(Infor) {
+  async handle(Xxxbot) {
     sql.query("UPDATE groupdata SET totalmsgtoday=0;");
     sql.query("UPDATE botdata SET totalmsgtoday=0;");
     sql.query("UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;");
-    Infor.replytext(Infor.mess.success);
+    Xxxbot.replytext(Xxxbot.mess.success);
   },
 };

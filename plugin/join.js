@@ -5,23 +5,23 @@ module.exports = {
   eg: ["join "],
   group: false,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
 
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
 
       return;
     }
     if (!arg[1].includes("https://chat.whatsapp.com/")) {
-      Infor.replytext(Infor.mess.error.invalid);
+      Xxxbot.replytext(Xxxbot.mess.error.invalid);
       return;
     }
     try {
-      await Infor.client.acceptInvite(arg[1].split(".com/")[1]);
-      Infor.replytext(Infor.mess.success);
+      await Xxxbot.client.acceptInvite(arg[1].split(".com/")[1]);
+      Xxxbot.replytext(Xxxbot.mess.success);
     } catch (error) {
-      Infor.replytext(Infor.mess.error.error);
+      Xxxbot.replytext(Xxxbot.mess.error.error);
     }
   },
 };

@@ -7,7 +7,7 @@ const settings = JSON.parse(
 );
 const { newgroup } = require(path.join(__dirname, "./newgroup"));
 
-const InforClass = require("./Infor");
+const InforClass = require("./Xxxbot");
 
 let data1,
   data3 = JSON.parse(
@@ -40,42 +40,45 @@ const getGroupAdmins = (participants) => {
 };
 
 module.exports = async function settingread(xxx, client) {
-  const Infor = new InforClass();
-  Infor.client = client;
-  Infor.reply = xxx;
+  const Xxxbot = new InforClass();
+  Xxxbot.client = client;
+  Xxxbot.reply = xxx;
   try {
     const random = settings.prefixchoice.charAt(
       Math.floor(Math.random() * settings.prefixchoice.length)
     );
 
     const from = xxx.key.remoteJid;
-    Infor.from = from;
-    Infor.isGroup = from.endsWith("@g.us");
-    Infor.sender = Infor.isGroup ? xxx.participant : xxx.key.remoteJid;
-    Infor.groupMetadata = Infor.isGroup
+    Xxxbot.from = from;
+    Xxxbot.isGroup = from.endsWith("@g.us");
+    Xxxbot.sender = Xxxbot.isGroup ? xxx.participant : xxx.key.remoteJid;
+    Xxxbot.groupMetadata = Xxxbot.isGroup
       ? await client.groupMetadata(from)
       : undefined;
-    Infor.groupMembers = Infor.isGroup
-      ? Infor.groupMetadata.participants
+    Xxxbot.groupMembers = Xxxbot.isGroup
+      ? Xxxbot.groupMetadata.participants
       : undefined;
-    Infor.groupAdmins = Infor.isGroup
-      ? getGroupAdmins(Infor.groupMembers)
+    Xxxbot.groupAdmins = Xxxbot.isGroup
+      ? getGroupAdmins(Xxxbot.groupMembers)
       : undefined;
-    Infor.groupName = Infor.isGroup ? Infor.groupMetadata.subject : undefined;
-    Infor.botNumber = client.user.jid.split("@")[0];
-    Infor.isBotGroupAdmins = Infor.isGroup
-      ? Infor.groupAdmins.includes(`${Infor.botNumber}@s.whatsapp.net`) || false
+    Xxxbot.groupName = Xxxbot.isGroup
+      ? Xxxbot.groupMetadata.subject
       : undefined;
-    Infor.isOwner = Infor.isGroup
-      ? Infor.sender.split("@")[0] === process.env.OWNER_NUMBER
-      : Infor.from.split("@")[0] === process.env.OWNER_NUMBER;
-    Infor.isSuperAdmin = Infor.isGroup
-      ? Infor.groupMetadata.owner == Infor.from
+    Xxxbot.botNumber = client.user.jid.split("@")[0];
+    Xxxbot.isBotGroupAdmins = Xxxbot.isGroup
+      ? Xxxbot.groupAdmins.includes(`${Xxxbot.botNumber}@s.whatsapp.net`) ||
+        false
+      : undefined;
+    Xxxbot.isOwner = Xxxbot.isGroup
+      ? Xxxbot.sender.split("@")[0] === process.env.OWNER_NUMBER
+      : Xxxbot.from.split("@")[0] === process.env.OWNER_NUMBER;
+    Xxxbot.isSuperAdmin = Xxxbot.isGroup
+      ? Xxxbot.groupMetadata.owner == Xxxbot.from
       : undefined;
 
     const botdata = await sql.query("select * from botdata;");
 
-    if (Infor.isGroup) {
+    if (Xxxbot.isGroup) {
       data1 = await sql.query(
         `select * from groupdata where groupid='${from}';`
       );
@@ -83,7 +86,7 @@ module.exports = async function settingread(xxx, client) {
         if (process.env.NODE_ENV === "development") {
           console.log(
             "👪  " +
-              chalk.bgCyan("Prefix assigned is / for group " + Infor.groupName)
+              chalk.bgCyan("Prefix assigned is / for group " + Xxxbot.groupName)
           );
           await sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','/','false','true', '{''}',0,0,false,true);`
@@ -92,10 +95,10 @@ module.exports = async function settingread(xxx, client) {
         }
         if (process.env.NODE_ENV === "production") {
           if (
-            Infor.groupMetadata.participants.length <
+            Xxxbot.groupMetadata.participants.length <
             botdata.rows[0].mingroupsize
           ) {
-            Infor.text(
+            Xxxbot.text(
               "*Minimum participants required is* " +
                 botdata.rows[0].mingroupsize
             );
@@ -105,7 +108,7 @@ module.exports = async function settingread(xxx, client) {
           console.log(
             "👪  " +
               chalk.bgCyan(
-                `Prefix assigned is '${random}' for group ` + Infor.groupName
+                `Prefix assigned is '${random}' for group ` + Xxxbot.groupName
               )
           );
           newgroup(from, client, random);
@@ -117,8 +120,8 @@ module.exports = async function settingread(xxx, client) {
       }
     }
 
-    const number = Infor.isGroup
-      ? Infor.sender.split("@")[0]
+    const number = Xxxbot.isGroup
+      ? Xxxbot.sender.split("@")[0]
       : from.split("@")[0];
     const data2 = await sql.query(
       `select * from messagecount where phonenumber='${number}';`
@@ -155,8 +158,8 @@ module.exports = async function settingread(xxx, client) {
         ? xxx.message.extendedTextMessage.text
         : "";
 
-    Infor.isMedia = type === "imageMessage" || type === "videoMessage";
-    Infor.arg = Infor.isGroup
+    Xxxbot.isMedia = type === "imageMessage" || type === "videoMessage";
+    Xxxbot.arg = Xxxbot.isGroup
       ? data1.rows[0].useprefix
         ? arg
             .replace(/\s+/g, " ")
@@ -189,50 +192,50 @@ module.exports = async function settingread(xxx, client) {
           .replace(/\s+/g, " ")
           .split(" ")
           .map((xa) => (urlregex.test(xa) ? xa : xa.toLowerCase())));
-    Infor.number = number;
-    Infor.noofmsgtoday = data2.rows[0].totalmsgtoday;
-    Infor.totalmsg = data2.rows[0].totalmsg;
-    Infor.dailylimitover = data2.rows[0].dailylimitover;
-    Infor.abusepresent = from.endsWith("@g.us")
+    Xxxbot.number = number;
+    Xxxbot.noofmsgtoday = data2.rows[0].totalmsgtoday;
+    Xxxbot.totalmsg = data2.rows[0].totalmsg;
+    Xxxbot.dailylimitover = data2.rows[0].dailylimitover;
+    Xxxbot.abusepresent = from.endsWith("@g.us")
       ? data1.rows[0].allowabuse == 0
         ? arg.detecta()
         : []
       : arg.detecta();
-    Infor.groupdata = from.endsWith("@g.us") ? data1.rows[0] : 0;
-    Infor.botdata = botdata.rows[0];
-    Infor.stanzaId = stanzaId;
-    Infor.isQuotedImage =
+    Xxxbot.groupdata = from.endsWith("@g.us") ? data1.rows[0] : 0;
+    Xxxbot.botdata = botdata.rows[0];
+    Xxxbot.stanzaId = stanzaId;
+    Xxxbot.isQuotedImage =
       type === "extendedTextMessage" && content.includes("imageMessage");
-    Infor.isQuotedVideo =
+    Xxxbot.isQuotedVideo =
       type === "extendedTextMessage" && content.includes("videoMessage");
-    Infor.isQuotedText =
+    Xxxbot.isQuotedText =
       type == "extendedTextMessage" &&
       content.includes("text") &&
       content.includes("stanzaId");
-    Infor.isQuotedSticker =
+    Xxxbot.isQuotedSticker =
       type === "extendedTextMessage" && content.includes("stickerMessage");
-    Infor.quotedMessage = Infor.isQuotedText
-      ? Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage
+    Xxxbot.quotedMessage = Xxxbot.isQuotedText
+      ? Xxxbot.reply.message.extendedTextMessage.contextInfo.quotedMessage
           .conversation
       : undefined;
-    Infor.isUserTagged =
+    Xxxbot.isUserTagged =
       type == "extendedTextMessage" &&
       content.includes("text") &&
       content.includes("mentionedJid");
-    Infor.taggedUser = Infor.isUserTagged
+    Xxxbot.taggedUser = Xxxbot.isUserTagged
       ? xxx.message.extendedTextMessage.contextInfo.mentionedJid
       : undefined;
-    Infor.isBotModerator =
-      Infor.botdata.moderators.includes(Infor.number) || Infor.isOwner;
-    Infor.isGroupAdmins = Infor.isGroup
-      ? Infor.groupAdmins.includes(Infor.sender) ||
-        Infor.isBotModerator ||
+    Xxxbot.isBotModerator =
+      Xxxbot.botdata.moderators.includes(Xxxbot.number) || Xxxbot.isOwner;
+    Xxxbot.isGroupAdmins = Xxxbot.isGroup
+      ? Xxxbot.groupAdmins.includes(Xxxbot.sender) ||
+        Xxxbot.isBotModerator ||
         false
       : undefined;
 
-    return Infor;
+    return Xxxbot;
   } catch (error) {
     console.log(error);
-    // Infor.errorlog(error);
+    // Xxxbot.errorlog(error);
   }
 };

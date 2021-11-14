@@ -8,11 +8,11 @@ module.exports = {
   eg: ["stp"],
   group: false,
   owner: true,
-  async handle(Infor) {
+  async handle(Xxxbot) {
     await sql.query("update botdata set isconnected = false;");
     setTimeout(() => {
       process.exit(1);
     }, 3000);
-    Infor.replytext(Infor.success);
+    Xxxbot.replytext(Xxxbot.success);
   },
 };

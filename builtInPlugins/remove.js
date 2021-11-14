@@ -5,36 +5,36 @@ module.exports = {
   eg: ["remove @ankit", "remove @dibyam"],
   group: true,
   owner: false,
-  async handle(Infor) {
+  async handle(Xxxbot) {
     if (!isBotGroupAdmins) {
-      Infor.replytext(Infor.mess.only.Badmin);
+      Xxxbot.replytext(Xxxbot.mess.only.Badmin);
       return;
     }
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
       return;
     }
 
     const mentioned =
-      Infor.reply.message.extendedTextMessage.contextInfo.mentionedJid;
+      Xxxbot.reply.message.extendedTextMessage.contextInfo.mentionedJid;
 
     if (!mentioned) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
       return;
     }
     const z = mentioned[0].split("@")[0];
-    if (z === `${Infor.client.user.jid}`.split("@")[0]) {
-      Infor.replytext(Infor.mess.error.error);
+    if (z === `${Xxxbot.client.user.jid}`.split("@")[0]) {
+      Xxxbot.replytext(Xxxbot.mess.error.error);
       return;
     }
     if (z === isSuperAdmin) {
-      Infor.replytext(Infor.mess.error.error);
+      Xxxbot.replytext(Xxxbot.mess.error.error);
 
       return;
     }
 
-    Infor.client.groupRemove(Infor.from, mentioned);
+    Xxxbot.client.groupRemove(Xxxbot.from, mentioned);
 
-    Infor.replytext(Infor.mess.success);
+    Xxxbot.replytext(Xxxbot.mess.success);
   },
 };

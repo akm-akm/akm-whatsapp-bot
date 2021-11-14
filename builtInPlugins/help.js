@@ -87,11 +87,11 @@ module.exports = {
   group: false,
   owner: false,
 
-  handle(Infor) {
-    let prefix = Infor.groupdata.prefix;
-    const useprefix = Infor.groupdata.useprefix;
+  handle(Xxxbot) {
+    let prefix = Xxxbot.groupdata.prefix;
+    const useprefix = Xxxbot.groupdata.useprefix;
 
-    if (Infor.arg.length === 1) {
+    if (Xxxbot.arg.length === 1) {
       const c =
         prefix == undefined
           ? "```Not needed in inbox```"
@@ -99,9 +99,10 @@ module.exports = {
           ? prefix
           : "( " + prefix + " )" + " ```Disabled```";
       if (prefix == undefined || !useprefix) prefix = "🎀";
-      const grpcmds = Infor.isGroup && Infor.isGroupAdmins ? adminCommands : "";
+      const grpcmds =
+        Xxxbot.isGroup && Xxxbot.isGroupAdmins ? adminCommands : "";
       const owncmds =
-        Infor.number === process.env.OWNER_NUMBER ? ownerCommands : "";
+        Xxxbot.number === process.env.OWNER_NUMBER ? ownerCommands : "";
 
       let help =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
@@ -127,27 +128,27 @@ module.exports = {
         "\n‼️ _wazirx added_" +
         "\n\n⚙️ *Bot version* : " +
         version;
-      Infor.replytext(help);
+      Xxxbot.replytext(help);
     } else {
-      if (!pluginsinfo[Infor.arg[1]])
-        return Infor.replytext(Infor.mess.unknowncommand);
+      if (!pluginsinfo[Xxxbot.arg[1]])
+        return Xxxbot.replytext(Xxxbot.mess.unknowncommand);
       if (prefix == undefined || !useprefix) prefix = "🎀";
       let body =
         "🔖 *Description* :\n" +
         "```" +
-        pluginsinfo[Infor.arg[1]].desc +
+        pluginsinfo[Xxxbot.arg[1]].desc +
         "```\n\n" +
         "📕 *Usage* :\n" +
         prefix +
         "```" +
-        pluginsinfo[Infor.arg[1]].usage +
+        pluginsinfo[Xxxbot.arg[1]].usage +
         "```\n\n" +
         "📚 *Example* :";
 
-      pluginsinfo[Infor.arg[1]].eg.forEach((currentItem) => {
+      pluginsinfo[Xxxbot.arg[1]].eg.forEach((currentItem) => {
         body += "\n```" + prefix + currentItem + "```";
       });
-      Infor.replytext(body);
+      Xxxbot.replytext(body);
     }
   },
 };

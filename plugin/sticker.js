@@ -20,12 +20,12 @@ module.exports = {
   ],
   group: false,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
-    const from = Infor.from;
-    const isMedia = Infor.isMedia;
-    const isQuotedImage = Infor.isQuotedImage;
-    const isQuotedVideo = Infor.isQuotedVideo;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
+    const from = Xxxbot.from;
+    const isMedia = Xxxbot.isMedia;
+    const isQuotedImage = Xxxbot.isQuotedImage;
+    const isQuotedVideo = Xxxbot.isQuotedVideo;
 
     const getRandom = (ext) => {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
@@ -102,20 +102,20 @@ module.exports = {
     }
 
     ///////////////image//////////////////
-    if ((isMedia && !Infor.reply.message.videoMessage) || isQuotedImage) {
+    if ((isMedia && !Xxxbot.reply.message.videoMessage) || isQuotedImage) {
       const encmedia = isQuotedImage
-        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m"))
+        ? JSON.parse(JSON.stringify(Xxxbot.reply).replace("quotedM", "m"))
             .message.extendedTextMessage.contextInfo
-        : Infor.reply;
-      const media = await Infor.client.downloadAndSaveMediaMessage(
+        : Xxxbot.reply;
+      const media = await Xxxbot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
       const ran = getRandom(".webp");
-      if (!Infor.isGroup || Infor.groupdata.nsfw == true) {
+      if (!Xxxbot.isGroup || Xxxbot.groupdata.nsfw == true) {
         const nsfw = await ai(media);
         if (nsfw.output.nsfw_score > 0.6) {
-          Infor.replytext("🌚 🔞");
+          Xxxbot.replytext("🌚 🔞");
           fs.unlinkSync(media);
           return;
         }
@@ -134,7 +134,7 @@ module.exports = {
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Infor.replysticker(ran);
+          Xxxbot.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
         } else {
@@ -143,8 +143,8 @@ module.exports = {
             authorName,
             ran
           );
-          Infor.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Infor.reply,
+          Xxxbot.client.sendMessage(from, webpWithMetadata, sticker, {
+            quoted: Xxxbot.reply,
           });
 
           fs.unlinkSync(media);
@@ -156,23 +156,23 @@ module.exports = {
 
       ///////////////video//////////////////
     } else if (
-      (isMedia && Infor.reply.message.videoMessage.seconds < 11) ||
+      (isMedia && Xxxbot.reply.message.videoMessage.seconds < 11) ||
       (isQuotedVideo &&
-        Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage
+        Xxxbot.reply.message.extendedTextMessage.contextInfo.quotedMessage
           .videoMessage.seconds < 11)
     ) {
       const encmedia = isQuotedVideo
-        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m"))
+        ? JSON.parse(JSON.stringify(Xxxbot.reply).replace("quotedM", "m"))
             .message.extendedTextMessage.contextInfo
-        : Infor.reply;
-      const media = await Infor.client.downloadAndSaveMediaMessage(
+        : Xxxbot.reply;
+      const media = await Xxxbot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
-      if (!Infor.isGroup || Infor.groupdata.nsfw == true) {
+      if (!Xxxbot.isGroup || Xxxbot.groupdata.nsfw == true) {
         const nsfw = await ai(media);
         if (nsfw.output.nsfw_score > 0.6) {
-          Infor.replytext("🌚 🔞");
+          Xxxbot.replytext("🌚 🔞");
 
           fs.unlinkSync(media);
 
@@ -198,7 +198,7 @@ module.exports = {
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Infor.replysticker(ran);
+          Xxxbot.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
         } else {
@@ -207,8 +207,8 @@ module.exports = {
             authorName,
             ran
           );
-          Infor.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Infor.reply,
+          Xxxbot.client.sendMessage(from, webpWithMetadata, sticker, {
+            quoted: Xxxbot.reply,
           });
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
@@ -216,23 +216,23 @@ module.exports = {
         }
       }
     } else if (
-      (isMedia && Infor.reply.message.videoMessage.seconds >= 11) ||
+      (isMedia && Xxxbot.reply.message.videoMessage.seconds >= 11) ||
       (isQuotedVideo &&
-        Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage
+        Xxxbot.reply.message.extendedTextMessage.contextInfo.quotedMessage
           .videoMessage.seconds >= 11)
     ) {
       const encmedia = isQuotedVideo
-        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m"))
+        ? JSON.parse(JSON.stringify(Xxxbot.reply).replace("quotedM", "m"))
             .message.extendedTextMessage.contextInfo
-        : Infor.reply;
-      const media1 = await Infor.client.downloadAndSaveMediaMessage(
+        : Xxxbot.reply;
+      const media1 = await Xxxbot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
-      if (!Infor.isGroup || Infor.groupdata.nsfw == true) {
+      if (!Xxxbot.isGroup || Xxxbot.groupdata.nsfw == true) {
         const nsfw = await ai(media1);
         if (nsfw.output.nsfw_score > 0.6) {
-          Infor.replytext("🌚 🔞");
+          Xxxbot.replytext("🌚 🔞");
 
           fs.unlinkSync(media1);
 
@@ -281,7 +281,7 @@ module.exports = {
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Infor.replysticker(ran);
+          Xxxbot.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
           fs.unlinkSync(media1);
@@ -291,8 +291,8 @@ module.exports = {
             authorName,
             ran
           );
-          Infor.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Infor.reply,
+          Xxxbot.client.sendMessage(from, webpWithMetadata, sticker, {
+            quoted: Xxxbot.reply,
           });
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
@@ -301,7 +301,7 @@ module.exports = {
         }
       }
     } else {
-      Infor.replytext(Infor.mess.tag);
+      Xxxbot.replytext(Xxxbot.mess.tag);
     }
   },
 };

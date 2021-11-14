@@ -8,11 +8,11 @@ module.exports = {
   eg: ["rmdr @ankit", "rmdr @messi", "rmdr 15123479768"],
   group: false,
   owner: true,
-  async handle(Infor) {
-    const arg = Infor.arg;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
 
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
       return;
     }
 
@@ -23,10 +23,10 @@ module.exports = {
         `UPDATE botdata SET moderators = array_remove(moderators, '${number}');`
       )
       .then((result) => {
-        Infor.replytext(Infor.mess.success);
+        Xxxbot.replytext(Xxxbot.mess.success);
       })
       .catch((err) => {
-        Infor.replytext(Infor.mess.error.error);
+        Xxxbot.replytext(Xxxbot.mess.error.error);
       });
   },
 };

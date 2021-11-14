@@ -8,26 +8,26 @@ module.exports = {
   eg: ["mgs 5", "mgs 10", "mgs 20"],
   group: false,
   owner: true,
-  async handle(Infor) {
-    const arg = Infor.arg;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
 
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
 
       return;
     }
     if ((typeof arg[1] !== "number" && arg[1] < 0) || arg[1] > 1000) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
 
       return;
     }
     sql
       .query(`update botdata set mingroupsize = '${arg[1]}'`)
       .then((result) => {
-        Infor.replytext(Infor.mess.success);
+        Xxxbot.replytext(Xxxbot.mess.success);
       })
       .catch((err) => {
-        Infor.replytext(Infor.mess.error.error);
+        Xxxbot.replytext(Xxxbot.mess.error.error);
       });
   },
 };

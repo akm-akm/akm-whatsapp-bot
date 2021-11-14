@@ -5,8 +5,8 @@ module.exports = {
   eg: ["botleave"],
   group: true,
   owner: false,
-  async handle(Infor) {
-    await Infor.replytext("🤧 ```Bye, Miss you all ```");
-    Infor.client.groupLeave(Infor.from);
+  async handle(Xxxbot) {
+    await Xxxbot.replytext("🤧 ```Bye, Miss you all ```");
+    Xxxbot.client.groupLeave(Xxxbot.from);
   },
 };

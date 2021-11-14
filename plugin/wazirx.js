@@ -7,10 +7,10 @@ module.exports = {
   eg: ["wazirx btc", "wazirx xrp", "wazirx eth"],
   group: false,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
     if (arg.length === 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
     }
     axios
       .get("https://api.wazirx.com/api/v2/trades?market=" + arg[1] + "inr")
@@ -18,7 +18,7 @@ module.exports = {
         var crypto_body = response.data;
 
         if (response.data.code == 1999) {
-          Infor.replytext("💸 ```No such crypto currency on Wazirx```");
+          Xxxbot.replytext("💸 ```No such crypto currency on Wazirx```");
         } else {
           const message =
             "*" +
@@ -30,7 +30,7 @@ module.exports = {
             " 🪙\n\n" +
             "```Price :```  " +
             crypto_body[0].price.toUpperCase();
-          Infor.replytext(message);
+          Xxxbot.replytext(message);
         }
       });
   },

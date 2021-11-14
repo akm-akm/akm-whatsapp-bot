@@ -7,11 +7,11 @@ module.exports = {
   eg: ["lyrics Brown munde", "lyrics Baby"],
   group: false,
   owner: false,
-  handle(Infor) {
-    const arg = Infor.arg;
+  handle(Xxxbot) {
+    const arg = Xxxbot.arg;
 
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
 
       return;
     }
@@ -19,8 +19,8 @@ module.exports = {
     solenolyrics
       .requestLyricsFor(arg.splice(1).join(" "))
       .then(async (lyrics) => {
-        Infor.replytext(lyrics);
+        Xxxbot.replytext(lyrics);
       })
-      .catch((e) => Infor.replytext(Infor.mess.error.error));
+      .catch((e) => Xxxbot.replytext(Xxxbot.mess.error.error));
   },
 };

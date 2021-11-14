@@ -8,40 +8,40 @@ module.exports = {
   eg: ["ban @ankit", "ban @dibyam", "ban @saket"],
   group: true,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
-    const from = Infor.from;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
+    const from = Xxxbot.from;
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
       return;
     }
 
     try {
-      const mentioned = Infor.taggedUser;
+      const mentioned = Xxxbot.taggedUser;
       if (!mentioned) {
-        Infor.wrongCommand();
+        Xxxbot.wrongCommand();
         return;
       }
       const z = mentioned[0].split("@")[0];
 
-      if (z === Infor.botNumber) {
-        Infor.replytext(
+      if (z === Xxxbot.botNumber) {
+        Xxxbot.replytext(
           "🤖 ```I can't ban myself, but I can ban you! There you go!``` _BANNED_"
         );
         sql.query(
-          `UPDATE groupdata SET banned_users = array_append(banned_users, '${Infor.number}') where groupid = '${from}';`
+          `UPDATE groupdata SET banned_users = array_append(banned_users, '${Xxxbot.number}') where groupid = '${from}';`
         );
         return;
       }
       if (
-        Infor.botdata.moderators.includes(z) ||
+        Xxxbot.botdata.moderators.includes(z) ||
         z == process.env.OWNER_NUMBER
       ) {
-        Infor.replytext(Infor.mess.error.error);
+        Xxxbot.replytext(Xxxbot.mess.error.error);
         return;
       }
-      if (z == Infor.number) {
-        Infor.replytext(Infor.mess.error.error);
+      if (z == Xxxbot.number) {
+        Xxxbot.replytext(Xxxbot.mess.error.error);
         return;
       }
       await sql.query(
@@ -50,11 +50,11 @@ module.exports = {
       sql.query(
         `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
       );
-      Infor.replytext(Infor.mess.success);
+      Xxxbot.replytext(Xxxbot.mess.success);
     } catch (error) {
       console.log(error);
-      Infor.replytext(Infor.mess.error.error);
-      Infor.errorlog();
+      Xxxbot.replytext(Xxxbot.mess.error.error);
+      Xxxbot.errorlog();
     }
   },
 };

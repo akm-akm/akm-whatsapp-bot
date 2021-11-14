@@ -5,17 +5,17 @@ module.exports = {
   eg: ["banlist"],
   group: true,
   owner: false,
-  async handle(Infor) {
-    const bannedlist = Infor.groupdata.banned_users;
+  async handle(Xxxbot) {
+    const bannedlist = Xxxbot.groupdata.banned_users;
     if (bannedlist.length == 1) {
-      Infor.replytext("🤖 *No users banned*");
+      Xxxbot.replytext("🤖 *No users banned*");
     } else {
       let msg = "🤖 *Users banned:*\n";
       bannedlist.shift();
       bannedlist.forEach((currentItem) => {
         msg += "\n🚨 " + currentItem;
       });
-      Infor.replytext(msg);
+      Xxxbot.replytext(msg);
     }
   },
 };

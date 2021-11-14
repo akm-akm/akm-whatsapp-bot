@@ -10,14 +10,14 @@ module.exports = {
   eg: ["shorturl https://www.hindustantimes.com/world-nes"],
   group: false,
   owner: false,
-  async handle(Infor) {
-    const arg = Infor.arg;
+  async handle(Xxxbot) {
+    const arg = Xxxbot.arg;
     if (arg.length == 1) {
-      Infor.wrongCommand();
+      Xxxbot.wrongCommand();
       return;
     }
     if (urlregex.test(arg[1]) === false) {
-      Infor.replytext(Infor.mess.error.invalid);
+      Xxxbot.replytext(Xxxbot.mess.error.invalid);
       return;
     }
     axios({
@@ -26,7 +26,7 @@ module.exports = {
     })
       .then((response) => {
         if (response.data == "Invalid URL") {
-          Infor.replytext(Infor.mess.error.invalid);
+          Xxxbot.replytext(Xxxbot.mess.error.invalid);
 
           return;
         }
@@ -39,10 +39,10 @@ module.exports = {
           "```" +
           "\n\n" +
           "```API by lenk.cf```";
-        Infor.replytext(msg);
+        Xxxbot.replytext(msg);
       })
       .catch((e) => {
-        Infor.errorlog(e);
+        Xxxbot.errorlog(e);
       });
   },
 };

@@ -7,16 +7,16 @@ module.exports = {
   eg: ["close"],
   group: true,
   owner: false,
-  async handle(Infor) {
-    if (!Infor.isBotGroupAdmins) {
-      Infor.replytext(Infor.mess.only.Badmin);
+  async handle(Xxxbot) {
+    if (!Xxxbot.isBotGroupAdmins) {
+      Xxxbot.replytext(Xxxbot.mess.only.Badmin);
       return;
     }
-    Infor.client.groupSettingChange(
-      Infor.from,
+    Xxxbot.client.groupSettingChange(
+      Xxxbot.from,
       GroupSettingChange.messageSend,
       true
     );
-    Infor.replytext(Infor.mess.success);
+    Xxxbot.replytext(Xxxbot.mess.success);
   },
 };

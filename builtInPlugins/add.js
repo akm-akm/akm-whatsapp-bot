@@ -4,5 +4,5 @@ module.exports = {
   eg: ["add 19876543210", "add 919012345678"],
   group: true,
   owner: false,
-  async handle(Infor) {},
+  async handle(Xxxbot) {},
 };

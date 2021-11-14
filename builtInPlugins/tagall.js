@@ -7,9 +7,9 @@ module.exports = {
   eg: ["tagall class at 7am", "tagall holiday today"],
   group: true,
   owner: false,
-  async handle(Infor) {
+  async handle(Xxxbot) {
     const memberslist = [];
-    const arg = Infor.arg;
+    const arg = Xxxbot.arg;
     if (arg.length > 1) {
       arg.shift();
       msg =
@@ -18,11 +18,11 @@ module.exports = {
         arg.join(" ").slice(1) +
         "```";
     } else msg = "👋  ```Hello Everyone```";
-    for (let member of Infor.groupMembers) {
+    for (let member of Xxxbot.groupMembers) {
       memberslist.push(member.jid);
     }
-    Infor.client.sendMessage(Infor.from, msg, MessageType.extendedText, {
-      quoted: Infor.reply,
+    Xxxbot.client.sendMessage(Xxxbot.from, msg, MessageType.extendedText, {
+      quoted: Xxxbot.reply,
       contextInfo: {
         mentionedJid: memberslist,
       },

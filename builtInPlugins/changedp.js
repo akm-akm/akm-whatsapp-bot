@@ -5,5 +5,5 @@ module.exports = {
   eg: ["changedp"],
   group: true,
   owner: false,
-  async handle(Infor) {},
+  async handle(Xxxbot) {},
 };

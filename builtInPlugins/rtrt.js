@@ -5,5 +5,5 @@ module.exports = {
   eg: ["rtrt"],
   group: false,
   owner: true,
-  async handle(Infor) {},
+  async handle(Xxxbot) {},
 };
