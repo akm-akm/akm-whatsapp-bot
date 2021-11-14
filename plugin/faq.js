@@ -5,20 +5,16 @@ const faq = JSON.parse(
 );
 
 module.exports = {
-  "name": "faq",
-  "usage": "faq",
-  "desc": "The bot will send some frequently asked questions about the bot.",
-  "eg": [
-    "faq"
-  ],
-  "group": false,
-  "owner": false,
+  name: "faq",
+  usage: "faq",
+  desc: "The bot will send some frequently asked questions about the bot.",
+  eg: ["faq"],
+  group: false,
+  owner: false,
   handle(Infor) {
-
     let msgl = "🤖🤖🤖 *XXX-BOT FAQs* 🤖🤖🤖\n";
 
     faq.forEach((element) => {
-
       msgl +=
         "\n🤔 *" +
         element.question +
@@ -27,6 +23,6 @@ module.exports = {
         element.answer +
         "```\n";
     });
-    Infor.replytext(msgl)
-  }
-}
+    Infor.replytext(msgl);
+  },
+};

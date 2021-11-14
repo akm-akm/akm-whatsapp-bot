@@ -19,35 +19,28 @@ const requestOptions = {
   gzip: true,
 };
 
-
-
 module.exports = {
-  "name": 'crypto',
-  "usage": "crypto <coinsymbol>",
-  "desc": "Fetches the price of given crypto currency from coinmarketcap using its API.",
-  "eg": [
-    "crypto btc",
-    "crypto xrp",
-    "crypto eth"
-  ],
-  "group": false,
-  "owner": false,
+  name: "crypto",
+  usage: "crypto <coinsymbol>",
+  desc: "Fetches the price of given crypto currency from coinmarketcap using its API.",
+  eg: ["crypto btc", "crypto xrp", "crypto eth"],
+  group: false,
+  owner: false,
   handle(Infor) {
     let c = 0;
     const arg = Infor.arg;
     let message;
 
     if (arg.length == 1) {
-      Infor.wrongCommand()
-      return
+      Infor.wrongCommand();
+      return;
     }
     if (!process.env.COINMARKETCAP_API_KEY) {
-      Infor.noapi()
+      Infor.noapi();
       return;
     }
     if (!coins.includes(arg[1].toUpperCase())) {
-
-      Infor.replytext("🤖 ```Not in coinmarketcap.```")
+      Infor.replytext("🤖 ```Not in coinmarketcap.```");
     } else {
       axios(requestOptions)
         .then(function (response) {
@@ -83,10 +76,8 @@ module.exports = {
           });
         })
         .catch((error) => {
-          Infor.errorlog(error)
+          Infor.errorlog(error);
         });
     }
-  }
-}
-
-
+  },
+};

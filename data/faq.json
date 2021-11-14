@@ -1,23 +1,23 @@
 [
-    {
-        "question": "How many replies will the bot give back?",
-        "answer": "Every number has a limit of x replies. This means when the bot has given x successful replies to any number, it will not respond  to that number anymore."
-    },
-   
-    {
-        "question": "Why is the bot not replying to someone?",
-        "answer": "The number may have used its daily limit of x replies or the bot may be down due to heavy traffic."
-    },
-    {
-        "question": "When is the limit reset?",
-        "answer": "The limit is reset at midnight everyday."
-    },
-    {
-        "question": "How does the bot work?",
-        "answer": "Javascript, nodejs and postgresql."
-    },
-    {
-        "question": "How many groups use this bot?",
-        "answer": "This bot is present in almost 1000 groups."
-    }
+  {
+    "question": "How many replies will the bot give back?",
+    "answer": "Every number has a limit of x replies. This means when the bot has given x successful replies to any number, it will not respond  to that number anymore."
+  },
+
+  {
+    "question": "Why is the bot not replying to someone?",
+    "answer": "The number may have used its daily limit of x replies or the bot may be down due to heavy traffic."
+  },
+  {
+    "question": "When is the limit reset?",
+    "answer": "The limit is reset at midnight everyday."
+  },
+  {
+    "question": "How does the bot work?",
+    "answer": "Javascript, nodejs and postgresql."
+  },
+  {
+    "question": "How many groups use this bot?",
+    "answer": "This bot is present in almost 1000 groups."
+  }
 ]

@@ -1,6 +1,5 @@
 //stop and login
 $(function () {
-
   $.ajax({
     url: "/isconnected",
     method: "get",
@@ -10,7 +9,7 @@ $(function () {
         $("#stop").addClass("hidden");
         $("#login").removeClass("hidden");
       } else if (res == "open") {
-        $("#login").prop('disabled', true);
+        $("#login").prop("disabled", true);
         $("#stop").removeClass("hidden");
         $("#login").text("connected");
       } else if (res == "connecting") {
@@ -27,23 +26,12 @@ $(function () {
       if (res == "present") {
         $("#logout").removeClass("hidden");
         $("#qrcode").removeAttr("src");
-
       } else {
         $("#logout").addClass("hidden");
       }
     },
   });
-
 });
-
-
-
-
-
-
-
-
-
 
 //sql query
 
@@ -51,17 +39,16 @@ $("#submit").click(function (e) {
   e.preventDefault();
   if ($("#query").val() == "") return $("#submit").text("Enter query");
   $("#submit").text("Loading");
-  $("#submit").prop('disabled', true);
+  $("#submit").prop("disabled", true);
 
   $.ajax({
     url: "/sql",
     method: "post",
     success: function final(res) {
       console.log(res);
-      $("#submit").prop('disabled', false);
+      $("#submit").prop("disabled", false);
       $("#submit").text("Run Query");
       $("#output").text(JSON.stringify(res, null, "\t"));
-
     },
     data: {
       query: $("#query").val(),
@@ -72,25 +59,19 @@ $("#submit").click(function (e) {
 //restart
 $("#restart").click(function (e) {
   $("#restart").text("Restarting...");
-  $("#logout").prop('disabled', true);
-  $("#login").prop('disabled', true);
-  $("#stop").prop('disabled', true);
-  $("#database").prop('disabled', true);
-  $("#restart").prop('disabled', true);
+  $("#logout").prop("disabled", true);
+  $("#login").prop("disabled", true);
+  $("#stop").prop("disabled", true);
+  $("#database").prop("disabled", true);
+  $("#restart").prop("disabled", true);
   e.preventDefault();
   $.ajax({
     url: "/restart",
     method: "get",
-    success: function () {
-
-    }
+    success: function () {},
   });
-  setTimeout(location.reload(), 8000)
-
+  setTimeout(location.reload(), 8000);
 });
-
-
-
 
 ///////database
 $("#database").click(function (e) {
@@ -98,9 +79,7 @@ $("#database").click(function (e) {
   $(".container1").removeClass("hidden");
   $("#container2").addClass("hidden");
   $("#postgres").removeClass("hidden");
-
 });
-
 
 //ddatabase back/////
 $("#back").click(function (e) {
@@ -108,20 +87,18 @@ $("#back").click(function (e) {
   $(".container1").addClass("hidden");
   $("#container2").removeClass("hidden");
   $("#postgres").addClass("hidden");
-
 });
 
-
 ///////login////////
-let myVar
+let myVar;
 $("#login").click(function (e) {
   $("#login").text("connecting...");
   $("#stop").text("stop bot");
   $("#stop").removeClass("hidden");
-  $("#logout").prop('disabled', true);
-  $("#login").prop('disabled', true);
-  $("#database").prop('disabled', true);
-  $("#restart").prop('disabled', true);
+  $("#logout").prop("disabled", true);
+  $("#login").prop("disabled", true);
+  $("#database").prop("disabled", true);
+  $("#restart").prop("disabled", true);
   e.preventDefault();
   $.ajax({
     url: "/login",
@@ -130,12 +107,12 @@ $("#login").click(function (e) {
       console.log(res);
       if (res == "present") {
         $("#login").text("connected");
-        $("#logout").prop('disabled', false);
-        $("#login").prop('disabled', true);
+        $("#logout").prop("disabled", false);
+        $("#login").prop("disabled", true);
         $("#logout").removeClass("hidden");
         $("#stop").removeClass("hidden");
-        $("#database").prop('disabled', false);
-        $("#restart").prop('disabled', false);
+        $("#database").prop("disabled", false);
+        $("#restart").prop("disabled", false);
         $("#qrcode").removeAttr("src");
       } else if (res == "absent") {
         $("#login").text("Generating Qr");
@@ -149,15 +126,15 @@ $("#login").click(function (e) {
                 url: "/isconnected",
                 method: "get",
                 success: function (ima) {
-                  console.log('ima ' + ima);
-                  if (ima == 'open') {
+                  console.log("ima " + ima);
+                  if (ima == "open") {
                     $("#login").text("conected");
-                    $("#logout").prop('disabled', false);
-                    $("#login").prop('disabled', false);
+                    $("#logout").prop("disabled", false);
+                    $("#login").prop("disabled", false);
                     $("#logout").removeClass("hidden");
                     $("#stop").removeClass("hidden");
-                    $("#database").prop('disabled', false);
-                    $("#restart").prop('disabled', false);
+                    $("#database").prop("disabled", false);
+                    $("#restart").prop("disabled", false);
                     clearInterval(myVar);
                     $("#qrcode").removeAttr("src");
                   }
@@ -173,17 +150,14 @@ $("#login").click(function (e) {
   });
 });
 
-
-
-
 //stop////////////
 $("#stop").click(function (e) {
   $("#stop").text("stoping...");
-  $("#logout").prop('disabled', true);
-  $("#login").prop('disabled', true);
-  $("#stop").prop('disabled', true);
-  $("#database").prop('disabled', true);
-  $("#restart").prop('disabled', true);
+  $("#logout").prop("disabled", true);
+  $("#login").prop("disabled", true);
+  $("#stop").prop("disabled", true);
+  $("#database").prop("disabled", true);
+  $("#restart").prop("disabled", true);
   e.preventDefault();
 
   $.ajax({
@@ -193,37 +167,36 @@ $("#stop").click(function (e) {
       console.log(res);
       clearInterval(myVar);
       $("#qrcode").removeAttr("src");
-      $("#logout").prop('disabled', false);
-      $("#login").prop('disabled', false);
-      $("#stop").prop('disabled', false);
-      $("#database").prop('disabled', false);
-      $("#restart").prop('disabled', false);
+      $("#logout").prop("disabled", false);
+      $("#login").prop("disabled", false);
+      $("#stop").prop("disabled", false);
+      $("#database").prop("disabled", false);
+      $("#restart").prop("disabled", false);
       $("#login").text("start bot");
       $("#stop").addClass("hidden");
     },
   });
 });
 
-
 ////logout
 $("#logout").click(function (e) {
   e.preventDefault();
   $("#logout").text("Refresh in a minute..");
-  $("#logout").prop('disabled', true);
-  $("#login").prop('disabled', true);
-  $("#stop").prop('disabled', true);
-  $("#database").prop('disabled', true);
-  $("#restart").prop('disabled', true);
+  $("#logout").prop("disabled", true);
+  $("#login").prop("disabled", true);
+  $("#stop").prop("disabled", true);
+  $("#database").prop("disabled", true);
+  $("#restart").prop("disabled", true);
   $.ajax({
     url: "/logout",
     method: "get",
     success: function final(res) {
       console.log(res);
-      $("#logout").prop('disabled', false);
-      $("#login").prop('disabled', false);
-      $("#stop").prop('disabled', false);
-      $("#database").prop('disabled', false);
-      $("#restart").prop('disabled', false);
+      $("#logout").prop("disabled", false);
+      $("#login").prop("disabled", false);
+      $("#stop").prop("disabled", false);
+      $("#database").prop("disabled", false);
+      $("#restart").prop("disabled", false);
       $("#stop").addClass("hidden");
       $("#login").text("start bot");
       $("#logout").text("Log out");
@@ -232,37 +205,33 @@ $("#logout").click(function (e) {
   });
 });
 
-
 ////sitelogin//////
 
-
 $("#submitauth").click(function (e) {
-
-
   e.preventDefault();
-  if ($("#session").val() == "") return $("#session").attr("placeholder", "Enter password");
+  if ($("#session").val() == "")
+    return $("#session").attr("placeholder", "Enter password");
   $("#submitauth").text("Loading");
 
-  $("#submitauth").prop('disabled', true);
+  $("#submitauth").prop("disabled", true);
   $.ajax({
     url: "/auth",
     method: "post",
     success: function final(res) {
       console.log(res);
       if (res == "true") {
-
         $(".container1").addClass("hidden");
         $(".container2").removeClass("hidden");
       } else if (res == "false") {
-        $("#session").val('')
+        $("#session").val("");
         $("#session").attr("placeholder", "Wrong password");
-        $("#submitauth").prop('disabled', false);
+        $("#submitauth").prop("disabled", false);
         $("#submitauth").text("login");
       }
     },
     data: {
       pass: $("#session").val(),
-      siteurl: window.location.origin
+      siteurl: window.location.origin,
     },
   });
 });

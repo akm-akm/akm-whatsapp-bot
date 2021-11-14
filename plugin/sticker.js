@@ -6,30 +6,26 @@ const fs = require("fs");
 
 const { MessageType } = require("../@adiwajshing/baileys");
 const { sticker } = MessageType;
-const {
-  ai
-} = require("../utils/deepai");
-
+const { ai } = require("../utils/deepai");
 
 module.exports = {
-  "name": "sticker",
-  "usage": "sticker <arguments>",
-  "desc": "Converts the image, tagged image or video to sticker.",
-  "eg": [
+  name: "sticker",
+  usage: "sticker <arguments>",
+  desc: "Converts the image, tagged image or video to sticker.",
+  eg: [
     "sticker crop nodata",
     "sticker pack cheems author doge",
     "sticker nodata",
-    "sticker crop pack cheems"
+    "sticker crop pack cheems",
   ],
-  "group": false,
-  "owner": false,
+  group: false,
+  owner: false,
   async handle(Infor) {
-
     const arg = Infor.arg;
     const from = Infor.from;
     const isMedia = Infor.isMedia;
-    const isQuotedImage = Infor.isQuotedImage
-    const isQuotedVideo = Infor.isQuotedVideo
+    const isQuotedImage = Infor.isQuotedImage;
+    const isQuotedVideo = Infor.isQuotedVideo;
 
     const getRandom = (ext) => {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
@@ -108,15 +104,18 @@ module.exports = {
     ///////////////image//////////////////
     if ((isMedia && !Infor.reply.message.videoMessage) || isQuotedImage) {
       const encmedia = isQuotedImage
-        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m")).message
-          .extendedTextMessage.contextInfo
+        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m"))
+            .message.extendedTextMessage.contextInfo
         : Infor.reply;
-      const media = await Infor.client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
+      const media = await Infor.client.downloadAndSaveMediaMessage(
+        encmedia,
+        getRandom("")
+      );
       const ran = getRandom(".webp");
       if (!Infor.isGroup || Infor.groupdata.nsfw == true) {
-        const nsfw = await ai(media)
+        const nsfw = await ai(media);
         if (nsfw.output.nsfw_score > 0.6) {
-          Infor.replytext("🌚 🔞")
+          Infor.replytext("🌚 🔞");
           fs.unlinkSync(media);
           return;
         }
@@ -135,7 +134,7 @@ module.exports = {
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Infor.replysticker(ran)
+          Infor.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
         } else {
@@ -159,18 +158,21 @@ module.exports = {
     } else if (
       (isMedia && Infor.reply.message.videoMessage.seconds < 11) ||
       (isQuotedVideo &&
-        Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage
-          .seconds < 11)
+        Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage
+          .videoMessage.seconds < 11)
     ) {
       const encmedia = isQuotedVideo
-        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m")).message
-          .extendedTextMessage.contextInfo
+        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m"))
+            .message.extendedTextMessage.contextInfo
         : Infor.reply;
-      const media = await Infor.client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
+      const media = await Infor.client.downloadAndSaveMediaMessage(
+        encmedia,
+        getRandom("")
+      );
       if (!Infor.isGroup || Infor.groupdata.nsfw == true) {
-        const nsfw = await ai(media)
+        const nsfw = await ai(media);
         if (nsfw.output.nsfw_score > 0.6) {
-          Infor.replytext("🌚 🔞")
+          Infor.replytext("🌚 🔞");
 
           fs.unlinkSync(media);
 
@@ -178,7 +180,6 @@ module.exports = {
         }
       }
       const ran = getRandom(".webp");
-
 
       ffmpeg(`./${media}`)
         .inputFormat(media.split(".")[1])
@@ -197,7 +198,7 @@ module.exports = {
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Infor.replysticker(ran)
+          Infor.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
         } else {
@@ -214,22 +215,24 @@ module.exports = {
           return;
         }
       }
-    }
-    else if (
+    } else if (
       (isMedia && Infor.reply.message.videoMessage.seconds >= 11) ||
       (isQuotedVideo &&
-        Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage
-          .seconds >= 11)
+        Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage
+          .videoMessage.seconds >= 11)
     ) {
       const encmedia = isQuotedVideo
-        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m")).message
-          .extendedTextMessage.contextInfo
+        ? JSON.parse(JSON.stringify(Infor.reply).replace("quotedM", "m"))
+            .message.extendedTextMessage.contextInfo
         : Infor.reply;
-      const media1 = await Infor.client.downloadAndSaveMediaMessage(encmedia, getRandom(''));
+      const media1 = await Infor.client.downloadAndSaveMediaMessage(
+        encmedia,
+        getRandom("")
+      );
       if (!Infor.isGroup || Infor.groupdata.nsfw == true) {
-        const nsfw = await ai(media1)
+        const nsfw = await ai(media1);
         if (nsfw.output.nsfw_score > 0.6) {
-          Infor.replytext("🌚 🔞")
+          Infor.replytext("🌚 🔞");
 
           fs.unlinkSync(media1);
 
@@ -240,10 +243,10 @@ module.exports = {
       const ran = getRandom(".webp");
       const media = getRandom(".mp4");
       ffmpeg(`./${media1}`)
-        .setStartTime('00:00:00')
-        .setDuration('9')
+        .setStartTime("00:00:00")
+        .setDuration("9")
         .output(media)
-        .on('end', function (err) {
+        .on("end", function (err) {
           if (err) {
             fs.unlinkSync(media);
             fs.unlinkSync(ran);
@@ -265,9 +268,8 @@ module.exports = {
             .addOutputOptions(outputOptions)
             .toFormat("webp")
             .save(ran);
-
         })
-        .on('error', function (err) {
+        .on("error", function (err) {
           reject(inofr5);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
@@ -275,12 +277,11 @@ module.exports = {
 
           return;
         })
-        .run()
-
+        .run();
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Infor.replysticker(ran)
+          Infor.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
           fs.unlinkSync(media1);
@@ -299,9 +300,8 @@ module.exports = {
           return;
         }
       }
-    }
-    else {
+    } else {
       Infor.replytext(Infor.mess.tag);
     }
-  }
-}
+  },
+};

@@ -1,16 +1,18 @@
 const {
   WAConnection,
   ReconnectMode,
-  MessageType
+  MessageType,
 } = require("../@adiwajshing/baileys");
-
 
 const path = require("path");
 const fs = require("fs");
 const settingread = require(path.join(__dirname, "../utils/settingcheck"));
 let qri = require("qr-image");
 const sql = require(path.join(__dirname, "../utils/ps"));
-const {messagehandler} = require(path.join(__dirname, "../utils/messagehandler"));
+const { messagehandler } = require(path.join(
+  __dirname,
+  "../utils/messagehandler"
+));
 
 const client = new WAConnection();
 
@@ -35,10 +37,9 @@ async function connect() {
     }
 
     client.on("qr", (qr) => {
-
       qri
         .image(qr, {
-          type: "png"
+          type: "png",
         })
         .pipe(fs.createWriteStream("./public/qr.png"));
     });
@@ -46,12 +47,12 @@ async function connect() {
       console.log("connecting...");
     });
     await client.connect({
-      timeoutMs: 30 * 1000
+      timeoutMs: 30 * 1000,
     });
     client.on("open", () => {
       console.log("connected");
       console.log(`credentials updated!`);
-      fs.unlink("./public/qr.png", () => { });
+      fs.unlink("./public/qr.png", () => {});
     });
     const authInfo = client.base64EncodedAuthInfo();
     load_clientID = authInfo.clientID;
@@ -88,7 +89,7 @@ async function connect() {
   } catch (err) {
     console.error(err);
     if (err.message.startsWith("Unexpected error in login")) {
-      await sql.query('UPDATE botdata SET isconnected = false;')
+      await sql.query("UPDATE botdata SET isconnected = false;");
       console.log("isconnected set to false");
       await sql.query("DROP TABLE auth;");
       console.log("auth dropped");
@@ -105,39 +106,50 @@ async function connect() {
   }
 }
 async function main() {
-  
- 
   try {
     client.logger.level = "fatal";
     await connect();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
     console.log("Hello " + client.user.name);
-    sql.query('UPDATE botdata SET isconnected = true;')
+    sql.query("UPDATE botdata SET isconnected = true;");
 
-    client.on('CB:Call', async json => {
-      const number = json[1]['from'];
+    client.on("CB:Call", async (json) => {
+      const number = json[1]["from"];
       const isOffer = json[1]["type"] == "offer";
       if (number && isOffer && json[1]["data"]) {
         const tag = client.generateMessageTag();
-        const jsjs = ["action", "call", ["call", {
-          "from": client.user.jid,
-          "to": number.split("@")[0] + "@s.whatsapp.net",
-          "id": tag
-        },
+        const jsjs = [
+          "action",
+          "call",
           [
-            ["reject", {
-              "call-id": json[1]['id'],
-              "call-creator": number.split("@")[0] + "@s.whatsapp.net",
-              "count": "0"
-            }, null]
-          ]
-        ]];
-        client.send(`${tag},${JSON.stringify(jsjs)}`)
-        client.sendMessage(number, "🤖 ```Cannot receive call!```", MessageType.text);
+            "call",
+            {
+              from: client.user.jid,
+              to: number.split("@")[0] + "@s.whatsapp.net",
+              id: tag,
+            },
+            [
+              [
+                "reject",
+                {
+                  "call-id": json[1]["id"],
+                  "call-creator": number.split("@")[0] + "@s.whatsapp.net",
+                  count: "0",
+                },
+                null,
+              ],
+            ],
+          ],
+        ];
+        client.send(`${tag},${JSON.stringify(jsjs)}`);
+        client.sendMessage(
+          number,
+          "🤖 ```Cannot receive call!```",
+          MessageType.text
+        );
       }
-    })
-
+    });
 
     client.on("chat-update", async (xxxx) => {
       try {
@@ -147,7 +159,7 @@ async function main() {
         if (xxx5.key && xxx5.key.remoteJid == "status@broadcast") return;
         if (xxx5.key.fromMe) return;
         const Infor = await settingread(xxx5, client);
-        messagehandler(Infor)
+        messagehandler(Infor);
       } catch (error) {
         console.log(error);
       }
@@ -155,34 +167,26 @@ async function main() {
   } catch (err) {
     console.log(err);
   }
-
-
-
-
 }
-
-
-
 
 ////////////////////////////////////////////////////////////////////
 async function stop() {
   client.close();
   console.log("Stopped");
-  await sql.query('UPDATE botdata SET isconnected = false;')
+  await sql.query("UPDATE botdata SET isconnected = false;");
   process.exit();
 }
 async function isconnected() {
   return client.state;
 }
 async function logout() {
-  sql.query('UPDATE botdata SET isconnected = false;')
+  sql.query("UPDATE botdata SET isconnected = false;");
   console.log("isconnected set to false");
   sql.query("DROP TABLE auth;");
   console.log("auth dropped");
   client.close();
   client.logout();
   console.log("Logged out");
-
 }
 
 module.exports.main = main;

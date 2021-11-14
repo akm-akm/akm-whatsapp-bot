@@ -1,15 +1,15 @@
 const axios = require("axios");
 
-let msg = '';
+let msg = "";
 function stripTags(string) {
   return string.replace(/<(.|\n)*?>/g, "").trim();
 }
 const proxy = {
   proxy: {
-    host: '103.35.134.30',
-    port: 83
-  }
-}
+    host: "103.35.134.30",
+    port: 83,
+  },
+};
 function searchTransformer(isIndex) {
   let matcher = "";
   if (isIndex) {
@@ -31,68 +31,60 @@ function searchTransformer(isIndex) {
   };
 }
 
-
 module.exports = {
-  "name": "market",
-  "usage": "market <arguments>",
-  "desc": "Fetches the information of given symbol from NSE. Arguments it can take are,\n📱 status - It will give the status of the market.\n📱 search <name> - It will search all the companies with this name.\n📱 details <key> - It will give all the details of the stock from NSE.\n📱 losers - It will give top 10 loosers of NSE.\n📱 gainers - It will give top 10 gainers of NSE.",
-  "eg": [
+  name: "market",
+  usage: "market <arguments>",
+  desc: "Fetches the information of given symbol from NSE. Arguments it can take are,\n📱 status - It will give the status of the market.\n📱 search <name> - It will search all the companies with this name.\n📱 details <key> - It will give all the details of the stock from NSE.\n📱 losers - It will give top 10 loosers of NSE.\n📱 gainers - It will give top 10 gainers of NSE.",
+  eg: [
     "market status",
     "market search tata",
     "market details tcs",
     "market losers",
-    "market gainers"
+    "market gainers",
   ],
-  "group": false,
-  "owner": false,
+  group: false,
+  owner: false,
   handle(Infor) {
-
-    const arg = Infor.arg
+    const arg = Infor.arg;
 
     if (arg.length == 1) {
-      Infor.wrongCommand()
+      Infor.wrongCommand();
 
-      return
+      return;
     }
     switch (arg[1]) {
       case "status":
         axios
           .get(
-            "https://www1.nseindia.com//emerge/homepage/smeNormalMktStatus.json"
-            , proxy
+            "https://www1.nseindia.com//emerge/homepage/smeNormalMktStatus.json",
+            proxy
           )
           .then((response) => {
             if (response.error) {
-              Infor.replytext(Infor.mess.error.error)
-                ;
-
+              Infor.replytext(Infor.mess.error.error);
             } else {
               let msg =
                 "Market status : ```" + response.data.NormalMktStatus + "```";
-              Infor.replytext(msg)
-
-
-
+              Infor.replytext(msg);
             }
           })
           .catch((err) => {
             console.log(err);
-
           });
         break;
       case "gainer":
       case "gainers":
         axios
           .get(
-            "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json"
-            , proxy)
+            "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json",
+            proxy
+          )
           .then((response) => {
             let msg = "*Gainers* 📈";
 
             if (response.error) {
               console.log("err");
-              Infor.replytext(Infor.mess.error.error)
-
+              Infor.replytext(Infor.mess.error.error);
             } else {
               response.data.data.forEach((element) => {
                 msg +=
@@ -115,12 +107,11 @@ module.exports = {
                   element.previousPrice +
                   "```";
               });
-              Infor.replytext(msg)
+              Infor.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error)
-
+            Infor.replytext(Infor.mess.error.error);
           });
 
         break;
@@ -128,8 +119,9 @@ module.exports = {
       case "stocks":
         axios
           .get(
-            "https://www1.nseindia.com/live_market/dynaContent/live_watch/stock_watch/nifty"
-            , proxy)
+            "https://www1.nseindia.com/live_market/dynaContent/live_watch/stock_watch/nifty",
+            proxy
+          )
           .then((response) => {
             let msg = "*Index Stocks NIFTY* 📈";
             if (response.error) {
@@ -159,15 +151,11 @@ module.exports = {
                   element.ltP +
                   "```";
               });
-              Infor.replytext(msg)
-
+              Infor.replytext(msg);
             }
           })
           .catch((err) => {
-
-            Infor.replytext(Infor.mess.error.error)
-
-
+            Infor.replytext(Infor.mess.error.error);
           });
 
         break;
@@ -176,8 +164,9 @@ module.exports = {
       case "loser":
         axios
           .get(
-            "https://www1.nseindia.com/live_market/dynaContent/live_analysis/losers/niftyLosers1.json"
-            , proxy)
+            "https://www1.nseindia.com/live_market/dynaContent/live_analysis/losers/niftyLosers1.json",
+            proxy
+          )
           .then((response) => {
             let msg = "*Losers* 📈";
 
@@ -200,50 +189,49 @@ module.exports = {
                   "```\n" +
                   "```Prev Price: " +
                   element.previousPrice +
-                  "```\n"; +
-                    "```turnoverInLakhs : " + element.turnoverInLakhs + "```";
+                  "```\n";
+                +"```turnoverInLakhs : " + element.turnoverInLakhs + "```";
               });
-              Infor.replytext(msg)
-
+              Infor.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error)
-
+            Infor.replytext(Infor.mess.error.error);
           });
 
         break;
 
       case "search":
-
         if (arg.length < 3) {
-          Infor.replytext("```Enter stocks name to search.```")
-          return
+          Infor.replytext("```Enter stocks name to search.```");
+          return;
         }
         if (arg.length > 3) {
-          Infor.replytext("```Searching only the first word.```")
+          Infor.replytext("```Searching only the first word.```");
         }
         axios
           .get(
             "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxCompanySearch.jsp?search=" +
-            arg[2].toUpperCase(), {
-            headers: {
-              "X-Requested-With": "XMLHttpRequest",
-              Referer: "https://www.nseindia.com/ChartApp/install/charts/mainpage.jsp",
-              Host: "www.nseindia.com",
+              arg[2].toUpperCase(),
+            {
+              headers: {
+                "X-Requested-With": "XMLHttpRequest",
+                Referer:
+                  "https://www.nseindia.com/ChartApp/install/charts/mainpage.jsp",
+                Host: "www.nseindia.com",
+              },
+              transformResponse: searchTransformer(false),
             },
-            transformResponse: searchTransformer(false),
-          }
-            , proxy)
+            proxy
+          )
           .then((response) => {
             if (response.error) {
               console.log("err");
             } else {
-              msg =
-                "*Search Result* 🔎\n"
+              msg = "*Search Result* 🔎\n";
               response.data.forEach((element) => {
-                msg = msg +
-
+                msg =
+                  msg +
                   "\n\n📈 " +
                   "*" +
                   element.symbol +
@@ -255,42 +243,42 @@ module.exports = {
                   element.symbol +
                   "```";
               });
-              Infor.replytext(msg)
-
+              Infor.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error)
-
+            Infor.replytext(Infor.mess.error.error);
           });
         break;
 
       case "details":
       case "detail":
         if (arg.length < 3) {
-          Infor.replytext("```Enter stock symbol to get details.```")
-          return
+          Infor.replytext("```Enter stock symbol to get details.```");
+          return;
         }
         if (arg.length > 3) {
-          Infor.replytext("```Searching only the first symbol.```")
+          Infor.replytext("```Searching only the first symbol.```");
         }
         axios
           .get(
             "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=" +
-            arg[2].toUpperCase(), {
-            headers: {
-              Referer: "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=" +
-                arg[2].toUpperCase(),
-              "X-Requested-With": "XMLHttpRequest",
+              arg[2].toUpperCase(),
+            {
+              headers: {
+                Referer:
+                  "https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=" +
+                  arg[2].toUpperCase(),
+                "X-Requested-With": "XMLHttpRequest",
+              },
             },
-          }
-            , proxy)
+            proxy
+          )
           .then((response) => {
             if (response.error) {
               console.log("err");
             } else if (response.data.data.length == 0) {
               msg = "```Not Found```";
-
             } else {
               element = response.data.data[0];
 
@@ -358,20 +346,16 @@ module.exports = {
                 "```Update Time   : " +
                 response.data.lastUpdateTime.split(" ")[1] +
                 "```";
-              Infor.replytext(msg)
-
+              Infor.replytext(msg);
             }
           })
           .catch((err) => {
-            Infor.replytext(Infor.mess.error.error)
-
+            Infor.replytext(Infor.mess.error.error);
           });
         break;
 
       default:
         Infor.wrongCommand();
-
     }
-
-  }
-}
+  },
+};
