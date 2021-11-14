@@ -44,6 +44,9 @@ for (let file of builtInPlugins) {
 
 
 exports.messagehandler = async (Infor) => {
+
+
+  
     /**
      * @param {String} place
      * This stores the place message is received
@@ -137,7 +140,7 @@ exports.messagehandler = async (Infor) => {
 
   console.log(
     "🤖  " +
-      chalk.bgRed("[" + Infor.number + "   ]") +
+      chalk.bgRed("[" + Infor.number + "]") +
       "  " +
       chalk.bgGreen("[" + place + "]") +
       "  " +
