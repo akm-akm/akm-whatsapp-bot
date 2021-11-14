@@ -96,7 +96,7 @@ exports.messagehandler = async (Infor) => {
 
     /* This line checks the following-
     (IS the daily limit over?)
-    If yes then return
+    If yes then returntrtuj
     */
     if (Infor.dailylimitover === true) return
 
