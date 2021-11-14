@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const version = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../package.json"))
 ).version;
-const plugins = fs.readdirSync(path.join(__dirname, '../plugin'))
+const plugins = fs.readdirSync(path.join(__dirname, '../plugin')).filter(file => file != 'help.js' && file != 'template.js')
 const pluginsinfo = require(path.join(__dirname, '../utils/pluginInfo'));
 
 for (let file of plugins) {
@@ -76,7 +76,7 @@ module.exports = {
 
       const c = prefix == undefined ? "```Not needed in inbox```" : useprefix ? prefix : "( " + prefix + " )" + " ```Disabled```";
       if (prefix == undefined || !useprefix) prefix = "🎀";
-      const grpcmds = (Infor.isGroup && (Infor.isGroupAdmins || Infor.number === process.env.OWNER_NUMBER || Infor.botdata.moderators.includes(Infor.number))) ? adminCommands : "";
+      const grpcmds = (Infor.isGroup && Infor.isGroupAdmins) ? adminCommands : "";
       const owncmds = Infor.number === process.env.OWNER_NUMBER ? ownerCommands : "";
 
 
@@ -92,7 +92,7 @@ module.exports = {
 
         "\n📃 *Bot News* :" +
         "\n‼️ _wazirx added_" +
-      
+
         "\n\n⚙️ *Bot version* : " + version;
       Infor.replytext(help);
 
