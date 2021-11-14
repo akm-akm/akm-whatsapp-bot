@@ -8,23 +8,11 @@ const {
 const path = require("path");
 const fs = require("fs");
 const settingread = require(path.join(__dirname, "../utils/settingcheck"));
-const {
-  switchcase
-} = require(path.join(__dirname, "../utils/case"));
 let qri = require("qr-image");
 const sql = require(path.join(__dirname, "../utils/ps"));
-const {
-  count
-} = require(path.join(__dirname, "../utils/count"));
-const chalk = require('chalk');
-const mess = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
-);
 const {messagehandler} = require(path.join(__dirname, "../utils/messagehandler"));
 
 const client = new WAConnection();
-client.version = [3, 3234, 9];
-
 
 async function connect() {
   try {
@@ -152,27 +140,30 @@ async function main() {
 
 
     client.on("chat-update", async (xxxx) => {
-
       try {
         if (!xxxx.hasNewMessage) return;
         xxx5 = xxxx.messages.all()[0];
         if (!xxx5.message) return;
         if (xxx5.key && xxx5.key.remoteJid == "status@broadcast") return;
-
         if (xxx5.key.fromMe) return;
         const Infor = await settingread(xxx5, client);
-
         messagehandler(Infor)
-       // switchcase(Infor, client, xxx4);
-
       } catch (error) {
         console.log(error);
       }
     });
   } catch (err) {
-    console.log("EVENTS.JS ERROR-----------------------" + err);
+    console.log(err);
   }
+
+
+
+
 }
+
+
+
+
 ////////////////////////////////////////////////////////////////////
 async function stop() {
   client.close();

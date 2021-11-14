@@ -24,7 +24,7 @@ module.exports = {
         )
             .then((response) => {
                 var crypto_body = response.data;
-                console.log(response.data.code);
+            
                 if (response.data.code==1999) {
                     Infor.replytext("💸 ```No such crypto currency on Wazirx```")
                 } else {
