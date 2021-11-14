@@ -23,7 +23,8 @@ module.exports = {
             Infor.wrongCommand()
             return;
         }
-
+        arg.shift();
+        const cmd = arg.join(" ")
 
         sql.query(cmd).then(result => {
             Infor.replytext(JSON.stringify(result.rows, null, "\t"))

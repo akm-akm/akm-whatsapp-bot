@@ -59,7 +59,8 @@ module.exports = async function settingread(xxx, client) {
     Infor.groupName = Infor.isGroup ? Infor.groupMetadata.subject : undefined;
     Infor.botNumber = client.user.jid.split("@")[0];
     Infor.isBotGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(`${Infor.botNumber}@s.whatsapp.net`) || false : undefined;
-    Infor.isOwner = Infor.from === `${process.env.OWNER_NUMBER}@s.whatsapp.net`;
+    Infor.isOwner =Infor.isGroup?
+      Infor.sender === `${process.env.OWNER_NUMBER}@s.whatsapp.net` : Infor.from === `${process.env.OWNER_NUMBER}@s.whatsapp.net` ;
     Infor.isSuperAdmin = Infor.isGroup ? Infor.groupMetadata.owner == Infor.from : undefined;
 
 
@@ -88,7 +89,7 @@ module.exports = async function settingread(xxx, client) {
             client.groupLeave(from);
             return
           }
-          console.log("👪  " + chalk.bgCyan(`Prefix assigned is '${random}' for group ` + groupname));
+          console.log("👪  " + chalk.bgCyan(`Prefix assigned is '${random}' for group ` + Infor.groupname));
           newgroup(from, client, random)
           sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`

@@ -107,23 +107,26 @@ exports.messagehandler = async (Infor) => {
         return
     }
 
-    console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + Infor.groupName + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
+    console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + Infor.isGroup?Infor.groupName:"INBOX" + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
 
 
     if (Infor.abusepresent.length != 0 && !Infor.isBotModerator) {
         Infor.replytext("⚠️  ```" + Infor.abusepresent.join(" ") + "```")
+        count(Infor)
         return;
     }
 
 
     if (Infor.isGroup && Infor.groupdata.autosticker && Infor.isMedia && Infor.arg[0] !== "sticker" && Infor.arg[0] !== "testnsfw") {
         commandHandler.get('sticker').handle(Infor);
-
+        count(Infor)
+        return;
     }
 
 
     if (Infor.arg == "hi" || Infor.arg == "hey" || Infor.arg == "hello" || Infor.arg == "helloo" || Infor.arg == "hellooo" || Infor.arg == "hii" || Infor.arg == "hiii" || Infor.arg == "heyy" || Infor.arg == "heyyy" ) {
         Infor.replytext(Infor.mess.salutations[Math.floor(Math.random() * Infor.mess.salutations.length)])
+        count(Infor);
         return;
     }
 

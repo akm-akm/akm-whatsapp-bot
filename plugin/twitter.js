@@ -18,11 +18,11 @@ module.exports = {
     "owner": false,
     async handle(Infor) {
 
-
-
         if (!Infor.isBotModerator) {
             Infor.replytext(Infor.mess.only.modB)
+            return;
         }
+
         let msg = "⚽ *Name* : ```Fabrizio Romano```\n\n"
 
 
