@@ -4,7 +4,6 @@ const { count } = require(path.join(__dirname, "./count"));
 
 const chalk = require('chalk');
 const sql = require(path.join(__dirname, "./ps"));
-
 const commandHandler = new Map();
 const plugins = fs.readdirSync(path.join(__dirname, '../plugin'))
 for (let file of plugins) {
@@ -28,7 +27,7 @@ for (let file of builtInPlugins) {
 
 exports.messagehandler = async (Infor) => {
 
-
+    const place = Infor.isGroup ? Infor.groupName : "inbox";
 
 
     /* This line checks the following- 
@@ -107,15 +106,15 @@ exports.messagehandler = async (Infor) => {
         return
     }
 
-    console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + Infor.isGroup?Infor.groupName:"INBOX" + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
-
+    console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " +
+        chalk.bgGreen("[" + place + ']')
+        + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
 
     if (Infor.abusepresent.length != 0 && !Infor.isBotModerator) {
         Infor.replytext("⚠️  ```" + Infor.abusepresent.join(" ") + "```")
         count(Infor)
         return;
     }
-
 
     if (Infor.isGroup && Infor.groupdata.autosticker && Infor.isMedia && Infor.arg[0] !== "sticker" && Infor.arg[0] !== "testnsfw") {
         commandHandler.get('sticker').handle(Infor);

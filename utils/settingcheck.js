@@ -74,7 +74,7 @@ module.exports = async function settingread(xxx, client) {
       if (data1.rows.length == 0) {
 
         if (process.env.NODE_ENV === 'development') {
-          console.log("👪  " + chalk.bgCyan("Prefix assigned is / for group " + Infor.groupname));
+          console.log("👪  " + chalk.bgCyan("Prefix assigned is / for group " + Infor.groupName));
           await sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','/','false','true', '{''}',0,0,false,true);`
           );
@@ -88,7 +88,7 @@ module.exports = async function settingread(xxx, client) {
             client.groupLeave(from);
             return
           }
-          console.log("👪  " + chalk.bgCyan(`Prefix assigned is '${random}' for group ` + Infor.groupname));
+          console.log("👪  " + chalk.bgCyan(`Prefix assigned is '${random}' for group ` + Infor.groupName));
           newgroup(from, client, random)
           sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
