@@ -3,7 +3,7 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
-const { MessageType } = require("@adiwajshing/baileys");
+const { MessageType } = require("../@adiwajshing/baileys");
 const { sticker } = MessageType;
 const axios = require("axios").default;
 

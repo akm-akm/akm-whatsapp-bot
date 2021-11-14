@@ -2,11 +2,11 @@
 
 const {
     GroupSettingChange,
-} = require("@adiwajshing/baileys");
+} = require("../@adiwajshing/baileys");
 
 module.exports = {
     "name": 'close',
-//    "usage": "close",
+    //    "usage": "close",
     "desc": "Changes the setting so that only admins can message.",
     "eg": [
         "close"

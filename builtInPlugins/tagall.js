@@ -1,7 +1,7 @@
 
 const {
     MessageType
-} = require("@adiwajshing/baileys");
+} = require("../@adiwajshing/baileys");
 
 module.exports = {
     "name": 'tagall',

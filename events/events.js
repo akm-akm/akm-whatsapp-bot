@@ -2,7 +2,7 @@ const {
   WAConnection,
   ReconnectMode,
   MessageType
-} = require("@adiwajshing/baileys");
+} = require("../@adiwajshing/baileys");
 
 
 const path = require("path");

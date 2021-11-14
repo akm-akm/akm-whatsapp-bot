@@ -1,7 +1,7 @@
 const fs = require("fs");
 const axios = require("axios");
 const http = require("https");
-const { MessageType } = require("@adiwajshing/baileys");
+const { MessageType } = require("../@adiwajshing/baileys");
 const { text, video } = MessageType;
 const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}.${ext}`;

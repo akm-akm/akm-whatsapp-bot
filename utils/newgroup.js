@@ -1,6 +1,6 @@
 const {
   MessageType
-} = require("@adiwajshing/baileys");
+} = require("../@adiwajshing/baileys");
 const {
   text
 } = MessageType;

@@ -1,4 +1,4 @@
-const { Mimetype, MessageType } = require("@adiwajshing/baileys");
+const { Mimetype, MessageType } = require("../@adiwajshing/baileys");
 const fs = require('fs');
 const chalk = require('chalk');
 const path = require('path');

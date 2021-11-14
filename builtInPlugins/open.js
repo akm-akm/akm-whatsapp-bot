@@ -2,12 +2,12 @@
 
 const {
     GroupSettingChange,
-} = require("@adiwajshing/baileys");
+} = require("../@adiwajshing/baileys");
 
 module.exports = {
     name: "open",
     "usage": "open",
- //   "desc": "Changes the setting so that members can message.",
+    //   "desc": "Changes the setting so that members can message.",
     "eg": [
         "open"
     ],
