@@ -122,7 +122,10 @@ exports.messagehandler = async (Infor) => {
     }
 
 
-
+    if (Infor.arg == "hi" || Infor.arg == "hey" || Infor.arg == "hello" || Infor.arg == "helloo" || Infor.arg == "hellooo" || Infor.arg == "hii" || Infor.arg == "hiii" || Infor.arg == "heyy" || Infor.arg == "heyyy" ) {
+        Infor.replytext(Infor.mess.salutations[Math.floor(Math.random() * Infor.mess.salutations.length)])
+        return;
+    }
 
 
 

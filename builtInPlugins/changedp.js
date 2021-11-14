@@ -1,6 +1,6 @@
 module.exports = {
     "name": 'changedp',
-    "usage": "changedp",
+   // "usage": "changedp",
     "desc": "Sets the tagged media as profile picture of the group.",
     "eg": [
         "changedp"

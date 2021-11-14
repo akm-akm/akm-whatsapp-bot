@@ -1,7 +1,7 @@
 module.exports = {
     "name": 'remove',
     "usage": "remove <@user>",
-    "desc": "Removes the tagged member from the group.",
+  //  "desc": "Removes the tagged member from the group.",
     "eg": [
         "remove @ankit",
         "remove @dibyam"
@@ -11,21 +11,14 @@ module.exports = {
     async handle(Infor) {
 
 
-
-
-
         if (!isBotGroupAdmins) {
             Infor.replytext(Infor.mess.only.Badmin);
-
             return;
         }
         if (arg.length == 1) {
             Infor.wrongCommand()
             return;
-
         }
-
-
 
         const mentioned = Infor.reply.message.extendedTextMessage.contextInfo.mentionedJid;
 
@@ -47,16 +40,6 @@ module.exports = {
         Infor.client.groupRemove(Infor.from, mentioned);
 
         Infor.replytext(Infor.mess.success)
-
-
-
-
-
-
-
-
-
-
 
     }
 }
