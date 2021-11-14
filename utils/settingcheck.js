@@ -56,12 +56,11 @@ module.exports = async function settingread(xxx, client) {
     Infor.groupMetadata = Infor.isGroup ? await client.groupMetadata(from) : undefined;
     Infor.groupMembers = Infor.isGroup ? Infor.groupMetadata.participants : undefined;
     Infor.groupAdmins = Infor.isGroup ? getGroupAdmins(Infor.groupMembers) : undefined;
-    Infor.isGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(Infor.sender) || false : undefined;
     Infor.groupName = Infor.isGroup ? Infor.groupMetadata.subject : undefined;
     Infor.botNumber = client.user.jid.split("@")[0];
-    Infor.isBotGroupAdmins = Infor.groupAdmins.includes(`${Infor.botNumber}@s.whatsapp.net`) || false;
-    Infor.isOwner = Infor.from == `${process.env.OWNER_NUMBER}@s.whatsapp.net`;
-    Infor.isSuperAdmin = Infor.groupMetadata.owner == Infor.from;
+    Infor.isBotGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(`${Infor.botNumber}@s.whatsapp.net`) || false : undefined;
+    Infor.isOwner = Infor.from === `${process.env.OWNER_NUMBER}@s.whatsapp.net`;
+    Infor.isSuperAdmin = Infor.isGroup ? Infor.groupMetadata.owner == Infor.from : undefined;
 
 
 
@@ -157,7 +156,8 @@ module.exports = async function settingread(xxx, client) {
     Infor.quotedMessage = Infor.isQuotedText ? Infor.reply.message.extendedTextMessage.contextInfo.quotedMessage.conversation : undefined;
     Infor.isUserTagged = type == "extendedTextMessage" && content.includes("text") && content.includes("mentionedJid");
     Infor.taggedUser = Infor.isUserTagged ? xxx.message.extendedTextMessage.contextInfo.mentionedJid : undefined;
-    Infor.isBotModerator = Infor.botdata.moderators.includes(Infor.number)
+    Infor.isBotModerator = Infor.botdata.moderators.includes(Infor.number) || Infor.isOwner;
+    Infor.isGroupAdmins = Infor.isGroup ? Infor.groupAdmins.includes(Infor.sender) || Infor.isBotModerator|| false : undefined;
 
     return Infor;
 

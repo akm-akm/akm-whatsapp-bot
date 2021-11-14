@@ -28,7 +28,7 @@ for (let file of plugins) {
   }
 
 }
-const builtInPlugins = fs.readdirSync(path.join(__dirname, '../builtInPlugins')).filter(file => file != 'help.js')
+const builtInPlugins = fs.readdirSync(path.join(__dirname, '../builtInPlugins')).filter(file => file != 'help.js' && file != 'template.js')
 for (let file of builtInPlugins) {
   const command = require(path.join(__dirname, '../builtInPlugins/', `${file}`));
   if (command.name && command.usage && command.desc && typeof command.handle === "function" && command.eg && typeof command.group === "boolean" && typeof command.owner === "boolean") {
@@ -91,7 +91,7 @@ module.exports = {
         prefix + "help run```\n" +
 
         "\n📃 *Bot News* :" +
-        "\n‼️ _Few admin commands are down_" +
+        "\n‼️ _wazirx added_" +
       
         "\n\n⚙️ *Bot version* : " + version;
       Infor.replytext(help);

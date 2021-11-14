@@ -8,22 +8,18 @@ const sql = require(path.join(__dirname, "./ps"));
 const commandHandler = new Map();
 const plugins = fs.readdirSync(path.join(__dirname, '../plugin'))
 for (let file of plugins) {
+
+
     const command = require(path.join(__dirname, '../plugin/', `${file}`));
     if (command.name && command.usage && command.desc && typeof command.handle === "function" && command.eg && typeof command.group === "boolean" && typeof command.owner === "boolean") {
         commandHandler.set(command.name, command);
-    } 
+    }
 }
 const builtInPlugins = fs.readdirSync(path.join(__dirname, '../builtInPlugins'))
 for (let file of builtInPlugins) {
     const command = require(path.join(__dirname, '../builtInPlugins/', `${file}`));
     if (command.name && command.usage && command.desc && typeof command.handle === "function" && command.eg && typeof command.group === "boolean" && typeof command.owner === "boolean") {
         commandHandler.set(command.name, command);
-    } else {
-        console.log(
-            chalk.blueBright.bold("Could not import plugin  "),
-            chalk.redBright.bold(`${file}`)
-        )
-        continue;
     }
 
 }
@@ -61,7 +57,7 @@ exports.messagehandler = async (Infor) => {
     (If non admins cannot use the bot then is the sender an admin or a bot moderator?)
     If yes then continue
     */
-    if (Infor.isGroup && Infor.groupdata.membercanusebot === false && !Infor.isGroupAdmins && Infor.number !== process.env.OWNER_NUMBER && !Infor.botdata.moderators.includes(Infor.number)) return
+    if (Infor.isGroup && Infor.groupdata.membercanusebot === false && !Infor.isGroupAdmins) return
 
 
 
@@ -87,7 +83,6 @@ exports.messagehandler = async (Infor) => {
     */
     if (
         Infor.noofmsgtoday >= Infor.botdata.dailylimit &&
-        Infor.number !== process.env.OWNER_NUMBER &&
         !Infor.botdata.moderators.includes(Infor.number) &&
         Infor.dailylimitover === false
     ) {
@@ -107,15 +102,16 @@ exports.messagehandler = async (Infor) => {
 
 
     if (Infor.isGroup && Infor.groupdata.totalmsgtoday >= Infor.botdata.dailygrouplimit) {
-        Infor.client.sendMessage(Infor.from, Infor.mess.grouplimit, text);
-        count(Infor)
+        Infor.text(Infor.mess.grouplimit);
+        count(Infor);
         return
     }
+
     console.log("🤖  " + chalk.bgRed("[" + Infor.number + ']') + "  " + chalk.bgGreen("[" + Infor.groupName + ']') + "  " + chalk.bgBlue("[" + Infor.arg.slice(0, 6).join(" ") + ']'));
 
 
-    if (Infor.abusepresent.length != 0 && !Infor.isOwner && !Infor.isBotModerator) {
-        Infor.replytext("⚠️  ```Tu " + Infor.abusepresent.join(" ") + "```")
+    if (Infor.abusepresent.length != 0 && !Infor.isBotModerator) {
+        Infor.replytext("⚠️  ```" + Infor.abusepresent.join(" ") + "```")
         return;
     }
 
@@ -133,24 +129,32 @@ exports.messagehandler = async (Infor) => {
     if (commandHandler.has(Infor.arg[0])) {
 
         if (commandHandler.get(Infor.arg[0]).owner && Infor.isOwner) {
-            Infor.replytext(Infor.mess.only.ownerB)
+            Infor.replytext(Infor.mess.only.ownerB);
+            count(Infor);
             return
         } else if (commandHandler.get(Infor.arg[0]).owner && Infor.isOwner) {
             commandHandler.get(Infor.arg[0]).handle(Infor);
+            count(Infor);
             return
         } else if (commandHandler.get(Infor.arg[0]).group && (!Infor.isGroup)) {
-            Infor.replytext(Infor.mess.only.group)
+            Infor.replytext(Infor.mess.only.group);
+            count(Infor);
             return;
-        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && !(Infor.isGroupAdmins || Infor.isOwner || Infor.isBotModerator)) {
-            Infor.replytext(Infor.mess.only.admin)
-        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && (Infor.isGroupAdmins || Infor.isOwner || Infor.isBotModerator)) {
+        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && !Infor.isGroupAdmins) {
+            Infor.replytext(Infor.mess.only.admin);
+            count(Infor);
+        } else if (commandHandler.get(Infor.arg[0]).group && Infor.isGroup && Infor.isGroupAdmins) {
             commandHandler.get(Infor.arg[0]).handle(Infor);
+            count(Infor);
+
         } else {
             commandHandler.get(Infor.arg[0]).handle(Infor);
+            count(Infor);
             return;
         }
     } else if ((Infor.isGroup && Infor.groupdata.useprefix) || !Infor.isGroup) {
-        Infor.replytext(Infor.mess.unknowncommand)
+        Infor.replytext(Infor.mess.unknowncommand);
+        count(Infor);
     }
 
 }

@@ -58,7 +58,11 @@ module.exports = class InforClass {
         })
     }
 
-
+    text(input) {
+        this.client.sendMessage(this.from, input, MessageType.text, {
+            detectLinks: false,
+        })
+    }
     replysticker(path) {
         this.client.sendMessage(this.from, fs.readFileSync(path), MessageType.sticker, {
             quoted: this.reply,

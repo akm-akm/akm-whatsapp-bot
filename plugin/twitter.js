@@ -17,6 +17,12 @@ module.exports = {
     "group": false,
     "owner": false,
     async handle(Infor) {
+
+
+
+        if (!Infor.isBotModerator) {
+            Infor.replytext(Infor.mess.only.modB)
+        }
         let msg = "⚽ *Name* : ```Fabrizio Romano```\n\n"
 
 
