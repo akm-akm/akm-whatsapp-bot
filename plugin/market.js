@@ -33,7 +33,7 @@ function searchTransformer(isIndex) {
 
 module.exports = {
   name: "market",
- // usage: "market <arguments>",
+  // usage: "market <arguments>",
   desc: "Fetches the information of given symbol from NSE. Arguments it can take are,\n📱 status - It will give the status of the market.\n📱 search <name> - It will search all the companies with this name.\n📱 details <key> - It will give all the details of the stock from NSE.\n📱 losers - It will give top 10 loosers of NSE.\n📱 gainers - It will give top 10 gainers of NSE.",
   eg: [
     "market status",

@@ -49,8 +49,6 @@ Edit file named `.env.example` and replace the values with your own.
 
 `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
 
-`CHATBOT_API` The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox. (optional)
-
 Now save the file with the name `.env`
 ### 💾 Setting up the database
 

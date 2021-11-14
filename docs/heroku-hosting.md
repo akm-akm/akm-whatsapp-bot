@@ -31,8 +31,6 @@
 
 - `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
 
-- `CHATBOT_API` The api key from [Rapid API](https://rapidapi.com/lemur-engine-lemur-engine-default/api/harley-the-chatbot) for the chatbot to work in the inbox. (optional)
-
  Now scroll to the bottom and click on deploy app.
 
  Now the bot will be deployed in under a minute and then click on view button.
