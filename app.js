@@ -7,7 +7,6 @@ setTimeout(() => {
   require(path.join(__dirname, "./utils/config"));
   sql = require(path.join(__dirname, "./utils/ps"));
 }, 1)
-require('dotenv').config();
 const {
   main,
   logout,

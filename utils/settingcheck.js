@@ -73,9 +73,6 @@ module.exports = async function settingread(xxx, client) {
       data1 = await sql.query(`select * from groupdata where groupid='${from}';`);
       if (data1.rows.length == 0) {
 
-        const groupMetadata = await client.groupMetadata(from);
-
-
         if (process.env.NODE_ENV === 'development') {
           console.log("👪  " + chalk.bgCyan("Prefix assigned is / for group " + Infor.groupname));
           await sql.query(
@@ -85,9 +82,9 @@ module.exports = async function settingread(xxx, client) {
         }
         if (process.env.NODE_ENV === 'production') {
           if (
-            groupMetadata.participants.length < botdata.rows[0].mingroupsize
+            Infor.groupMetadata.participants.length < botdata.rows[0].mingroupsize
           ) {
-            await client.sendMessage(from, "*Minimum participants required is* " + botdata.rows[0].mingroupsize, text);
+            Infor.text("*Minimum participants required is* " + botdata.rows[0].mingroupsize);
             client.groupLeave(from);
             return
           }
