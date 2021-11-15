@@ -2,7 +2,7 @@ module.exports = {
   name: "invite",
   usage: "invite <link>",
   desc: "The bot will join the group with the invite link.",
-  eg: ["join "],
+  eg: ["invite https://chat.whatsapp.com/JdEuI6JvN4W434RmF","invite https://chat.whatsapp.com/Jweve74J434RmF"],
   group: false,
   owner: false,
   async handle(Xxxbot) {
