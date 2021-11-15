@@ -12,7 +12,7 @@ const { main, logout, stop, isconnected } = require(path.join(
   "./events/events"
 ));
 
-node.schedule("0 */24 * * *", () => {
+node.schedule("0 */20 * * *", () => {
   sql.query("UPDATE groupdata SET totalmsgtoday=0;");
   sql.query("UPDATE botdata SET totalmsgtoday=0;");
   sql.query("UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;");
