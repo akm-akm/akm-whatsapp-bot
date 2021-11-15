@@ -117,6 +117,7 @@ exports.messagehandler = async (Xxxbot) => {
       `UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${Xxxbot.number}';`
     );
     Xxxbot.replytext(Xxxbot.mess.userlimit);
+    return;
   }
 
   /* This line checks the following-
