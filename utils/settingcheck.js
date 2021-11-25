@@ -7,7 +7,7 @@ const settings = JSON.parse(
 );
 const { newgroup } = require(path.join(__dirname, "./newgroup"));
 
-const InforClass = require("./Xxxbot");
+const InforClass = require("./Infor");
 
 let data1,
   data3 = JSON.parse(

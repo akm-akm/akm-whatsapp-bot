@@ -117,6 +117,7 @@ exports.messagehandler = async (Xxxbot) => {
       `UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${Xxxbot.number}';`
     );
     Xxxbot.replytext(Xxxbot.mess.userlimit);
+    return;
   }
 
   /* This line checks the following-
@@ -136,11 +137,11 @@ exports.messagehandler = async (Xxxbot) => {
 
   console.log(
     "🤖  " +
-      chalk.bgRed("[" + Xxxbot.number + "]") +
-      "  " +
-      chalk.bgGreen("[" + place + "]") +
-      "  " +
-      chalk.bgBlue("[" + Xxxbot.arg.slice(0, 6).join(" ") + "]")
+    chalk.bgRed("[" + Xxxbot.number + "]") +
+    "  " +
+    chalk.bgGreen("[" + place + "]") +
+    "  " +
+    chalk.bgBlue("[" + Xxxbot.arg.slice(0, 6).join(" ") + "]")
   );
 
   if (Xxxbot.abusepresent.length != 0 && !Xxxbot.isBotModerator) {
@@ -174,7 +175,7 @@ exports.messagehandler = async (Xxxbot) => {
   ) {
     Xxxbot.replytext(
       Xxxbot.mess.salutations[
-        Math.floor(Math.random() * Xxxbot.mess.salutations.length)
+      Math.floor(Math.random() * Xxxbot.mess.salutations.length)
       ]
     );
 
@@ -216,7 +217,7 @@ exports.messagehandler = async (Xxxbot) => {
     }
   } else if (
     (Xxxbot.isGroup && Xxxbot.groupdata.useprefix) ||
-    !Xxxbot.isGroup
+    (!Xxxbot.isGroup && !Xxxbot.isMedia)
   ) {
     Xxxbot.replytext(Xxxbot.mess.unknowncommand);
     count(Xxxbot);
