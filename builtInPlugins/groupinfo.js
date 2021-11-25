@@ -7,72 +7,72 @@ module.exports = {
   eg: ["groupinfo"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
+  async handle(Bot) {
     const grpdata =
       "\n💮 *Title* : " +
       "*" +
-      Xxxbot.groupMetadata.subject +
+      Bot.groupMetadata.subject +
       "*" +
       "\n\n🏊 *Member* : " +
       "```" +
-      Xxxbot.groupMetadata.participants.length +
+      Bot.groupMetadata.participants.length +
       "```" +
       "\n🏅 *Admins*  : " +
       "```" +
-      Xxxbot.groupAdmins.length +
+      Bot.groupAdmins.length +
       "```" +
       "\n🎀 *Prefix*      : " +
       "```" +
-      Xxxbot.groupdata.prefix +
+      Bot.groupdata.prefix +
       "```" +
       "\n💡 *Useprefix*        : " +
       "```" +
-      Xxxbot.groupdata.useprefix +
+      Bot.groupdata.useprefix +
       "```" +
       "\n🐶 *Autosticker*    : " +
       "```" +
-      Xxxbot.groupdata.autosticker +
+      Bot.groupdata.autosticker +
       "```" +
       "\n🤖 *Botaccess*      : " +
       "```" +
-      Xxxbot.groupdata.membercanusebot +
+      Bot.groupdata.membercanusebot +
       "```" +
       "\n🌏 *Filterabuse*     : " +
       "```" +
-      Xxxbot.groupdata.allowabuse +
+      Bot.groupdata.allowabuse +
       "```" +
       "\n⚠️ *NSFW detect*  : " +
       "```" +
-      Xxxbot.groupdata.nsfw +
+      Bot.groupdata.nsfw +
       "```" +
       "\n🎫 *Credits used*  : " +
       "```" +
-      Xxxbot.groupdata.totalmsgtoday +
+      Bot.groupdata.totalmsgtoday +
       "```" +
       "\n🧶 *Total credits*  : " +
       "```" +
-      Xxxbot.botdata.dailygrouplimit +
+      Bot.botdata.dailygrouplimit +
       "```" +
       "\n🚨 *Banned users* : " +
       "```" +
-      (Number(Xxxbot.groupdata.banned_users.length) - 1) +
+      (Number(Bot.groupdata.banned_users.length) - 1) +
       "```\n";
 
     try {
-      const ppUrl = await Xxxbot.client.getProfilePicture(from);
+      const ppUrl = await Bot.client.getProfilePicture(from);
       ran = getRandom(".jpeg");
       const file = fs.createWriteStream(ran);
       http.get(ppUrl, function (response) {
         response.pipe(file);
         file.on("finish", function () {
           file.close(async () => {
-            await Xxxbot.replyimage(ran, grpdata);
+            await Bot.replyimage(ran, grpdata);
             fs.unlinkSync(ran);
           });
         });
       });
     } catch (error) {
-      Xxxbot.replytext(grpdata);
+      Bot.replytext(grpdata);
     }
   },
 };

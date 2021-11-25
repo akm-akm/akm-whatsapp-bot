@@ -14,12 +14,12 @@ module.exports = {
   eg: ["ss Leo Messi", "ss Virat Kohli", "ss crop Emma Watson"],
   group: false,
   owner: false,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
-    const from = Xxxbot.from;
+  async handle(Bot) {
+    const arg = Bot.arg;
+    const from = Bot.from;
 
     if (!process.env.SEARCH_STICKER) {
-      Xxxbot.noapi();
+      Bot.noapi();
       return;
     }
     const getRandom = (ext) => {
@@ -59,7 +59,7 @@ module.exports = {
       .filter((z) => z !== "crop")
       .join(" ");
     if (searchthis.length == 0) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
 
@@ -103,7 +103,7 @@ module.exports = {
                   .input(media)
                   .on("error", function (err) {
                     fs.unlinkSync(media);
-                    Xxxbot.errorlog(err);
+                    Bot.errorlog(err);
                     fs.unlinkSync(ran);
                     return;
                   })
@@ -120,8 +120,8 @@ module.exports = {
                     authorName,
                     ran
                   );
-                  Xxxbot.client.sendMessage(from, webpWithMetadata, sticker, {
-                    quoted: Xxxbot.reply,
+                  Bot.client.sendMessage(from, webpWithMetadata, sticker, {
+                    quoted: Bot.reply,
                   });
 
                   fs.unlinkSync(media);
@@ -133,7 +133,7 @@ module.exports = {
           });
       })
       .catch((e) => {
-        Xxxbot.errorlog(e);
+        Bot.errorlog(e);
       });
   },
 };

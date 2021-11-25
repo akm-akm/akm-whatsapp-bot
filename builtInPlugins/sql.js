@@ -13,10 +13,10 @@ module.exports = {
   ],
   group: false,
   owner: true,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  async handle(Bot) {
+    const arg = Bot.arg;
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
     arg.shift();
@@ -25,10 +25,10 @@ module.exports = {
     sql
       .query(cmd)
       .then((result) => {
-        Xxxbot.replytext(JSON.stringify(result.rows, null, "\t"));
+        Bot.replytext(JSON.stringify(result.rows, null, "\t"));
       })
       .catch((err) => {
-        Xxxbot.replytext(Xxxbot.mess.error.error);
+        Bot.replytext(Bot.mess.error.error);
       });
   },
 };

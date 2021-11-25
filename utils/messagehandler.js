@@ -42,12 +42,12 @@ for (let file of builtInPlugins) {
   }
 }
 
-exports.messagehandler = async (Xxxbot) => {
+exports.messagehandler = async (Bot) => {
   /**
    * @param {String} place
    * This stores the place message is received
    */
-  const place = Xxxbot.isGroup ? Xxxbot.groupName : "inbox";
+  const place = Bot.isGroup ? Bot.groupName : "inbox";
 
   /* This line checks the following- 
     (If the message is sent in a group, is the group limit exhausted ?) return
@@ -56,11 +56,11 @@ exports.messagehandler = async (Xxxbot) => {
     */
   if (
     !(
-      !Xxxbot.isGroup ||
-      (Xxxbot.isGroup &&
-        Xxxbot.groupdata.totalmsgtoday <= Xxxbot.botdata.dailygrouplimit &&
-        (Xxxbot.arg.length !== 0 ||
-          (Xxxbot.isGroup && Xxxbot.isMedia && Xxxbot.groupdata.autosticker)))
+      !Bot.isGroup ||
+      (Bot.isGroup &&
+        Bot.groupdata.totalmsgtoday <= Bot.botdata.dailygrouplimit &&
+        (Bot.arg.length !== 0 ||
+          (Bot.isGroup && Bot.isMedia && Bot.groupdata.autosticker)))
     )
   )
     return;
@@ -70,8 +70,7 @@ exports.messagehandler = async (Xxxbot) => {
     (is the user sending the message banned in that group to use the bot?)
     If yes then return
     */
-  if (Xxxbot.isGroup && Xxxbot.groupdata.banned_users.includes(Xxxbot.number))
-    return;
+  if (Bot.isGroup && Bot.groupdata.banned_users.includes(Bot.number)) return;
 
   /* This line checks the following-
     (is the message sent in a group?) and
@@ -80,9 +79,9 @@ exports.messagehandler = async (Xxxbot) => {
     If yes then continue
     */
   if (
-    Xxxbot.isGroup &&
-    Xxxbot.groupdata.membercanusebot === false &&
-    !Xxxbot.isGroupAdmins
+    Bot.isGroup &&
+    Bot.groupdata.membercanusebot === false &&
+    !Bot.isGroupAdmins
   )
     return;
 
@@ -90,14 +89,10 @@ exports.messagehandler = async (Xxxbot) => {
     (is the message sent 'limit' ?)
     If yes then send back the credits used
     */
-  if (Xxxbot.arg[0] === "limit") {
+  if (Bot.arg[0] === "limit") {
     const x =
-      Xxxbot.mess.limit +
-      Xxxbot.noofmsgtoday +
-      " / *" +
-      Xxxbot.botdata.dailylimit +
-      "*";
-    Xxxbot.replytext(x);
+      Bot.mess.limit + Bot.noofmsgtoday + " / *" + Bot.botdata.dailylimit + "*";
+    Bot.replytext(x);
     return;
   }
 
@@ -109,14 +104,14 @@ exports.messagehandler = async (Xxxbot) => {
     If yes then continue
     */
   if (
-    Xxxbot.noofmsgtoday >= Xxxbot.botdata.dailylimit &&
-    !Xxxbot.botdata.moderators.includes(Xxxbot.number) &&
-    Xxxbot.dailylimitover === false
+    Bot.noofmsgtoday >= Bot.botdata.dailylimit &&
+    !Bot.botdata.moderators.includes(Bot.number) &&
+    Bot.dailylimitover === false
   ) {
     sql.query(
-      `UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${Xxxbot.number}';`
+      `UPDATE messagecount SET dailylimitover = true WHERE phonenumber ='${Bot.number}';`
     );
-    Xxxbot.replytext(Xxxbot.mess.userlimit);
+    Bot.replytext(Bot.mess.userlimit);
     return;
   }
 
@@ -124,102 +119,102 @@ exports.messagehandler = async (Xxxbot) => {
     (IS the daily limit over?)
     If yes then returntrtuj
     */
-  if (Xxxbot.dailylimitover === true) return;
+  if (Bot.dailylimitover === true) return;
 
   if (
-    Xxxbot.isGroup &&
-    Xxxbot.groupdata.totalmsgtoday >= Xxxbot.botdata.dailygrouplimit
+    Bot.isGroup &&
+    Bot.groupdata.totalmsgtoday >= Bot.botdata.dailygrouplimit
   ) {
-    Xxxbot.text(Xxxbot.mess.grouplimit);
-    count(Xxxbot);
+    Bot.text(Bot.mess.grouplimit);
+    count(Bot);
     return;
   }
 
   console.log(
     "🤖  " +
-    chalk.bgRed("[" + Xxxbot.number + "]") +
-    "  " +
-    chalk.bgGreen("[" + place + "]") +
-    "  " +
-    chalk.bgBlue("[" + Xxxbot.arg.slice(0, 6).join(" ") + "]")
+      chalk.bgRed("[" + Bot.number + "]") +
+      "  " +
+      chalk.bgGreen("[" + place + "]") +
+      "  " +
+      chalk.bgBlue("[" + Bot.arg.slice(0, 6).join(" ") + "]")
   );
 
-  if (Xxxbot.abusepresent.length != 0 && !Xxxbot.isBotModerator) {
-    Xxxbot.replytext("⚠️  ```" + Xxxbot.abusepresent.join(" ") + "```");
-    count(Xxxbot);
+  if (Bot.abusepresent.length != 0 && !Bot.isBotModerator) {
+    Bot.replytext("⚠️  ```" + Bot.abusepresent.join(" ") + "```");
+    count(Bot);
     return;
   }
 
   if (
-    Xxxbot.isGroup &&
-    Xxxbot.groupdata.autosticker &&
-    Xxxbot.isMedia &&
-    Xxxbot.arg[0] !== "sticker" &&
-    Xxxbot.arg[0] !== "testnsfw"
+    Bot.isGroup &&
+    Bot.groupdata.autosticker &&
+    Bot.isMedia &&
+    Bot.arg[0] !== "sticker" &&
+    Bot.arg[0] !== "testnsfw"
   ) {
-    commandHandler.get("sticker").handle(Xxxbot);
-    count(Xxxbot);
+    commandHandler.get("sticker").handle(Bot);
+    count(Bot);
     return;
   }
 
   if (
-    Xxxbot.arg == "hi" ||
-    Xxxbot.arg == "hey" ||
-    Xxxbot.arg == "hello" ||
-    Xxxbot.arg == "helloo" ||
-    Xxxbot.arg == "hellooo" ||
-    Xxxbot.arg == "hii" ||
-    Xxxbot.arg == "hiii" ||
-    Xxxbot.arg == "heyy" ||
-    Xxxbot.arg == "heyyy"
+    Bot.arg == "hi" ||
+    Bot.arg == "hey" ||
+    Bot.arg == "hello" ||
+    Bot.arg == "helloo" ||
+    Bot.arg == "hellooo" ||
+    Bot.arg == "hii" ||
+    Bot.arg == "hiii" ||
+    Bot.arg == "heyy" ||
+    Bot.arg == "heyyy"
   ) {
-    Xxxbot.replytext(
-      Xxxbot.mess.salutations[
-      Math.floor(Math.random() * Xxxbot.mess.salutations.length)
+    Bot.replytext(
+      Bot.mess.salutations[
+        Math.floor(Math.random() * Bot.mess.salutations.length)
       ]
     );
 
-    count(Xxxbot);
+    count(Bot);
     return;
   }
 
-  if (commandHandler.has(Xxxbot.arg[0])) {
-    if (commandHandler.get(Xxxbot.arg[0]).owner && !Xxxbot.isOwner) {
-      Xxxbot.replytext(Xxxbot.mess.only.ownerB);
-      count(Xxxbot);
+  if (commandHandler.has(Bot.arg[0])) {
+    if (commandHandler.get(Bot.arg[0]).owner && !Bot.isOwner) {
+      Bot.replytext(Bot.mess.only.ownerB);
+      count(Bot);
       return;
-    } else if (commandHandler.get(Xxxbot.arg[0]).owner && Xxxbot.isOwner) {
-      commandHandler.get(Xxxbot.arg[0]).handle(Xxxbot);
-      count(Xxxbot);
+    } else if (commandHandler.get(Bot.arg[0]).owner && Bot.isOwner) {
+      commandHandler.get(Bot.arg[0]).handle(Bot);
+      count(Bot);
       return;
-    } else if (commandHandler.get(Xxxbot.arg[0]).group && !Xxxbot.isGroup) {
-      Xxxbot.replytext(Xxxbot.mess.only.group);
-      count(Xxxbot);
+    } else if (commandHandler.get(Bot.arg[0]).group && !Bot.isGroup) {
+      Bot.replytext(Bot.mess.only.group);
+      count(Bot);
       return;
     } else if (
-      commandHandler.get(Xxxbot.arg[0]).group &&
-      Xxxbot.isGroup &&
-      !Xxxbot.isGroupAdmins
+      commandHandler.get(Bot.arg[0]).group &&
+      Bot.isGroup &&
+      !Bot.isGroupAdmins
     ) {
-      Xxxbot.replytext(Xxxbot.mess.only.admin);
-      count(Xxxbot);
+      Bot.replytext(Bot.mess.only.admin);
+      count(Bot);
     } else if (
-      commandHandler.get(Xxxbot.arg[0]).group &&
-      Xxxbot.isGroup &&
-      Xxxbot.isGroupAdmins
+      commandHandler.get(Bot.arg[0]).group &&
+      Bot.isGroup &&
+      Bot.isGroupAdmins
     ) {
-      commandHandler.get(Xxxbot.arg[0]).handle(Xxxbot);
-      count(Xxxbot);
+      commandHandler.get(Bot.arg[0]).handle(Bot);
+      count(Bot);
     } else {
-      commandHandler.get(Xxxbot.arg[0]).handle(Xxxbot);
-      count(Xxxbot);
+      commandHandler.get(Bot.arg[0]).handle(Bot);
+      count(Bot);
       return;
     }
   } else if (
-    (Xxxbot.isGroup && Xxxbot.groupdata.useprefix) ||
-    (!Xxxbot.isGroup && !Xxxbot.isMedia)
+    (Bot.isGroup && Bot.groupdata.useprefix) ||
+    (!Bot.isGroup && !Bot.isMedia)
   ) {
-    Xxxbot.replytext(Xxxbot.mess.unknowncommand);
-    count(Xxxbot);
+    Bot.replytext(Bot.mess.unknowncommand);
+    count(Bot);
   }
 };

@@ -20,12 +20,12 @@ module.exports = {
   ],
   group: false,
   owner: false,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
-    const from = Xxxbot.from;
-    const isMedia = Xxxbot.isMedia;
-    const isQuotedImage = Xxxbot.isQuotedImage;
-    const isQuotedVideo = Xxxbot.isQuotedVideo;
+  async handle(Bot) {
+    const arg = Bot.arg;
+    const from = Bot.from;
+    const isMedia = Bot.isMedia;
+    const isQuotedImage = Bot.isQuotedImage;
+    const isQuotedVideo = Bot.isQuotedVideo;
 
     const getRandom = (ext) => {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
@@ -102,20 +102,20 @@ module.exports = {
     }
 
     ///////////////image//////////////////
-    if ((isMedia && !Xxxbot.reply.message.videoMessage) || isQuotedImage) {
+    if ((isMedia && !Bot.reply.message.videoMessage) || isQuotedImage) {
       const encmedia = isQuotedImage
-        ? JSON.parse(JSON.stringify(Xxxbot.reply).replace("quotedM", "m"))
-            .message.extendedTextMessage.contextInfo
-        : Xxxbot.reply;
-      const media = await Xxxbot.client.downloadAndSaveMediaMessage(
+        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
+            .extendedTextMessage.contextInfo
+        : Bot.reply;
+      const media = await Bot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
       const ran = getRandom(".webp");
-      if (!Xxxbot.isGroup || Xxxbot.groupdata.nsfw == true) {
+      if (!Bot.isGroup || Bot.groupdata.nsfw == true) {
         const nsfw = await ai(media);
         if (nsfw.output.nsfw_score > 0.6) {
-          Xxxbot.replytext("🌚 🔞");
+          Bot.replytext("🌚 🔞");
           fs.unlinkSync(media);
           return;
         }
@@ -134,7 +134,7 @@ module.exports = {
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Xxxbot.replysticker(ran);
+          Bot.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
         } else {
@@ -143,8 +143,8 @@ module.exports = {
             authorName,
             ran
           );
-          Xxxbot.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Xxxbot.reply,
+          Bot.client.sendMessage(from, webpWithMetadata, sticker, {
+            quoted: Bot.reply,
           });
 
           fs.unlinkSync(media);
@@ -156,23 +156,23 @@ module.exports = {
 
       ///////////////video//////////////////
     } else if (
-      (isMedia && Xxxbot.reply.message.videoMessage.seconds < 11) ||
+      (isMedia && Bot.reply.message.videoMessage.seconds < 11) ||
       (isQuotedVideo &&
-        Xxxbot.reply.message.extendedTextMessage.contextInfo.quotedMessage
+        Bot.reply.message.extendedTextMessage.contextInfo.quotedMessage
           .videoMessage.seconds < 11)
     ) {
       const encmedia = isQuotedVideo
-        ? JSON.parse(JSON.stringify(Xxxbot.reply).replace("quotedM", "m"))
-            .message.extendedTextMessage.contextInfo
-        : Xxxbot.reply;
-      const media = await Xxxbot.client.downloadAndSaveMediaMessage(
+        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
+            .extendedTextMessage.contextInfo
+        : Bot.reply;
+      const media = await Bot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
-      if (!Xxxbot.isGroup || Xxxbot.groupdata.nsfw == true) {
+      if (!Bot.isGroup || Bot.groupdata.nsfw == true) {
         const nsfw = await ai(media);
         if (nsfw.output.nsfw_score > 0.6) {
-          Xxxbot.replytext("🌚 🔞");
+          Bot.replytext("🌚 🔞");
 
           fs.unlinkSync(media);
 
@@ -198,7 +198,7 @@ module.exports = {
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Xxxbot.replysticker(ran);
+          Bot.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
         } else {
@@ -207,8 +207,8 @@ module.exports = {
             authorName,
             ran
           );
-          Xxxbot.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Xxxbot.reply,
+          Bot.client.sendMessage(from, webpWithMetadata, sticker, {
+            quoted: Bot.reply,
           });
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
@@ -216,23 +216,23 @@ module.exports = {
         }
       }
     } else if (
-      (isMedia && Xxxbot.reply.message.videoMessage.seconds >= 11) ||
+      (isMedia && Bot.reply.message.videoMessage.seconds >= 11) ||
       (isQuotedVideo &&
-        Xxxbot.reply.message.extendedTextMessage.contextInfo.quotedMessage
+        Bot.reply.message.extendedTextMessage.contextInfo.quotedMessage
           .videoMessage.seconds >= 11)
     ) {
       const encmedia = isQuotedVideo
-        ? JSON.parse(JSON.stringify(Xxxbot.reply).replace("quotedM", "m"))
-            .message.extendedTextMessage.contextInfo
-        : Xxxbot.reply;
-      const media1 = await Xxxbot.client.downloadAndSaveMediaMessage(
+        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
+            .extendedTextMessage.contextInfo
+        : Bot.reply;
+      const media1 = await Bot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
-      if (!Xxxbot.isGroup || Xxxbot.groupdata.nsfw == true) {
+      if (!Bot.isGroup || Bot.groupdata.nsfw == true) {
         const nsfw = await ai(media1);
         if (nsfw.output.nsfw_score > 0.6) {
-          Xxxbot.replytext("🌚 🔞");
+          Bot.replytext("🌚 🔞");
 
           fs.unlinkSync(media1);
 
@@ -281,7 +281,7 @@ module.exports = {
 
       async function buildSticker() {
         if (arg.includes("nodata") == true) {
-          Xxxbot.replysticker(ran);
+          Bot.replysticker(ran);
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
           fs.unlinkSync(media1);
@@ -291,8 +291,8 @@ module.exports = {
             authorName,
             ran
           );
-          Xxxbot.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Xxxbot.reply,
+          Bot.client.sendMessage(from, webpWithMetadata, sticker, {
+            quoted: Bot.reply,
           });
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
@@ -301,7 +301,7 @@ module.exports = {
         }
       }
     } else {
-      Xxxbot.replytext(Xxxbot.mess.tag);
+      Bot.replytext(Bot.mess.tag);
     }
   },
 };

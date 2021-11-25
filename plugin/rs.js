@@ -7,12 +7,12 @@ module.exports = {
   eg: ["rs"],
   group: false,
   owner: false,
-  handle(Xxxbot) {
+  handle(Bot) {
     const random = Math.floor(Math.random() * 500);
     const ran =
       path.join(__dirname, "../assets/stickers/allsticker/s (") +
       random +
       ").webp";
-    Xxxbot.replysticker(ran);
+    Bot.replysticker(ran);
   },
 };

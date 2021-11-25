@@ -7,11 +7,11 @@ module.exports = {
   eg: ["lyrics Brown munde", "lyrics Baby"],
   group: false,
   owner: false,
-  handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  handle(Bot) {
+    const arg = Bot.arg;
 
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
 
       return;
     }
@@ -19,8 +19,8 @@ module.exports = {
     solenolyrics
       .requestLyricsFor(arg.splice(1).join(" "))
       .then(async (lyrics) => {
-        Xxxbot.replytext(lyrics);
+        Bot.replytext(lyrics);
       })
-      .catch((e) => Xxxbot.replytext(Xxxbot.mess.error.error));
+      .catch((e) => Bot.replytext(Bot.mess.error.error));
   },
 };

@@ -20,29 +20,29 @@ module.exports = {
   ],
   group: false,
   owner: false,
-  handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  handle(Bot) {
+    const arg = Bot.arg;
 
     if (arg.length === 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
-    if (!Xxxbot.isQuotedText) {
-      Xxxbot.wrongCommand();
+    if (!Bot.isQuotedText) {
+      Bot.wrongCommand();
 
       return;
     }
     if (!process.env.clientId && !process.env.clientSecret) {
-      Xxxbot.noapi();
+      Bot.noapi();
       return;
     }
     if (!languagecode.includes(arg[1])) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
     try {
       const program = {
-        script: Xxxbot.quotedMessage,
+        script: Bot.quotedMessage,
         language: arg[1],
         versionIndex: "0",
         stdin: arg.slice(2).join(" "),
@@ -56,13 +56,13 @@ module.exports = {
           json: program,
         },
         function (_error, _response, body) {
-          Xxxbot.replytext(
+          Bot.replytext(
             "🧮 > " + arg[1] + "\n\n" + "```" + body.output + "```"
           );
         }
       );
     } catch (error) {
-      Xxxbot.errorlog(error);
+      Bot.errorlog(error);
     }
   },
 };

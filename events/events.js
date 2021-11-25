@@ -158,8 +158,8 @@ async function main() {
         if (!xxx5.message) return;
         if (xxx5.key && xxx5.key.remoteJid == "status@broadcast") return;
         if (xxx5.key.fromMe) return;
-        const Xxxbot = await settingread(xxx5, client);
-        messagehandler(Xxxbot);
+        const Bot = await settingread(xxx5, client);
+        messagehandler(Bot);
       } catch (error) {
         console.log(error);
       }

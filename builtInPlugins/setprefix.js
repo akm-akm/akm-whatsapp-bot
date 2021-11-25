@@ -12,24 +12,24 @@ module.exports = {
   eg: ["setprefix !", "setprefix .", "setprefix #"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  async handle(Bot) {
+    const arg = Bot.arg;
 
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
 
       return;
     }
     if (!settings.prefixchoice.split("").includes(arg[1])) {
-      Xxxbot.replytext(
+      Bot.replytext(
         "🤖 ```Select prefix from ```" +
           settings.prefixchoice.split("").join(" ")
       );
       return;
     }
     sql.query(
-      `UPDATE groupdata SET prefix = '${arg[1]}' where groupid = '${Xxxbot.from}';`
+      `UPDATE groupdata SET prefix = '${arg[1]}' where groupid = '${Bot.from}';`
     );
-    Xxxbot.replytext("🚨 ```Prefix set to " + arg[1] + "```");
+    Bot.replytext("🚨 ```Prefix set to " + arg[1] + "```");
   },
 };

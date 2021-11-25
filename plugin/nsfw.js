@@ -9,24 +9,21 @@ module.exports = {
   eg: ["testnsfw"],
   group: false,
   owner: false,
-  async handle(Xxxbot) {
+  async handle(Bot) {
     if (!process.env.DEEPAI) {
-      Xxxbot.noapi();
+      Bot.noapi();
       return;
     }
 
     const getRandom = (ext) => {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
     };
-    if (
-      (isMedia && Xxxbot.reply.message.imageMessage) ||
-      Xxxbot.isQuotedImage
-    ) {
-      const encmedia = Xxxbot.isQuotedImage
-        ? JSON.parse(JSON.stringify(Xxxbot.reply).replace("quotedM", "m"))
-            .message.extendedTextMessage.contextInfo
-        : Xxxbot.reply;
-      const media = await Xxxbot.client.downloadAndSaveMediaMessage(
+    if ((isMedia && Bot.reply.message.imageMessage) || Bot.isQuotedImage) {
+      const encmedia = Bot.isQuotedImage
+        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
+            .extendedTextMessage.contextInfo
+        : Bot.reply;
+      const media = await Bot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
@@ -53,7 +50,7 @@ module.exports = {
               " %\n";
           });
 
-          Xxxbot.replytext(nsfw);
+          Bot.replytext(nsfw);
           fs.unlinkSync(media);
           return;
         })
@@ -64,16 +61,16 @@ module.exports = {
           return;
         });
     } else if (
-      (Xxxbot.isMedia && Xxxbot.reply.message.videoMessage) ||
-      Xxxbot.isQuotedVideo
+      (Bot.isMedia && Bot.reply.message.videoMessage) ||
+      Bot.isQuotedVideo
     ) {
       ///////////////////////////////////////////////////////
 
-      const encmedia = Xxxbot.isQuotedVideo
-        ? JSON.parse(JSON.stringify(Xxxbot.reply).replace("quotedM", "m"))
-            .message.extendedTextMessage.contextInfo
-        : Xxxbot.reply;
-      const media = await Xxxbot.client.downloadAndSaveMediaMessage(
+      const encmedia = Bot.isQuotedVideo
+        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
+            .extendedTextMessage.contextInfo
+        : Bot.reply;
+      const media = await Bot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
@@ -99,7 +96,7 @@ module.exports = {
               " %\n";
           });
 
-          Xxxbot.replytext(nsfw);
+          Bot.replytext(nsfw);
           fs.unlinkSync(media);
           return;
         })
@@ -111,12 +108,12 @@ module.exports = {
         });
 
       ///////////////////////////////////////////////////////
-    } else if (Xxxbot.isQuotedSticker) {
+    } else if (Bot.isQuotedSticker) {
       const encmedia = JSON.parse(
-        JSON.stringify(Xxxbot.reply).replace("quotedM", "m")
+        JSON.stringify(Bot.reply).replace("quotedM", "m")
       ).message.extendedTextMessage.contextInfo;
 
-      const media = await Xxxbot.client.downloadAndSaveMediaMessage(
+      const media = await Bot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")
       );
@@ -143,7 +140,7 @@ module.exports = {
               " %\n";
           });
 
-          Xxxbot.replytext(nsfw);
+          Bot.replytext(nsfw);
 
           fs.unlinkSync(media);
           return;
@@ -155,7 +152,7 @@ module.exports = {
           return;
         });
     } else {
-      Xxxbot.reply(Xxxbot.mess.tag);
+      Bot.reply(Bot.mess.tag);
     }
   },
 };

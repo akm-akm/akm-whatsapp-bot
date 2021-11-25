@@ -8,40 +8,37 @@ module.exports = {
   eg: ["ban @ankit", "ban @dibyam", "ban @saket"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
-    const from = Xxxbot.from;
+  async handle(Bot) {
+    const arg = Bot.arg;
+    const from = Bot.from;
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
 
     try {
-      const mentioned = Xxxbot.taggedUser;
+      const mentioned = Bot.taggedUser;
       if (!mentioned) {
-        Xxxbot.wrongCommand();
+        Bot.wrongCommand();
         return;
       }
       const z = mentioned[0].split("@")[0];
 
-      if (z === Xxxbot.botNumber) {
-        Xxxbot.replytext(
+      if (z === Bot.botNumber) {
+        Bot.replytext(
           "🤖 ```I can't ban myself, but I can ban you! There you go!``` _BANNED_"
         );
         sql.query(
-          `UPDATE groupdata SET banned_users = array_append(banned_users, '${Xxxbot.number}') where groupid = '${from}';`
+          `UPDATE groupdata SET banned_users = array_append(banned_users, '${Bot.number}') where groupid = '${from}';`
         );
         return;
       }
-      if (
-        Xxxbot.botdata.moderators.includes(z) ||
-        z == process.env.OWNER_NUMBER
-      ) {
-        Xxxbot.replytext(Xxxbot.mess.error.error);
+      if (Bot.botdata.moderators.includes(z) || z == process.env.OWNER_NUMBER) {
+        Bot.replytext(Bot.mess.error.error);
         return;
       }
-      if (z == Xxxbot.number) {
-        Xxxbot.replytext(Xxxbot.mess.error.error);
+      if (z == Bot.number) {
+        Bot.replytext(Bot.mess.error.error);
         return;
       }
       await sql.query(
@@ -50,11 +47,11 @@ module.exports = {
       sql.query(
         `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
       );
-      Xxxbot.replytext(Xxxbot.mess.success);
+      Bot.replytext(Bot.mess.success);
     } catch (error) {
       console.log(error);
-      Xxxbot.replytext(Xxxbot.mess.error.error);
-      Xxxbot.errorlog();
+      Bot.replytext(Bot.mess.error.error);
+      Bot.errorlog();
     }
   },
 };

@@ -7,9 +7,9 @@ module.exports = {
   eg: ["tagall class at 7am", "tagall holiday today"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
+  async handle(Bot) {
     const memberslist = [];
-    const arg = Xxxbot.arg;
+    const arg = Bot.arg;
     if (arg.length > 1) {
       arg.shift();
       msg =
@@ -18,11 +18,11 @@ module.exports = {
         arg.join(" ").slice(1) +
         "```";
     } else msg = "👋  ```Hello Everyone```";
-    for (let member of Xxxbot.groupMembers) {
+    for (let member of Bot.groupMembers) {
       memberslist.push(member.jid);
     }
-    Xxxbot.client.sendMessage(Xxxbot.from, msg, MessageType.extendedText, {
-      quoted: Xxxbot.reply,
+    Bot.client.sendMessage(Bot.from, msg, MessageType.extendedText, {
+      quoted: Bot.reply,
       contextInfo: {
         mentionedJid: memberslist,
       },

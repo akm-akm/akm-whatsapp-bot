@@ -13,9 +13,9 @@ module.exports = {
   eg: ["tweet"],
   group: false,
   owner: false,
-  async handle(Xxxbot) {
-    if (!Xxxbot.isBotModerator) {
-      Xxxbot.replytext(Xxxbot.mess.only.modB);
+  async handle(Bot) {
+    if (!Bot.isBotModerator) {
+      Bot.replytext(Bot.mess.only.modB);
       return;
     }
 
@@ -45,7 +45,7 @@ module.exports = {
 
         i++;
       }
-      Xxxbot.replytext(msg);
+      Bot.replytext(msg);
     });
   },
 };

@@ -5,31 +5,31 @@ module.exports = {
   eg: ["promote @ankit", "promote @dibyam"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
-    if (!Xxxbot.isBotGroupAdmins) {
-      Xxxbot.replytext(Xxxbot.mess.only.Badmin);
+  async handle(Bot) {
+    if (!Bot.isBotGroupAdmins) {
+      Bot.replytext(Bot.mess.only.Badmin);
 
       return;
     }
-    if (Xxxbot.arg.length == 1) {
-      Xxxbot.wrongCommand();
+    if (Bot.arg.length == 1) {
+      Bot.wrongCommand();
       return;
     }
 
-    const mentioned = Xxxbot.taggedUser;
+    const mentioned = Bot.taggedUser;
 
     if (!mentioned) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
     const z = mentioned[0].split("@")[0];
-    if (z == Xxxbot.botNumber) {
-      Xxxbot.replytext(Xxxbot.mess.error.error);
+    if (z == Bot.botNumber) {
+      Bot.replytext(Bot.mess.error.error);
       return;
     }
 
-    Xxxbot.client.groupMakeAdmin(Xxxbot.from, mentioned);
+    Bot.client.groupMakeAdmin(Bot.from, mentioned);
 
-    Xxxbot.replytext(Xxxbot.mess.success);
+    Bot.replytext(Bot.mess.success);
   },
 };

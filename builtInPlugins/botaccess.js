@@ -5,27 +5,27 @@ module.exports = {
   eg: ["botaccess off", "botaccess on"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  async handle(Bot) {
+    const arg = Bot.arg;
 
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
     if (arg[1] == "off") {
       sql.query(
-        `UPDATE groupdata SET membercanusebot = false WHERE groupid = '${Xxxbot.from}'`
+        `UPDATE groupdata SET membercanusebot = false WHERE groupid = '${Bot.from}'`
       );
-      Xxxbot.replytext(Xxxbot.mess.success);
+      Bot.replytext(Bot.mess.success);
       return;
     } else if (arg[1] == "on") {
       sql.query(
-        `UPDATE groupdata SET membercanusebot = true WHERE groupid = '${Xxxbot.from}'`
+        `UPDATE groupdata SET membercanusebot = true WHERE groupid = '${Bot.from}'`
       );
-      Xxxbot.replytext(Xxxbot.mess.success);
+      Bot.replytext(Bot.mess.success);
       return;
     } else {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
     }
   },
 };

@@ -5,13 +5,13 @@ module.exports = {
   eg: ["grouplink"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
-    if (!Xxxbot.isBotGroupAdmins) {
-      Xxxbot.replytext(Xxxbot.mess.only.Badmin);
+  async handle(Bot) {
+    if (!Bot.isBotGroupAdmins) {
+      Bot.replytext(Bot.mess.only.Badmin);
       return;
     }
-    const grplink = await Xxxbot.client.groupInviteCode(Xxxbot.from);
-    Xxxbot.replytext(
+    const grplink = await Bot.client.groupInviteCode(Bot.from);
+    Bot.replytext(
       "🤖 ```https://chat.whatsapp.com/```" + "```" + grplink + "```"
     );
   },

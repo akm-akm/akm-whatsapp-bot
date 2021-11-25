@@ -5,8 +5,8 @@ module.exports = {
   eg: ["botleave"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
-    await Xxxbot.replytext("🤧 ```Bye, Miss you all ```");
-    Xxxbot.client.groupLeave(Xxxbot.from);
+  async handle(Bot) {
+    await Bot.replytext("🤧 ```Bye, Miss you all ```");
+    Bot.client.groupLeave(Bot.from);
   },
 };

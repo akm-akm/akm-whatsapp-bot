@@ -14,15 +14,15 @@ module.exports = {
   eg: ["pint https://pin.it/1f1m", "pint https://pin.it/dd4f"],
   group: false,
   owner: false,
-  handle(Xxxbot) {
-    const arg = Xxxbot.arg;
-    const from = Xxxbot.from;
+  handle(Bot) {
+    const arg = Bot.arg;
+    const from = Bot.from;
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
     if (!process.env.KEEPSAVEIT_API) {
-      Xxxbot.noapi();
+      Bot.noapi();
       return;
     }
     ran = getRandom("mp4");
@@ -42,13 +42,13 @@ module.exports = {
             file.close(async () => {
               console.log("filesaved");
               title.startsWith("<div")
-                ? Xxxbot.replytext(Xxxbot.mess.error.error)
-                : await Xxxbot.client.sendMessage(
+                ? Bot.replytext(Bot.mess.error.error)
+                : await Bot.client.sendMessage(
                     from,
                     fs.readFileSync(ran),
                     video,
                     {
-                      quoted: Xxxbot.reply,
+                      quoted: Bot.reply,
                       caption: "```" + title + "```",
                     }
                   );
@@ -58,7 +58,7 @@ module.exports = {
         });
       })
       .catch((err) => {
-        Xxxbot.replytext(Xxxbot.mess.error.error);
+        Bot.replytext(Bot.mess.error.error);
         fs.unlinkSync(ran);
       });
   },

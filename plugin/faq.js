@@ -11,7 +11,7 @@ module.exports = {
   eg: ["faq"],
   group: false,
   owner: false,
-  handle(Xxxbot) {
+  handle(Bot) {
     let msgl = "🤖🤖🤖 *XXX-BOT FAQs* 🤖🤖🤖\n";
 
     faq.forEach((element) => {
@@ -23,6 +23,6 @@ module.exports = {
         element.answer +
         "```\n";
     });
-    Xxxbot.replytext(msgl);
+    Bot.replytext(msgl);
   },
 };

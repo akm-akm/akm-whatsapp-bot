@@ -8,10 +8,10 @@ module.exports = {
   eg: ["mdr @ankit", "mdr @messi", "mdr 15123479768"],
   group: false,
   owner: true,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  async handle(Bot) {
+    const arg = Bot.arg;
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
 
@@ -25,10 +25,10 @@ module.exports = {
         `UPDATE groupdata SET banned_users = array_remove(banned_users, '${number}');`
       )
       .then((result) => {
-        Xxxbot.replytext(Xxxbot.mess.success);
+        Bot.replytext(Bot.mess.success);
       })
       .catch((err) => {
-        Xxxbot.replytext(Xxxbot.mess.error.error);
+        Bot.replytext(Bot.mess.error.error);
       });
   },
 };

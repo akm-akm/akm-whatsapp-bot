@@ -1,27 +1,29 @@
 module.exports = {
-  name: "invite",
-  usage: "invite <link>",
+  name: "join",
+  usage: "join <link>",
   desc: "The bot will join the group with the invite link.",
-  eg: ["invite https://chat.whatsapp.com/JdEuI6JvN4W434RmF","invite https://chat.whatsapp.com/Jweve74J434RmF"],
+  eg: [
+    "join https://chat.whatsapp.com/JdEuI6JvN4W434RmF",
+    "join https://chat.whatsapp.com/Jweve74J434RmF",
+  ],
   group: false,
   owner: false,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  async handle(Bot) {
+    const arg = Bot.arg;
 
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
-
+      Bot.wrongCommand();
       return;
     }
     if (!arg[1].includes("https://chat.whatsapp.com/")) {
-      Xxxbot.replytext(Xxxbot.mess.error.invalid);
+      Bot.replytext(Bot.mess.error.invalid);
       return;
     }
     try {
-      await Xxxbot.client.acceptInvite(arg[1].split(".com/")[1]);
-      Xxxbot.replytext(Xxxbot.mess.success);
+      await Bot.client.acceptInvite(arg[1].split(".com/")[1]);
+      Bot.replytext(Bot.mess.success);
     } catch (error) {
-      Xxxbot.replytext(Xxxbot.mess.error.error);
+      Bot.replytext(Bot.mess.error.error);
     }
   },
 };

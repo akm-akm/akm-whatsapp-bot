@@ -7,19 +7,19 @@ module.exports = {
   eg: ["open"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
-    if (!Xxxbot.isBotGroupAdmins) {
-      Xxxbot.replytext(Xxxbot.mess.only.Badmin);
+  async handle(Bot) {
+    if (!Bot.isBotGroupAdmins) {
+      Bot.replytext(Bot.mess.only.Badmin);
 
       return;
     }
 
-    Xxxbot.client.groupSettingChange(
-      Xxxbot.from,
+    Bot.client.groupSettingChange(
+      Bot.from,
       GroupSettingChange.messageSend,
       false
     );
 
-    Xxxbot.replytext(Xxxbot.mess.success);
+    Bot.replytext(Bot.mess.success);
   },
 };

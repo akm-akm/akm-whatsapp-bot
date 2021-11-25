@@ -8,26 +8,26 @@ module.exports = {
   eg: ["dul 50", "dul 100"],
   group: false,
   owner: true,
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  async handle(Bot) {
+    const arg = Bot.arg;
 
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
 
       return;
     }
     if ((typeof arg[1] !== "number" && arg[1] < 0) || arg[1] > 1000) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
 
       return;
     }
     sql
       .query(`update botdata set dailylimit = '${arg[1]}'`)
       .then((result) => {
-        Xxxbot.replytext(Xxxbot.mess.success);
+        Bot.replytext(Bot.mess.success);
       })
       .catch((err) => {
-        Xxxbot.replytext(Xxxbot.mess.error.error);
+        Bot.replytext(Bot.mess.error.error);
       });
   },
 };

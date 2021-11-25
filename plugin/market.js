@@ -44,11 +44,11 @@ module.exports = {
   ],
   group: false,
   owner: false,
-  handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  handle(Bot) {
+    const arg = Bot.arg;
 
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
 
       return;
     }
@@ -61,11 +61,11 @@ module.exports = {
           )
           .then((response) => {
             if (response.error) {
-              Xxxbot.replytext(Xxxbot.mess.error.error);
+              Bot.replytext(Bot.mess.error.error);
             } else {
               let msg =
                 "Market status : ```" + response.data.NormalMktStatus + "```";
-              Xxxbot.replytext(msg);
+              Bot.replytext(msg);
             }
           })
           .catch((err) => {
@@ -84,7 +84,7 @@ module.exports = {
 
             if (response.error) {
               console.log("err");
-              Xxxbot.replytext(Xxxbot.mess.error.error);
+              Bot.replytext(Bot.mess.error.error);
             } else {
               response.data.data.forEach((element) => {
                 msg +=
@@ -107,11 +107,11 @@ module.exports = {
                   element.previousPrice +
                   "```";
               });
-              Xxxbot.replytext(msg);
+              Bot.replytext(msg);
             }
           })
           .catch((err) => {
-            Xxxbot.replytext(Xxxbot.mess.error.error);
+            Bot.replytext(Bot.mess.error.error);
           });
 
         break;
@@ -151,11 +151,11 @@ module.exports = {
                   element.ltP +
                   "```";
               });
-              Xxxbot.replytext(msg);
+              Bot.replytext(msg);
             }
           })
           .catch((err) => {
-            Xxxbot.replytext(Xxxbot.mess.error.error);
+            Bot.replytext(Bot.mess.error.error);
           });
 
         break;
@@ -192,22 +192,22 @@ module.exports = {
                   "```\n";
                 +"```turnoverInLakhs : " + element.turnoverInLakhs + "```";
               });
-              Xxxbot.replytext(msg);
+              Bot.replytext(msg);
             }
           })
           .catch((err) => {
-            Xxxbot.replytext(Xxxbot.mess.error.error);
+            Bot.replytext(Bot.mess.error.error);
           });
 
         break;
 
       case "search":
         if (arg.length < 3) {
-          Xxxbot.replytext("```Enter stocks name to search.```");
+          Bot.replytext("```Enter stocks name to search.```");
           return;
         }
         if (arg.length > 3) {
-          Xxxbot.replytext("```Searching only the first word.```");
+          Bot.replytext("```Searching only the first word.```");
         }
         axios
           .get(
@@ -243,22 +243,22 @@ module.exports = {
                   element.symbol +
                   "```";
               });
-              Xxxbot.replytext(msg);
+              Bot.replytext(msg);
             }
           })
           .catch((err) => {
-            Xxxbot.replytext(Xxxbot.mess.error.error);
+            Bot.replytext(Bot.mess.error.error);
           });
         break;
 
       case "details":
       case "detail":
         if (arg.length < 3) {
-          Xxxbot.replytext("```Enter stock symbol to get details.```");
+          Bot.replytext("```Enter stock symbol to get details.```");
           return;
         }
         if (arg.length > 3) {
-          Xxxbot.replytext("```Searching only the first symbol.```");
+          Bot.replytext("```Searching only the first symbol.```");
         }
         axios
           .get(
@@ -346,16 +346,16 @@ module.exports = {
                 "```Update Time   : " +
                 response.data.lastUpdateTime.split(" ")[1] +
                 "```";
-              Xxxbot.replytext(msg);
+              Bot.replytext(msg);
             }
           })
           .catch((err) => {
-            Xxxbot.replytext(Xxxbot.mess.error.error);
+            Bot.replytext(Bot.mess.error.error);
           });
         break;
 
       default:
-        Xxxbot.wrongCommand();
+        Bot.wrongCommand();
     }
   },
 };

@@ -40,45 +40,40 @@ const getGroupAdmins = (participants) => {
 };
 
 module.exports = async function settingread(xxx, client) {
-  const Xxxbot = new InforClass();
-  Xxxbot.client = client;
-  Xxxbot.reply = xxx;
+  const Bot = new InforClass();
+  Bot.client = client;
+  Bot.reply = xxx;
   try {
     const random = settings.prefixchoice.charAt(
       Math.floor(Math.random() * settings.prefixchoice.length)
     );
 
     const from = xxx.key.remoteJid;
-    Xxxbot.from = from;
-    Xxxbot.isGroup = from.endsWith("@g.us");
-    Xxxbot.sender = Xxxbot.isGroup ? xxx.participant : xxx.key.remoteJid;
-    Xxxbot.groupMetadata = Xxxbot.isGroup
+    Bot.from = from;
+    Bot.isGroup = from.endsWith("@g.us");
+    Bot.sender = Bot.isGroup ? xxx.participant : xxx.key.remoteJid;
+    Bot.groupMetadata = Bot.isGroup
       ? await client.groupMetadata(from)
       : undefined;
-    Xxxbot.groupMembers = Xxxbot.isGroup
-      ? Xxxbot.groupMetadata.participants
+    Bot.groupMembers = Bot.isGroup ? Bot.groupMetadata.participants : undefined;
+    Bot.groupAdmins = Bot.isGroup
+      ? getGroupAdmins(Bot.groupMembers)
       : undefined;
-    Xxxbot.groupAdmins = Xxxbot.isGroup
-      ? getGroupAdmins(Xxxbot.groupMembers)
+    Bot.groupName = Bot.isGroup ? Bot.groupMetadata.subject : undefined;
+    Bot.botNumber = client.user.jid.split("@")[0];
+    Bot.isBotGroupAdmins = Bot.isGroup
+      ? Bot.groupAdmins.includes(`${Bot.botNumber}@s.whatsapp.net`) || false
       : undefined;
-    Xxxbot.groupName = Xxxbot.isGroup
-      ? Xxxbot.groupMetadata.subject
-      : undefined;
-    Xxxbot.botNumber = client.user.jid.split("@")[0];
-    Xxxbot.isBotGroupAdmins = Xxxbot.isGroup
-      ? Xxxbot.groupAdmins.includes(`${Xxxbot.botNumber}@s.whatsapp.net`) ||
-        false
-      : undefined;
-    Xxxbot.isOwner = Xxxbot.isGroup
-      ? Xxxbot.sender.split("@")[0] === process.env.OWNER_NUMBER
-      : Xxxbot.from.split("@")[0] === process.env.OWNER_NUMBER;
-    Xxxbot.isSuperAdmin = Xxxbot.isGroup
-      ? Xxxbot.groupMetadata.owner == Xxxbot.from
+    Bot.isOwner = Bot.isGroup
+      ? Bot.sender.split("@")[0] === process.env.OWNER_NUMBER
+      : Bot.from.split("@")[0] === process.env.OWNER_NUMBER;
+    Bot.isSuperAdmin = Bot.isGroup
+      ? Bot.groupMetadata.owner == Bot.from
       : undefined;
 
     const botdata = await sql.query("select * from botdata;");
 
-    if (Xxxbot.isGroup) {
+    if (Bot.isGroup) {
       data1 = await sql.query(
         `select * from groupdata where groupid='${from}';`
       );
@@ -86,7 +81,7 @@ module.exports = async function settingread(xxx, client) {
         if (process.env.NODE_ENV === "development") {
           console.log(
             "👪  " +
-              chalk.bgCyan("Prefix assigned is / for group " + Xxxbot.groupName)
+              chalk.bgCyan("Prefix assigned is / for group " + Bot.groupName)
           );
           await sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','/','false','true', '{''}',0,0,false,true);`
@@ -95,10 +90,9 @@ module.exports = async function settingread(xxx, client) {
         }
         if (process.env.NODE_ENV === "production") {
           if (
-            Xxxbot.groupMetadata.participants.length <
-            botdata.rows[0].mingroupsize
+            Bot.groupMetadata.participants.length < botdata.rows[0].mingroupsize
           ) {
-            Xxxbot.text(
+            Bot.text(
               "*Minimum participants required is* " +
                 botdata.rows[0].mingroupsize
             );
@@ -108,7 +102,7 @@ module.exports = async function settingread(xxx, client) {
           console.log(
             "👪  " +
               chalk.bgCyan(
-                `Prefix assigned is '${random}' for group ` + Xxxbot.groupName
+                `Prefix assigned is '${random}' for group ` + Bot.groupName
               )
           );
           newgroup(from, client, random);
@@ -120,9 +114,7 @@ module.exports = async function settingread(xxx, client) {
       }
     }
 
-    const number = Xxxbot.isGroup
-      ? Xxxbot.sender.split("@")[0]
-      : from.split("@")[0];
+    const number = Bot.isGroup ? Bot.sender.split("@")[0] : from.split("@")[0];
     const data2 = await sql.query(
       `select * from messagecount where phonenumber='${number}';`
     );
@@ -158,8 +150,8 @@ module.exports = async function settingread(xxx, client) {
         ? xxx.message.extendedTextMessage.text
         : "";
 
-    Xxxbot.isMedia = type === "imageMessage" || type === "videoMessage";
-    Xxxbot.arg = Xxxbot.isGroup
+    Bot.isMedia = type === "imageMessage" || type === "videoMessage";
+    Bot.arg = Bot.isGroup
       ? data1.rows[0].useprefix
         ? arg
             .replace(/\s+/g, " ")
@@ -192,50 +184,48 @@ module.exports = async function settingread(xxx, client) {
           .replace(/\s+/g, " ")
           .split(" ")
           .map((xa) => (urlregex.test(xa) ? xa : xa.toLowerCase())));
-    Xxxbot.number = number;
-    Xxxbot.noofmsgtoday = data2.rows[0].totalmsgtoday;
-    Xxxbot.totalmsg = data2.rows[0].totalmsg;
-    Xxxbot.dailylimitover = data2.rows[0].dailylimitover;
-    Xxxbot.abusepresent = from.endsWith("@g.us")
+    Bot.number = number;
+    Bot.noofmsgtoday = data2.rows[0].totalmsgtoday;
+    Bot.totalmsg = data2.rows[0].totalmsg;
+    Bot.dailylimitover = data2.rows[0].dailylimitover;
+    Bot.abusepresent = from.endsWith("@g.us")
       ? data1.rows[0].allowabuse == 0
         ? arg.detecta()
         : []
       : arg.detecta();
-    Xxxbot.groupdata = from.endsWith("@g.us") ? data1.rows[0] : 0;
-    Xxxbot.botdata = botdata.rows[0];
-    Xxxbot.stanzaId = stanzaId;
-    Xxxbot.isQuotedImage =
+    Bot.groupdata = from.endsWith("@g.us") ? data1.rows[0] : 0;
+    Bot.botdata = botdata.rows[0];
+    Bot.stanzaId = stanzaId;
+    Bot.isQuotedImage =
       type === "extendedTextMessage" && content.includes("imageMessage");
-    Xxxbot.isQuotedVideo =
+    Bot.isQuotedVideo =
       type === "extendedTextMessage" && content.includes("videoMessage");
-    Xxxbot.isQuotedText =
+    Bot.isQuotedText =
       type == "extendedTextMessage" &&
       content.includes("text") &&
       content.includes("stanzaId");
-    Xxxbot.isQuotedSticker =
+    Bot.isQuotedSticker =
       type === "extendedTextMessage" && content.includes("stickerMessage");
-    Xxxbot.quotedMessage = Xxxbot.isQuotedText
-      ? Xxxbot.reply.message.extendedTextMessage.contextInfo.quotedMessage
+    Bot.quotedMessage = Bot.isQuotedText
+      ? Bot.reply.message.extendedTextMessage.contextInfo.quotedMessage
           .conversation
       : undefined;
-    Xxxbot.isUserTagged =
+    Bot.isUserTagged =
       type == "extendedTextMessage" &&
       content.includes("text") &&
       content.includes("mentionedJid");
-    Xxxbot.taggedUser = Xxxbot.isUserTagged
+    Bot.taggedUser = Bot.isUserTagged
       ? xxx.message.extendedTextMessage.contextInfo.mentionedJid
       : undefined;
-    Xxxbot.isBotModerator =
-      Xxxbot.botdata.moderators.includes(Xxxbot.number) || Xxxbot.isOwner;
-    Xxxbot.isGroupAdmins = Xxxbot.isGroup
-      ? Xxxbot.groupAdmins.includes(Xxxbot.sender) ||
-        Xxxbot.isBotModerator ||
-        false
+    Bot.isBotModerator =
+      Bot.botdata.moderators.includes(Bot.number) || Bot.isOwner;
+    Bot.isGroupAdmins = Bot.isGroup
+      ? Bot.groupAdmins.includes(Bot.sender) || Bot.isBotModerator || false
       : undefined;
 
-    return Xxxbot;
+    return Bot;
   } catch (error) {
     console.log(error);
-    // Xxxbot.errorlog(error);
+    // Bot.errorlog(error);
   }
 };

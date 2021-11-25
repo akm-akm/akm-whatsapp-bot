@@ -26,21 +26,21 @@ module.exports = {
   eg: ["crypto btc", "crypto xrp", "crypto eth"],
   group: false,
   owner: false,
-  handle(Xxxbot) {
+  handle(Bot) {
     let c = 0;
-    const arg = Xxxbot.arg;
+    const arg = Bot.arg;
     let message;
 
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
     if (!process.env.COINMARKETCAP_API_KEY) {
-      Xxxbot.noapi();
+      Bot.noapi();
       return;
     }
     if (!coins.includes(arg[1].toUpperCase())) {
-      Xxxbot.replytext("🤖 ```Not in coinmarketcap.```");
+      Bot.replytext("🤖 ```Not in coinmarketcap.```");
     } else {
       axios(requestOptions)
         .then(function (response) {
@@ -71,12 +71,12 @@ module.exports = {
                 c.market_cap.toFixed(2) +
                 "\n";
 
-              Xxxbot.replytext(message);
+              Bot.replytext(message);
             }
           });
         })
         .catch((error) => {
-          Xxxbot.errorlog(error);
+          Bot.errorlog(error);
         });
     }
   },

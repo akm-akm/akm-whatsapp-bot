@@ -5,19 +5,19 @@ module.exports = {
   eg: ["delete"],
   group: false,
   owner: false,
-  async handle(Xxxbot) {
-    if (!Xxxbot.stanzaId) {
-      Xxxbot.wrongCommand();
+  async handle(Bot) {
+    if (!Bot.stanzaId) {
+      Bot.wrongCommand();
       return;
     }
     try {
-      await Xxxbot.client.deleteMessage(Xxxbot.from, {
-        id: Xxxbot.stanzaId,
-        remoteJid: Xxxbot.from,
+      await Bot.client.deleteMessage(Bot.from, {
+        id: Bot.stanzaId,
+        remoteJid: Bot.from,
         fromMe: true,
       });
     } catch (error) {
-      Xxxbot.replytext(Xxxbot.mess.error.error);
+      Bot.replytext(Bot.mess.error.error);
     }
   },
 };

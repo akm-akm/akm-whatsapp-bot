@@ -87,11 +87,11 @@ module.exports = {
   group: false,
   owner: false,
 
-  handle(Xxxbot) {
-    let prefix = Xxxbot.groupdata.prefix;
-    const useprefix = Xxxbot.groupdata.useprefix;
+  handle(Bot) {
+    let prefix = Bot.groupdata.prefix;
+    const useprefix = Bot.groupdata.useprefix;
 
-    if (Xxxbot.arg.length === 1) {
+    if (Bot.arg.length === 1) {
       const c =
         prefix == undefined
           ? "```Not needed in inbox```"
@@ -99,10 +99,9 @@ module.exports = {
           ? prefix
           : "( " + prefix + " )" + " ```Disabled```";
       if (prefix == undefined || !useprefix) prefix = "🎀";
-      const grpcmds =
-        Xxxbot.isGroup && Xxxbot.isGroupAdmins ? adminCommands : "";
+      const grpcmds = Bot.isGroup && Bot.isGroupAdmins ? adminCommands : "";
       const owncmds =
-        Xxxbot.number === process.env.OWNER_NUMBER ? ownerCommands : "";
+        Bot.number === process.env.OWNER_NUMBER ? ownerCommands : "";
 
       let help =
         "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
@@ -128,27 +127,27 @@ module.exports = {
         "\n‼️ _wazirx added_" +
         "\n\n⚙️ *Bot version* : " +
         version;
-      Xxxbot.replytext(help);
+      Bot.replytext(help);
     } else {
-      if (!pluginsinfo[Xxxbot.arg[1]])
-        return Xxxbot.replytext(Xxxbot.mess.unknowncommand);
+      if (!pluginsinfo[Bot.arg[1]])
+        return Bot.replytext(Bot.mess.unknowncommand);
       if (prefix == undefined || !useprefix) prefix = "🎀";
       let body =
         "🔖 *Description* :\n" +
         "```" +
-        pluginsinfo[Xxxbot.arg[1]].desc +
+        pluginsinfo[Bot.arg[1]].desc +
         "```\n\n" +
         "📕 *Usage* :\n" +
         prefix +
         "```" +
-        pluginsinfo[Xxxbot.arg[1]].usage +
+        pluginsinfo[Bot.arg[1]].usage +
         "```\n\n" +
         "📚 *Example* :";
 
-      pluginsinfo[Xxxbot.arg[1]].eg.forEach((currentItem) => {
+      pluginsinfo[Bot.arg[1]].eg.forEach((currentItem) => {
         body += "\n```" + prefix + currentItem + "```";
       });
-      Xxxbot.replytext(body);
+      Bot.replytext(body);
     }
   },
 };

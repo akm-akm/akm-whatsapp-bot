@@ -5,36 +5,36 @@ module.exports = {
   eg: ["demote @ankit", "demote @dibyam"],
   group: true,
   owner: false,
-  async handle(Xxxbot) {
-    if (!Xxxbot.isBotGroupAdmins) {
-      Xxxbot.replytext(Xxxbot.mess.only.Badmin);
+  async handle(Bot) {
+    if (!Bot.isBotGroupAdmins) {
+      Bot.replytext(Bot.mess.only.Badmin);
 
       return;
     }
     if (arg.length == 1) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
 
-    const mentioned = Xxxbot.taggedUser;
+    const mentioned = Bot.taggedUser;
 
     if (!mentioned) {
-      Xxxbot.wrongCommand();
+      Bot.wrongCommand();
       return;
     }
     const z = mentioned[0].split("@")[0];
-    if (z === Xxxbot.botNumber) {
-      Xxxbot.replytext(Xxxbot.mess.error.error);
+    if (z === Bot.botNumber) {
+      Bot.replytext(Bot.mess.error.error);
       return;
     }
     if (z === isSuperAdmin) {
-      Xxxbot.replytext(Xxxbot.mess.error.error);
+      Bot.replytext(Bot.mess.error.error);
 
       return;
     }
 
-    Xxxbot.client.groupDemoteAdmin(Xxxbot.from, mentioned);
+    Bot.client.groupDemoteAdmin(Bot.from, mentioned);
 
-    Xxxbot.replytext(Xxxbot.mess.success);
+    Bot.replytext(Bot.mess.success);
   },
 };

@@ -13,15 +13,15 @@ module.exports = {
   group: false,
   owner: false,
 
-  async handle(Xxxbot) {
-    const arg = Xxxbot.arg;
+  async handle(Bot) {
+    const arg = Bot.arg;
     const url = arg[1];
     const vid = getRandom(".mp4");
     const thumb = getRandom(".jpg");
 
     try {
       if (arg.length == 1) {
-        Xxxbot.wrongCommand();
+        Bot.wrongCommand();
         return;
       }
       if (ytdl.validateURL(url)) {
@@ -63,15 +63,15 @@ module.exports = {
         ytdl(url)
           .pipe(fs.createWriteStream(vid))
           .on("finish", async () => {
-            Xxxbot.replyvideo(vid, msg, thumb);
+            Bot.replyvideo(vid, msg, thumb);
             fs.unlinkSync(vid);
             fs.unlinkSync(thumb);
           });
       } else {
-        Xxxbot.replytext(Xxxbot.mess.error.invalid);
+        Bot.replytext(Bot.mess.error.invalid);
       }
     } catch (err) {
-      Xxxbot.errorlog(err);
+      Bot.errorlog(err);
       fs.unlinkSync(vid);
       fs.unlinkSync(thumb);
     }
