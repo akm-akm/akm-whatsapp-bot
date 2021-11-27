@@ -173,7 +173,7 @@ module.exports = class BotClass {
   }
 
   noapi() {
-    this.replytext("🔑  ```API key not set```");
+    this.replytext(mess.noapi);
   }
 
   wrongCommand() {

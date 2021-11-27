@@ -3,10 +3,11 @@
   "disabled": "😢 ```Feature down```",
   "success": "✅ ```Successful```",
   "noenv": "🛠️ ```Environment variable not set.```",
+  "noapi": "🔑  ```API key not set```",
   "tag": "🌌 ```Reply to a media.```",
   "tagtext": "📑 ```Reply to a text.```",
   "grouplimit": "🎫 ```Daily group credits exhausted.```",
-  "userlimit": "💳 ```Daily credits exhausetd.```",
+  "userlimit": "💳 ```Daily credits exhausted.```",
   "limit": "💳 ```Daily credit used: ```",
   "unknowncommand": "🤖 ```Invalid command```",
 
