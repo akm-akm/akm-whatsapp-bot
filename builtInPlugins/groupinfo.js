@@ -1,5 +1,9 @@
 const http = require("http");
-
+const fs = require('fs');
+const path = require('path');
+ const getRandom = (ext) => {
+   return `${Math.floor(Math.random() * 10000)}${ext}`;
+ };
 module.exports = {
   name: "groupinfo",
   usage: "groupinfo",

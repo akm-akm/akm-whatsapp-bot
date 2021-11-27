@@ -26,7 +26,7 @@ module.exports = {
         Bot.replytext(Bot.mess.success);
       })
       .catch((err) => {
-        Bot.replytext(Bot.mess.error.error);
+        Bot.errorlog(err);
       });
   },
 };

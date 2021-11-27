@@ -28,7 +28,7 @@ module.exports = {
         Bot.replytext(JSON.stringify(result.rows, null, "\t"));
       })
       .catch((err) => {
-        Bot.replytext(Bot.mess.error.error);
+        Bot.errorlog(err);
       });
   },
 };

@@ -13,6 +13,6 @@ module.exports = {
     setTimeout(() => {
       process.exit(1);
     }, 3000);
-    Bot.replytext(Bot.success);
+    Bot.replytext(Bot.mess.success);
   },
 };
