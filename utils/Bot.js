@@ -117,8 +117,8 @@ module.exports = class BotClass {
    * @param {String} path The absolute image path.
    * @param {String} caption The caption of the image if any.
    */
-  replyimage(path, caption) {
-    this.client.sendMessage(
+  async replyimage(path, caption) {
+    await this.client.sendMessage(
       this.from,
       fs.readFileSync(path),
       MessageType.image,
@@ -129,6 +129,7 @@ module.exports = class BotClass {
         mimetype: Mimetype.jpeg,
       }
     );
+    fs.unlinkSync(path);
   }
 
   /**
@@ -137,8 +138,8 @@ module.exports = class BotClass {
    * @param {String} caption The caption of the video if any
    * @param {String} thumb The absolute thumbnail path if any
    */
-  replyvideo(path, caption, thumb) {
-    this.client.sendMessage(
+  async replyvideo(path, caption, thumb) {
+    await this.client.sendMessage(
       this.from,
       fs.readFileSync(path),
       MessageType.video,
@@ -150,6 +151,7 @@ module.exports = class BotClass {
         thumbnail: fs.readFileSync(thumb),
       }
     );
+    fs.unlinkSync(path);
   }
 
   errorlog(error) {
@@ -170,12 +172,10 @@ module.exports = class BotClass {
     }
   }
 
-
   noapi() {
     this.replytext("🔑  ```API key not set```");
   }
 
-  
   wrongCommand() {
     var prefix = this.groupdata.prefix;
     if (this.groupdata.prefix == undefined || !this.groupdata.useprefix)

@@ -9,7 +9,7 @@ module.exports = {
   owner: false,
   async handle(Bot) {
     const grpdata =
-      "\n💮 *Title* : " +
+      "💮 *Title* : " +
       "*" +
       Bot.groupMetadata.subject +
       "*" +
@@ -59,19 +59,19 @@ module.exports = {
       "```\n";
 
     try {
-      const ppUrl = await Bot.client.getProfilePicture(from);
+      const ppUrl = await Bot.client.getProfilePicture(Bot.from);
       ran = getRandom(".jpeg");
       const file = fs.createWriteStream(ran);
       http.get(ppUrl, function (response) {
         response.pipe(file);
         file.on("finish", function () {
           file.close(async () => {
-            await Bot.replyimage(ran, grpdata);
-            fs.unlinkSync(ran);
+            Bot.replyimage(ran, grpdata);
           });
         });
       });
     } catch (error) {
+      Bot.errorlog(error);
       Bot.replytext(grpdata);
     }
   },

@@ -65,7 +65,8 @@ module.exports = {
           return;
         })
         .catch((err) => {
-          console.log(err);
+          Bot.errorlog(error);
+
           fs.unlinkSync(media);
 
           return;
@@ -108,8 +109,9 @@ module.exports = {
           fs.unlinkSync(media);
           return;
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          Bot.errorlog(error);
+
           fs.unlinkSync(media);
 
           return;
@@ -151,7 +153,7 @@ module.exports = {
           return;
         })
         .catch((err) => {
-          console.log(err);
+          Bot.errorlog(error);
           fs.unlinkSync(media);
 
           return;

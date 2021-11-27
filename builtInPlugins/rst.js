@@ -11,7 +11,7 @@ module.exports = {
   async handle(Bot) {
     sql.query("UPDATE groupdata SET totalmsgtoday=0;");
     sql.query("UPDATE botdata SET totalmsgtoday=0;");
-    sql.query("UPDATE messagecount SET totalmsgtoday=0,dailylimitover=false;");
+    sql.query("UPDATE messagecount SET totalmsgtoday=0, dailylimitover=false;");
     Bot.replytext(Bot.mess.success);
   },
 };
