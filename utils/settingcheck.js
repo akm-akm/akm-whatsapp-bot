@@ -7,7 +7,7 @@ const settings = JSON.parse(
 );
 const { newgroup } = require(path.join(__dirname, "./newgroup"));
 
-const InforClass = require("./Infor");
+const BotClass = require("./Bot");
 
 let data1,
   data3 = JSON.parse(
@@ -40,7 +40,7 @@ const getGroupAdmins = (participants) => {
 };
 
 module.exports = async function settingread(xxx, client) {
-  const Bot = new InforClass();
+  const Bot = new BotClass();
   Bot.client = client;
   Bot.reply = xxx;
   try {

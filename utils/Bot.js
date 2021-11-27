@@ -1,4 +1,4 @@
-const { Mimetype, MessageType } = require("../@adiwajshing/baileys");
+const { Mimetype, MessageType } = require("../@adiwajshing/baileys/lib");
 const fs = require("fs");
 const chalk = require("chalk");
 const path = require("path");
@@ -6,7 +6,7 @@ const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 const pluginsinfo = require(path.join(__dirname, "./pluginInfo"));
-module.exports = class InforClass {
+module.exports = class BotClass {
   constructor(
     isQuotedSticker,
     botNumber,
@@ -76,17 +76,10 @@ module.exports = class InforClass {
   }
   mess = mess;
 
-  noapi() {
-    this.client.sendMessage(
-      this.from,
-      "🔑  ```API key not set```",
-      MessageType.text,
-      {
-        quoted: this.reply,
-      }
-    );
-  }
-
+  /**
+   * This function is used to send a text message tagging the command.
+   * @param {String} input The text message you want to send
+   */
   replytext(input) {
     this.client.sendMessage(this.from, input, MessageType.text, {
       quoted: this.reply,
@@ -94,11 +87,20 @@ module.exports = class InforClass {
     });
   }
 
+  /**
+   * This function is used to send a text message without tagging the command.
+   * @param {String} input The text message you want to send
+   */
   text(input) {
     this.client.sendMessage(this.from, input, MessageType.text, {
       detectLinks: false,
     });
   }
+
+  /**
+   *This function is used to send a sticker message
+   * @param {String} path The absolute sticker path
+   */
   replysticker(path) {
     this.client.sendMessage(
       this.from,
@@ -110,6 +112,11 @@ module.exports = class InforClass {
     );
   }
 
+  /**
+   * This function is used to send a image message along with caption if any.
+   * @param {String} path The absolute image path.
+   * @param {String} caption The caption of the image if any.
+   */
   replyimage(path, caption) {
     this.client.sendMessage(
       this.from,
@@ -123,6 +130,13 @@ module.exports = class InforClass {
       }
     );
   }
+
+  /**
+   * This function is used to send a video message along with caption if any.
+   * @param {String} path The absolute video path
+   * @param {String} caption The caption of the video if any
+   * @param {String} thumb The absolute thumbnail path if any
+   */
   replyvideo(path, caption, thumb) {
     this.client.sendMessage(
       this.from,
@@ -142,6 +156,7 @@ module.exports = class InforClass {
     if (process.env.NODE_ENV !== "production") {
       console.log(chalk.red.bold(error));
     } else {
+      this.replytext(mess.error.error);
       const e = "🤖 Error log for the tagged message \n\n```" + error + "```";
       this.client.sendMessage(
         `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
@@ -155,6 +170,12 @@ module.exports = class InforClass {
     }
   }
 
+
+  noapi() {
+    this.replytext("🔑  ```API key not set```");
+  }
+
+  
   wrongCommand() {
     var prefix = this.groupdata.prefix;
     if (this.groupdata.prefix == undefined || !this.groupdata.useprefix)

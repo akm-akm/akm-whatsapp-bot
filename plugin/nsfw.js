@@ -28,7 +28,7 @@ module.exports = {
     const getRandom = (ext) => {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
     };
-    if ((isMedia && Bot.reply.message.imageMessage) || Bot.isQuotedImage) {
+    if ((Bot.isMedia && Bot.reply.message.imageMessage) || Bot.isQuotedImage) {
       const encmedia = Bot.isQuotedImage
         ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
             .extendedTextMessage.contextInfo
