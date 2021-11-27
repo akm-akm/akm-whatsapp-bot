@@ -1,6 +1,6 @@
 {
   "name": "xxx-whatsapp-bot",
-  "description": "Whatsapp bot that can convert images and videos into sticker, send crypto price updates, stock market updates, search internet for any stickers and send random stickers, download youtube and pinterest videos and do many more things.",
+  "description": "Whatsapp bot that can convert images and videos into sticker, send crypto price updates, stock market updates, search internet for any stickers and send random stickers, download youtube videos and do many more things.",
   "repository": "https://github.com/akm-akm/xxx-whatsapp-bot",
   "logo": "https://raw.githubusercontent.com/akm-akm/xxx-whatsapp-bot/master/docs/images/xxxlogo.jpeg",
   "keywords": [

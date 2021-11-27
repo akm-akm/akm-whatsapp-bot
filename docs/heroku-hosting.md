@@ -7,29 +7,32 @@
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a></p>
 
-### 📝 Enter a unique App name in the field below
+### The following site will open in a new tab -
 
- <br/><img width = "500px"  src='images/deployapp.png'></img>
+ <br/><img width = "500px"  src='images/heroku1.png'></img>
 
-### 🔑 Enter these config vars according to your needs
+- Enter a unique App name in the field above
+
+- Leave the region to United States
+
+#### Now scroll down to config vars -
+
+ <br/><img width = "500px"  src='images/config.png'></img>
+### 🔑 Fill this form with APIs of the features you need.
 
 - `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
 
-- `clientId` The client id from jdoodle.com for the run feature to compile code. (optional)
-
-- `clientSecret` The client secret from jdoodle.com for the run feature to compile code. (optional)
+- `DEEPAI` The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector). (optional)
 
 - `OWNER_NUMBER` Your whatsapp number along with country code without + sign. (required)
 
-- `WEBSITE_PASSWORD` The password you want to keep for the bot website. (required)
-
-- `DEEPAI` The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector). (optional)
-
 - `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
 
- Now scroll to the bottom and click on deploy app.
+- `WEBSITE_PASSWORD` The password you want to keep for the bot website. (required)
 
- Now the bot will be deployed in under a minute and then click on view button.
+##### After filling the required APIs click on deploy app
+
+##### Now the bot will be deployed in under a minute and then click on view button.
 
 ### ‼️ Failing to do the below step will stop the bot from working
 
