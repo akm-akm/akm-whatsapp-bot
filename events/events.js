@@ -85,6 +85,7 @@ async function connect() {
       );
       sql.query("commit;");
       console.log("Login data updated!");
+      sql.query("UPDATE botdata SET isconnected = true;");
     }
   } catch (err) {
     console.error(err);
@@ -107,12 +108,23 @@ async function connect() {
 }
 async function main() {
   try {
+
+    sql.query("SELECT totalmsg from botdata;").then((result) => {
+      totalmsg = result.rows[0].totalmsg;
+      if (totalmsg === 0) {
+        client.sendMessage(
+          `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
+          "*Bot Integrated Succesfully!*",
+          MessageType.text,
+        );
+      }
+    });
+    
     client.logger.level = "fatal";
     await connect();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
     console.log("Hello " + client.user.name);
-    sql.query("UPDATE botdata SET isconnected = true;");
 
     client.on("CB:Call", async (json) => {
       const number = json[1]["from"];

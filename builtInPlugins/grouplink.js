@@ -1,3 +1,5 @@
+const { MessageType } = require("../@adiwajshing/baileys");
+
 module.exports = {
   name: "grouplink",
   usage: "grouplink",
@@ -11,8 +13,13 @@ module.exports = {
       return;
     }
     const grplink = await Bot.client.groupInviteCode(Bot.from);
-    Bot.replytext(
-      "🤖 ```https://chat.whatsapp.com/```" + "```" + grplink + "```"
+    Bot.client.sendMessage(
+      Bot.from,
+      "```https://chat.whatsapp.com/```" + "```" + grplink + "```",
+      MessageType.text,
+      {
+        quoted: Bot.reply,
+      }
     );
   },
 };

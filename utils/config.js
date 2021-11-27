@@ -4,7 +4,7 @@ const { main } = require(path.join(__dirname, "../events/events.js"));
 
 const chalk = require("chalk");
 (botsettingcheck = () =>
-  new Promise(async () => {
+  new Promise(async (resolve,reject) => {
     if (!process.env.WEBSITE_PASSWORD) {
       console.log(chalk.bgRed("WEBSITE_PASSWORD is not set"));
       process.exit(1);
@@ -55,14 +55,7 @@ const chalk = require("chalk");
       botsettingcheck();
     }
 
-    try {
-      await sql.query("select * from groupdata");
-    } catch (error) {
-      console.log(chalk.bgRed("Creating groupdata table"));
-      await sql.query(
-        "CREATE TABLE IF NOT EXISTS groupdata (groupid TEXT, useprefix BOOL, prefix TEXT, allowabuse BOOL, membercanusebot BOOL, banned_users TEXT[], totalmsgtoday INT, totalmsg INT, autosticker BOOL, nsfw BOOL);"
-      );
-    }
+  
 
     try {
       await sql.query("select * from messagecount");
@@ -72,4 +65,14 @@ const chalk = require("chalk");
         "CREATE TABLE IF NOT EXISTS messagecount (phonenumber TEXT, totalmsgtoday INT, totalmsg INT, dailylimitover BOOL);"
       );
     }
+
+
+      try {
+        await sql.query("select * from groupdata");
+      } catch (error) {
+        console.log(chalk.bgRed("Creating groupdata table"));
+        await sql.query(
+          "CREATE TABLE IF NOT EXISTS groupdata (groupid TEXT, useprefix BOOL, prefix TEXT, allowabuse BOOL, membercanusebot BOOL, banned_users TEXT[], totalmsgtoday INT, totalmsg INT, autosticker BOOL, nsfw BOOL);"
+        );
+      }
   }))();

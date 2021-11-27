@@ -105,7 +105,7 @@ exports.messagehandler = async (Bot) => {
     */
   if (
     Bot.noofmsgtoday >= Bot.botdata.dailylimit &&
-    !Bot.botdata.moderators.includes(Bot.number) &&
+    !Bot.isBotModerator &&
     Bot.dailylimitover === false
   ) {
     sql.query(
@@ -116,8 +116,8 @@ exports.messagehandler = async (Bot) => {
   }
 
   /* This line checks the following-
-    (IS the daily limit over?)
-    If yes then returntrtuj
+    (Is the daily limit over?)
+    If yes then return true
     */
   if (Bot.dailylimitover === true) return;
 

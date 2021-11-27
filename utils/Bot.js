@@ -152,6 +152,7 @@ module.exports = class BotClass {
       }
     );
     fs.unlinkSync(path);
+    fs.unlinkSync(thumb);
   }
 
   errorlog(error) {

@@ -64,8 +64,7 @@ module.exports = {
           .pipe(fs.createWriteStream(vid))
           .on("finish", async () => {
             Bot.replyvideo(vid, msg, thumb);
-            fs.unlinkSync(vid);
-            fs.unlinkSync(thumb);
+           
           });
       } else {
         Bot.replytext(Bot.mess.error.invalid);
