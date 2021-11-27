@@ -114,8 +114,8 @@ async function main() {
       if (totalmsg === 0) {
         client.sendMessage(
           `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
-          "*Bot Integrated Succesfully!*",
-          MessageType.text,
+          "🤖 *XXX whatsapp Bot Integrated Succesfully!*",
+          MessageType.text
         );
       }
     });

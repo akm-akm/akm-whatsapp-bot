@@ -30,9 +30,9 @@
 
 - `WEBSITE_PASSWORD` The password you want to keep for the bot website. (required)
 
-##### After filling the required APIs click on deploy app
+#### After filling the required APIs click on deploy app
 
-##### Now the bot will be deployed in under a minute and then click on view button
+#### Now the bot will be deployed in under a minute and then click on view button
 
 ### ‼️ Failing to do the below step will stop the bot from working
 
