@@ -33,12 +33,12 @@
       "required": false
     },
     "DEEPAI": {
-      "description": "The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector)",
+      "description": "The api key for nsfw detection in images from https://deepai.org/machine-learning-model/nsfw-detector",
       "value": "",
       "required": false
     },
     "SEARCH_STICKER": {
-      "description": "The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature.",
+      "description": "The api from https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1 if you want to use the search sticker (ss) feature.",
       "value": "",
       "required": false
     }

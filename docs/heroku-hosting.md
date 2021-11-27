@@ -20,7 +20,7 @@
  <br/><img width = "500px"  src='images/config.png'></img>
 ### 🔑 Fill this form with APIs of the features you need.
 
-- `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
+- `COINMARKETCAP_API_KEY` The API key of [CoinMarketCap](https://pro.coinmarketcap.com/signup) for crypto market data. (optional)
 
 - `DEEPAI` The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector). (optional)
 
@@ -32,7 +32,7 @@
 
 ##### After filling the required APIs click on deploy app
 
-##### Now the bot will be deployed in under a minute and then click on view button.
+##### Now the bot will be deployed in under a minute and then click on view button
 
 ### ‼️ Failing to do the below step will stop the bot from working
 
