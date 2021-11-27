@@ -49,8 +49,6 @@ module.exports = {
       );
       Bot.replytext(Bot.mess.success);
     } catch (error) {
-      console.log(error);
-      Bot.replytext(Bot.mess.error.error);
       Bot.errorlog();
     }
   },
