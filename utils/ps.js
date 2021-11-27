@@ -1,17 +1,14 @@
 const { Pool } = require("pg");
 let credentials = {};
-if (process.env.HOSTING_PLATFORM === "local") {
+
+if (!process.env.DATABASE_URL) {
   credentials = {
     connectionString: process.env.LOCAL_DATABASE_URL,
   };
-} else if (process.env.HOSTING_PLATFORM === "heroku") {
+} else {
   credentials = {
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false },
-  };
-} else if (process.env.HOSTING_PLATFORM === "qovery") {
-  credentials = {
-    connectionString: process.env.QOVERY_DATABASE_MY_DB_CONNECTION_URI,
   };
 }
 

@@ -17,7 +17,14 @@ module.exports = {
   async handle(Bot) {
     const arg = Bot.arg;
     const from = Bot.from;
-
+    const searchthis = arg
+      .slice(1)
+      .filter((z) => z !== "crop")
+      .join(" ");
+    if (searchthis.length == 0) {
+      Bot.wrongCommand();
+      return;
+    }
     if (!process.env.SEARCH_STICKER) {
       Bot.noapi();
       return;
@@ -53,14 +60,6 @@ module.exports = {
         `-s`,
         `512:512`,
       ];
-    }
-    const searchthis = arg
-      .slice(1)
-      .filter((z) => z !== "crop")
-      .join(" ");
-    if (searchthis.length == 0) {
-      Bot.wrongCommand();
-      return;
     }
 
     const options = {

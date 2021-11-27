@@ -31,21 +31,17 @@ Edit file named `.env.example` and replace the values with your own.
 
 `COINMARKETCAP_API_KEY` The API key of CoinMarketCap for crypto market data. (optional)
 
-`KEEPSAVEIT_API` The API key of KeepSaveIt for downloading the Pinterest videos. (optional)
-
 `clientId` The client id from jdoodle.com for the run feature to compile code. (optional)
 
 `clientSecret` The client secret from jdoodle.com for the run feature to compile code. (optional)
 
 `OWNER_NUMBER` Your whatsapp number along with country code without + sign. (required)
 
-`HOSTING_PLATFORM` Type local there. (required)
-
 `WEBSITE_PASSWORD` The password you want to keep for the bot website. (required)
 
 `DEEPAI` The api key for nsfw detection in images from [deepai](https://deepai.org/machine-learning-model/nsfw-detector). (optional)
 
-`LOCAL_DATABASE_URL` The url of the database if the bot is running locallly on your system. (required if running locally)
+`LOCAL_DATABASE_URL` The url of the database. See below on how to get this. (required)
 
 `SEARCH_STICKER` The api from [Rapid API](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-image-search1/) if you want to use the search sticker (ss) feature. (optional)
 

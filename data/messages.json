@@ -5,7 +5,7 @@
   "noenv": "🛠️ ```Environment variable not set.```",
   "tag": "🌌 ```Reply to a media.```",
   "tagtext": "📑 ```Reply to a text.```",
-  "grouplimit": "🎫 ```Daily group credits exhausetd.```",
+  "grouplimit": "🎫 ```Daily group credits exhausted.```",
   "userlimit": "💳 ```Daily credits exhausetd.```",
   "limit": "💳 ```Daily credit used: ```",
   "unknowncommand": "🤖 ```Invalid command```",

@@ -4,7 +4,7 @@ const sql = require(path.join(__dirname, "../utils/ps"));
 module.exports = {
   name: "mdr",
   usage: "mdr <@user>",
-  desc: "The bot will promote the tagged user a moderator of the bot.",
+  desc: "The bot will promote the tagged user as a moderator of the bot.",
   eg: ["mdr @ankit", "mdr @messi", "mdr 15123479768"],
   group: false,
   owner: true,

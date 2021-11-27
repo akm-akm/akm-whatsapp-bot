@@ -10,6 +10,16 @@ module.exports = {
   group: false,
   owner: false,
   async handle(Bot) {
+    if (
+      !(
+        Bot.isMedia ||
+        Bot.isQuotedImage ||
+        Bot.isQuotedVideo ||
+        Bot.isQuotedSticker
+      )
+    ) {
+      Bot.replytext(Bot.mess.tag);
+    }
     if (!process.env.DEEPAI) {
       Bot.noapi();
       return;
@@ -64,8 +74,6 @@ module.exports = {
       (Bot.isMedia && Bot.reply.message.videoMessage) ||
       Bot.isQuotedVideo
     ) {
-      ///////////////////////////////////////////////////////
-
       const encmedia = Bot.isQuotedVideo
         ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
             .extendedTextMessage.contextInfo
@@ -106,8 +114,6 @@ module.exports = {
 
           return;
         });
-
-      ///////////////////////////////////////////////////////
     } else if (Bot.isQuotedSticker) {
       const encmedia = JSON.parse(
         JSON.stringify(Bot.reply).replace("quotedM", "m")
@@ -141,7 +147,6 @@ module.exports = {
           });
 
           Bot.replytext(nsfw);
-
           fs.unlinkSync(media);
           return;
         })
@@ -151,8 +156,6 @@ module.exports = {
 
           return;
         });
-    } else {
-      Bot.reply(Bot.mess.tag);
     }
   },
 };

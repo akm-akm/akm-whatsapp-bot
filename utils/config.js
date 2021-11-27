@@ -29,16 +29,8 @@ const chalk = require("chalk");
       process.exit(1);
     }
     if (
-      !process.env.HOSTING_PLATFORM === "heroku" &&
-      !process.env.HOSTING_PLATFORM === "local" &&
-      !process.env.HOSTING_PLATFORM === "qovery"
-    ) {
-      console.log(chalk.bgRed("HOSTING_PLATFORM is not set correctly "));
-      process.exit(1);
-    }
-    if (
-      process.env.HOSTING_PLATFORM === "local" &&
-      process.env.LOCAL_DATABASE_URL === undefined
+      !process.env.DATABASE_URL &&
+      !process.env.LOCAL_DATABASE_URL
     ) {
       console.log(
         chalk.bgRed(

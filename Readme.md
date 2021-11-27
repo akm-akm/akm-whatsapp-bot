@@ -8,11 +8,10 @@
 
 - #### 💻 Test on your computer [Guide](/docs/self-hosting.md)
 
-- #### 🛰️ Host on a free server [Heroku Guide](/docs/heroku-hosting.md)
+- #### 🛰️ Host on a free server [Guide](/docs/heroku-hosting.md)
 
 ## ✨ Highlights
 
-- 💻 5000 lines of code
 - 💖 open source
 - 💙 Written in Javascript
 - 💛 Event-Based
@@ -54,7 +53,8 @@
 
 ## 💡 How to use the bot
 
-- Send `hi` to the bot in the inbox or hi along with prefix if in a group.
+- Send `hi` to the bot in the inbox to see if the bot is working.
+- or hi along with prefix if in a group.
 - The bot will respond with `👋 hello`.
 - Send `help` to the bot in the inbox or help along with prefix if in a group.
 - The bot will respond with the menu.
