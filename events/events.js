@@ -19,7 +19,6 @@ const client = new WAConnection();
 async function connect() {
   try {
     auth_result = await sql.query("select * from auth;");
-    console.log("Fetching login data...");
     auth_row_count = await auth_result.rowCount;
     if (auth_row_count == 0) {
       console.log("No login data found!");
@@ -44,14 +43,12 @@ async function connect() {
         .pipe(fs.createWriteStream("./public/qr.png"));
     });
     client.on("connecting", () => {
-      console.log("connecting...");
     });
     await client.connect({
       timeoutMs: 30 * 1000,
     });
     client.on("open", () => {
       console.log("connected");
-      console.log(`credentials updated!`);
       fs.unlink("./public/qr.png", () => {});
     });
     const authInfo = client.base64EncodedAuthInfo();
@@ -72,7 +69,6 @@ async function connect() {
       ]);
       console.log("New login data inserted!");
     } else {
-      console.log("Updating login data....");
       sql.query(
         "UPDATE auth SET clientid = $1, servertoken = $2, clienttoken = $3, enckey = $4, mackey = $5;",
         [
@@ -84,7 +80,6 @@ async function connect() {
         ]
       );
       sql.query("commit;");
-      console.log("Login data updated!");
       sql.query("UPDATE botdata SET isconnected = true;");
     }
   } catch (err) {

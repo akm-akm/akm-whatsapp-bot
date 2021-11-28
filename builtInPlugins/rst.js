@@ -9,9 +9,11 @@ module.exports = {
   group: false,
   owner: true,
   async handle(Bot) {
-    sql.query("UPDATE groupdata SET totalmsgtoday=0;");
-    sql.query("UPDATE botdata SET totalmsgtoday=0;");
-    sql.query("UPDATE messagecount SET totalmsgtoday=0, dailylimitover=false;");
+    await sql.query("UPDATE groupdata SET totalmsgtoday = 0;");
+    await sql.query("UPDATE botdata SET totalmsgtoday = 0;");
+    await sql.query(
+      "UPDATE messagecount SET totalmsgtoday = 0, dailylimitover = false;"
+    );
     Bot.replytext(Bot.mess.success);
   },
 };
