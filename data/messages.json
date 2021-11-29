@@ -5,6 +5,7 @@
   "noenv": "🛠️ ```Environment variable not set.```",
   "noapi": "🔑  ```API key not set```",
   "tag": "🌌 ```Reply to a media.```",
+  "tags": "🌌 ```Reply to a sticker.```",
   "tagtext": "📑 ```Reply to a text.```",
   "grouplimit": "🎫 ```Daily group credits exhausted.```",
   "userlimit": "💳 ```Daily credits exhausted.```",

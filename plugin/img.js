@@ -4,13 +4,13 @@ const webp = require("webp-converter");
 module.exports = {
   name: "img",
   usage: "img",
-  desc: "Send the image of the tagged sticker.",
+  desc: "Sends the image of the non animated tagged sticker.",
   eg: ["img"],
   group: false,
   owner: false,
   async handle(Bot) {
     if (!Bot.isQuotedSticker) {
-      Bot.replytext(Bot.mess.tag);
+      Bot.replytext(Bot.mess.tags);
     }
 
     const getRandom = (ext) => {
