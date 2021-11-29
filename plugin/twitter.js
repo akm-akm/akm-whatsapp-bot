@@ -18,7 +18,14 @@ module.exports = {
       Bot.replytext(Bot.mess.only.modB);
       return;
     }
-
+    if (
+      !process.env.accesstokensecret ||
+      !process.env.accesstoken ||
+      !process.env.apiKey ||
+      !process.env.apiKeysecret
+    ) {
+      Bot.noapi();
+    }
     let msg = "⚽ *Name* : ```Fabrizio Romano```\n\n";
 
     const params = {
