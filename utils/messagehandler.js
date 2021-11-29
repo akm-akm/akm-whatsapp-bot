@@ -58,7 +58,8 @@ exports.messagehandler = async (Bot) => {
     !(
       !Bot.isGroup ||
       (Bot.isGroup &&
-        Bot.groupdata.totalmsgtoday <= Bot.botdata.dailygrouplimit &&
+        (Bot.groupdata.totalmsgtoday <= Bot.botdata.dailygrouplimit ||
+          Bot.isBotModerator) &&
         (Bot.arg.length !== 0 ||
           (Bot.isGroup && Bot.isMedia && Bot.groupdata.autosticker)))
     )

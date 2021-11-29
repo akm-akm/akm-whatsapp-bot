@@ -8,7 +8,7 @@ module.exports = {
   group: false,
   owner: false,
   handle(Bot) {
-    const random = Math.floor(Math.random() * 500);
+    const random = Math.ceil(Math.random() * 499);
     const ran =
       path.join(__dirname, "../assets/stickers/allsticker/s (") +
       random +
