@@ -10,15 +10,6 @@
 
 - #### 🛰️ Host on a free server [Guide](/docs/heroku-hosting.md)
 
-## ✨ Highlights
-
-- 💖 open source
-- 💙 Written in Javascript
-- 💛 Event-Based
-- 💝 Built with [Baileys](https://github.com/adiwajshing/baileys)
-- 🖤 Integrated abuse detection
-- ⚠️ Integrated NSFW detection
-
 ## 📝 Features
 
 <table>
