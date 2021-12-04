@@ -3,23 +3,25 @@ const fs = require("fs");
 let pluginsinfo = [];
 const plugins = fs.readdirSync(path.join(__dirname, "../plugin"));
 for (let file of plugins) {
-  const command = require(path.join(__dirname, "../plugin/", `${file}`));
-  if (
-    command.name &&
-    command.usage &&
-    command.desc &&
-    typeof command.handle === "function" &&
-    command.eg &&
-    typeof command.group === "boolean" &&
-    typeof command.owner === "boolean"
-  ) {
-    temp = {
-      desc: command.desc,
-      usage: command.usage,
-      eg: command.eg,
-    };
-    pluginsinfo[command.name] = temp;
-  }
+  try {
+    const command = require(path.join(__dirname, "../plugin/", `${file}`));
+    if (
+      command.name &&
+      command.usage &&
+      command.desc &&
+      typeof command.handle === "function" &&
+      command.eg &&
+      typeof command.group === "boolean" &&
+      typeof command.owner === "boolean"
+    ) {
+      temp = {
+        desc: command.desc,
+        usage: command.usage,
+        eg: command.eg,
+      };
+      pluginsinfo[command.name] = temp;
+    }
+  } catch (error) {}
 }
 const builtInPlugin = fs
   .readdirSync(path.join(__dirname, "../builtInPlugins"))

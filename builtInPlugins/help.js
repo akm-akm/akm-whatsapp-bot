@@ -13,29 +13,36 @@ const plugins = fs
 const pluginsinfo = require(path.join(__dirname, "../utils/pluginInfo"));
 
 for (let file of plugins) {
-  const command = require(path.join(__dirname, "../plugin/", `${file}`));
-  if (
-    command.name &&
-    command.usage &&
-    command.desc &&
-    typeof command.handle === "function" &&
-    command.eg &&
-    typeof command.group === "boolean" &&
-    typeof command.owner === "boolean"
-  ) {
-    if (command.owner) {
-      owner.push(command.name);
-    } else if (command.group) {
-      admin.push(command.name);
+  try {
+    const command = require(path.join(__dirname, "../plugin/", `${file}`));
+    if (
+      command.name &&
+      command.usage &&
+      command.desc &&
+      typeof command.handle === "function" &&
+      command.eg &&
+      typeof command.group === "boolean" &&
+      typeof command.owner === "boolean"
+    ) {
+      if (command.owner) {
+        owner.push(command.name);
+      } else if (command.group) {
+        admin.push(command.name);
+      } else {
+        user.push(command.name);
+      }
     } else {
-      user.push(command.name);
+      console.log(
+        chalk.blueBright.bold("Could not import plugin  "),
+        chalk.redBright.bold(`${file}`)
+      );
+      continue;
     }
-  } else {
+  } catch (error) {
     console.log(
       chalk.blueBright.bold("Could not import plugin  "),
       chalk.redBright.bold(`${file}`)
     );
-    continue;
   }
 }
 const builtInPlugins = fs

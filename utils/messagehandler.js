@@ -7,38 +7,44 @@ const sql = require(path.join(__dirname, "./ps"));
 const commandHandler = new Map();
 const plugins = fs.readdirSync(path.join(__dirname, "../plugin"));
 for (let file of plugins) {
-  const command = require(path.join(__dirname, "../plugin/", `${file}`));
-  if (
-    command.name &&
-    command.usage &&
-    command.desc &&
-    typeof command.handle === "function" &&
-    command.eg &&
-    typeof command.group === "boolean" &&
-    typeof command.owner === "boolean"
-  ) {
-    commandHandler.set(command.name, command);
-  }
+  try {
+    const command = require(path.join(__dirname, "../plugin/", `${file}`));
+    if (
+      command.name &&
+      command.usage &&
+      command.desc &&
+      typeof command.handle === "function" &&
+      command.eg &&
+      typeof command.group === "boolean" &&
+      typeof command.owner === "boolean"
+    ) {
+      commandHandler.set(command.name, command);
+    }
+  } catch (error) {}
 }
 const builtInPlugins = fs.readdirSync(
   path.join(__dirname, "../builtInPlugins")
 );
 for (let file of builtInPlugins) {
-  const command = require(path.join(
-    __dirname,
-    "../builtInPlugins/",
-    `${file}`
-  ));
-  if (
-    command.name &&
-    command.usage &&
-    command.desc &&
-    typeof command.handle === "function" &&
-    command.eg &&
-    typeof command.group === "boolean" &&
-    typeof command.owner === "boolean"
-  ) {
-    commandHandler.set(command.name, command);
+  try {
+    const command = require(path.join(
+      __dirname,
+      "../builtInPlugins/",
+      `${file}`
+    ));
+    if (
+      command.name &&
+      command.usage &&
+      command.desc &&
+      typeof command.handle === "function" &&
+      command.eg &&
+      typeof command.group === "boolean" &&
+      typeof command.owner === "boolean"
+    ) {
+      commandHandler.set(command.name, command);
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
 

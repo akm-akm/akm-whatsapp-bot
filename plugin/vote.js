@@ -3,7 +3,7 @@ module.exports = {
     usage: "vote <arguments>",
     desc: "Used to vote",
     eg: ["vote startvote", "vote vote", "vote checkvote"],
-    group: true,
+  //  group: true,
     owner: false,
     async handle(Bot) {
       const arg = Bot.arg;
