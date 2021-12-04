@@ -115,7 +115,7 @@ async function main() {
       }
     });
     
-    client.logger.level = "fatal";
+    client.logger.level = "debug";
     await connect();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;

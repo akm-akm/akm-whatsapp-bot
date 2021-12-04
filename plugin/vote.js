@@ -9,14 +9,9 @@ module.exports = {
       const arg = Bot.arg;
       switch (arg[1]) {
         case "startvote":
-          if (!isGroup) {
-            reply("❌ Group command only!");
-            return;
-          }
-          if (args.length === 0) {
-            reply(
-              `❌ Give some values seperated with # to vote on like ${prefix}startvote #title #name1 #name2 #name3`
-            );
+     
+          if (arg.length === 2) {
+          
             return;
           }
           votingResult = await getVotingData(from);
@@ -127,11 +122,7 @@ module.exports = {
         case "stopvote":
         case "checkvote":
         case "cv":
-          if (!isGroup) {
-            reply("❌ Group command only!");
-            return;
-          }
-
+      
           votingResult = await getVotingData(from);
           if (!votingResult.is_started) {
             reply(
