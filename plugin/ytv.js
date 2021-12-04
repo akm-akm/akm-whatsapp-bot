@@ -56,7 +56,7 @@ module.exports = {
           "```" +
           info.videoDetails.likes +
           "```\n" +
-          "👎 *Disikes:*  " +
+          "👎 *Dislikes:*  " +
           "```" +
           info.videoDetails.dislikes +
           "```";

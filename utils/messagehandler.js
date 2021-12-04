@@ -93,17 +93,6 @@ exports.messagehandler = async (Bot) => {
     return;
 
   /* This line checks the following-
-    (is the message sent 'limit' ?)
-    If yes then send back the credits used
-    */
-  if (Bot.arg[0] === "limit") {
-    const x =
-      Bot.mess.limit + Bot.noofmsgtoday + " / *" + Bot.botdata.dailylimit + "*";
-    Bot.replytext(x);
-    return;
-  }
-
-  /* This line checks the following-
     (IS the number of message sent by the bot less than the daily limit) and
     (the sender is not bot moderator) and
     (the sender is not the owner) and
@@ -130,10 +119,22 @@ exports.messagehandler = async (Bot) => {
 
   if (
     Bot.isGroup &&
-    Bot.groupdata.totalmsgtoday >= Bot.botdata.dailygrouplimit
+    Bot.groupdata.totalmsgtoday >= Bot.botdata.dailygrouplimit &&
+    !Bot.isBotModerator
   ) {
     Bot.text(Bot.mess.grouplimit);
     count(Bot);
+    return;
+  }
+
+  /* This line checks the following-
+    (is the message sent 'limit' ?)
+    If yes then send back the credits used
+    */
+  if (Bot.arg[0] === "limit") {
+    const x =
+      Bot.mess.limit + Bot.noofmsgtoday + " / *" + Bot.botdata.dailylimit + "*";
+    Bot.replytext(x);
     return;
   }
 
