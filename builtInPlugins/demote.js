@@ -1,7 +1,7 @@
 module.exports = {
-  name: "demote",
+  // name: "demote",
   usage: "demote <@user>",
-  //  "desc": "Demotes the tagged member from admin.",
+  desc: "Demotes the tagged member from admin.",
   eg: ["demote @ankit", "demote @dibyam"],
   group: true,
   owner: false,

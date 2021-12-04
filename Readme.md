@@ -59,7 +59,7 @@
 - By default, abuse detection and nudity detection is on.
 - Default minimum group size for the bot to work in it is `1` members.
 - These values can be changed only by the bot owner.
-- When the bot is added to any group, it will auto assign any random prefix to it, which can be changed by group admins using `setprefix` command or prefix can be turned off using `useprefix` command.
+- When the bot is added to any group, it will auto assign any random prefix to it, which can be changed by group admins using `setprefix` command or prefix can be turned off using `prefix` command.
 - If deepai api key is added to the bot, the bot will detect nudity in the image and if it detects 50% nudity, it will not make a sticker.
 
 ## ⚠️ Troubleshooting

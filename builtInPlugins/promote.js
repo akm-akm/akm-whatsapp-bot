@@ -1,6 +1,6 @@
 module.exports = {
-  name: "promote",
-  //   "usage": "promote <@user>",
+  // name: "promote",
+  usage: "promote <@user>",
   desc: "Promotes the tagged member as an admin.",
   eg: ["promote @ankit", "promote @dibyam"],
   group: true,
