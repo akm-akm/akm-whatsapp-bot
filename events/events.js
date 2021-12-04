@@ -42,8 +42,7 @@ async function connect() {
         })
         .pipe(fs.createWriteStream("./public/qr.png"));
     });
-    client.on("connecting", () => {
-    });
+    client.on("connecting", () => {});
     await client.connect({
       timeoutMs: 30 * 1000,
     });
@@ -103,7 +102,6 @@ async function connect() {
 }
 async function main() {
   try {
-
     sql.query("SELECT totalmsg from botdata;").then((result) => {
       totalmsg = result.rows[0].totalmsg;
       if (totalmsg === 0) {
@@ -114,8 +112,8 @@ async function main() {
         );
       }
     });
-    
-    client.logger.level = "debug";
+
+    client.logger.level = "fatal";
     await connect();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
