@@ -57,9 +57,7 @@
     "wa-sticker-formatter": "^3.6.0",
     "webp-converter": "^2.3.3",
     "ws": "^7.3.1",
+    "dotenv": "^10.0.0",
     "ytdl-core": "^4.9.1"
-  },
-  "devDependencies": {
-    "dotenv": "^10.0.0"
   }
 }
