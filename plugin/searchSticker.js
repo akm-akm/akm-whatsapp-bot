@@ -33,7 +33,7 @@ module.exports = {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
     };
 
-    const authorName = "xxx whatsapp bot";
+    const authorName = "akm-whatsapp-bot";
     outputOptions = [
       `-vcodec`,
       `libwebp`,

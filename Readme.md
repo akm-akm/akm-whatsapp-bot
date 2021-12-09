@@ -1,7 +1,7 @@
-<h1 align="center">🤖 XXX WHATSAPP BOT 🤖</h1>
+<h1 align="center">🤖 AKM WHATSAPP BOT 🤖</h1>
 
 <p align="center">
-<img src="docs/images/xxxlogo.jpeg" width=300px alt="xxxlogo" />
+<img src="docs/images/akmlogo.jpeg" width=300px alt="akmlogo" />
 </p>
 
 ## 💮 Want your own bot?

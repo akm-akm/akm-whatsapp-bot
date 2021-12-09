@@ -1,5 +1,5 @@
 {
-  "name": "xxx-whatsapp-bot",
+  "name": "akm-whatsapp-bot",
   "version": "4.0.0",
   "description": "Whatsapp bot that can convert images and videos into sticker, send crypto price updates, stock market updates, search internet for any stickers and send random stickers, download youtube and pinterest videos and do many more things.",
   "main": "src/app.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akm-akm/xxx-whatsapp-bot.git"
+    "url": "git+https://github.com/akm-akm/akm-whatsapp-bot.git"
   },
   "keywords": [
     "whatsapp",
@@ -23,9 +23,9 @@
   "author": "ADITYA KUMAR MANDAL",
   "license": "GNU General Public License v3.0",
   "bugs": {
-    "url": "https://github.com/akm-akm/xxx-whatsapp-bot/issues"
+    "url": "https://github.com/akm-akm/akm-whatsapp-bot/issues"
   },
-  "homepage": "https://github.com/akm-akm/xxx-whatsapp-bot#readme",
+  "homepage": "https://github.com/akm-akm/akm-whatsapp-bot#readme",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.2",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",

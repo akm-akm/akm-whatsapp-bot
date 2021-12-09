@@ -1,6 +1,6 @@
 const axios = require("axios");
 const path = require("path");
-const logo = path.join(__dirname, "../docs/images/xxxlogo.jpeg");
+const logo = path.join(__dirname, "../docs/images/akmlogo.jpeg");
 module.exports = {
   name: "sourcecode",
   usage: "sourcecode",
@@ -10,13 +10,13 @@ module.exports = {
   owner: false,
   async handle(Bot) {
     axios
-      .get(`https://api.github.com/repos/akm-akm/xxx-whatsapp-bot`)
+      .get(`https://api.github.com/repos/akm-akm/akm-whatsapp-bot`)
       .then((response) => {
         let data = response.data;
 
         msg =
           "🤖🤖🤖 *Sourcecode* 🤖🤖🤖\n\n" +
-          "🐱 *Github*\n```github.com/akm-akm/xxx-whatsapp-bot```\n\n" +
+          "🐱 *Github*\n```github.com/akm-akm/akm-whatsapp-bot```\n\n" +
           "👨‍💻 *Owner:* ```" +
           data.owner.login +
           "```\n" +
