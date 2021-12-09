@@ -62,16 +62,6 @@ server.get("/qr", async (req, res) => {
   res.send("qr.png");
 });
 
-server.post("/sql", async (req, res) => {
-  sql
-    .query(req.body.query)
-    .then((result) => {
-      res.send(result.rows);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
-});
 
 server.post("/auth", async (req, res) => {
   sql.query(`UPDATE botdata SET boturl='${req.body.siteurl}';`);
