@@ -15,7 +15,6 @@ module.exports = {
 
   async handle(Bot) {
     const arg = Bot.arg;
-    const url = arg[1];
     const vid = getRandom(".mp4");
     const thumb = getRandom(".jpg");
 
@@ -24,6 +23,7 @@ module.exports = {
         Bot.wrongCommand();
         return;
       }
+      const url = arg[1];
       if (ytdl.validateURL(url)) {
         const info = await ytdl.getInfo(ytdl.getURLVideoID(url));
         const file = fs.createWriteStream(thumb);
@@ -64,7 +64,6 @@ module.exports = {
           .pipe(fs.createWriteStream(vid))
           .on("finish", async () => {
             Bot.replyvideo(vid, msg, thumb);
-           
           });
       } else {
         Bot.replytext(Bot.mess.error.invalid);
