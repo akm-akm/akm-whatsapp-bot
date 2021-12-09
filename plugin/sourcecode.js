@@ -1,6 +1,8 @@
 const axios = require("axios");
 const path = require("path");
-const logo = path.join(__dirname, "../docs/images/akmlogo.jpeg");
+const logo = path.join(__dirname, "../docs/images/akmlogo.mp4");
+const thumb = path.join(__dirname, "../docs/images/akmlogo.png");
+
 module.exports = {
   name: "sourcecode",
   usage: "sourcecode",
@@ -15,8 +17,9 @@ module.exports = {
         let data = response.data;
 
         msg =
+          "🤖 🤖  *AKM  🤖  BOT*  🤖 🤖\n\n" +
           "🤖🤖🤖 *Sourcecode* 🤖🤖🤖\n\n" +
-          "🐱 *Github*\n```github.com/akm-akm/akm-whatsapp-bot```\n\n" +
+          "🐱 *Github*\n```www.github.com/akm-akm/akm-whatsapp-bot```\n\n" +
           "👨‍💻 *Owner:* ```" +
           data.owner.login +
           "```\n" +
@@ -46,8 +49,9 @@ module.exports = {
           " ```\n" +
           "\n🤖 🤖 *_Bot made by AKM_* 🤖 🤖";
 
-        Bot.replyimage(logo, msg);
+        Bot.replyvideo(logo, msg, thumb);
       })
+
       .catch((e) => {
         Bot.errorlog(e);
       });

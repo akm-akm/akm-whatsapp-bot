@@ -139,20 +139,37 @@ module.exports = class BotClass {
    * @param {String} thumb The absolute thumbnail path if any
    */
   async replyvideo(path, caption, thumb) {
-    await this.client.sendMessage(
-      this.from,
-      fs.readFileSync(path),
-      MessageType.video,
-      {
-        quoted: this.reply,
-        caption: caption,
-        mimetype: Mimetype.mp4,
-        detectLinks: false,
-        thumbnail: fs.readFileSync(thumb),
-      }
-    );
-    fs.unlinkSync(path);
-    fs.unlinkSync(thumb);
+    if (thumb != null) {
+      await this.client.sendMessage(
+        this.from,
+        fs.readFileSync(path),
+        MessageType.video,
+        {
+          quoted: this.reply,
+          caption: caption,
+          mimetype: Mimetype.mp4,
+          detectLinks: false,
+          thumbnail: fs.readFileSync(thumb),
+        }
+      ).then(() => {
+        fs.unlinkSync(path);
+        fs.unlinkSync(thumb);
+      });
+    } else {
+      await this.client.sendMessage(
+        this.from,
+        fs.readFileSync(path),
+        MessageType.video,
+        {
+          quoted: this.reply,
+          caption: caption,
+          mimetype: Mimetype.mp4,
+          detectLinks: false,
+        }
+      ).then(() => {
+        fs.unlinkSync(path);
+      });
+    }
   }
 
   errorlog(error) {
