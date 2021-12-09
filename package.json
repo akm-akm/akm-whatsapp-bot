@@ -1,6 +1,6 @@
 {
   "name": "akm-whatsapp-bot",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Whatsapp bot that can convert images and videos into sticker, send crypto price updates, stock market updates, search internet for any stickers and send random stickers, download youtube and pinterest videos and do many more things.",
   "main": "src/app.js",
   "scripts": {
