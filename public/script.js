@@ -33,28 +33,6 @@ $(function () {
   });
 });
 
-//sql query
-
-$("#submit").click(function (e) {
-  e.preventDefault();
-  if ($("#query").val() == "") return $("#submit").text("Enter query");
-  $("#submit").text("Loading");
-  $("#submit").prop("disabled", true);
-
-  $.ajax({
-    url: "/sql",
-    method: "post",
-    success: function final(res) {
-      console.log(res);
-      $("#submit").prop("disabled", false);
-      $("#submit").text("Run Query");
-      $("#output").text(JSON.stringify(res, null, "\t"));
-    },
-    data: {
-      query: $("#query").val(),
-    },
-  });
-});
 
 //restart
 $("#restart").click(function (e) {
@@ -73,21 +51,7 @@ $("#restart").click(function (e) {
   setTimeout(location.reload(), 8000);
 });
 
-///////database
-$("#database").click(function (e) {
-  e.preventDefault();
-  $(".container1").removeClass("hidden");
-  $("#container2").addClass("hidden");
-  $("#postgres").removeClass("hidden");
-});
 
-//ddatabase back/////
-$("#back").click(function (e) {
-  e.preventDefault();
-  $(".container1").addClass("hidden");
-  $("#container2").removeClass("hidden");
-  $("#postgres").addClass("hidden");
-});
 
 ///////login////////
 let myVar;
