@@ -33,7 +33,7 @@ module.exports = {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
     };
 
-    const authorName = "akm-whatsapp-bot";
+    const authorName = "AKM WHATSAPP BOT";
     outputOptions = [
       `-vcodec`,
       `libwebp`,
@@ -81,7 +81,7 @@ module.exports = {
               ? 19
               : response1.data.value.length)
         );
-        const packName = searchthis + " - " + random;
+        const packName = searchthis;
         const imageurl = response1.data.value[random].thumbnailUrl;
         const media = getRandom(".jpg");
         const file = fs.createWriteStream(media);

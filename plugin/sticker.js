@@ -31,8 +31,8 @@ module.exports = {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
     };
 
-    let packName = "XXX";
-    let authorName = "WHATSAPP BOT";
+    let packName = Bot.isGroup ? Bot.groupName : "github";
+    let authorName = "AKM WHATSAPP BOT";
 
     if (arg.includes("pack") == true) {
       packName = "";

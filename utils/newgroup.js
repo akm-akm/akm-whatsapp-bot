@@ -3,7 +3,7 @@ const { text } = MessageType;
 
 const newgroup = (from, client, random) => {
   let newmsg =
-    "🤖🤖🤖  *XXX 🤖 BOT*  🤖🤖🤖\n\n" +
+    "🤖🤖🤖  *AKM 🤖 BOT*  🤖🤖🤖\n\n" +
     "🚨 *Prefix assigned is:* " +
     random +
     "\n\n🚨 *The bot will only listen to commands starting with* " +

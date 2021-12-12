@@ -6,7 +6,7 @@ const thumb = path.join(__dirname, "../docs/images/akmlogo.png");
 module.exports = {
   name: "sourcecode",
   usage: "sourcecode",
-  desc: "Provids the link to the source code of the bot.",
+  desc: "Provids the source code of the bot.",
   eg: ["sourcecode"],
   group: false,
   owner: false,
@@ -18,7 +18,6 @@ module.exports = {
 
         msg =
           "🤖 🤖  *AKM  🤖  BOT*  🤖 🤖\n\n" +
-          "🤖🤖🤖 *Sourcecode* 🤖🤖🤖\n\n" +
           "🐱 *Github*\n```www.github.com/akm-akm/akm-whatsapp-bot```\n\n" +
           "👨‍💻 *Owner:* ```" +
           data.owner.login +
@@ -49,7 +48,7 @@ module.exports = {
           " ```\n" +
           "\n🤖 🤖 *_Bot made by AKM_* 🤖 🤖";
 
-        Bot.replyvideo(logo, msg, thumb);
+        Bot.replytext(msg);
       })
 
       .catch((e) => {
