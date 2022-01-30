@@ -4,7 +4,7 @@ const sql = require(path.join(__dirname, "../utils/ps"));
 module.exports = {
   name: "sql",
   usage: "sql <query>",
-  desc: "The bot will perform the given sqlquery on its postgres databse.",
+  desc: "The bot will perform the given sql query on its postgres databse.",
   eg: [
     "sql select * from groupdata;",
     "sql select * from messagecount;",
@@ -22,13 +22,11 @@ module.exports = {
     arg.shift();
     const cmd = arg.join(" ");
 
-    sql
-      .query(cmd)
-      .then((result) => {
-        Bot.replytext(JSON.stringify(result.rows, null, "\t"));
-      })
-      .catch((err) => {
-        Bot.errorlog(err);
-      });
+    try {
+      const result = await sql.query(cmd);
+      Bot.reply(JSON.stringify(result.rows, null, "\t"));
+    } catch (error) {
+      Bot.errorlog(error);
+    }
   },
 };

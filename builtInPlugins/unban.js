@@ -35,13 +35,13 @@ module.exports = {
         Bot.replytext(Bot.mess.error.error);
         return;
       }
-      sql.query(
+      await sql.query(
         `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
       );
 
       Bot.replytext(Bot.mess.success);
     } catch (error) {
-      Bot.errorlog();
+      Bot.errorlog(error);
     }
   },
 };

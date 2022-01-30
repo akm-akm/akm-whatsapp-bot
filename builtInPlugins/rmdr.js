@@ -17,16 +17,13 @@ module.exports = {
     }
 
     const number = arg[1].replace("@", "").replace("+", "");
-
-    sql
-      .query(
+    try {
+      await sql.query(
         `UPDATE botdata SET moderators = array_remove(moderators, '${number}');`
-      )
-      .then((result) => {
-        Bot.replytext(Bot.mess.success);
-      })
-      .catch((err) => {
-        Bot.errorlog(err);
-      });
+      );
+      Bot.replytext(Bot.mess.success);
+    } catch (error) {
+      Bot.errorlog(error);
+    }
   },
 };

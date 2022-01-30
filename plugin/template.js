@@ -21,7 +21,7 @@ module.exports = {
   /**
    * Show few examples on how to use the plugin in the format given below.
    */
-  eg: ["template btc", "template xrp", "template eth"],
+  eg: ["template input 1", "template ok", "template input 3"],
 
   /**
    * If your plugin runs only in a group and not in inbox then write true here.
@@ -38,15 +38,19 @@ module.exports = {
    * @param {Constructor} Bot It contains all the details of the message that called this function.
    */
   async handle(Bot) {
+    /**
+     * Suppose someone messages this to the bot - "   Hey bot       hoW  ARe you? See THIS https://GOOGLE.COM  🤦‍♀️"
+     * Then the bot will clean this string and store it in an array like this - ["hey","bot","how","are","you?","see","this","https://GOOGLE.COM","🤦‍♀️"]
+     * it converts all the test except links to small case. 
+     */
     const arg = Bot.arg;
 
+
+    Bot.repytext("This function only takes text as input and replies to the user who called this.");
+   /**
+    * To see other message types, see this file - /utils/Bot.js
+    */
     // your code here
   },
 };
 
-
-
-/** 
- * What are the details and methods in Bot constructor?
- * 
- */

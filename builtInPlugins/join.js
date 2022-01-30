@@ -1,7 +1,7 @@
 module.exports = {
   name: "join",
   usage: "join <link>",
-  desc: "The bot will join the group with the invite link.",
+  desc: "The bot will join your group with the invite link.",
   eg: [
     "join https://chat.whatsapp.com/JdEuI6JvN4W434RmF",
     "join https://chat.whatsapp.com/Jweve74J434RmF",

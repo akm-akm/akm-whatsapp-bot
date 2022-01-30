@@ -24,5 +24,7 @@
     "modB": "👮 ```This command can only be used by the bot moderators!```",
     "admin": "🛡️ ```This command can only be used by the admins!```",
     "Badmin": "🤖 ```This command can only be used when the bot is admin!```"
-  }
+  },
+
+  "initialSetup":  "🤖 *AKM WHATSAPP BOT Integrated Successfully!* \n \n ❗*Here are the few commands only you can run to manage the bot-*\n👨‍👨‍👧‍👦*dgl* : ```Change daily user limit```\n\n👦*dul* : ```Change daily group limit```\n👨‍👨‍👧‍👦*mgs* : ```Change the minimum participants required for bot to work in group```\n🕛*rst* : ```Reset the daily group and user credit back to 0```\n💾*sql* : ```Perform sql command on the bot databse```\n👮‍♀️*mdr* : ```Add a user as a bot moderator```\n❎*rmdr*: ```Remove a user as a bot moderator```\n🟢*rtrt*: ```Restart the bot server```\n🔴*stp* : ```Shutdown the bot```"
 }

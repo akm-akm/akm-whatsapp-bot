@@ -13,13 +13,13 @@ module.exports = {
       return;
     }
     if (arg[1] == "off") {
-      sql.query(
+      await sql.query(
         `UPDATE groupdata SET allowabuse = false WHERE groupid = '${Bot.from}'`
       );
       Bot.replytext(Bot.mess.success);
       return;
     } else if (arg[1] == "on") {
-      sql.query(
+      await sql.query(
         `UPDATE groupdata SET allowabuse = true WHERE groupid = '${Bot.from}'`
       );
       Bot.replytext(Bot.mess.success);

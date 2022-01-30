@@ -3,8 +3,7 @@ const sql = require(path.join(__dirname, "./ps"));
 const { main } = require(path.join(__dirname, "../events/events.js"));
 
 const chalk = require("chalk");
-(botsettingcheck = () =>
-  new Promise(async (resolve,reject) => {
+(botsettingcheck = async () => {
     if (!process.env.WEBSITE_PASSWORD) {
       console.log(chalk.bgRed("WEBSITE_PASSWORD is not set"));
       process.exit(1);
@@ -75,4 +74,4 @@ const chalk = require("chalk");
           "CREATE TABLE IF NOT EXISTS groupdata (groupid TEXT, useprefix BOOL, prefix TEXT, allowabuse BOOL, membercanusebot BOOL, banned_users TEXT[], totalmsgtoday INT, totalmsg INT, autosticker BOOL, nsfw BOOL);"
         );
       }
-  }))();
+  })();

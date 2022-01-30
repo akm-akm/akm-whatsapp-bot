@@ -3,12 +3,9 @@
 <p align="center">
 <img src="docs/images/akmlogo.png" width=300px alt="akmlogo" />
 </p>
+<h2 align="center">🤖 <a href="/docs/heroku-hosting.md">Click here to get your personal bot</a> 🤖</h1>
 
-## 💮 Want your own bot?
-
-- #### 💻 Test on your computer [Guide](/docs/self-hosting.md)
-
-- #### 🛰️ Host on a free server [Guide](/docs/heroku-hosting.md)
+#### 💻 Or test on your computer [Guide](/docs/self-hosting.md)
 
 ## 📝 Features
 

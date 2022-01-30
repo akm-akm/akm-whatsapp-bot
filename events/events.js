@@ -13,7 +13,9 @@ const { messagehandler } = require(path.join(
   __dirname,
   "../utils/messagehandler"
 ));
-
+const mess = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
+);
 const client = new WAConnection();
 
 async function connect() {
@@ -107,7 +109,7 @@ async function main() {
       if (totalmsg === 0) {
         client.sendMessage(
           `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
-          "🤖 *AKM WHATSAPP BOT Integrated Succesfully!*",
+          mess.initialSetup,
           MessageType.text
         );
       }
