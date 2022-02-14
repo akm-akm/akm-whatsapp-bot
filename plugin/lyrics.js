@@ -12,15 +12,13 @@ module.exports = {
 
     if (arg.length == 1) {
       Bot.wrongCommand();
-
       return;
     }
-
-    solenolyrics
-      .requestLyricsFor(arg.splice(1).join(" "))
-      .then(async (lyrics) => {
-        Bot.replytext(lyrics);
-      })
-      .catch((e) => Bot.replytext(Bot.mess.error.error));
+    try {
+      const lyrics = await solenolyrics.getLyrics(arg.splice(1).join(" "));
+      Bot.replytext(lyrics);
+    } catch (error) {
+      Bot.replytext(Bot.mess.error.error);
+    }
   },
 };

@@ -9,7 +9,7 @@ const axios = require("axios").default;
 
 module.exports = {
   name: "ss",
-  usage: "ss <search-term>",
+  usage: "ss <text>",
   desc: "The bot will search internet for the image and send its sticker. Add crop to crop the sticker sent by the bot.",
   eg: ["ss Leo Messi", "ss Virat Kohli", "ss crop Emma Watson"],
   group: false,

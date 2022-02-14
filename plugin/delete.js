@@ -11,11 +11,7 @@ module.exports = {
       return;
     }
     try {
-      await Bot.client.deleteMessage(Bot.from, {
-        id: Bot.stanzaId,
-        remoteJid: Bot.from,
-        fromMe: true,
-      });
+      await Bot.client.sendMessage(Bot.from, { delete: Bot.stanzaId });
     } catch (error) {
       Bot.replytext(Bot.mess.error.error);
     }

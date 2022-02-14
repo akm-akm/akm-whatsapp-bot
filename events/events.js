@@ -107,18 +107,14 @@ async function main() {
     sql.query("SELECT totalmsg from botdata;").then((result) => {
       totalmsg = result.rows[0].totalmsg;
       if (totalmsg === 0) {
-        client.sendMessage(
-          `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
-          mess.initialSetup,
-          MessageType.text
-        );
+        client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, {
+          text: mess.initialSetup,
+        });
       }
     });
 
-    client.logger.level = "fatal";
     await connect();
-    client.autoReconnect = ReconnectMode.onConnectionLost;
-    client.connectOptions.maxRetries = 100;
+
     console.log("Hello " + client.user.name);
 
     client.on("CB:Call", async (json) => {
@@ -156,6 +152,9 @@ async function main() {
           MessageType.text
         );
       }
+    });
+    client.ev.on("messages.upsert", ({ messages }) => {
+      console.log("got messages", messages);
     });
 
     client.on("chat-update", async (xxxx) => {
