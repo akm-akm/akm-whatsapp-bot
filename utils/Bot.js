@@ -81,7 +81,7 @@ module.exports = class BotClass {
    * @param {String} input The text message you want to send
    */
   replytext(input) {
-    this.client.sendMessage(this.from, input, MessageType.text, {
+    await this.client.sendMessage(this.from, input, MessageType.text, {
       quoted: this.reply,
       detectLinks: false,
     });
@@ -92,7 +92,8 @@ module.exports = class BotClass {
    * @param {String} input The text message you want to send
    */
   text(input) {
-    this.client.sendMessage(this.from, input, MessageType.text, {
+    this.client.sendMessage(this.from, {
+      text: input,
       detectLinks: false,
     });
   }
@@ -102,14 +103,11 @@ module.exports = class BotClass {
    * @param {String} path The absolute sticker path
    */
   replysticker(path) {
-    this.client.sendMessage(
-      this.from,
-      fs.readFileSync(path),
-      MessageType.sticker,
-      {
-        quoted: this.reply,
-      }
-    );
+    this.client.sendMessage(this.from, {
+      sticker: fs.readFileSync(path),
+      quoted: this.reply,
+      mimetype: Mimetype.webp,
+    });
   }
 
   /**
@@ -117,18 +115,13 @@ module.exports = class BotClass {
    * @param {String} path The absolute image path.
    * @param {String} caption The caption of the image if any.
    */
-  async replyimage(path, caption) {
-    await this.client.sendMessage(
-      this.from,
-      fs.readFileSync(path),
-      MessageType.image,
-      {
-        quoted: this.reply,
-        caption: caption,
-        detectLinks: false,
-        mimetype: Mimetype.jpeg,
-      }
-    );
+  async replyimage(path, caption = "") {
+    await this.client.sendMessage(this.from, {
+      image: fs.readFileSync(path),
+      caption: caption,
+      quoted: this.reply,
+      detectLinks: false,
+    });
     fs.unlinkSync(path);
   }
 
@@ -151,10 +144,10 @@ module.exports = class BotClass {
           detectLinks: false,
           thumbnail: fs.readFileSync(thumb),
         }
-      ).then(() => {
-        fs.unlinkSync(path);
-        fs.unlinkSync(thumb);
-      });
+      );
+
+      fs.unlinkSync(path);
+      fs.unlinkSync(thumb);
     } else {
       await this.client.sendMessage(
         this.from,
@@ -166,10 +159,10 @@ module.exports = class BotClass {
           mimetype: Mimetype.mp4,
           detectLinks: false,
         }
-      ).then(() => {
-        fs.unlinkSync(path);
-      });
+      );
+      fs.unlinkSync(path);
     }
+    this.client.sendMessage(this.from, videoMessageDetails);
   }
 
   errorlog(error) {
@@ -178,15 +171,11 @@ module.exports = class BotClass {
     } else {
       this.replytext(mess.error.error);
       const e = "🤖 Error log for the tagged message \n\n```" + error + "```";
-      this.client.sendMessage(
-        `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
-        e,
-        MessageType.text,
-        {
-          quoted: this.reply,
-          detectLinks: false,
-        }
-      );
+      this.client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, {
+        text: e,
+        quoted: this.reply,
+        detectLinks: false,
+      });
     }
   }
 
@@ -194,8 +183,8 @@ module.exports = class BotClass {
     this.replytext(mess.noapi);
   }
 
-  wrongCommand() {
-    var prefix = this.groupdata.prefix;
+  async wrongCommand() {
+    let prefix = this.groupdata.prefix;
     if (this.groupdata.prefix == undefined || !this.groupdata.useprefix)
       prefix = "🎀";
 

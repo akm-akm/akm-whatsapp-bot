@@ -4,7 +4,7 @@ const sql = require(path.join(__dirname, "../utils/ps"));
 module.exports = {
   name: "dgl",
   usage: "dgl <number>",
-  desc: "The bot will change the daily group limit.",
+  desc: "The bot will change the daily group limit. The number should be between 1 and 10000.",
   eg: ["dgl 300", "dgl 200"],
   group: false,
   owner: true,
@@ -16,18 +16,16 @@ module.exports = {
 
       return;
     }
-    if ((typeof arg[1] !== "number" && arg[1] < 0) || arg[1] > 1000) {
+    if ((typeof arg[1] !== "number" && arg[1] < 0) || arg[1] > 10000) {
       Bot.wrongCommand();
-
       return;
     }
-    sql
-      .query(`update botdata set dailygrouplimit = '${arg[1]}'`)
-      .then(() => {
-        Bot.replytext(Bot.mess.success);
-      })
-      .catch((err) => {
-        Bot.replytext(Bot.mess.error.error);
-      });
+
+    try {
+      await sql.query(`update botdata set dailygrouplimit = '${arg[1]}'`);
+      Bot.replytext(Bot.mess.success);
+    } catch (error) {
+      Bot.errorlog(error);
+    }
   },
 };

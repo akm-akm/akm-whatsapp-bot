@@ -28,7 +28,7 @@ module.exports = {
         Bot.replytext(
           "🤖 ```I can't ban myself, but I can ban you! There you go!``` _BANNED_"
         );
-        sql.query(
+        await sql.query(
           `UPDATE groupdata SET banned_users = array_append(banned_users, '${Bot.number}') where groupid = '${from}';`
         );
         return;
@@ -44,7 +44,7 @@ module.exports = {
       await sql.query(
         `UPDATE groupdata SET banned_users = array_remove(banned_users, '${z}') where groupid = '${from}';`
       );
-      sql.query(
+      await sql.query(
         `UPDATE groupdata SET banned_users = array_append(banned_users, '${z}') where groupid = '${from}';`
       );
       Bot.replytext(Bot.mess.success);

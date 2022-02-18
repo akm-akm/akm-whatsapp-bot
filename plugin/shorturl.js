@@ -6,8 +6,8 @@ const urlregex =
 module.exports = {
   name: "shorturl",
   usage: "shorturl <link>",
-  desc: "Generates a short url of the given link using www.lenk.cf API.",
-  eg: ["shorturl https://www.hindustantimes.com/world-nes"],
+  desc: "Generates a short url of the given link using https://lenk.cf API.",
+  eg: ["shorturl https://www.hindustantimes.com/world-news"],
   group: false,
   owner: false,
   async handle(Bot) {
@@ -20,29 +20,28 @@ module.exports = {
       Bot.replytext(Bot.mess.error.invalid);
       return;
     }
-    axios({
-      method: "POST",
-      url: "https://lenk.cf/p/" + encodeURIComponent(arg[1]),
-    })
-      .then((response) => {
-        if (response.data == "Invalid URL") {
-          Bot.replytext(Bot.mess.error.invalid);
-
-          return;
-        }
-        const msg =
-          "🤖 ```shortened url is:```" +
-          "\n" +
-          "```https://lenk.cf/```" +
-          "```" +
-          response.data +
-          "```" +
-          "\n\n" +
-          "```API by lenk.cf```";
-        Bot.replytext(msg);
-      })
-      .catch((e) => {
-        Bot.errorlog(e);
+    try {
+      const response = await axios({
+        method: "POST",
+        url: "https://lenk.cf/p/" + encodeURIComponent(arg[1]),
       });
+
+      if (response.data == "Invalid URL") {
+        Bot.replytext(Bot.mess.error.invalid);
+        return;
+      }
+      const msg =
+        "🤖 ```shortened url is:```" +
+        "\n" +
+        "```https://lenk.cf/```" +
+        "```" +
+        response.data +
+        "```" +
+        "\n\n" +
+        "```API by lenk.cf```";
+      Bot.replytext(msg);
+    } catch (error) {
+      Bot.replytext(Bot.mess.error.error);
+    }
   },
 };

@@ -12,8 +12,7 @@ module.exports = {
   group: false,
   owner: false,
   handle(Bot) {
-    let msgl = "🤖🤖🤖 *XXX-BOT FAQs* 🤖🤖🤖\n";
-
+    let msgl = "🤖🤖🤖  *AKM 🤖 BOT*  🤖🤖🤖\n";
     faq.forEach((element) => {
       msgl +=
         "\n🤔 *" +

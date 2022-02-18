@@ -13,13 +13,6 @@ module.exports = {
       return;
     }
     const grplink = await Bot.client.groupInviteCode(Bot.from);
-    Bot.client.sendMessage(
-      Bot.from,
-      "```https://chat.whatsapp.com/```" + "```" + grplink + "```",
-      MessageType.text,
-      {
-        quoted: Bot.reply,
-      }
-    );
+    Bot.replytext("```https://chat.whatsapp.com/```" + "```" + grplink + "```");
   },
 };

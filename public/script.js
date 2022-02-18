@@ -33,7 +33,6 @@ $(function () {
   });
 });
 
-
 //restart
 $("#restart").click(function (e) {
   $("#restart").text("Restarting...");
@@ -51,11 +50,12 @@ $("#restart").click(function (e) {
   setTimeout(location.reload(), 8000);
 });
 
-
-
 ///////login////////
 let myVar;
 $("#login").click(function (e) {
+  window.alert(
+    "Make sure that multi-device beta is off before scanning the qr code!"
+  );
   $("#login").text("connecting...");
   $("#stop").text("stop bot");
   $("#stop").removeClass("hidden");
@@ -101,6 +101,17 @@ $("#login").click(function (e) {
                     $("#restart").prop("disabled", false);
                     clearInterval(myVar);
                     $("#qrcode").removeAttr("src");
+                    var win = window.open(
+                      "https://github.com/akm-akm/akm-whatsapp-bot/blob/master/docs/heroku-hosting.md#%EF%B8%8F-failing-to-do-the-below-step-will-stop-the-bot-from-working",
+                      "_blank"
+                    );
+                    if (win) {
+                      win.focus();
+                    } else {
+                      window.location.replace(
+                        "https://github.com/akm-akm/akm-whatsapp-bot/blob/master/docs/heroku-hosting.md#%EF%B8%8F-failing-to-do-the-below-step-will-stop-the-bot-from-working"
+                      );
+                    }
                   }
                 },
               });

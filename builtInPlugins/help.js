@@ -131,7 +131,7 @@ module.exports = {
         prefix +
         "help run```\n" +
         "\n📃 *Bot News* :" +
-        "\n‼️ _wazirx added_" +
+        "\n‼️ _Docs added_" +
         "\n\n⚙️ *Bot version* : " +
         version;
       Bot.replytext(help);

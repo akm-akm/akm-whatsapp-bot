@@ -13,7 +13,9 @@ const { messagehandler } = require(path.join(
   __dirname,
   "../utils/messagehandler"
 ));
-
+const mess = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/messages.json"))
+);
 const client = new WAConnection();
 
 async function connect() {
@@ -105,18 +107,14 @@ async function main() {
     sql.query("SELECT totalmsg from botdata;").then((result) => {
       totalmsg = result.rows[0].totalmsg;
       if (totalmsg === 0) {
-        client.sendMessage(
-          `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
-          "🤖 *AKM WHATSAPP BOT Integrated Succesfully!*",
-          MessageType.text
-        );
+        client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, {
+          text: mess.initialSetup,
+        });
       }
     });
 
-    client.logger.level = "debug";
     await connect();
-    client.autoReconnect = ReconnectMode.onConnectionLost;
-    client.connectOptions.maxRetries = 100;
+
     console.log("Hello " + client.user.name);
 
     client.on("CB:Call", async (json) => {
@@ -155,19 +153,8 @@ async function main() {
         );
       }
     });
-    setInterval(() => {
-      client
-        .requestPresenceUpdate(`${process.env.x}@s.whatsapp.net`)
-        .then((z) => {
-          /*    client.sendMessage(
-              `${process.env.MessageType}@s.whatsapp.net`,
-              JSON.stringify(z),
-              MessageType.text
-            );
-          */
-          console.log(z);
-        });
-    }, 5000);
+   
+
     client.on("chat-update", async (xxxx) => {
       try {
         if (!xxxx.hasNewMessage) return;
