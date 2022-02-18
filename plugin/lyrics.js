@@ -7,7 +7,7 @@ module.exports = {
   eg: ["lyrics Brown munde", "lyrics Baby"],
   group: false,
   owner: false,
-  handle(Bot) {
+  async handle(Bot) {
     const arg = Bot.arg;
 
     if (arg.length == 1) {
