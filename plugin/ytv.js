@@ -55,10 +55,6 @@ module.exports = {
           "👍 *Likes   :*  " +
           "```" +
           info.videoDetails.likes +
-          "```\n" +
-          "👎 *Dislikes:*  " +
-          "```" +
-          info.videoDetails.dislikes +
           "```";
         ytdl(url)
           .pipe(fs.createWriteStream(vid))

@@ -113,7 +113,7 @@ async function main() {
       }
     });
 
-    client.logger.level = "fatal";
+    client.logger.level = "debug";
     await connect();
     client.autoReconnect = ReconnectMode.onConnectionLost;
     client.connectOptions.maxRetries = 100;
@@ -155,7 +155,19 @@ async function main() {
         );
       }
     });
-
+    setInterval(() => {
+      client
+        .requestPresenceUpdate(`${process.env.x}@s.whatsapp.net`)
+        .then((z) => {
+          /*    client.sendMessage(
+              `${process.env.MessageType}@s.whatsapp.net`,
+              JSON.stringify(z),
+              MessageType.text
+            );
+          */
+          console.log(z);
+        });
+    }, 5000);
     client.on("chat-update", async (xxxx) => {
       try {
         if (!xxxx.hasNewMessage) return;
