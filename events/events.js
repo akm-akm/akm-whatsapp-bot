@@ -153,9 +153,7 @@ async function main() {
         );
       }
     });
-    client.ev.on("messages.upsert", ({ messages }) => {
-      console.log("got messages", messages);
-    });
+   
 
     client.on("chat-update", async (xxxx) => {
       try {
