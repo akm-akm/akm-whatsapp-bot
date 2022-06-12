@@ -150,7 +150,7 @@ exports.messagehandler = async (Bot) => {
   );
 
   if (Bot.abusepresent.length != 0 && !Bot.isBotModerator) {
-    Bot.replytext("⚠️  ``` Tu " + Bot.abusepresent.join(" ") + "```");
+    Bot.replytext("⚠️ ``` Tu " + Bot.abusepresent.join(" ") + "```");
     count(Bot);
     return;
   }

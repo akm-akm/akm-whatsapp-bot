@@ -55,9 +55,9 @@ module.exports = async function settingread(xxx, client) {
       botNumberJid.slice(botNumberJid.search("@"));
 
     const from = xxx.key.remoteJid;
-    Bot.from = from;
+    Bot.from = xxx.key.remoteJid;
     Bot.isGroup = from.endsWith("@g.us");
-    Bot.sender = Bot.isGroup ? xxx.key.participant : xxx.messages[0].key.remoteJid;
+    Bot.sender = Bot.isGroup ? xxx.key.participant : xxx.key.remoteJid;
     const senderNumb = Bot.sender.includes(":")
       ? Bot.sender.split(":")[0]
       : Bot.sender.split("@")[0];
