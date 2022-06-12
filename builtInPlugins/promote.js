@@ -1,5 +1,5 @@
 module.exports = {
-  // name: "promote",
+   name: "promote",
   usage: "promote <@user>",
   desc: "Promotes the tagged member as an admin.",
   eg: ["promote @ankit", "promote @dibyam"],
@@ -28,7 +28,7 @@ module.exports = {
       return;
     }
 
-    Bot.client.groupMakeAdmin(Bot.from, mentioned);
+    Bot.client.groupParticipantsUpdate(Bot.from, [mentioned], "demote");
 
     Bot.replytext(Bot.mess.success);
   },

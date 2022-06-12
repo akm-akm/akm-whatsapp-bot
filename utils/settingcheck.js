@@ -49,11 +49,19 @@ module.exports = async function settingread(xxx, client) {
     const random = settings.prefixchoice.charAt(
       Math.floor(Math.random() * settings.prefixchoice.length)
     );
+    let botNumberJid = client.user.id;
+    botNumberJid =
+      botNumberJid.slice(0, botNumberJid.search(":")) +
+      botNumberJid.slice(botNumberJid.search("@"));
 
     const from = xxx.key.remoteJid;
     Bot.from = from;
     Bot.isGroup = from.endsWith("@g.us");
-    Bot.sender = Bot.isGroup ? xxx.participant : xxx.key.remoteJid;
+    Bot.sender = Bot.isGroup ? xxx.key.participant : xxx.messages[0].key.remoteJid;
+    const senderNumb = Bot.sender.includes(":")
+      ? Bot.sender.split(":")[0]
+      : Bot.sender.split("@")[0];
+
     Bot.groupMetadata = Bot.isGroup
       ? await client.groupMetadata(from)
       : undefined;
@@ -62,12 +70,12 @@ module.exports = async function settingread(xxx, client) {
       ? getGroupAdmins(Bot.groupMembers)
       : undefined;
     Bot.groupName = Bot.isGroup ? Bot.groupMetadata.subject : undefined;
-    Bot.botNumber = client.user.jid.split("@")[0];
+    Bot.botNumber = botNumberJid.split("@")[0];
     Bot.isBotGroupAdmins = Bot.isGroup
       ? Bot.groupAdmins.includes(`${Bot.botNumber}@s.whatsapp.net`) || false
       : undefined;
     Bot.isOwner = Bot.isGroup
-      ? Bot.sender.split("@")[0] === process.env.OWNER_NUMBER
+      ? senderNumb === process.env.OWNER_NUMBER
       : Bot.from.split("@")[0] === process.env.OWNER_NUMBER;
     Bot.isSuperAdmin = Bot.isGroup
       ? Bot.groupMetadata.owner == Bot.from

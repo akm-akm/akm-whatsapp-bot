@@ -1,8 +1,12 @@
 const {
-  WAConnection,
-  ReconnectMode,
-  MessageType,
-} = require("../@adiwajshing/baileys");
+  default: makeWASocket,
+  DisconnectReason,
+  useSingleFileAuthState,
+  downloadMediaMessage,
+  fetchLatestBaileysVersion,
+} = require("@adiwajshing/baileys");
+const P = require("pino");
+const { state, saveState } = useSingleFileAuthState("./auth_info_multi.json");
 
 const path = require("path");
 const fs = require("fs");
@@ -16,158 +20,402 @@ const { messagehandler } = require(path.join(
 const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
-const client = new WAConnection();
 
-async function connect() {
+let cred, auth_row_count;
+async function fetchauth() {
   try {
-    auth_result = await sql.query("select * from auth;");
+    auth_result = await sql.query("select * from auth;"); //checking auth table
+    console.log("Fetching login data...");
     auth_row_count = await auth_result.rowCount;
+    let data = auth_result.rows[0];
     if (auth_row_count == 0) {
       console.log("No login data found!");
     } else {
       console.log("Login data found!");
-      auth_obj = {
-        clientID: auth_result.rows[0].clientid,
-        serverToken: auth_result.rows[0].servertoken,
-        clientToken: auth_result.rows[0].clienttoken,
-        encKey: auth_result.rows[0].enckey,
-        macKey: auth_result.rows[0].mackey,
+      cred = {
+        creds: {
+          noiseKey: {
+            private: data.noicekeyprvt,
+            public: data.noicekeypub,
+          },
+          signedIdentityKey: {
+            private: data.signedidentitykeyprvt,
+            public: data.signedidentitykeypub,
+          },
+          signedPreKey: {
+            keyPair: {
+              private: data.signedprekeypairprv,
+              public: data.signedprekeypairpub,
+            },
+            signature: data.signedprekeysignature,
+            keyId: Number(data.signedprekeyidb),
+          },
+          registrationId: Number(data.registrationidb),
+          advSecretKey: data.advsecretkeyb,
+          nextPreKeyId: Number(data.nextprekeyidb),
+          firstUnuploadedPreKeyId: Number(data.firstunuploadedprekeyidb),
+          serverHasPreKeys: Boolean(data.serverhasprekeysb),
+          account: {
+            details: data.accountdetailsb,
+            accountSignatureKey: data.accountsignaturekeyb,
+            accountSignature: data.accountsignatureb,
+            deviceSignature: data.devicesignatureb,
+          },
+          me: {
+            id: data.meidb,
+            verifiedName: data.meverifiednameb,
+            name: data.menameb,
+          },
+          signalIdentities: [
+            {
+              identifier: {
+                name: data.signalidentitiesnameb,
+                deviceId: Number(data.signalidentitiesdeviceidb),
+              },
+              identifierKey: data.signalidentitieskey,
+            },
+          ],
+          lastAccountSyncTimestamp: 0, // remove the last timeStamp from db
+          // lastAccountSyncTimestamp: Number(data.lastaccountsynctimestampb),
+          myAppStateKeyId: data.myappstatekeyidb,
+        },
+        keys: state.keys,
       };
-
-      client.loadAuthInfo(auth_obj);
-    }
-
-    client.on("qr", (qr) => {
-      qri
-        .image(qr, {
-          type: "png",
-        })
-        .pipe(fs.createWriteStream("./public/qr.png"));
-    });
-    client.on("connecting", () => {});
-    await client.connect({
-      timeoutMs: 30 * 1000,
-    });
-    client.on("open", () => {
-      console.log("connected");
-      fs.unlink("./public/qr.png", () => {});
-    });
-    const authInfo = client.base64EncodedAuthInfo();
-    load_clientID = authInfo.clientID;
-    load_serverToken = authInfo.serverToken;
-    load_clientToken = authInfo.clientToken;
-    load_encKey = authInfo.encKey;
-    load_macKey = authInfo.macKey;
-
-    if (auth_row_count == 0) {
-      console.log("Inserting login data...");
-      sql.query("INSERT INTO auth VALUES($1,$2,$3,$4,$5);", [
-        load_clientID,
-        load_serverToken,
-        load_clientToken,
-        load_encKey,
-        load_macKey,
-      ]);
-      console.log("New login data inserted!");
-    } else {
-      sql.query(
-        "UPDATE auth SET clientid = $1, servertoken = $2, clienttoken = $3, enckey = $4, mackey = $5;",
-        [
-          load_clientID,
-          load_serverToken,
-          load_clientToken,
-          load_encKey,
-          load_macKey,
-        ]
-      );
-      sql.query("commit;");
-      sql.query("UPDATE botdata SET isconnected = true;");
+      //---------------noiceKey----------------//
+      let noiceKeyPrvt = [],
+        noiceKeyPub = [];
+      let noiceKeyPrvtB = cred.creds.noiseKey.private.slice(1).split("+");
+      let noiceKeyPubB = cred.creds.noiseKey.public.slice(1).split("+");
+      for (let i = 0; i < noiceKeyPrvtB.length; i++) {
+        noiceKeyPrvt.push(parseInt(noiceKeyPrvtB[i]));
+      }
+      for (let i = 0; i < noiceKeyPubB.length; i++) {
+        noiceKeyPub.push(parseInt(noiceKeyPubB[i]));
+      }
+      cred.creds.noiseKey.private = Buffer.from(noiceKeyPrvt);
+      cred.creds.noiseKey.public = Buffer.from(noiceKeyPub);
+      //------------------------------------------//
+      //----------------signedIdentityKey---------//
+      let signedIdentityKeyPrvt = [],
+        signedIdentityKeyPub = [];
+      let signedIdentityKeyPrvtB = cred.creds.signedIdentityKey.private
+        .slice(1)
+        .split("+");
+      let signedIdentityKeyPubB = cred.creds.signedIdentityKey.public
+        .slice(1)
+        .split("+");
+      for (let i = 0; i < signedIdentityKeyPrvtB.length; i++) {
+        signedIdentityKeyPrvt.push(parseInt(signedIdentityKeyPrvtB[i]));
+      }
+      for (let i = 0; i < signedIdentityKeyPubB.length; i++) {
+        signedIdentityKeyPub.push(parseInt(signedIdentityKeyPubB[i]));
+      }
+      cred.creds.signedIdentityKey.private = Buffer.from(signedIdentityKeyPrvt);
+      cred.creds.signedIdentityKey.public = Buffer.from(signedIdentityKeyPub);
+      //------------------------------------------//
+      //----------------signedPreKey------------------//
+      let signedPreKeyPairPrv = [],
+        signedPreKeyPairPub = [];
+      let signedPreKeyPairPrvB = cred.creds.signedPreKey.keyPair.private
+        .slice(1)
+        .split("+");
+      let signedPreKeyPairPubB = cred.creds.signedPreKey.keyPair.public
+        .slice(1)
+        .split("+");
+      for (let i = 0; i < signedPreKeyPairPrvB.length; i++) {
+        signedPreKeyPairPrv.push(parseInt(signedPreKeyPairPrvB[i]));
+      }
+      for (let i = 0; i < signedPreKeyPairPubB.length; i++) {
+        signedPreKeyPairPub.push(parseInt(signedPreKeyPairPubB[i]));
+      }
+      cred.creds.signedPreKey.keyPair.private =
+        Buffer.from(signedPreKeyPairPrv);
+      cred.creds.signedPreKey.keyPair.public = Buffer.from(signedPreKeyPairPub);
+      //------------------------------------------//
+      let signedPreKeySignature = [];
+      let signedPreKeySignatureB = cred.creds.signedPreKey.signature
+        .slice(1)
+        .split("+");
+      for (let i = 0; i < signedPreKeySignatureB.length; i++) {
+        signedPreKeySignature.push(parseInt(signedPreKeySignatureB[i]));
+      }
+      cred.creds.signedPreKey.signature = Buffer.from(signedPreKeySignature);
+      //-----------------------------------------------//
+      //---------------------------signalIdentities-----//
+      let signalIdentitiesKey = [];
+      let signalIdentitiesKeyB = cred.creds.signalIdentities[0].identifierKey
+        .slice(1)
+        .split("+");
+      for (let i = 0; i < signalIdentitiesKeyB.length; i++) {
+        signalIdentitiesKey.push(parseInt(signalIdentitiesKeyB[i]));
+      }
+      cred.creds.signalIdentities[0].identifierKey =
+        Buffer.from(signalIdentitiesKey);
+      // console.log("Auth : ", cred.creds.signalIdentities);
+      //---------------------------------------------------//
     }
   } catch (err) {
-    console.error(err);
-    if (err.message.startsWith("Unexpected error in login")) {
-      await sql.query("UPDATE botdata SET isconnected = false;");
-      console.log("isconnected set to false");
-      await sql.query("DROP TABLE auth;");
-      console.log("auth dropped");
-      client.close();
-      client.logout();
-      console.log("Logged out");
-      process.exit(1);
-    }
-    console.log("Creating database...");
+    console.log("Creating database..."); //if login fail create a db
     await sql.query(
-      "CREATE TABLE IF NOT EXISTS auth(clientID text, serverToken text, clientToken text, encKey text, macKey text);"
+      "CREATE TABLE auth(noiceKeyPrvt text, noiceKeyPub text, signedIdentityKeyPrvt text, signedIdentityKeyPub text, signedPreKeyPairPrv text, signedPreKeyPairPub text, signedPreKeySignature text, signedPreKeyIdB text, registrationIdB text, advSecretKeyB text, nextPreKeyIdB text, firstUnuploadedPreKeyIdB text, serverHasPreKeysB text, accountdetailsB text, accountSignatureKeyB text, accountSignatureB text, deviceSignatureB text, meIdB text, meverifiedNameB text, menameB text, signalIdentitiesNameB text, signalIdentitiesDeviceIDB text, signalIdentitiesKey text, lastAccountSyncTimestampB text, myAppStateKeyIdB text);"
     );
-    await connect();
+    await fetchauth();
   }
 }
-async function main() {
-  try {
-    sql.query("SELECT totalmsg from botdata;").then((result) => {
-      totalmsg = result.rows[0].totalmsg;
-      if (totalmsg === 0) {
-        client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, {
-          text: mess.initialSetup,
-        });
-      }
-    });
 
-    await connect();
+const startSock = async () => {
+  const { version, isLatest } = await fetchLatestBaileysVersion();
+  console.log(`using WA v${version.join(".")}, isLatest: ${isLatest}`);
+  let noLogs = P({ level: "silent" }); //to hide the chat logs
+  await fetchauth();
+  if (auth_row_count == 0);
+  else {
+    state.creds = cred.creds;
+  }
+  const sock = makeWASocket({
+    version,
+    logger: noLogs,
+    defaultQueryTimeoutMs: undefined,
+    printQRInTerminal: true,
+    auth: state,
+  });
 
-    console.log("Hello " + client.user.name);
+  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-    client.on("CB:Call", async (json) => {
-      const number = json[1]["from"];
-      const isOffer = json[1]["type"] == "offer";
-      if (number && isOffer && json[1]["data"]) {
-        const tag = client.generateMessageTag();
-        const jsjs = [
-          "action",
+  sock.ev.on("CB:Call", async (json) => {
+    const number = json[1]["from"];
+    const isOffer = json[1]["type"] == "offer";
+    if (number && isOffer && json[1]["data"]) {
+      const tag = sock.generateMessageTag();
+      const jsjs = [
+        "action",
+        "call",
+        [
           "call",
+          {
+            from: sock.user.jid,
+            to: number.split("@")[0] + "@s.whatsapp.net",
+            id: tag,
+          },
           [
-            "call",
-            {
-              from: client.user.jid,
-              to: number.split("@")[0] + "@s.whatsapp.net",
-              id: tag,
-            },
             [
-              [
-                "reject",
-                {
-                  "call-id": json[1]["id"],
-                  "call-creator": number.split("@")[0] + "@s.whatsapp.net",
-                  count: "0",
-                },
-                null,
-              ],
+              "reject",
+              {
+                "call-id": json[1]["id"],
+                "call-creator": number.split("@")[0] + "@s.whatsapp.net",
+                count: "0",
+              },
+              null,
             ],
           ],
-        ];
-        client.send(`${tag},${JSON.stringify(jsjs)}`);
-        client.sendMessage(
-          number,
-          "🤖 ```Cannot receive call!```",
-          MessageType.text
-        );
-      }
-    });
-   
+        ],
+      ];
+      sock.send(`${tag},${JSON.stringify(jsjs)}`);
+      sock.sendMessage(number, {
+        text: "🤖 ```Cannot receive call!```",
+      });
+    }
+  });
 
-    client.on("chat-update", async (xxxx) => {
-      try {
-        if (!xxxx.hasNewMessage) return;
-        xxx5 = xxxx.messages.all()[0];
-        if (!xxx5.message) return;
-        if (xxx5.key && xxx5.key.remoteJid == "status@broadcast") return;
-        if (xxx5.key.fromMe) return;
-        const Bot = await settingread(xxx5, client);
-        messagehandler(Bot);
-      } catch (error) {
-        console.log(error);
+  sock.ev.on("messages.upsert", async (mek) => {
+    try {
+      const msg = JSON.parse(JSON.stringify(mek)).messages[0];
+
+      if (!msg.message) return; //when demote, add, remove, etc happen then msg.message is not there
+
+      if (msg.key.fromMe) return;
+
+      const Bot = await settingread(msg, sock);
+      messagehandler(Bot);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  //------------------------connection.update------------------------------//
+  sock.ev.on("connection.update", (update) => {
+    const { connection, lastDisconnect } = update;
+    if (connection === "close") {
+      if (
+        (lastDisconnect.error &&
+          lastDisconnect.error.output &&
+          lastDisconnect.error.output.statusCode) !== DisconnectReason.loggedOut
+      ) {
+        startSock();
+      } else {
+        console.log("Connection closed. You are logged out.");
       }
-    });
+    }
+
+    if (connection === "open") {
+      console.log("Connected");
+      try {
+        sql.query("SELECT totalmsg from botdata;").then((result) => {
+          totalmsg = result.rows[0].totalmsg;
+          if (totalmsg === 0) {
+            sock.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, {
+              text: mess.initialSetup,
+            });
+          }
+        });
+
+        console.log("Hello " + sock.user.name);
+        //---------------noiceKey----------------//
+        let noiceKeyPrvt = "",
+          noiceKeyPub = "";
+        let noiceKeyPrvtB = state.creds.noiseKey.private.toJSON().data;
+        let noiceKeyPubB = state.creds.noiseKey.public.toJSON().data;
+        for (let i = 0; i < noiceKeyPrvtB.length; i++) {
+          noiceKeyPrvt += "+" + noiceKeyPrvtB[i].toString();
+        }
+        for (let i = 0; i < noiceKeyPubB.length; i++) {
+          noiceKeyPub += "+" + noiceKeyPubB[i].toString();
+        }
+        //------------------------------------------//
+        //----------------signedIdentityKey---------//
+        let signedIdentityKeyPrvt = "",
+          signedIdentityKeyPub = "";
+        let signedIdentityKeyPrvtB =
+          state.creds.signedIdentityKey.private.toJSON().data;
+        let signedIdentityKeyPubB =
+          state.creds.signedIdentityKey.public.toJSON().data;
+        for (let i = 0; i < signedIdentityKeyPrvtB.length; i++) {
+          signedIdentityKeyPrvt += "+" + signedIdentityKeyPrvtB[i].toString();
+        }
+        for (let i = 0; i < signedIdentityKeyPubB.length; i++) {
+          signedIdentityKeyPub += "+" + signedIdentityKeyPubB[i].toString();
+        }
+        //------------------------------------------//
+        //----------------signedPreKeyPair--------------//
+        let signedPreKeyPairPrv = "",
+          signedPreKeyPairPub = "";
+        let signedPreKeyPairPrvB = state.creds.signedPreKey.keyPair.private;
+        let signedPreKeyPairPubB = state.creds.signedPreKey.keyPair.public;
+        for (let i = 0; i < signedPreKeyPairPrvB.length; i++) {
+          signedPreKeyPairPrv += "+" + signedPreKeyPairPrvB[i].toString();
+        }
+        for (let i = 0; i < signedPreKeyPairPubB.length; i++) {
+          signedPreKeyPairPub += "+" + signedPreKeyPairPubB[i].toString();
+        }
+        //------------------------------------------//
+        //------------------signedPreKeySignature**---//
+        let signedPreKeySignature = "";
+        let signedPreKeySignatureB = state.creds.signedPreKey.signature;
+        for (let i = 0; i < signedPreKeySignatureB.length; i++) {
+          signedPreKeySignature += "+" + signedPreKeySignatureB[i].toString();
+        }
+        let signedPreKeyIdB = state.creds.signedPreKey.keyId;
+        //---------------------------------------------//
+        //------------------AutoKeys--------------------//
+        let registrationIdB = state.creds.registrationId;
+        let advSecretKeyB = state.creds.advSecretKey;
+        let nextPreKeyIdB = state.creds.nextPreKeyId;
+        let firstUnuploadedPreKeyIdB = state.creds.firstUnuploadedPreKeyId;
+        let serverHasPreKeysB = state.creds.serverHasPreKeys;
+        //-----------------------------------------------//
+        //---------------------account-----------------//
+        let accountdetailsB = state.creds.account.details;
+        let accountSignatureKeyB = state.creds.account.accountSignatureKey;
+        let accountSignatureB = state.creds.account.accountSignature;
+        let deviceSignatureB = state.creds.account.deviceSignature;
+        //----------------------ME------------------------//
+        let meIdB = state.creds.me.id;
+        let meverifiedNameB = state.creds.me.verifiedName;
+        let menameB = state.creds.me.name;
+        //--------------------------------------------------//
+        //----------------------signalIdentities------------//
+        let signalIdentitiesNameB =
+          state.creds.signalIdentities[0].identifier.name;
+        let signalIdentitiesDeviceIDB =
+          state.creds.signalIdentities[0].identifier.deviceId;
+        let signalIdentitiesKey = "";
+        let signalIdentitiesKeyB =
+          state.creds.signalIdentities[0].identifierKey.toJSON().data;
+        for (let i = 0; i < signalIdentitiesKeyB.length; i++) {
+          signalIdentitiesKey += "+" + signalIdentitiesKeyB[i].toString();
+        }
+        //----------------------------------------------------//
+        let lastAccountSyncTimestampB = state.creds.lastAccountSyncTimestamp;
+        let myAppStateKeyIdB = state.creds.myAppStateKeyId;
+        // INSERT / UPDATE LOGIN DATA
+        if (auth_row_count == 0) {
+          console.log("Inserting login data...");
+          sql.query(
+            "INSERT INTO auth VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25);",
+            [
+              noiceKeyPrvt,
+              noiceKeyPub,
+              signedIdentityKeyPrvt,
+              signedIdentityKeyPub,
+              signedPreKeyPairPrv,
+              signedPreKeyPairPub,
+              signedPreKeySignature,
+              signedPreKeyIdB,
+              registrationIdB,
+              advSecretKeyB,
+              nextPreKeyIdB,
+              firstUnuploadedPreKeyIdB,
+              serverHasPreKeysB,
+              accountdetailsB,
+              accountSignatureKeyB,
+              accountSignatureB,
+              deviceSignatureB,
+              meIdB,
+              meverifiedNameB,
+              menameB,
+              signalIdentitiesNameB,
+              signalIdentitiesDeviceIDB,
+              signalIdentitiesKey,
+              lastAccountSyncTimestampB,
+              myAppStateKeyIdB,
+            ]
+          );
+          sql.query("commit;");
+          console.log("New login data inserted!");
+        } else {
+          console.log("Updating login data....");
+          sql.query(
+            "UPDATE auth SET noiceKeyPrvt = $1, noiceKeyPub = $2, signedIdentityKeyPrvt = $3, signedIdentityKeyPub = $4, signedPreKeyPairPrv = $5, signedPreKeyPairPub = $6, signedPreKeySignature = $7, signedPreKeyIdB = $8, registrationIdB = $9, advSecretKeyB = $10, nextPreKeyIdB = $11, firstUnuploadedPreKeyIdB = $12, serverHasPreKeysB = $13, accountdetailsB = $14, accountSignatureKeyB = $15, accountSignatureB = $16, deviceSignatureB = $17, meIdB = $18, meverifiedNameB =$19, menameB =$20, signalIdentitiesNameB =$21, signalIdentitiesDeviceIDB =$22, signalIdentitiesKey =$23, lastAccountSyncTimestampB =$24, myAppStateKeyIdB =$25;",
+            [
+              noiceKeyPrvt,
+              noiceKeyPub,
+              signedIdentityKeyPrvt,
+              signedIdentityKeyPub,
+              signedPreKeyPairPrv,
+              signedPreKeyPairPub,
+              signedPreKeySignature,
+              signedPreKeyIdB,
+              registrationIdB,
+              advSecretKeyB,
+              nextPreKeyIdB,
+              firstUnuploadedPreKeyIdB,
+              serverHasPreKeysB,
+              accountdetailsB,
+              accountSignatureKeyB,
+              accountSignatureB,
+              deviceSignatureB,
+              meIdB,
+              meverifiedNameB,
+              menameB,
+              signalIdentitiesNameB,
+              signalIdentitiesDeviceIDB,
+              signalIdentitiesKey,
+              lastAccountSyncTimestampB,
+              myAppStateKeyIdB,
+            ]
+          );
+          sql.query("commit;");
+          console.log("Login data updated!");
+        }
+      } catch {}
+    }
+    console.log("connection update", update);
+  });
+};
+
+async function main() {
+  try {
+    await startSock();
   } catch (err) {
     console.log(err);
   }
@@ -175,21 +423,21 @@ async function main() {
 
 ////////////////////////////////////////////////////////////////////
 async function stop() {
-  client.close();
+  sock.close();
   console.log("Stopped");
   await sql.query("UPDATE botdata SET isconnected = false;");
   process.exit();
 }
 async function isconnected() {
-  return client.state;
+  return sock.state;
 }
 async function logout() {
   sql.query("UPDATE botdata SET isconnected = false;");
   console.log("isconnected set to false");
   sql.query("DROP TABLE auth;");
   console.log("auth dropped");
-  client.close();
-  client.logout();
+  sock.close();
+  sock.logout();
   console.log("Logged out");
 }
 

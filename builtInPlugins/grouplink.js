@@ -1,4 +1,3 @@
-const { MessageType } = require("../@adiwajshing/baileys");
 
 module.exports = {
   name: "grouplink",

@@ -3,9 +3,7 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
-
-const { MessageType } = require("../@adiwajshing/baileys");
-const { sticker } = MessageType;
+const { downloadContentFromMessage } = require("@adiwajshing/baileys");
 const { ai } = require("../utils/deepai");
 
 module.exports = {

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const webp = require("webp-converter");
-
+const { downloadContentFromMessage } = require("@adiwajshing/baileys");
 module.exports = {
   name: "img",
   usage: "img",

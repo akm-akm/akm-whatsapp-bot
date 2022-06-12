@@ -20,7 +20,9 @@ for (let file of plugins) {
     ) {
       commandHandler.set(command.name, command);
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 const builtInPlugins = fs.readdirSync(
   path.join(__dirname, "../builtInPlugins")

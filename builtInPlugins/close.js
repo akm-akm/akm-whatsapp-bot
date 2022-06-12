@@ -1,7 +1,5 @@
-const { GroupSettingChange } = require("../@adiwajshing/baileys");
-
 module.exports = {
-  // name: "close",
+  name: "close",
   usage: "close",
   desc: "Changes the setting so that only admins can message.",
   eg: ["close"],
@@ -12,11 +10,7 @@ module.exports = {
       Bot.replytext(Bot.mess.only.Badmin);
       return;
     }
-    Bot.client.groupSettingChange(
-      Bot.from,
-      GroupSettingChange.messageSend,
-      true
-    );
+    Bot.client.groupSettingUpdate(Bot.from, "announcement");
     Bot.replytext(Bot.mess.success);
   },
 };

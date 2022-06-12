@@ -1,5 +1,3 @@
-const { MessageType } = require("../@adiwajshing/baileys");
-
 module.exports = {
   name: "tagall",
   usage: "tagall <text>",
@@ -21,11 +19,15 @@ module.exports = {
     for (let member of Bot.groupMembers) {
       memberslist.push(member.jid);
     }
-    Bot.client.sendMessage(Bot.from, msg, MessageType.extendedText, {
-      quoted: Bot.reply,
-      contextInfo: {
-        mentionedJid: memberslist,
-      },
-    });
+    Bot.client.sendMessage(
+      Bot.from,
+      { text: msg },
+      {
+        quoted: Bot.reply,
+        contextInfo: {
+          mentionedJid: memberslist,
+        },
+      }
+    );
   },
 };

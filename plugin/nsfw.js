@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { ai } = require(path.join(__dirname, "../utils/deepai"));
-
+const { downloadContentFromMessage } = require("@adiwajshing/baileys");
 module.exports = {
   name: "testnsfw",
   usage: "testnsfw",
@@ -30,9 +30,10 @@ module.exports = {
     };
     if ((Bot.isMedia && Bot.reply.message.imageMessage) || Bot.isQuotedImage) {
       const encmedia = Bot.isQuotedImage
-        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
-            .extendedTextMessage.contextInfo
-        : Bot.reply;
+        ? Bot.reply.extendedTextMessage.contextInfo.quotedMessage.imageMessage
+        : Bot.reply.message.imageMessage;
+      const stream = await downloadContentFromMessage(encmedia, "image");
+
       const media = await Bot.client.downloadAndSaveMediaMessage(
         encmedia,
         getRandom("")

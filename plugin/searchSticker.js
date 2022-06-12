@@ -3,8 +3,6 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
-const { MessageType } = require("../@adiwajshing/baileys");
-const { sticker } = MessageType;
 const axios = require("axios").default;
 
 module.exports = {
@@ -119,9 +117,13 @@ module.exports = {
                     authorName,
                     ran
                   );
-                  Bot.client.sendMessage(from, webpWithMetadata, sticker, {
-                    quoted: Bot.reply,
-                  });
+                  Bot.client.sendMessage(
+                    from,
+                    { sticker: webpWithMetadata },
+                    {
+                      quoted: Bot.reply,
+                    }
+                  );
 
                   fs.unlinkSync(media);
                   fs.unlinkSync(ran);

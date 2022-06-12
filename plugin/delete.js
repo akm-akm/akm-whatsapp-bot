@@ -11,7 +11,14 @@ module.exports = {
       return;
     }
     try {
-      await Bot.client.sendMessage(Bot.from, { delete: Bot.stanzaId });
+      const options = {
+        remoteJid: Bot.botNumber+"@s.whatsapp.net",
+        fromMe: true,
+        id: Bot.reply.message.extendedTextMessage.contextInfo.stanzaId,
+      };
+      await Bot.client.sendMessage(Bot.from, {
+        delete: options,
+      });
     } catch (error) {
       Bot.replytext(Bot.mess.error.error);
     }

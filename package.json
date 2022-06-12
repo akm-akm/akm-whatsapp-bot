@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/akm-akm/akm-whatsapp-bot#readme",
   "dependencies": {
+    "@adiwajshing/baileys": "git+ssh://git@github.com/adiwajshing/baileys.git#a98484c38bc92055e3c660a86687ee0425bc5c5b",
     "@adiwajshing/keyed-db": "^0.2.2",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "any-shell-escape": "^0.1.1",
@@ -34,6 +35,7 @@
     "chalk": "^4.1.2",
     "curve25519-js": "^0.0.4",
     "deepai": "^1.0.17",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.4.0",
@@ -45,7 +47,7 @@
     "music-metadata": "^7.4.1",
     "node-cron": "^3.0.0",
     "pg": "^8.6.0",
-    "pino": "^6.7.0",
+    "pino": "^6.14.0",
     "pino-pretty": "^4.3.0",
     "protobufjs": "^6.10.1",
     "qr-image": "^3.2.0",
@@ -56,7 +58,6 @@
     "wa-sticker-formatter": "^3.6.0",
     "webp-converter": "^2.3.3",
     "ws": "^7.3.1",
-    "dotenv": "^10.0.0",
     "ytdl-core": "^4.9.1"
   }
 }
