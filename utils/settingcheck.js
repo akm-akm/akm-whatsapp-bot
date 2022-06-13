@@ -36,7 +36,7 @@ Array.prototype.detecta = function () {
 const getGroupAdmins = (participants) => {
   const admins = [];
   for (let i of participants) {
-    i.isAdmin ? admins.push(i.jid) : "";
+    i.admin == "admin" || i.admin == "superadmin" ? admins.push(i.id) : "";
   }
   return admins;
 };

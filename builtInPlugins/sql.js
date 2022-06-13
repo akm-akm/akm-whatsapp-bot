@@ -24,7 +24,7 @@ module.exports = {
 
     try {
       const result = await sql.query(cmd);
-      Bot.reply(JSON.stringify(result.rows, null, "\t"));
+      Bot.replytext(JSON.stringify(result.rows, null, "\t"));
     } catch (error) {
       Bot.errorlog(error);
     }

@@ -17,20 +17,25 @@ module.exports = {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
     };
     if (Bot.isQuotedSticker) {
-      const encmedia = JSON.parse(
-        JSON.stringify(Bot.reply).replace("quotedM", "m")
-      ).message.extendedTextMessage.contextInfo;
+      const encmedia =
+        Bot.reply.message.extendedTextMessage.contextInfo.quotedMessage
+          .stickerMessage;
 
-      const media = await Bot.client.downloadAndSaveMediaMessage(
-        encmedia,
-        getRandom("")
-      );
+      const stream = await downloadContentFromMessage(encmedia, "image");
+      let buffer = Buffer.from([]);
+      for await (const chunk of stream) {
+        buffer = Buffer.concat([buffer, chunk]);
+      }
+      const media = getRandom(".webp");
+      await writeFile(media, buffer);
+      if (encmedia.isAnimated)
+        throw new Error("Animated stickers are not supported");
       const ran = getRandom(".jpg");
 
       webp
         .dwebp(media, ran, "-o", (logging = "-v"))
-          .then(() => {
-            fs.unlinkSync(media)
+        .then(() => {
+          fs.unlinkSync(media);
           Bot.replyimage(ran);
         })
         .catch((err) => Bot.replytext(Bot.mess.error.error));

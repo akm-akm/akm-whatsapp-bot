@@ -15,10 +15,12 @@ module.exports = {
       return;
     }
     try {
-      const lyrics = await solenolyrics.getLyrics(arg.splice(1).join(" "));
+      const lyrics = await solenolyrics.requestLyricsFor(
+        arg.splice(1).join(" ")
+      );
       Bot.replytext(lyrics);
     } catch (error) {
-      Bot.replytext(Bot.mess.error.error);
+      Bot.errorlog(error);
     }
   },
 };

@@ -15,18 +15,17 @@ module.exports = {
       {
         index: 1,
         urlButton: {
-          displayText: "⭐ Project Link!",
+          displayText: "Project Link",
           url: "https://github.com/akm-akm/akm-whatsapp-bot/",
         },
       },
       {
         index: 2,
         urlButton: {
-          displayText: "Contact Me!",
+          displayText: "Contact Me",
           url: "https://github.com/akm-akm/akm-whatsapp-bot/issues",
         },
       },
-      
     ];
 
     axios
@@ -35,7 +34,7 @@ module.exports = {
         let data = response.data;
 
         msg =
-          "\n 🤖 🤖  *AKM  🤖  BOT*  🤖 🤖\n\n" +
+          "🤖🤖🤖  *AKM  BOT*  🤖🤖🤖\n\n" +
           "👨‍💻 *Owner:* ```" +
           data.owner.login +
           "```\n" +

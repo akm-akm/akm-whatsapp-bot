@@ -5,7 +5,7 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
 const { downloadContentFromMessage } = require("@adiwajshing/baileys");
 const { ai } = require("../utils/deepai");
-
+const { writeFile } = require("fs/promises");
 module.exports = {
   name: "sticker",
   usage: "sticker <arguments>",
@@ -102,13 +102,16 @@ module.exports = {
     ///////////////image//////////////////
     if ((isMedia && !Bot.reply.message.videoMessage) || isQuotedImage) {
       const encmedia = isQuotedImage
-        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
-            .extendedTextMessage.contextInfo
-        : Bot.reply;
-      const media = await Bot.client.downloadAndSaveMediaMessage(
-        encmedia,
-        getRandom("")
-      );
+        ? Bot.reply.message.extendedTextMessage.contextInfo.quotedMessage
+            .imageMessage
+        : Bot.reply.message.imageMessage;
+      const stream = await downloadContentFromMessage(encmedia, "image");
+      let buffer = Buffer.from([]);
+      for await (const chunk of stream) {
+        buffer = Buffer.concat([buffer, chunk]);
+      }
+      const media = getRandom(".jpeg");
+      await writeFile(media, buffer);
       const ran = getRandom(".webp");
       if (!Bot.isGroup || Bot.groupdata.nsfw == true) {
         const nsfw = await ai(media);
@@ -141,9 +144,13 @@ module.exports = {
             authorName,
             ran
           );
-          Bot.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Bot.reply,
-          });
+          Bot.client.sendMessage(
+            from,
+            { sticker: webpWithMetadata },
+            {
+              quoted: Bot.reply,
+            }
+          );
 
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
@@ -160,13 +167,16 @@ module.exports = {
           .videoMessage.seconds < 11)
     ) {
       const encmedia = isQuotedVideo
-        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
-            .extendedTextMessage.contextInfo
-        : Bot.reply;
-      const media = await Bot.client.downloadAndSaveMediaMessage(
-        encmedia,
-        getRandom("")
-      );
+        ? Bot.reply.message.extendedTextMessage.contextInfo.quotedMessage
+            .videoMessage
+        : Bot.reply.message.videoMessage;
+      const stream = await downloadContentFromMessage(encmedia, "video");
+      let buffer = Buffer.from([]);
+      for await (const chunk of stream) {
+        buffer = Buffer.concat([buffer, chunk]);
+      }
+      const media = getRandom(".mp4");
+      await writeFile(media, buffer);
       if (!Bot.isGroup || Bot.groupdata.nsfw == true) {
         const nsfw = await ai(media);
         if (nsfw.output.nsfw_score > 0.6) {
@@ -205,10 +215,14 @@ module.exports = {
             authorName,
             ran
           );
-          Bot.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Bot.reply,
-          });
-          fs.unlinkSync(media);
+          Bot.client.sendMessage(
+            from,
+            { sticker: webpWithMetadata },
+            {
+              quoted: Bot.reply,
+            }
+          );
+          fs.unlinkSync(media1);
           fs.unlinkSync(ran);
           return;
         }
@@ -220,13 +234,16 @@ module.exports = {
           .videoMessage.seconds >= 11)
     ) {
       const encmedia = isQuotedVideo
-        ? JSON.parse(JSON.stringify(Bot.reply).replace("quotedM", "m")).message
-            .extendedTextMessage.contextInfo
-        : Bot.reply;
-      const media1 = await Bot.client.downloadAndSaveMediaMessage(
-        encmedia,
-        getRandom("")
-      );
+        ? Bot.reply.message.extendedTextMessage.contextInfo.quotedMessage
+            .videoMessage
+        : Bot.reply.message.videoMessage;
+      const stream = await downloadContentFromMessage(encmedia, "video");
+      let buffer = Buffer.from([]);
+      for await (const chunk of stream) {
+        buffer = Buffer.concat([buffer, chunk]);
+      }
+      const media1 = getRandom(".mp4");
+      await writeFile(media1, buffer);
       if (!Bot.isGroup || Bot.groupdata.nsfw == true) {
         const nsfw = await ai(media1);
         if (nsfw.output.nsfw_score > 0.6) {
@@ -289,9 +306,13 @@ module.exports = {
             authorName,
             ran
           );
-          Bot.client.sendMessage(from, webpWithMetadata, sticker, {
-            quoted: Bot.reply,
-          });
+          Bot.client.sendMessage(
+            from,
+            { sticker: webpWithMetadata },
+            {
+              quoted: Bot.reply,
+            }
+          );
           fs.unlinkSync(media);
           fs.unlinkSync(ran);
           fs.unlinkSync(media1);

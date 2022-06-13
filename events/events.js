@@ -2,7 +2,6 @@ const {
   default: makeWASocket,
   DisconnectReason,
   useSingleFileAuthState,
-  downloadMediaMessage,
   fetchLatestBaileysVersion,
 } = require("@adiwajshing/baileys");
 const P = require("pino");
@@ -253,9 +252,32 @@ const startSock = async () => {
         sql.query("SELECT totalmsg from botdata;").then((result) => {
           totalmsg = result.rows[0].totalmsg;
           if (totalmsg === 0) {
-            sock.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, {
+            const templateButtons = [
+              {
+                index: 1,
+                urlButton: {
+                  displayText: "Don't forget to do this!",
+                  url: "https://github.com/akm-akm/akm-whatsapp-bot/blob/new/docs/heroku-hosting.md#%EF%B8%8F-failing-to-do-the-below-step-will-stop-the-bot-from-working",
+                },
+              },
+              {
+                index: 2,
+                urlButton: {
+                  displayText: "How to use the bot?",
+                  url: "https://github.com/akm-akm/akm-whatsapp-bot/tree/new#-how-to-use-the-bot",
+                },
+              },
+            ];
+            const templateMessage = {
               text: mess.initialSetup,
-            });
+              footer: "Bot made by Aditya K Mandal",
+              templateButtons: templateButtons,
+            };
+
+            sock.sendMessage(
+              `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
+              templateMessage
+            );
           }
         });
 

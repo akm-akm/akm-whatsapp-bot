@@ -44,6 +44,7 @@
     "https-proxy-agent": "^5.0.0",
     "image-charts": "^6.0.18",
     "jimp": "^0.16.1",
+    "long": "^4.0.0",
     "music-metadata": "^7.4.1",
     "node-cron": "^3.0.0",
     "pg": "^8.6.0",
