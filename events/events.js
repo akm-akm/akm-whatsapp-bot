@@ -176,12 +176,13 @@ const startSock = async () => {
     logger: noLogs,
     defaultQueryTimeoutMs: undefined,
     printQRInTerminal: true,
+    receivePendingNotifications: false,
     auth: state,
   });
 
   //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-  sock.ev.on("CB:Call", async (json) => {
+  sock.ev.on("call", async (json) => {
     const number = json[1]["from"];
     const isOffer = json[1]["type"] == "offer";
     if (number && isOffer && json[1]["data"]) {
@@ -234,6 +235,8 @@ const startSock = async () => {
   //------------------------connection.update------------------------------//
   sock.ev.on("connection.update", (update) => {
     const { connection, lastDisconnect } = update;
+
+    
     if (connection === "close") {
       if (
         (lastDisconnect.error &&
