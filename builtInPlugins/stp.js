@@ -11,8 +11,8 @@ module.exports = {
   async handle(Bot) {
     await sql.query("update botdata set isconnected = false;");
     setTimeout(() => {
-      process.exit(1);
+      Bot.client.end();
     }, 3000);
     Bot.replytext(Bot.mess.success);
-  },
+  }
 };

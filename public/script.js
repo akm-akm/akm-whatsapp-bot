@@ -53,9 +53,7 @@ $("#restart").click(function (e) {
 ///////login////////
 let myVar;
 $("#login").click(function (e) {
-  window.alert(
-    "Make sure that multi-device beta is off before scanning the qr code!"
-  );
+  
   $("#login").text("connecting...");
   $("#stop").text("stop bot");
   $("#stop").removeClass("hidden");

@@ -1,9 +1,8 @@
-const { GroupSettingChange } = require("../@adiwajshing/baileys");
 
 module.exports = {
   name: "open",
   usage: "open",
-  //   "desc": "Changes the setting so that members can message.",
+  desc: "Changes the setting so that members can message.",
   eg: ["open"],
   group: true,
   owner: false,
@@ -14,11 +13,7 @@ module.exports = {
       return;
     }
 
-    Bot.client.groupSettingChange(
-      Bot.from,
-      GroupSettingChange.messageSend,
-      false
-    );
+    Bot.client.groupSettingUpdate(Bot.from, "not_announcement");
 
     Bot.replytext(Bot.mess.success);
   },

@@ -1,5 +1,5 @@
 module.exports = {
-  //  name: "remove",
+  name: "remove",
   usage: "remove <@user>",
   desc: "Removes the tagged member from the group.",
   eg: ["remove @ankit", "remove @dibyam"],
@@ -33,7 +33,7 @@ module.exports = {
       return;
     }
 
-    Bot.client.groupRemove(Bot.from, mentioned);
+    Bot.client.groupParticipantsUpdate(Bot.from, [mentioned], "remove");
 
     Bot.replytext(Bot.mess.success);
   },

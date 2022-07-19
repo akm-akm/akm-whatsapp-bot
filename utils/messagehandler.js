@@ -20,7 +20,9 @@ for (let file of plugins) {
     ) {
       commandHandler.set(command.name, command);
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 const builtInPlugins = fs.readdirSync(
   path.join(__dirname, "../builtInPlugins")
@@ -148,7 +150,7 @@ exports.messagehandler = async (Bot) => {
   );
 
   if (Bot.abusepresent.length != 0 && !Bot.isBotModerator) {
-    Bot.replytext("⚠️  ``` Tu " + Bot.abusepresent.join(" ") + "```");
+    Bot.replytext("⚠️ ``` Tu " + Bot.abusepresent.join(" ") + "```");
     count(Bot);
     return;
   }

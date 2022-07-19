@@ -1,4 +1,3 @@
-const { Mimetype, MessageType } = require("../@adiwajshing/baileys/lib");
 const fs = require("fs");
 const chalk = require("chalk");
 const path = require("path");
@@ -81,10 +80,16 @@ module.exports = class BotClass {
    * @param {String} input The text message you want to send
    */
   async replytext(input) {
-    await this.client.sendMessage(this.from, input, MessageType.text, {
-      quoted: this.reply,
-      detectLinks: false,
-    });
+    await this.client.sendMessage(
+      this.from,
+      {
+        text: input
+      },
+      {
+        quoted: this.reply,
+        detectLinks: false
+      }
+    );
   }
 
   /**
@@ -92,10 +97,15 @@ module.exports = class BotClass {
    * @param {String} input The text message you want to send
    */
   text(input) {
-    this.client.sendMessage(this.from, {
-      text: input,
-      detectLinks: false,
-    });
+    this.client.sendMessage(
+      this.from,
+      {
+        text: input
+      },
+      {
+        detectLinks: false
+      }
+    );
   }
 
   /**
@@ -103,11 +113,15 @@ module.exports = class BotClass {
    * @param {String} path The absolute sticker path
    */
   async replysticker(path) {
-    await this.client.sendMessage(this.from, {
-      sticker: fs.readFileSync(path),
-      quoted: this.reply,
-      mimetype: Mimetype.webp,
-    });
+    await this.client.sendMessage(
+      this.from,
+      {
+        sticker: fs.readFileSync(path)
+      },
+      {
+        quoted: this.reply
+      }
+    );
   }
 
   /**
@@ -116,12 +130,17 @@ module.exports = class BotClass {
    * @param {String} caption The caption of the image if any.
    */
   async replyimage(path, caption = "") {
-    await this.client.sendMessage(this.from, {
-      image: fs.readFileSync(path),
-      caption: caption,
-      quoted: this.reply,
-      detectLinks: false,
-    });
+    await this.client.sendMessage(
+      this.from,
+      {
+        image: fs.readFileSync(path),
+        caption: caption
+      },
+      {
+        quoted: this.reply,
+        detectLinks: false
+      }
+    );
     fs.unlinkSync(path);
   }
 
@@ -135,34 +154,32 @@ module.exports = class BotClass {
     if (thumb != null) {
       await this.client.sendMessage(
         this.from,
-        fs.readFileSync(path),
-        MessageType.video,
+        {
+          video: fs.readFileSync(path)
+        },
         {
           quoted: this.reply,
-          caption: caption,
-          mimetype: Mimetype.mp4,
+          caption: this.caption,
           detectLinks: false,
-          thumbnail: fs.readFileSync(thumb),
+          thumbnail: fs.readFileSync(thumb)
         }
       );
-
       fs.unlinkSync(path);
       fs.unlinkSync(thumb);
     } else {
       await this.client.sendMessage(
         this.from,
-        fs.readFileSync(path),
-        MessageType.video,
+        {
+          video: fs.readFileSync(path)
+        },
         {
           quoted: this.reply,
-          caption: caption,
-          mimetype: Mimetype.mp4,
-          detectLinks: false,
+          caption: this.caption,
+          detectLinks: false
         }
       );
       fs.unlinkSync(path);
     }
-    this.client.sendMessage(this.from, videoMessageDetails);
   }
 
   errorlog(error) {
@@ -171,11 +188,16 @@ module.exports = class BotClass {
     } else {
       this.replytext(mess.error.error);
       const e = "🤖 Error log for the tagged message \n\n```" + error + "```";
-      this.client.sendMessage(`${process.env.OWNER_NUMBER}@s.whatsapp.net`, {
-        text: e,
-        quoted: this.reply,
-        detectLinks: false,
-      });
+      this.client.sendMessage(
+        `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
+        {
+          text: e
+        },
+        {
+          quoted: this.reply,
+          detectLinks: false
+        }
+      );
     }
   }
 

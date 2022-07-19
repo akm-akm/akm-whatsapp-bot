@@ -3,8 +3,6 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
-const { MessageType } = require("../@adiwajshing/baileys");
-const { sticker } = MessageType;
 const axios = require("axios").default;
 
 module.exports = {
@@ -96,7 +94,7 @@ module.exports = {
             response.data.pipe(file);
             file.on("finish", () => {
               file.close(async () => {
-                ran = getRandom(".webp");
+                const ran = getRandom(".webp");
 
                 ffmpeg(`./${media}`)
                   .input(media)
@@ -119,9 +117,13 @@ module.exports = {
                     authorName,
                     ran
                   );
-                  Bot.client.sendMessage(from, webpWithMetadata, sticker, {
-                    quoted: Bot.reply,
-                  });
+                  Bot.client.sendMessage(
+                    from,
+                    { sticker: webpWithMetadata },
+                    {
+                      quoted: Bot.reply,
+                    }
+                  );
 
                   fs.unlinkSync(media);
                   fs.unlinkSync(ran);

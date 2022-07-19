@@ -1,5 +1,3 @@
-const { MessageType } = require("../@adiwajshing/baileys");
-const { text } = MessageType;
 
 const newgroup = (from, client, random) => {
   let newmsg =

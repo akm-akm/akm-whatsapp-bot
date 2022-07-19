@@ -11,14 +11,30 @@ module.exports = {
   group: false,
   owner: false,
   async handle(Bot) {
+    const templateButtons = [
+      {
+        index: 1,
+        urlButton: {
+          displayText: "Project Link",
+          url: "https://github.com/akm-akm/akm-whatsapp-bot/",
+        },
+      },
+      {
+        index: 2,
+        urlButton: {
+          displayText: "Contact Me",
+          url: "https://github.com/akm-akm/akm-whatsapp-bot/issues",
+        },
+      },
+    ];
+
     axios
       .get(`https://api.github.com/repos/akm-akm/akm-whatsapp-bot`)
       .then((response) => {
         let data = response.data;
 
         msg =
-          "🤖 🤖  *AKM  🤖  BOT*  🤖 🤖\n\n" +
-          "🐱 *Github*\n```www.github.com/akm-akm/akm-whatsapp-bot```\n\n" +
+          "🤖🤖🤖  *AKM  BOT*  🤖🤖🤖\n\n" +
           "👨‍💻 *Owner:* ```" +
           data.owner.login +
           "```\n" +
@@ -45,10 +61,13 @@ module.exports = {
           " KB```\n" +
           "📄 *License:*         ```" +
           data.license.key +
-          " ```\n" +
-          "\n🤖 🤖 *_Bot made by AKM_* 🤖 🤖";
-
-        Bot.replytext(msg);
+          " ```\n";
+        const templateMessage = {
+          text: msg,
+          footer: "Bot made by Aditya K Mandal",
+          templateButtons: templateButtons,
+        };
+        Bot.client.sendMessage(Bot.from, templateMessage);
       })
 
       .catch((e) => {

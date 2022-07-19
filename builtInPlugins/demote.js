@@ -1,5 +1,5 @@
 module.exports = {
-  // name: "demote",
+  name: "demote",
   usage: "demote <@user>",
   desc: "Demotes the tagged member from admin.",
   eg: ["demote @ankit", "demote @dibyam"],
@@ -33,7 +33,7 @@ module.exports = {
       return;
     }
 
-    Bot.client.groupDemoteAdmin(Bot.from, mentioned);
+    Bot.client.groupParticipantsUpdate(Bot.from, [mentioned], "demote");
 
     Bot.replytext(Bot.mess.success);
   },

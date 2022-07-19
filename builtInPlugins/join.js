@@ -20,7 +20,7 @@ module.exports = {
       return;
     }
     try {
-      await Bot.client.acceptInvite(arg[1].split(".com/")[1]);
+      await Bot.client.groupAcceptInvite(arg[1].split(".com/")[1]);
       Bot.replytext(Bot.mess.success);
     } catch (error) {
       Bot.replytext(Bot.mess.error.error);
