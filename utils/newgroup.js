@@ -32,6 +32,6 @@ const newgroup = (from, client, random) => {
     random +
     "```" +
     "```limit```\n";
-  client.Bot.sendMessage(from, { text: newmsg });
+  client.sendMessage(from, { text: newmsg });
 };
 module.exports.newgroup = newgroup;
