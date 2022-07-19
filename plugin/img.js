@@ -1,4 +1,5 @@
 const fs = require("fs");
+const {writeFile} = require("fs/promises")
 const webp = require("webp-converter");
 const { downloadContentFromMessage } = require("@adiwajshing/baileys");
 module.exports = {

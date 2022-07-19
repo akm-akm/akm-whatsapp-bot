@@ -94,7 +94,7 @@ module.exports = {
             response.data.pipe(file);
             file.on("finish", () => {
               file.close(async () => {
-                ran = getRandom(".webp");
+                const ran = getRandom(".webp");
 
                 ffmpeg(`./${media}`)
                   .input(media)

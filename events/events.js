@@ -2,15 +2,15 @@ const {
   default: makeWASocket,
   DisconnectReason,
   useSingleFileAuthState,
-  fetchLatestBaileysVersion,
+  fetchLatestBaileysVersion
 } = require("@adiwajshing/baileys");
 const P = require("pino");
 const { state, saveState } = useSingleFileAuthState("./auth_info_multi.json");
-
+let connectionState;
 const path = require("path");
 const fs = require("fs");
 const settingread = require(path.join(__dirname, "../utils/settingcheck"));
-let qri = require("qr-image");
+let qrcode = require("qr-image");
 const sql = require(path.join(__dirname, "../utils/ps"));
 const { messagehandler } = require(path.join(
   __dirname,
@@ -20,7 +20,7 @@ const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
 
-let cred, auth_row_count;
+let cred, auth_row_count, c;
 async function fetchauth() {
   try {
     auth_result = await sql.query("select * from auth;"); //checking auth table
@@ -35,19 +35,19 @@ async function fetchauth() {
         creds: {
           noiseKey: {
             private: data.noicekeyprvt,
-            public: data.noicekeypub,
+            public: data.noicekeypub
           },
           signedIdentityKey: {
             private: data.signedidentitykeyprvt,
-            public: data.signedidentitykeypub,
+            public: data.signedidentitykeypub
           },
           signedPreKey: {
             keyPair: {
               private: data.signedprekeypairprv,
-              public: data.signedprekeypairpub,
+              public: data.signedprekeypairpub
             },
             signature: data.signedprekeysignature,
-            keyId: Number(data.signedprekeyidb),
+            keyId: Number(data.signedprekeyidb)
           },
           registrationId: Number(data.registrationidb),
           advSecretKey: data.advsecretkeyb,
@@ -58,27 +58,27 @@ async function fetchauth() {
             details: data.accountdetailsb,
             accountSignatureKey: data.accountsignaturekeyb,
             accountSignature: data.accountsignatureb,
-            deviceSignature: data.devicesignatureb,
+            deviceSignature: data.devicesignatureb
           },
           me: {
             id: data.meidb,
             verifiedName: data.meverifiednameb,
-            name: data.menameb,
+            name: data.menameb
           },
           signalIdentities: [
             {
               identifier: {
                 name: data.signalidentitiesnameb,
-                deviceId: Number(data.signalidentitiesdeviceidb),
+                deviceId: Number(data.signalidentitiesdeviceidb)
               },
-              identifierKey: data.signalidentitieskey,
-            },
+              identifierKey: data.signalidentitieskey
+            }
           ],
           lastAccountSyncTimestamp: 0, // remove the last timeStamp from db
           // lastAccountSyncTimestamp: Number(data.lastaccountsynctimestampb),
-          myAppStateKeyId: data.myappstatekeyidb,
+          myAppStateKeyId: data.myappstatekeyidb
         },
-        keys: state.keys,
+        keys: state.keys
       };
       //---------------noiceKey----------------//
       let noiceKeyPrvt = [],
@@ -177,7 +177,7 @@ const startSock = async () => {
     defaultQueryTimeoutMs: undefined,
     printQRInTerminal: true,
     receivePendingNotifications: false,
-    auth: state,
+    auth: state
   });
 
   //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -195,7 +195,7 @@ const startSock = async () => {
           {
             from: sock.user.jid,
             to: number.split("@")[0] + "@s.whatsapp.net",
-            id: tag,
+            id: tag
           },
           [
             [
@@ -203,16 +203,16 @@ const startSock = async () => {
               {
                 "call-id": json[1]["id"],
                 "call-creator": number.split("@")[0] + "@s.whatsapp.net",
-                count: "0",
+                count: "0"
               },
-              null,
-            ],
-          ],
-        ],
+              null
+            ]
+          ]
+        ]
       ];
       sock.send(`${tag},${JSON.stringify(jsjs)}`);
       sock.sendMessage(number, {
-        text: "🤖 ```Cannot receive call!```",
+        text: "🤖 ```Cannot receive call!```"
       });
     }
   });
@@ -226,6 +226,7 @@ const startSock = async () => {
       if (msg.key.fromMe) return;
 
       const Bot = await settingread(msg, sock);
+
       messagehandler(Bot);
     } catch (e) {
       console.log(e);
@@ -233,11 +234,20 @@ const startSock = async () => {
   });
   //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   //------------------------connection.update------------------------------//
-  sock.ev.on("connection.update", (update) => {
-    const { connection, lastDisconnect } = update;
+  sock.ev.on("creds.update", saveState);
 
-    
+  sock.ev.on("connection.update", (update) => {
+    const { connection, lastDisconnect, qr } = update;
+    if (qr !== undefined) {
+      qrcode
+        .image(qr, { type: "png", size: 10 })
+        .pipe(
+          fs.createWriteStream(path.join(__dirname, "../public", "qr.png"))
+        );
+    }
     if (connection === "close") {
+      connectionState = "close";
+
       if (
         (lastDisconnect.error &&
           lastDisconnect.error.output &&
@@ -245,11 +255,12 @@ const startSock = async () => {
       ) {
         startSock();
       } else {
-        console.log("Connection closed. You are logged out.");
+        console.log("fuckk Connection closed. You are logged out.");
       }
     }
 
     if (connection === "open") {
+      connectionState = "open";
       console.log("Connected");
       try {
         sql.query("SELECT totalmsg from botdata;").then((result) => {
@@ -260,21 +271,21 @@ const startSock = async () => {
                 index: 1,
                 urlButton: {
                   displayText: "Don't forget to do this!",
-                  url: "https://github.com/akm-akm/akm-whatsapp-bot/blob/new/docs/heroku-hosting.md#%EF%B8%8F-failing-to-do-the-below-step-will-stop-the-bot-from-working",
-                },
+                  url: "https://github.com/akm-akm/akm-whatsapp-bot/blob/new/docs/heroku-hosting.md#%EF%B8%8F-failing-to-do-the-below-step-will-stop-the-bot-from-working"
+                }
               },
               {
                 index: 2,
                 urlButton: {
                   displayText: "How to use the bot?",
-                  url: "https://github.com/akm-akm/akm-whatsapp-bot/tree/new#-how-to-use-the-bot",
-                },
-              },
+                  url: "https://github.com/akm-akm/akm-whatsapp-bot/tree/new#-how-to-use-the-bot"
+                }
+              }
             ];
             const templateMessage = {
               text: mess.initialSetup,
               footer: "Bot made by Aditya K Mandal",
-              templateButtons: templateButtons,
+              templateButtons: templateButtons
             };
 
             sock.sendMessage(
@@ -392,11 +403,12 @@ const startSock = async () => {
               signalIdentitiesDeviceIDB,
               signalIdentitiesKey,
               lastAccountSyncTimestampB,
-              myAppStateKeyIdB,
+              myAppStateKeyIdB
             ]
           );
-          sql.query("commit;");
-          console.log("New login data inserted!");
+          sql.query("commit;").then(() => {
+            console.log("Login data inserted!");
+          });
         } else {
           console.log("Updating login data....");
           sql.query(
@@ -426,7 +438,7 @@ const startSock = async () => {
               signalIdentitiesDeviceIDB,
               signalIdentitiesKey,
               lastAccountSyncTimestampB,
-              myAppStateKeyIdB,
+              myAppStateKeyIdB
             ]
           );
           sql.query("commit;");
@@ -434,13 +446,13 @@ const startSock = async () => {
         }
       } catch {}
     }
-    console.log("connection update", update);
   });
+  return sock;
 };
 
 async function main() {
   try {
-    await startSock();
+    c = await startSock();
   } catch (err) {
     console.log(err);
   }
@@ -448,21 +460,19 @@ async function main() {
 
 ////////////////////////////////////////////////////////////////////
 async function stop() {
-  sock.close();
+  c.end();
   console.log("Stopped");
   await sql.query("UPDATE botdata SET isconnected = false;");
-  process.exit();
 }
 async function isconnected() {
-  return sock.state;
+  return connectionState;
 }
 async function logout() {
   sql.query("UPDATE botdata SET isconnected = false;");
   console.log("isconnected set to false");
   sql.query("DROP TABLE auth;");
   console.log("auth dropped");
-  sock.close();
-  sock.logout();
+  c.logout();
   console.log("Logged out");
 }
 

@@ -80,16 +80,16 @@ module.exports = class BotClass {
    * @param {String} input The text message you want to send
    */
   async replytext(input) {
-   await this.client.sendMessage(
-     this.from,
-     {
-       text: input,
-     },
-     {
+    await this.client.sendMessage(
+      this.from,
+      {
+        text: input
+      },
+      {
         quoted: this.reply,
-       detectLinks: false,
-     }
-   );
+        detectLinks: false
+      }
+    );
   }
 
   /**
@@ -97,13 +97,13 @@ module.exports = class BotClass {
    * @param {String} input The text message you want to send
    */
   text(input) {
-     this.client.sendMessage(
+    this.client.sendMessage(
       this.from,
       {
-        text: input,
+        text: input
       },
       {
-        detectLinks: false,
+        detectLinks: false
       }
     );
   }
@@ -113,13 +113,14 @@ module.exports = class BotClass {
    * @param {String} path The absolute sticker path
    */
   async replysticker(path) {
-    await this.client.sendMessage(this.from, 
+    await this.client.sendMessage(
+      this.from,
       {
         sticker: fs.readFileSync(path)
       },
       {
-        quoted: this.reply,
-        }
+        quoted: this.reply
+      }
     );
   }
 
@@ -133,11 +134,11 @@ module.exports = class BotClass {
       this.from,
       {
         image: fs.readFileSync(path),
-        caption: caption,
+        caption: caption
       },
       {
         quoted: this.reply,
-        detectLinks: false,
+        detectLinks: false
       }
     );
     fs.unlinkSync(path);
@@ -151,17 +152,16 @@ module.exports = class BotClass {
    */
   async replyvideo(path, caption, thumb) {
     if (thumb != null) {
-     
       await this.client.sendMessage(
         this.from,
         {
-          video: fs.readFileSync(path),
+          video: fs.readFileSync(path)
         },
         {
           quoted: this.reply,
           caption: this.caption,
           detectLinks: false,
-          thumbnail: fs.readFileSync(thumb),
+          thumbnail: fs.readFileSync(thumb)
         }
       );
       fs.unlinkSync(path);
@@ -170,12 +170,12 @@ module.exports = class BotClass {
       await this.client.sendMessage(
         this.from,
         {
-          video: fs.readFileSync(path),
+          video: fs.readFileSync(path)
         },
         {
           quoted: this.reply,
           caption: this.caption,
-          detectLinks: false,
+          detectLinks: false
         }
       );
       fs.unlinkSync(path);
@@ -191,11 +191,12 @@ module.exports = class BotClass {
       this.client.sendMessage(
         `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
         {
-        text: e
-      },{
-        quoted: this.reply,
-        detectLinks: false,
-      }
+          text: e
+        },
+        {
+          quoted: this.reply,
+          detectLinks: false
+        }
       );
     }
   }
