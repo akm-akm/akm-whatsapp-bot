@@ -1,4 +1,3 @@
-
 const newgroup = (from, client, random) => {
   let newmsg =
     "🤖🤖🤖  *AKM 🤖 BOT*  🤖🤖🤖\n\n" +
@@ -33,6 +32,6 @@ const newgroup = (from, client, random) => {
     random +
     "```" +
     "```limit```\n";
-  client.sendMessage(from, { text: newmsg });
+  client.Bot.sendMessage(from, { text: newmsg });
 };
 module.exports.newgroup = newgroup;

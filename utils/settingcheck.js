@@ -102,7 +102,7 @@ module.exports = async function settingread(xxx, client) {
           if (
             Bot.groupMetadata.participants.length < botdata.rows[0].mingroupsize
           ) {
-            Bot.text(
+            await Bot.text(
               "*Minimum participants required is* " +
                 botdata.rows[0].mingroupsize
             );

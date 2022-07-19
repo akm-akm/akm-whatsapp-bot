@@ -8,4 +8,4 @@ package-lock.json
 /*.jpeg
 pgdata
 /x.js
-auth_info_multi.json
+/auth_info_multi.json
