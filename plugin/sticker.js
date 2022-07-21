@@ -14,7 +14,7 @@ module.exports = {
     "sticker crop nodata",
     "sticker pack cheems author doge",
     "sticker nodata",
-    "sticker crop pack cheems",
+    "sticker crop pack cheems"
   ],
   group: false,
   owner: false,
@@ -74,7 +74,7 @@ module.exports = {
       `-vcodec`,
       `libwebp`,
       `-vf`,
-      `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`,
+      `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`
     ];
 
     if (arg.includes("crop") == true) {
@@ -95,7 +95,7 @@ module.exports = {
         `-vsync`,
         `0`,
         `-s`,
-        `512:512`,
+        `512:512`
       ];
     }
 
@@ -148,7 +148,7 @@ module.exports = {
             from,
             { sticker: webpWithMetadata },
             {
-              quoted: Bot.reply,
+              quoted: Bot.reply
             }
           );
 
@@ -219,11 +219,13 @@ module.exports = {
             from,
             { sticker: webpWithMetadata },
             {
-              quoted: Bot.reply,
+              quoted: Bot.reply
             }
           );
-          fs.unlinkSync(media1);
-          fs.unlinkSync(ran);
+          try {
+            fs.unlinkSync(media1);
+            fs.unlinkSync(ran);
+          } catch (error) {}
           return;
         }
       }
@@ -310,7 +312,7 @@ module.exports = {
             from,
             { sticker: webpWithMetadata },
             {
-              quoted: Bot.reply,
+              quoted: Bot.reply
             }
           );
           fs.unlinkSync(media);
@@ -322,5 +324,5 @@ module.exports = {
     } else {
       Bot.replytext(Bot.mess.tag);
     }
-  },
+  }
 };

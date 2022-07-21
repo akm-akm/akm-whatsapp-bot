@@ -31,7 +31,7 @@ module.exports = {
           .request({
             url: info.videoDetails.thumbnails.pop().url,
             method: "GET",
-            responseType: "stream",
+            responseType: "stream"
           })
           .then((response) => {
             response.data.pipe(file);
@@ -62,12 +62,14 @@ module.exports = {
             Bot.replyvideo(vid, msg, thumb);
           });
       } else {
-        Bot.replytext(Bot.mess.error.invalid);
+        await Bot.replytext(Bot.mess.error.invalid);
+        fs.unlinkSync(vid);
+        fs.unlinkSync(thumb);
       }
     } catch (err) {
       Bot.errorlog(err);
       fs.unlinkSync(vid);
       fs.unlinkSync(thumb);
     }
-  },
+  }
 };
