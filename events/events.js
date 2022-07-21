@@ -439,7 +439,7 @@ const startSock = async () => {
               footer: "Bot made by Aditya K Mandal",
               templateButtons: templateButtons
             };
-
+replace;
             sock.sendMessage(
               `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
               templateMessage

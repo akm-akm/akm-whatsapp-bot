@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const { count } = require(path.join(__dirname, "./count"));
-
+const { read } = require(path.join(__dirname, "./read"));
 const chalk = require("chalk");
 const sql = require(path.join(__dirname, "./ps"));
 const commandHandler = new Map();
@@ -56,6 +56,8 @@ exports.messagehandler = async (Bot) => {
    * This stores the place message is received
    */
   const place = Bot.isGroup ? Bot.groupName : "inbox";
+
+  read(Bot); // Read messages i.e blue tick mark
 
   /* This line checks the following- 
     (If the message is sent in a group, is the group limit exhausted ?) return

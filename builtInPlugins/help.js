@@ -131,7 +131,8 @@ module.exports = {
         prefix +
         "help run```\n" +
         "\n📃 *Bot News* :" +
-        "\n‼️ _Docs added_" +
+        "\n‼️ _Multi device added_" +
+        "\n‼️ _Blue tick mark added_" +
         "\n\n⚙️ *Bot version* : " +
         version;
       Bot.replytext(help);
@@ -156,5 +157,5 @@ module.exports = {
       });
       Bot.replytext(body);
     }
-  },
+  }
 };
