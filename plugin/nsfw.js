@@ -135,8 +135,12 @@ module.exports = {
       }
       const media = getRandom(".webp");
       await writeFile(media, buffer);
-      if (encmedia.isAnimated)
-        throw new Error("Animated stickers are not supported");
+      if (encmedia.isAnimated) {
+        Bot.replytext("```Animated stickers not supported```");
+        fs.unlinkSync(media);
+
+        return;
+      }
 
       ai(media)
         .then((result) => {
@@ -171,5 +175,5 @@ module.exports = {
           return;
         });
     }
-  },
+  }
 };

@@ -1,3 +1,6 @@
+const path = require('path');
+const sql = require(path.join(__dirname, "../utils/ps"));
+
 module.exports = {
   name: "abuseback",
   usage: "abuseback <condition>",
@@ -27,5 +30,5 @@ module.exports = {
     } else {
       Bot.wrongCommand();
     }
-  },
+  }
 };

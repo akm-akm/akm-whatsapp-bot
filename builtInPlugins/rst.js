@@ -1,6 +1,6 @@
 const path = require("path");
 const sql = require(path.join(__dirname, "../utils/ps"));
-
+const sqlc = require(path.join(__dirname, "./sql"));
 module.exports = {
   name: "rst",
   usage: "rst",
@@ -9,11 +9,17 @@ module.exports = {
   group: false,
   owner: true,
   async handle(Bot) {
-    await sql.query("UPDATE groupdata SET totalmsgtoday = 0;");
-    await sql.query("UPDATE botdata SET totalmsgtoday = 0;");
-    await sql.query(
-      "UPDATE messagecount SET totalmsgtoday = 0, dailylimitover = false;"
-    );
-    Bot.replytext(Bot.mess.success);
-  },
+    console.log("resest");
+    Bot.arg = "sql UPDATE groupdata SET totalmsgtoday = 0".split(" ");
+    sqlc.handle(Bot);
+    Bot.arg = "sql UPDATE botdata SET totalmsgtoday = 0".split(" ");
+    sqlc.handle(Bot);
+    Bot.arg =
+      "sql UPDATE messagecount SET totalmsgtoday = 0, dailylimitover = false".split(
+        " "
+      );
+    sqlc.handle(Bot);
+
+  //  Bot.replytext(Bot.mess.success);
+  }
 };

@@ -361,7 +361,7 @@ const startSock = async () => {
     version,
     logger: noLogs,
     defaultQueryTimeoutMs: undefined,
-    printQRInTerminal: true,
+    printQRInTerminal: false,
     receivePendingNotifications: false,
     auth: state
   });

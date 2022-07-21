@@ -36,7 +36,7 @@ const chalk = require("chalk");
     process.exit(1);
   }
   try {
-    fs.unlinkSync(path.join(__dirname, "../auth_info_multi.json"));
+  //  fs.unlinkSync(path.join(__dirname, "../auth_info_multi.json"));
   } catch (error) {}
   try {
     let bdata = await sql.query("select * from botdata");

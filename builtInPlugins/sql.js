@@ -9,7 +9,7 @@ module.exports = {
     "sql select * from groupdata;",
     "sql select * from messagecount;",
     "sql select * from botdata;",
-    "sql update botdata set totalmessage = 0;",
+    "sql update botdata set totalmessage = 0;"
   ],
   group: false,
   owner: true,
@@ -24,9 +24,13 @@ module.exports = {
 
     try {
       const result = await sql.query(cmd);
+      if (JSON.stringify(result.rows, null, "\t") == "[]") {
+        Bot.replytext(Bot.mess.success);
+        return;
+      }
       Bot.replytext(JSON.stringify(result.rows, null, "\t"));
     } catch (error) {
       Bot.errorlog(error);
     }
-  },
+  }
 };
