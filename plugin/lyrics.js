@@ -18,7 +18,7 @@ module.exports = {
       const lyrics = await solenolyrics.requestLyricsFor(
         arg.splice(1).join(" ")
       );
-      if (lyrics.length < 10) {
+      if (lyrics.length() < 10) {
         Bot.send(`No lyrics found for ${arg.splice(1).join(" ")}`);
         return;
       }
