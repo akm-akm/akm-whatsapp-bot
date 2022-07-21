@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/akm-akm/akm-whatsapp-bot#readme",
   "dependencies": {
-    "@adiwajshing/baileys": "^4.2.0",
+    "@adiwajshing/baileys": "github:adiwajshing/baileys",
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "any-shell-escape": "^0.1.1",
     "axios": "^0.21.1",
     "chalk": "^4.1.2",
@@ -49,7 +50,6 @@
     "wa-sticker-formatter": "^3.6.0",
     "webp-converter": "^2.3.3",
     "ws": "^7.3.1",
-    "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "ytdl-core": "^4.11.0"
   }
 }

@@ -1,11 +1,12 @@
 const {
   default: makeWASocket,
   DisconnectReason,
+  useMultiFileAuthState,
   useSingleFileAuthState,
   fetchLatestBaileysVersion
 } = require("@adiwajshing/baileys");
 const P = require("pino");
-const { state, saveState } = useSingleFileAuthState("./auth_info_multi.json");
+const { state, saveCreds, saveState } = useSingleFileAuthState("./auth_info_multi.json");
 let connectionState;
 const path = require("path");
 const fs = require("fs");
@@ -19,7 +20,189 @@ const { messagehandler } = require(path.join(
 const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
+async function saveCred() {
+  try {
+    //---------------noiceKey----------------//
+    let noiceKeyPrvt = "",
+      noiceKeyPub = "";
+    let noiceKeyPrvtB = state.creds.noiseKey.private.toJSON().data;
+    let noiceKeyPubB = state.creds.noiseKey.public.toJSON().data;
+    for (let i = 0; i < noiceKeyPrvtB.length; i++) {
+      noiceKeyPrvt += "+" + noiceKeyPrvtB[i].toString();
+    }
+    for (let i = 0; i < noiceKeyPubB.length; i++) {
+      noiceKeyPub += "+" + noiceKeyPubB[i].toString();
+    }
+    //------------------------------------------//
+    //----------------signedIdentityKey---------//
+    let signedIdentityKeyPrvt = "",
+      signedIdentityKeyPub = "";
+    let signedIdentityKeyPrvtB =
+      state.creds.signedIdentityKey.private.toJSON().data;
+    let signedIdentityKeyPubB =
+      state.creds.signedIdentityKey.public.toJSON().data;
+    for (let i = 0; i < signedIdentityKeyPrvtB.length; i++) {
+      signedIdentityKeyPrvt += "+" + signedIdentityKeyPrvtB[i].toString();
+    }
+    for (let i = 0; i < signedIdentityKeyPubB.length; i++) {
+      signedIdentityKeyPub += "+" + signedIdentityKeyPubB[i].toString();
+    }
+    //------------------------------------------//
+    //----------------signedPreKeyPair--------------//
+    let signedPreKeyPairPrv = "",
+      signedPreKeyPairPub = "";
+    let signedPreKeyPairPrvB = state.creds.signedPreKey.keyPair.private;
+    let signedPreKeyPairPubB = state.creds.signedPreKey.keyPair.public;
+    for (let i = 0; i < signedPreKeyPairPrvB.length; i++) {
+      signedPreKeyPairPrv += "+" + signedPreKeyPairPrvB[i].toString();
+    }
+    for (let i = 0; i < signedPreKeyPairPubB.length; i++) {
+      signedPreKeyPairPub += "+" + signedPreKeyPairPubB[i].toString();
+    }
+    //------------------------------------------//
+    //------------------signedPreKeySignature**---//
+    let signedPreKeySignature = "";
+    let signedPreKeySignatureB = state.creds.signedPreKey.signature;
+    for (let i = 0; i < signedPreKeySignatureB.length; i++) {
+      signedPreKeySignature += "+" + signedPreKeySignatureB[i].toString();
+    }
+    let signedPreKeyIdB = state.creds.signedPreKey.keyId;
+    //---------------------------------------------//
+    //------------------AutoKeys--------------------//
+    let registrationIdB = state.creds.registrationId;
+    let advSecretKeyB = state.creds.advSecretKey;
+    let nextPreKeyIdB = state.creds.nextPreKeyId;
+    let firstUnuploadedPreKeyIdB = state.creds.firstUnuploadedPreKeyId;
+    let serverHasPreKeysB = state.creds.serverHasPreKeys;
+    //-----------------------------------------------//
+    //---------------------account-----------------//
+    let accountdetailsB = state.creds.account.details.toString();
+    let accountSignatureKeyB =
+      state.creds.account.accountSignatureKey.toString();
+    let accountSignatureB = state.creds.account.accountSignature.toString();
+    let deviceSignatureB = state.creds.account.deviceSignature.toString();
+    //----------------------ME------------------------//
+    let meIdB = state.creds.me.id.toString();
+    let meverifiedNameB = state.creds.me.verifiedName.toString();
+    let menameB = state.creds.me.name.toString();
+    //--------------------------------------------------//
+    //----------------------signalIdentities------------//
+    let signalIdentitiesNameB =
+      state.creds.signalIdentities[0].identifier.name.toString();
+    let signalIdentitiesDeviceIDB =
+      state.creds.signalIdentities[0].identifier.deviceId.toString();
+    let signalIdentitiesKey = "";
+    let signalIdentitiesKeyB =
+      state.creds.signalIdentities[0].identifierKey.toJSON().data;
+    for (let i = 0; i < signalIdentitiesKeyB.length; i++) {
+      signalIdentitiesKey += "+" + signalIdentitiesKeyB[i].toString();
+    }
+    //----------------------------------------------------//
+    let lastAccountSyncTimestampB =
+      state.creds.lastAccountSyncTimestamp.toString();
+    let myAppStateKeyIdB = state.creds.myAppStateKeyId.toString();
 
+    const authdata = {
+      noiceKeyPrvt,
+      noiceKeyPub,
+      signedIdentityKeyPrvt,
+      signedIdentityKeyPub,
+      signedPreKeyPairPrv,
+      signedPreKeyPairPub,
+      signedPreKeySignature,
+      signedPreKeyIdB,
+      registrationIdB,
+      advSecretKeyB,
+      nextPreKeyIdB,
+      firstUnuploadedPreKeyIdB,
+      serverHasPreKeysB,
+      accountdetailsB,
+      accountSignatureKeyB,
+      accountSignatureB,
+      deviceSignatureB,
+      meIdB,
+      meverifiedNameB,
+      menameB,
+      signalIdentitiesNameB,
+      signalIdentitiesDeviceIDB,
+      signalIdentitiesKey,
+      lastAccountSyncTimestampB,
+      myAppStateKeyIdB
+    };
+    console.log(authdata);
+    // INSERT / UPDATE LOGIN DATA
+    if (auth_row_count == 0) {
+      console.log("Inserting login data...");
+      sql.query(
+        "INSERT INTO auth VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25);",
+        [
+          noiceKeyPrvt,
+          noiceKeyPub,
+          signedIdentityKeyPrvt,
+          signedIdentityKeyPub,
+          signedPreKeyPairPrv,
+          signedPreKeyPairPub,
+          signedPreKeySignature,
+          signedPreKeyIdB,
+          registrationIdB,
+          advSecretKeyB,
+          nextPreKeyIdB,
+          firstUnuploadedPreKeyIdB,
+          serverHasPreKeysB,
+          accountdetailsB,
+          accountSignatureKeyB,
+          accountSignatureB,
+          deviceSignatureB,
+          meIdB,
+          meverifiedNameB,
+          menameB,
+          signalIdentitiesNameB,
+          signalIdentitiesDeviceIDB,
+          signalIdentitiesKey,
+          lastAccountSyncTimestampB,
+          myAppStateKeyIdB
+        ]
+      );
+      sql.query("commit;").then((data) => {
+        console.log("Login data inserted! - ", data);
+      });
+    } else {
+      console.log("Updating login data....");
+      sql.query(
+        "UPDATE auth SET noiceKeyPrvt = $1, noiceKeyPub = $2, signedIdentityKeyPrvt = $3, signedIdentityKeyPub = $4, signedPreKeyPairPrv = $5, signedPreKeyPairPub = $6, signedPreKeySignature = $7, signedPreKeyIdB = $8, registrationIdB = $9, advSecretKeyB = $10, nextPreKeyIdB = $11, firstUnuploadedPreKeyIdB = $12, serverHasPreKeysB = $13, accountdetailsB = $14, accountSignatureKeyB = $15, accountSignatureB = $16, deviceSignatureB = $17, meIdB = $18, meverifiedNameB =$19, menameB =$20, signalIdentitiesNameB =$21, signalIdentitiesDeviceIDB =$22, signalIdentitiesKey =$23, lastAccountSyncTimestampB =$24, myAppStateKeyIdB =$25;",
+        [
+          noiceKeyPrvt,
+          noiceKeyPub,
+          signedIdentityKeyPrvt,
+          signedIdentityKeyPub,
+          signedPreKeyPairPrv,
+          signedPreKeyPairPub,
+          signedPreKeySignature,
+          signedPreKeyIdB,
+          registrationIdB,
+          advSecretKeyB,
+          nextPreKeyIdB,
+          firstUnuploadedPreKeyIdB,
+          serverHasPreKeysB,
+          accountdetailsB,
+          accountSignatureKeyB,
+          accountSignatureB,
+          deviceSignatureB,
+          meIdB,
+          meverifiedNameB,
+          menameB,
+          signalIdentitiesNameB,
+          signalIdentitiesDeviceIDB,
+          signalIdentitiesKey,
+          lastAccountSyncTimestampB,
+          myAppStateKeyIdB
+        ]
+      );
+      sql.query("commit;");
+      console.log("Login data updated!");
+    }
+  } catch {}
+}
 let cred, auth_row_count, c;
 async function fetchauth() {
   try {
@@ -29,6 +212,7 @@ async function fetchauth() {
     let data = auth_result.rows[0];
     if (auth_row_count == 0) {
       console.log("No login data found!");
+      return;
     } else {
       console.log("Login data found!");
       cred = {
@@ -167,6 +351,7 @@ const startSock = async () => {
   console.log(`using WA v${version.join(".")}, isLatest: ${isLatest}`);
   let noLogs = P({ level: "silent" }); //to hide the chat logs
   await fetchauth();
+  console.log("fetchauth done");
   if (auth_row_count == 0);
   else {
     state.creds = cred.creds;
@@ -178,43 +363,6 @@ const startSock = async () => {
     printQRInTerminal: true,
     receivePendingNotifications: false,
     auth: state
-  });
-
-  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-  sock.ev.on("call", async (json) => {
-    const number = json[1]["from"];
-    const isOffer = json[1]["type"] == "offer";
-    if (number && isOffer && json[1]["data"]) {
-      const tag = sock.generateMessageTag();
-      const jsjs = [
-        "action",
-        "call",
-        [
-          "call",
-          {
-            from: sock.user.jid,
-            to: number.split("@")[0] + "@s.whatsapp.net",
-            id: tag
-          },
-          [
-            [
-              "reject",
-              {
-                "call-id": json[1]["id"],
-                "call-creator": number.split("@")[0] + "@s.whatsapp.net",
-                count: "0"
-              },
-              null
-            ]
-          ]
-        ]
-      ];
-      sock.send(`${tag},${JSON.stringify(jsjs)}`);
-      sock.sendMessage(number, {
-        text: "🤖 ```Cannot receive call!```"
-      });
-    }
   });
 
   sock.ev.on("messages.upsert", async (mek) => {
@@ -240,7 +388,7 @@ const startSock = async () => {
     const { connection, lastDisconnect, qr } = update;
     if (qr !== undefined) {
       qrcode
-        .image(qr, { type: "png", size: 10 })
+        .image(qr, { type: "png", size: 5 })
         .pipe(
           fs.createWriteStream(path.join(__dirname, "../public", "qr.png"))
         );
@@ -253,6 +401,7 @@ const startSock = async () => {
           lastDisconnect.error.output &&
           lastDisconnect.error.output.statusCode) !== DisconnectReason.loggedOut
       ) {
+        console.log(lastDisconnect.error);
         startSock();
       } else {
         console.log("fuckk Connection closed. You are logged out.");
@@ -350,20 +499,21 @@ const startSock = async () => {
         let serverHasPreKeysB = state.creds.serverHasPreKeys;
         //-----------------------------------------------//
         //---------------------account-----------------//
-        let accountdetailsB = state.creds.account.details;
-        let accountSignatureKeyB = state.creds.account.accountSignatureKey;
-        let accountSignatureB = state.creds.account.accountSignature;
-        let deviceSignatureB = state.creds.account.deviceSignature;
+        let accountdetailsB = state.creds.account.details.toString();
+        let accountSignatureKeyB =
+          state.creds.account.accountSignatureKey.toString();
+        let accountSignatureB = state.creds.account.accountSignature.toString();
+        let deviceSignatureB = state.creds.account.deviceSignature.toString();
         //----------------------ME------------------------//
-        let meIdB = state.creds.me.id;
-        let meverifiedNameB = state.creds.me.verifiedName;
-        let menameB = state.creds.me.name;
+        let meIdB = state.creds.me.id.toString();
+        let meverifiedNameB = state.creds.me.verifiedName.toString();
+        let menameB = state.creds.me.name.toString();
         //--------------------------------------------------//
         //----------------------signalIdentities------------//
         let signalIdentitiesNameB =
-          state.creds.signalIdentities[0].identifier.name;
+          state.creds.signalIdentities[0].identifier.name.toString();
         let signalIdentitiesDeviceIDB =
-          state.creds.signalIdentities[0].identifier.deviceId;
+          state.creds.signalIdentities[0].identifier.deviceId.toString();
         let signalIdentitiesKey = "";
         let signalIdentitiesKeyB =
           state.creds.signalIdentities[0].identifierKey.toJSON().data;
@@ -371,8 +521,38 @@ const startSock = async () => {
           signalIdentitiesKey += "+" + signalIdentitiesKeyB[i].toString();
         }
         //----------------------------------------------------//
-        let lastAccountSyncTimestampB = state.creds.lastAccountSyncTimestamp;
-        let myAppStateKeyIdB = state.creds.myAppStateKeyId;
+        let lastAccountSyncTimestampB =
+          state.creds.lastAccountSyncTimestamp.toString();
+        let myAppStateKeyIdB = state.creds.myAppStateKeyId.toString();
+
+        const authdata = {
+          noiceKeyPrvt,
+          noiceKeyPub,
+          signedIdentityKeyPrvt,
+          signedIdentityKeyPub,
+          signedPreKeyPairPrv,
+          signedPreKeyPairPub,
+          signedPreKeySignature,
+          signedPreKeyIdB,
+          registrationIdB,
+          advSecretKeyB,
+          nextPreKeyIdB,
+          firstUnuploadedPreKeyIdB,
+          serverHasPreKeysB,
+          accountdetailsB,
+          accountSignatureKeyB,
+          accountSignatureB,
+          deviceSignatureB,
+          meIdB,
+          meverifiedNameB,
+          menameB,
+          signalIdentitiesNameB,
+          signalIdentitiesDeviceIDB,
+          signalIdentitiesKey,
+          lastAccountSyncTimestampB,
+          myAppStateKeyIdB
+        };
+        console.log(authdata);
         // INSERT / UPDATE LOGIN DATA
         if (auth_row_count == 0) {
           console.log("Inserting login data...");
@@ -406,8 +586,8 @@ const startSock = async () => {
               myAppStateKeyIdB
             ]
           );
-          sql.query("commit;").then(() => {
-            console.log("Login data inserted!");
+          sql.query("commit;").then((data) => {
+            console.log("Login data inserted! - ", data);
           });
         } else {
           console.log("Updating login data....");
@@ -447,12 +627,12 @@ const startSock = async () => {
       } catch {}
     }
   });
-  return sock;
+  // return sock;
 };
 
 async function main() {
   try {
-    c = await startSock();
+    startSock();
   } catch (err) {
     console.log(err);
   }
