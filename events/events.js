@@ -6,7 +6,9 @@ const {
   fetchLatestBaileysVersion
 } = require("@adiwajshing/baileys");
 const P = require("pino");
-const { state, saveCreds, saveState } = useSingleFileAuthState("./auth_info_multi.json");
+const { state, saveCreds, saveState } = useSingleFileAuthState(
+  "./auth_info_multi.json"
+);
 let connectionState;
 const path = require("path");
 const fs = require("fs");
@@ -589,6 +591,7 @@ const startSock = async () => {
           );
           sql.query("commit;").then((data) => {
             console.log("Login data inserted! - ", data);
+            sql.query("UPDATE botdata SET isconnected = true;");
           });
         } else {
           console.log("Updating login data....");
@@ -622,7 +625,12 @@ const startSock = async () => {
               myAppStateKeyIdB
             ]
           );
-          sql.query("commit;");
+          sql
+            .query("commit;")
+            .then((result) => {
+              sql.query("UPDATE botdata SET isconnected = true;");
+            })
+            .catch((err) => {});
           console.log("Login data updated!");
         }
       } catch {}
