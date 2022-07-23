@@ -169,7 +169,7 @@ module.exports = {
           return;
         })
         .catch((err) => {
-          Bot.errorlog(error);
+          Bot.errorlog(err);
           fs.unlinkSync(media);
 
           return;

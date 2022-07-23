@@ -57,6 +57,11 @@ exports.messagehandler = async (Bot) => {
    */
   const place = Bot.isGroup ? Bot.groupName : "inbox";
 
+ // if (process.env.NODE_ENV == "development" && !Bot.isOwner) return;
+
+  if (process.env.NODE_ENV == "development") {
+    console.log(Bot);
+  }
   read(Bot); // Read messages i.e blue tick mark
 
   /* This line checks the following- 

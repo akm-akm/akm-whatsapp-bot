@@ -8,6 +8,7 @@ module.exports = {
   async handle(Bot) {
     const memberslist = [];
     const arg = Bot.arg;
+    let msg;
     if (arg.length > 1) {
       arg.shift();
       msg =
@@ -17,7 +18,7 @@ module.exports = {
         "```";
     } else msg = "👋  ```Hello Everyone```";
     for (let member of Bot.groupMembers) {
-      memberslist.push(member.jid);
+      memberslist.push(member.id);
     }
     Bot.client.sendMessage(
       Bot.from,

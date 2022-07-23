@@ -7,7 +7,7 @@ const settings = JSON.parse(
 
 module.exports = {
   name: "setprefix",
-  usage: "setprefix <symbol>",
+  //usage: "setprefix <symbol>",
   desc: "Sets the prefix to be used for bot commands.",
   eg: ["setprefix !", "setprefix .", "setprefix #"],
   group: true,

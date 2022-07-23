@@ -36,7 +36,7 @@ module.exports = {
       `-vcodec`,
       `libwebp`,
       `-vf`,
-      `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`,
+      `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`
     ];
     if (arg.includes("crop") == true) {
       outputOptions = [
@@ -56,7 +56,7 @@ module.exports = {
         `-vsync`,
         `0`,
         `-s`,
-        `512:512`,
+        `512:512`
       ];
     }
 
@@ -66,8 +66,8 @@ module.exports = {
       params: { q: searchthis, count: "100", mkt: "en-IN" },
       headers: {
         "x-rapidapi-host": "bing-image-search1.p.rapidapi.com",
-        "x-rapidapi-key": process.env.SEARCH_STICKER,
-      },
+        "x-rapidapi-key": process.env.SEARCH_STICKER
+      }
     };
 
     axios
@@ -88,7 +88,7 @@ module.exports = {
           .request({
             url: imageurl,
             method: "GET",
-            responseType: "stream",
+            responseType: "stream"
           })
           .then((response) => {
             response.data.pipe(file);
@@ -121,7 +121,7 @@ module.exports = {
                     from,
                     { sticker: webpWithMetadata },
                     {
-                      quoted: Bot.reply,
+                      quoted: Bot.reply
                     }
                   );
 
@@ -134,7 +134,7 @@ module.exports = {
           });
       })
       .catch((e) => {
-        Bot.errorlog(e);
+        //  Bot.errorlog(e);
       });
-  },
+  }
 };
