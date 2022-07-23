@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 const sql = require(path.join(__dirname, "../utils/ps"));
 
 module.exports = {
@@ -17,13 +17,13 @@ module.exports = {
     }
     if (arg[1] == "off") {
       await sql.query(
-        `UPDATE groupdata SET allowabuse = false WHERE groupid = '${Bot.from}'`
+        `UPDATE groupdata SET allowabuse = true WHERE groupid = '${Bot.from}'`
       );
       Bot.replytext(Bot.mess.success);
       return;
     } else if (arg[1] == "on") {
       await sql.query(
-        `UPDATE groupdata SET allowabuse = true WHERE groupid = '${Bot.from}'`
+        `UPDATE groupdata SET allowabuse = false WHERE groupid = '${Bot.from}'`
       );
       Bot.replytext(Bot.mess.success);
       return;

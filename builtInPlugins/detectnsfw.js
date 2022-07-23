@@ -22,11 +22,10 @@ module.exports = {
       sql.query(
         `UPDATE groupdata SET nsfw = true WHERE groupid = '${Bot.from}'`
       );
-      Bot.repytext(Bot.mess.success);
-
+      Bot.replytext(Bot.mess.success);
       return;
     } else {
       Bot.wrongCommand();
     }
-  },
+  }
 };
