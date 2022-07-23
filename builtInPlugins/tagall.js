@@ -21,7 +21,7 @@ module.exports = {
     }
     Bot.client.sendMessage(
       Bot.from,
-      { text: text, mentions: memberslist },
+      { text: msg, mentions: memberslist },
       {
         quoted: Bot.reply
       }
