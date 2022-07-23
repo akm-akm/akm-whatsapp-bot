@@ -21,13 +21,10 @@ module.exports = {
     }
     Bot.client.sendMessage(
       Bot.from,
-      { text: msg },
+      { text: text, mentions: memberslist },
       {
-        quoted: Bot.reply,
-        contextInfo: {
-          mentionedJid: memberslist,
-        },
+        quoted: Bot.reply
       }
     );
-  },
+  }
 };
