@@ -6,26 +6,30 @@ module.exports = {
   group: true,
   owner: false,
   async handle(Bot) {
-    const memberslist = [];
-    const arg = Bot.arg;
-    let msg;
-    if (arg.length > 1) {
-      arg.shift();
-      msg =
-        "👋  ```" +
-        arg.join(" ").charAt(0).toUpperCase() +
-        arg.join(" ").slice(1) +
-        "```";
-    } else msg = "👋  ```Hello Everyone```";
-    for (let member of Bot.groupMembers) {
-      memberslist.push(member.id);
-    }
-    Bot.client.sendMessage(
-      Bot.from,
-      { text: msg, mentions: memberslist },
-      {
-        quoted: Bot.reply
+    try {
+      const memberslist = [];
+      const arg = Bot.arg;
+      let msg;
+      if (arg.length > 1) {
+        arg.shift();
+        msg =
+          "👋  ```" +
+          arg.join(" ").charAt(0).toUpperCase() +
+          arg.join(" ").slice(1) +
+          "```";
+      } else msg = "👋  ```Hello Everyone```";
+      for (let member of Bot.groupMembers) {
+        memberslist.push(member.id);
       }
-    );
+      Bot.client.sendMessage(
+        Bot.from,
+        { text: msg, mentions: memberslist },
+        {
+          quoted: Bot.reply
+        }
+      );
+    } catch (error) {
+      Bot.errorlog(error);
+    }
   }
 };

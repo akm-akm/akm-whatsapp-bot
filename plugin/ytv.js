@@ -14,11 +14,11 @@ module.exports = {
   owner: false,
 
   async handle(Bot) {
-    const arg = Bot.arg;
-    const vid = getRandom(".mp4");
-    const thumb = getRandom(".jpg");
-
     try {
+      const arg = Bot.arg;
+      const vid = getRandom(".mp4");
+      const thumb = getRandom(".jpg");
+
       if (arg.length == 1) {
         Bot.wrongCommand();
         return;

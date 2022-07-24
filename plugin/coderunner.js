@@ -16,44 +16,44 @@ module.exports = {
     "run java 20",
     "run nodejs",
     "run php",
-    "run python2",
+    "run python2"
   ],
   group: false,
   owner: false,
   handle(Bot) {
-    const arg = Bot.arg;
-
-    if (arg.length === 1) {
-      Bot.wrongCommand();
-      return;
-    }
-    if (!Bot.isQuotedText) {
-      Bot.wrongCommand();
-
-      return;
-    }
-    if (!process.env.clientId && !process.env.clientSecret) {
-      Bot.noapi();
-      return;
-    }
-    if (!languagecode.includes(arg[1])) {
-      Bot.wrongCommand();
-      return;
-    }
     try {
+      const arg = Bot.arg;
+
+      if (arg.length === 1) {
+        Bot.wrongCommand();
+        return;
+      }
+      if (!Bot.isQuotedText) {
+        Bot.wrongCommand();
+
+        return;
+      }
+      if (!process.env.clientId && !process.env.clientSecret) {
+        Bot.noapi();
+        return;
+      }
+      if (!languagecode.includes(arg[1])) {
+        Bot.wrongCommand();
+        return;
+      }
       const program = {
         script: Bot.quotedMessage,
         language: arg[1],
         versionIndex: "0",
         stdin: arg.slice(2).join(" "),
         clientId: process.env.clientId,
-        clientSecret: process.env.clientSecret,
+        clientSecret: process.env.clientSecret
       };
       request(
         {
           url: "https://api.jdoodle.com/v1/execute",
           method: "POST",
-          json: program,
+          json: program
         },
         function (_error, _response, body) {
           Bot.replytext(
@@ -64,5 +64,5 @@ module.exports = {
     } catch (error) {
       Bot.errorlog(error);
     }
-  },
+  }
 };

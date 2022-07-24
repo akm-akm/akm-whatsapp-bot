@@ -32,6 +32,9 @@ module.exports = {
             crypto_body[0].price.toUpperCase();
           Bot.replytext(message);
         }
+      })
+      .catch((e) => {
+        Bot.errorlog(e);
       });
-  },
+  }
 };

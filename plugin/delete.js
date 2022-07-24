@@ -6,21 +6,21 @@ module.exports = {
   group: false,
   owner: false,
   async handle(Bot) {
-    if (!Bot.stanzaId) {
-      Bot.wrongCommand();
-      return;
-    }
     try {
+      if (!Bot.stanzaId) {
+        Bot.wrongCommand();
+        return;
+      }
       const options = {
-        remoteJid: Bot.botNumber+"@s.whatsapp.net",
+        remoteJid: Bot.botNumber + "@s.whatsapp.net",
         fromMe: true,
-        id: Bot.reply.message.extendedTextMessage.contextInfo.stanzaId,
+        id: Bot.reply.message.extendedTextMessage.contextInfo.stanzaId
       };
       await Bot.client.sendMessage(Bot.from, {
-        delete: options,
+        delete: options
       });
     } catch (error) {
       Bot.replytext(Bot.mess.error.error);
     }
-  },
+  }
 };

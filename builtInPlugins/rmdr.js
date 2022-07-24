@@ -9,15 +9,15 @@ module.exports = {
   group: false,
   owner: true,
   async handle(Bot) {
-    const arg = Bot.arg;
-
-    if (arg.length == 1) {
-      Bot.wrongCommand();
-      return;
-    }
-
-    const number = arg[1].replace("@", "").replace("+", "");
     try {
+      const arg = Bot.arg;
+
+      if (arg.length == 1) {
+        Bot.wrongCommand();
+        return;
+      }
+
+      const number = arg[1].replace("@", "").replace("+", "");
       await sql.query(
         `UPDATE botdata SET moderators = array_remove(moderators, '${number}');`
       );
@@ -25,5 +25,5 @@ module.exports = {
     } catch (error) {
       Bot.errorlog(error);
     }
-  },
+  }
 };

@@ -6,35 +6,39 @@ module.exports = {
   group: true,
   owner: false,
   async handle(Bot) {
-    if (!isBotGroupAdmins) {
-      Bot.replytext(Bot.mess.only.Badmin);
-      return;
-    }
-    if (arg.length == 1) {
-      Bot.wrongCommand();
-      return;
-    }
+    try {
+      if (!isBotGroupAdmins) {
+        Bot.replytext(Bot.mess.only.Badmin);
+        return;
+      }
+      if (arg.length == 1) {
+        Bot.wrongCommand();
+        return;
+      }
 
-    const mentioned =
-      Bot.reply.message.extendedTextMessage.contextInfo.mentionedJid;
+      const mentioned =
+        Bot.reply.message.extendedTextMessage.contextInfo.mentionedJid;
 
-    if (!mentioned) {
-      Bot.wrongCommand();
-      return;
+      if (!mentioned) {
+        Bot.wrongCommand();
+        return;
+      }
+      const z = mentioned[0].split("@")[0];
+      if (z === `${Bot.client.user.id}`.split("@")[0]) {
+        Bot.replytext(Bot.mess.error.error);
+        return;
+      }
+      if (z === isSuperAdmin) {
+        Bot.replytext(Bot.mess.error.error);
+
+        return;
+      }
+
+      Bot.client.groupParticipantsUpdate(Bot.from, [mentioned], "remove");
+
+      Bot.replytext(Bot.mess.success);
+    } catch (error) {
+      Bot.errorlog(error);
     }
-    const z = mentioned[0].split("@")[0];
-    if (z === `${Bot.client.user.jid}`.split("@")[0]) {
-      Bot.replytext(Bot.mess.error.error);
-      return;
-    }
-    if (z === isSuperAdmin) {
-      Bot.replytext(Bot.mess.error.error);
-
-      return;
-    }
-
-    Bot.client.groupParticipantsUpdate(Bot.from, [mentioned], "remove");
-
-    Bot.replytext(Bot.mess.success);
-  },
+  }
 };

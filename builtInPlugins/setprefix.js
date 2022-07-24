@@ -13,23 +13,27 @@ module.exports = {
   group: true,
   owner: false,
   async handle(Bot) {
-    const arg = Bot.arg;
+    try {
+      const arg = Bot.arg;
 
-    if (arg.length == 1) {
-      Bot.wrongCommand();
+      if (arg.length == 1) {
+        Bot.wrongCommand();
 
-      return;
-    }
-    if (!settings.prefixchoice.split("").includes(arg[1])) {
-      Bot.replytext(
-        "🤖 ```Select prefix from ```" +
-          settings.prefixchoice.split("").join(" ")
+        return;
+      }
+      if (!settings.prefixchoice.split("").includes(arg[1])) {
+        Bot.replytext(
+          "🤖 ```Select prefix from ```" +
+            settings.prefixchoice.split("").join(" ")
+        );
+        return;
+      }
+      sql.query(
+        `UPDATE groupdata SET prefix = '${arg[1]}' where groupid = '${Bot.from}';`
       );
-      return;
+      Bot.replytext("🚨 ```Prefix set to " + arg[1] + "```");
+    } catch (error) {
+      Bot.errorlog(error);
     }
-    sql.query(
-      `UPDATE groupdata SET prefix = '${arg[1]}' where groupid = '${Bot.from}';`
-    );
-    Bot.replytext("🚨 ```Prefix set to " + arg[1] + "```");
-  },
+  }
 };

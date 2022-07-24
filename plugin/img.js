@@ -1,5 +1,5 @@
 const fs = require("fs");
-const {writeFile} = require("fs/promises")
+const { writeFile } = require("fs/promises");
 const webp = require("webp-converter");
 const { downloadContentFromMessage } = require("@adiwajshing/baileys");
 module.exports = {
@@ -41,5 +41,5 @@ module.exports = {
         })
         .catch((err) => Bot.replytext(Bot.mess.error.error));
     }
-  },
+  }
 };

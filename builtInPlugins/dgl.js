@@ -9,6 +9,7 @@ module.exports = {
   group: false,
   owner: true,
   async handle(Bot) {
+    try {
     const arg = Bot.arg;
 
     if (arg.length == 1) {
@@ -21,7 +22,6 @@ module.exports = {
       return;
     }
 
-    try {
       await sql.query(`update botdata set dailygrouplimit = '${arg[1]}'`);
       Bot.replytext(Bot.mess.success);
     } catch (error) {

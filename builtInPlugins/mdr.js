@@ -9,26 +9,24 @@ module.exports = {
   group: false,
   owner: true,
   async handle(Bot) {
-    const arg = Bot.arg;
-    if (arg.length == 1) {
-      Bot.wrongCommand();
-      return;
-    }
+    try {
+      const arg = Bot.arg;
+      if (arg.length == 1) {
+        Bot.wrongCommand();
+        return;
+      }
 
-    const number = arg[1].replace("@", "").replace("+", "");
+      const number = arg[1].replace("@", "").replace("+", "");
 
-    sql.query(
-      `UPDATE botdata SET moderators = array_append(moderators, '${number}');`
-    );
-    sql
-      .query(
+      sql.query(
+        `UPDATE botdata SET moderators = array_append(moderators, '${number}');`
+      );
+      await sql.query(
         `UPDATE groupdata SET banned_users = array_remove(banned_users, '${number}');`
-      )
-      .then((result) => {
-        Bot.replytext(Bot.mess.success);
-      })
-      .catch((err) => {
-        Bot.errorlog(err)
-      });
-  },
+      );
+      Bot.replytext(Bot.mess.success);
+    } catch (error) {
+      Bot.errorlog(error);
+    }
+  }
 };

@@ -9,25 +9,21 @@ module.exports = {
   group: false,
   owner: true,
   async handle(Bot) {
-    const arg = Bot.arg;
+    try {
+      const arg = Bot.arg;
 
-    if (arg.length == 1) {
-      Bot.wrongCommand();
-
-      return;
+      if (arg.length == 1) {
+        Bot.wrongCommand();
+        return;
+      }
+      if ((typeof arg[1] !== "number" && arg[1] < 0) || arg[1] > 1000) {
+        Bot.wrongCommand();
+        return;
+      }
+      await sql.query(`update botdata set mingroupsize = '${arg[1]}'`);
+      Bot.replytext(Bot.mess.success);
+    } catch (error) {
+      Bot.errorlog(error);
     }
-    if ((typeof arg[1] !== "number" && arg[1] < 0) || arg[1] > 1000) {
-      Bot.wrongCommand();
-
-      return;
-    }
-    sql
-      .query(`update botdata set mingroupsize = '${arg[1]}'`)
-      .then((result) => {
-        Bot.replytext(Bot.mess.success);
-      })
-      .catch((err) => {
-        Bot.errorlog(err);
-      });
-  },
+  }
 };

@@ -49,7 +49,7 @@ module.exports = {
       );
       Bot.replytext(Bot.mess.success);
     } catch (error) {
-      Bot.errorlog();
+      Bot.errorlog(error);
     }
-  },
+  }
 };

@@ -186,7 +186,7 @@ module.exports = class BotClass {
     if (process.env.NODE_ENV !== "production") {
       console.log(chalk.red.bold(error));
     } else {
-      this.replytext(mess.error.error);
+      this.replytext(mess.error.intenalError);
       const e = "🤖 Error log for the tagged message \n\n```" + error + "```";
       this.client.sendMessage(
         `${process.env.OWNER_NUMBER}@s.whatsapp.net`,

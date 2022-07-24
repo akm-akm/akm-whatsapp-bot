@@ -1,4 +1,3 @@
-
 module.exports = {
   name: "open",
   usage: "open",
@@ -7,14 +6,18 @@ module.exports = {
   group: true,
   owner: false,
   async handle(Bot) {
-    if (!Bot.isBotGroupAdmins) {
-      Bot.replytext(Bot.mess.only.Badmin);
+    try {
+      if (!Bot.isBotGroupAdmins) {
+        Bot.replytext(Bot.mess.only.Badmin);
 
-      return;
+        return;
+      }
+
+      Bot.client.groupSettingUpdate(Bot.from, "not_announcement");
+
+      Bot.replytext(Bot.mess.success);
+    } catch (error) {
+      Bot.errorlog(error);
     }
-
-    Bot.client.groupSettingUpdate(Bot.from, "not_announcement");
-
-    Bot.replytext(Bot.mess.success);
-  },
+  }
 };

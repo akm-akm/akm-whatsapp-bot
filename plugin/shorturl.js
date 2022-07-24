@@ -11,19 +11,19 @@ module.exports = {
   group: false,
   owner: false,
   async handle(Bot) {
-    const arg = Bot.arg;
-    if (arg.length == 1) {
-      Bot.wrongCommand();
-      return;
-    }
-    if (urlregex.test(arg[1]) === false) {
-      Bot.replytext(Bot.mess.error.invalid);
-      return;
-    }
     try {
+      const arg = Bot.arg;
+      if (arg.length == 1) {
+        Bot.wrongCommand();
+        return;
+      }
+      if (urlregex.test(arg[1]) === false) {
+        Bot.replytext(Bot.mess.error.invalid);
+        return;
+      }
       const response = await axios({
         method: "POST",
-        url: "https://lenk.cf/p/" + encodeURIComponent(arg[1]),
+        url: "https://lenk.cf/p/" + encodeURIComponent(arg[1])
       });
 
       if (response.data == "Invalid URL") {
@@ -41,7 +41,7 @@ module.exports = {
         "```API by lenk.cf```";
       Bot.replytext(msg);
     } catch (error) {
-      Bot.replytext(Bot.mess.error.error);
+      Bot.errorlog(error);
     }
-  },
+  }
 };

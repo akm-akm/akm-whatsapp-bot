@@ -9,14 +9,13 @@ module.exports = {
   group: true,
   owner: false,
   async handle(Bot) {
-    const arg = Bot.arg;
-    const from = Bot.from;
-    if (arg.length == 1) {
-      Bot.wrongCommand();
-      return;
-    }
-
     try {
+      const arg = Bot.arg;
+      const from = Bot.from;
+      if (arg.length == 1) {
+        Bot.wrongCommand();
+        return;
+      }
       const mentioned =
         Bot.reply.message.extendedTextMessage.contextInfo.mentionedJid;
 
@@ -43,5 +42,5 @@ module.exports = {
     } catch (error) {
       Bot.errorlog(error);
     }
-  },
+  }
 };

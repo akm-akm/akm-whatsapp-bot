@@ -14,21 +14,25 @@ module.exports = {
   group: false,
   owner: true,
   async handle(Bot) {
-    const arg = Bot.arg;
-    if (arg.length == 1) {
-      Bot.wrongCommand();
-      return;
-    }
-    arg.shift();
-    const cmd = arg.join(" ");
-
     try {
-      const result = await sql.query(cmd);
-      if (JSON.stringify(result.rows, null, "\t") == "[]") {
-        Bot.replytext(Bot.mess.success);
+      const arg = Bot.arg;
+      if (arg.length == 1) {
+        Bot.wrongCommand();
         return;
       }
-      Bot.replytext(JSON.stringify(result.rows, null, "\t"));
+      arg.shift();
+      const cmd = arg.join(" ");
+
+      try {
+        const result = await sql.query(cmd);
+        if (JSON.stringify(result.rows, null, "\t") == "[]") {
+          Bot.replytext(Bot.mess.success);
+          return;
+        }
+        Bot.replytext(JSON.stringify(result.rows, null, "\t"));
+      } catch (error) {
+        Bot.errorlog(error);
+      }
     } catch (error) {
       Bot.errorlog(error);
     }

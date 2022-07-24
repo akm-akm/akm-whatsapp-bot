@@ -7,11 +7,17 @@ module.exports = {
   group: true,
   owner: false,
   async handle(Bot) {
-    if (!Bot.isBotGroupAdmins) {
-      Bot.replytext(Bot.mess.only.Badmin);
-      return;
+    try {
+      if (!Bot.isBotGroupAdmins) {
+        Bot.replytext(Bot.mess.only.Badmin);
+        return;
+      }
+      const grplink = await Bot.client.groupInviteCode(Bot.from);
+      Bot.replytext(
+        "```https://chat.whatsapp.com/```" + "```" + grplink + "```"
+      );
+    } catch (error) {
+      Bot.errorlog(error);
     }
-    const grplink = await Bot.client.groupInviteCode(Bot.from);
-    Bot.replytext("```https://chat.whatsapp.com/```" + "```" + grplink + "```");
   },
 };

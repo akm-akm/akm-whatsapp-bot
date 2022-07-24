@@ -95,67 +95,71 @@ module.exports = {
   owner: false,
 
   handle(Bot) {
-    let prefix = Bot.groupdata.prefix;
-    const useprefix = Bot.groupdata.useprefix;
+    try {
+      let prefix = Bot.groupdata.prefix;
+      const useprefix = Bot.groupdata.useprefix;
 
-    if (Bot.arg.length === 1) {
-      const c =
-        prefix == undefined
-          ? "```Not needed in inbox```"
-          : useprefix
-          ? prefix
-          : "( " + prefix + " )" + " ```Disabled```";
-      if (prefix == undefined || !useprefix) prefix = "🎀";
-      const grpcmds = Bot.isGroup && Bot.isGroupAdmins ? adminCommands : "";
-      const owncmds =
-        Bot.number === process.env.OWNER_NUMBER ? ownerCommands : "";
+      if (Bot.arg.length === 1) {
+        const c =
+          prefix == undefined
+            ? "```Not needed in inbox```"
+            : useprefix
+            ? prefix
+            : "( " + prefix + " )" + " ```Disabled```";
+        if (prefix == undefined || !useprefix) prefix = "🎀";
+        const grpcmds = Bot.isGroup && Bot.isGroupAdmins ? adminCommands : "";
+        const owncmds =
+          Bot.number === process.env.OWNER_NUMBER ? ownerCommands : "";
 
-      let help =
-        "🤖🤖🤖  *AKM 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
-        c +
-        "\n\n" +
-        userCommands +
-        grpcmds +
-        owncmds +
-        "🎁 *For detailed info :*\n" +
-        prefix +
-        "```help <command>```\n\n" +
-        "🚄 *Example* :\n" +
-        "```" +
-        prefix +
-        "help crypto\n" +
-        prefix +
-        "help shorturl\n" +
-        prefix +
-        "help sticker\n" +
-        prefix +
-        "help run```\n" +
-        "\n📃 *Bot News* :" +
-        "\n‼️ _Multi device added_" +
-        "\n‼️ _Blue tick mark added_" +
-        "\n\n⚙️ *Bot version* : " +
-        version;
-      Bot.replytext(help);
-    } else {
-      if (!pluginsinfo[Bot.arg[1]])
-        return Bot.replytext(Bot.mess.unknowncommand);
-      if (prefix == undefined || !useprefix) prefix = "🎀";
-      let body =
-        "🔖 *Description* :\n" +
-        "```" +
-        pluginsinfo[Bot.arg[1]].desc +
-        "```\n\n" +
-        "📕 *Usage* :\n" +
-        prefix +
-        "```" +
-        pluginsinfo[Bot.arg[1]].usage +
-        "```\n\n" +
-        "📚 *Example* :";
+        let help =
+          "🤖🤖🤖  *AKM 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
+          c +
+          "\n\n" +
+          userCommands +
+          grpcmds +
+          owncmds +
+          "🎁 *For detailed info :*\n" +
+          prefix +
+          "```help <command>```\n\n" +
+          "🚄 *Example* :\n" +
+          "```" +
+          prefix +
+          "help crypto\n" +
+          prefix +
+          "help shorturl\n" +
+          prefix +
+          "help sticker\n" +
+          prefix +
+          "help run```\n" +
+          "\n📃 *Bot News* :" +
+          "\n‼️ _Multi device added_" +
+          "\n‼️ _Blue tick mark added_" +
+          "\n\n⚙️ *Bot version* : " +
+          version;
+        Bot.replytext(help);
+      } else {
+        if (!pluginsinfo[Bot.arg[1]])
+          return Bot.replytext(Bot.mess.unknowncommand);
+        if (prefix == undefined || !useprefix) prefix = "🎀";
+        let body =
+          "🔖 *Description* :\n" +
+          "```" +
+          pluginsinfo[Bot.arg[1]].desc +
+          "```\n\n" +
+          "📕 *Usage* :\n" +
+          prefix +
+          "```" +
+          pluginsinfo[Bot.arg[1]].usage +
+          "```\n\n" +
+          "📚 *Example* :";
 
-      pluginsinfo[Bot.arg[1]].eg.forEach((currentItem) => {
-        body += "\n```" + prefix + currentItem + "```";
-      });
-      Bot.replytext(body);
+        pluginsinfo[Bot.arg[1]].eg.forEach((currentItem) => {
+          body += "\n```" + prefix + currentItem + "```";
+        });
+        Bot.replytext(body);
+      }
+    } catch (error) {
+      Bot.replytext(Bot.mess.error.error);
     }
   }
 };

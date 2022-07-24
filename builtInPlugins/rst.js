@@ -9,17 +9,21 @@ module.exports = {
   group: false,
   owner: true,
   async handle(Bot) {
-    console.log("resest");
-    Bot.arg = "sql UPDATE groupdata SET totalmsgtoday = 0".split(" ");
-    sqlc.handle(Bot);
-    Bot.arg = "sql UPDATE botdata SET totalmsgtoday = 0".split(" ");
-    sqlc.handle(Bot);
-    Bot.arg =
-      "sql UPDATE messagecount SET totalmsgtoday = 0, dailylimitover = false".split(
-        " "
-      );
-    sqlc.handle(Bot);
+    try {
+      console.log("resest");
+      Bot.arg = "sql UPDATE groupdata SET totalmsgtoday = 0".split(" ");
+      sqlc.handle(Bot);
+      Bot.arg = "sql UPDATE botdata SET totalmsgtoday = 0".split(" ");
+      sqlc.handle(Bot);
+      Bot.arg =
+        "sql UPDATE messagecount SET totalmsgtoday = 0, dailylimitover = false".split(
+          " "
+        );
+      sqlc.handle(Bot);
 
-  //  Bot.replytext(Bot.mess.success);
+      //  Bot.replytext(Bot.mess.success);
+    } catch (error) {
+      Bot.errorlog(error);
+    }
   }
 };
