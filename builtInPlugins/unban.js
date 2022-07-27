@@ -19,7 +19,7 @@ module.exports = {
       const mentioned =
         Bot.reply.message.extendedTextMessage.contextInfo.mentionedJid;
 
-      if (!mentioned) {
+      if (!Bot.isUserTagged) {
         Bot.wrongCommand();
         return;
       }

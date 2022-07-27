@@ -19,10 +19,11 @@ module.exports = {
       const mentioned =
         Bot.reply.message.extendedTextMessage.contextInfo.mentionedJid;
 
-      if (!mentioned) {
+      if (!Bot.isUserTagged) {
         Bot.wrongCommand();
         return;
       }
+
       const z = mentioned[0].split("@")[0];
       if (z === `${Bot.client.user.id}`.split("@")[0]) {
         Bot.replytext(Bot.mess.error.error);

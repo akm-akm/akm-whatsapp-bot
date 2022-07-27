@@ -18,7 +18,7 @@ module.exports = {
 
     try {
       const mentioned = Bot.taggedUser;
-      if (!mentioned) {
+      if (!Bot.isUserTagged) {
         Bot.wrongCommand();
         return;
       }
