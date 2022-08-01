@@ -36,7 +36,7 @@ module.exports = {
           .then((response) => {
             response.data.pipe(file);
             file.on("finish", () => {
-              file.close(async () => {});
+              file.close(() => {});
             });
           });
         const msg =

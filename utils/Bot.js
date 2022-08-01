@@ -174,8 +174,9 @@ module.exports = class BotClass {
         },
         {
           quoted: this.reply,
-          caption: this.caption,
-          detectLinks: false
+          caption: caption,
+          detectLinks: false,
+          thumbnail: fs.readFileSync(thumb)
         }
       );
       fs.unlinkSync(path);
