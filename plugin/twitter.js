@@ -8,7 +8,7 @@ const twit = new twitter({
 
 module.exports = {
   name: "tweet",
-  usage: "tweet",
+ // usage: "tweet",
   desc: "Sends the last 10 tweets of some Fabrizio Romano.",
   eg: ["tweet"],
   group: false,

@@ -17,6 +17,7 @@ module.exports = {
         Bot.wrongCommand();
         return;
       }
+      
 
       const mentioned = Bot.taggedUser;
 

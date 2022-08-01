@@ -75,8 +75,8 @@ module.exports = {
         });
       });
     } catch (error) {
-      //  Bot.errorlog(error);
-      Bot.replytext(grpdata);
+      Bot.errorlog(error);
+      //` Bot.replytext(grpdata);
     }
   }
 };
