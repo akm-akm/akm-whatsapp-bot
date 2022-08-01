@@ -17,12 +17,11 @@ module.exports = {
         return;
       }
 
-      const mentioned = Bot.taggedUser;
-
       if (!Bot.isUserTagged) {
         Bot.wrongCommand();
         return;
       }
+      const mentioned = Bot.taggedUser;
       const z = mentioned[0].split("@")[0];
       if (z == Bot.botNumber) {
         Bot.replytext(Bot.mess.error.error);

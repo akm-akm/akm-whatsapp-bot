@@ -133,7 +133,7 @@ module.exports = {
           "help run```\n" +
           "\n📃 *Bot News* :" +
           "\n‼️ _Multi device added_" +
-          "\n‼️ _Blue tick mark added_" +
+          "\n‼️ _Can soon delete anyone's message_" +
           "\n\n⚙️ *Bot version* : " +
           version;
         Bot.replytext(help);

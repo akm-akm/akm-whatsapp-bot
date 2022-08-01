@@ -7,7 +7,7 @@ module.exports = {
   owner: false,
   async handle(Bot) {
     try {
-      if (!isBotGroupAdmins) {
+      if (!Bot.isBotGroupAdmins) {
         Bot.replytext(Bot.mess.only.Badmin);
         return;
       }
@@ -16,20 +16,18 @@ module.exports = {
         return;
       }
 
-      const mentioned =
-        Bot.reply.message.extendedTextMessage.contextInfo.mentionedJid;
-
       if (!Bot.isUserTagged) {
         Bot.wrongCommand();
         return;
       }
+      const mentioned = Bot.taggedUser;
 
       const z = mentioned[0].split("@")[0];
       if (z === `${Bot.client.user.id}`.split("@")[0]) {
         Bot.replytext(Bot.mess.error.error);
         return;
       }
-      if (z === isSuperAdmin) {
+      if (z === Bot.isSuperAdmin) {
         Bot.replytext(Bot.mess.error.error);
 
         return;
