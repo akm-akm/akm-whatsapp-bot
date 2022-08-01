@@ -59,7 +59,8 @@ module.exports = {
         ytdl(url)
           .pipe(fs.createWriteStream(vid))
           .on("finish", async () => {
-            Bot.replyvideo(vid, msg, thumb);
+            console.log(msg);
+            await Bot.replyvideo(vid, msg, thumb);
           });
       } else {
         await Bot.replytext(Bot.mess.error.invalid);

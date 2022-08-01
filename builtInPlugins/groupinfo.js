@@ -62,8 +62,8 @@ module.exports = {
         "```" +
         (Number(Bot.groupdata.banned_users.length) - 1) +
         "```\n";
+      const ppUrl = await Bot.client.profilePictureUrl(Bot.from, "image");
 
-      const ppUrl = await Bot.client.getProfilePicture(Bot.from);
       ran = getRandom(".jpeg");
       const file = fs.createWriteStream(ran);
       http.get(ppUrl, function (response) {

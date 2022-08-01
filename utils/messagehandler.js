@@ -63,7 +63,8 @@ exports.messagehandler = async (Bot) => {
   }
 
   if (process.env.NODE_ENV == "development") {
-    console.log(Bot);
+    // console.log(Bot);
+    console.log("ok");
   }
   read(Bot); // Read messages i.e blue tick mark
 
