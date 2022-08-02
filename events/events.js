@@ -45,7 +45,7 @@ async function fetchauth() {
     }
     return;
   } catch (err) {
-    console.log("Creating database...");
+    console.log(err, "Creating database...");
     await sql.query("CREATE TABLE creds(cred text);");
     await fetchauth();
   }
