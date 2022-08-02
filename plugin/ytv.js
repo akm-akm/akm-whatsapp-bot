@@ -1,6 +1,7 @@
 const fs = require("fs");
 const ytdl = require("ytdl-core");
 const axios = require("axios");
+const path = require("path");
 const getRandom = (ext) => {
   return `${Math.floor(Math.random() * 10000)}${ext}`;
 };
@@ -59,8 +60,7 @@ module.exports = {
         ytdl(url)
           .pipe(fs.createWriteStream(vid))
           .on("finish", async () => {
-            console.log(msg);
-            await Bot.replyvideo(vid, msg, thumb);
+            await Bot.replyvideo(vid, msg, path.join(__dirname, "../") + thumb);
           });
       } else {
         await Bot.replytext(Bot.mess.error.invalid);

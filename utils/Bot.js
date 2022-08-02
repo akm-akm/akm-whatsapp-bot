@@ -152,33 +152,23 @@ module.exports = class BotClass {
    */
   async replyvideo(path, caption, thumb) {
     if (thumb != null) {
-      await this.client.sendMessage(
-        this.from,
-        {
-          video: fs.readFileSync(path)
-        },
-        {
-          quoted: this.reply,
-          caption: caption,
-          detectLinks: false,
-          thumbnail: fs.readFileSync(thumb)
-        }
-      );
+      await this.client.sendMessage(this.from, {
+        video: fs.readFileSync(path),
+        quoted: this.reply,
+        caption: caption,
+        detectLinks: false,
+        thumbnail: fs.readFileSync(thumb)
+      });
       fs.unlinkSync(path);
       fs.unlinkSync(thumb);
     } else {
-      await this.client.sendMessage(
-        this.from,
-        {
-          video: fs.readFileSync(path)
-        },
-        {
-          quoted: this.reply,
-          caption: caption,
-          detectLinks: false,
-          thumbnail: fs.readFileSync(thumb)
-        }
-      );
+      await this.client.sendMessage(this.from, {
+        video: fs.readFileSync(path),
+        quoted: this.reply,
+        caption: caption,
+        detectLinks: false,
+        thumbnail: fs.readFileSync(thumb)
+      });
       fs.unlinkSync(path);
     }
   }

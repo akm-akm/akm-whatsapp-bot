@@ -36,7 +36,7 @@ const chalk = require("chalk");
     process.exit(1);
   }
   try {
-  //  fs.unlinkSync(path.join(__dirname, "../auth_info_multi.json"));
+    fs.unlinkSync(path.join(__dirname, "../auth_info_baileys/creds.json"));
   } catch (error) {}
   try {
     let bdata = await sql.query("select * from botdata");
@@ -63,12 +63,10 @@ const chalk = require("chalk");
     );
   }
   try {
-    await sql.query("select * from auth");
+    await sql.query("select * from state");
   } catch (error) {
-    console.log(chalk.bgRed("Creating auth table"));
-    await sql.query(
-      "CREATE TABLE auth(noiceKeyPrvt text, noiceKeyPub text, signedIdentityKeyPrvt text, signedIdentityKeyPub text, signedPreKeyPairPrv text, signedPreKeyPairPub text, signedPreKeySignature text, signedPreKeyIdB text, registrationIdB text, advSecretKeyB text, nextPreKeyIdB text, firstUnuploadedPreKeyIdB text, serverHasPreKeysB text, accountdetailsB text, accountSignatureKeyB text, accountSignatureB text, deviceSignatureB text, meIdB text, meverifiedNameB text, menameB text, signalIdentitiesNameB text, signalIdentitiesDeviceIDB text, signalIdentitiesKey text, lastAccountSyncTimestampB text, myAppStateKeyIdB text);"
-    );
+    console.log(chalk.bgRed("Creating state table"));
+    await sql.query("CREATE TABLE state(data text);");
   }
 
   try {

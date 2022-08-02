@@ -10,3 +10,4 @@ pgdata
 /x.js
 /auth_info_multi.json
 /.vscode
+/auth_info_baileys/*.json
