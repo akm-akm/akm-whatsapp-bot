@@ -134,7 +134,7 @@ module.exports = {
           });
       })
       .catch((e) => {
-        //  Bot.errorlog(e);
+         Bot.errorlog(e);
       });
   }
 };

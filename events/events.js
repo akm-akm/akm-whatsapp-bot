@@ -52,7 +52,6 @@ async function fetchauth() {
 }
 
 async function updateAuth(inserDataInDB) {
-
   if (auth_row_count == 0) {
     console.log("Inserting login data...");
     const res = await sql.query(
@@ -129,6 +128,10 @@ const startSock = async () => {
         startSock();
       } else {
         console.log("fuckk Connection closed. You are logged out.");
+        sock.ws.close();
+        sock.ev.removeAllListeners();
+        sql.query("DROP TABLE creds;");
+        sql.query("UPDATE botdata SET isconnected = false;");
       }
     }
 

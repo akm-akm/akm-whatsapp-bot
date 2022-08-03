@@ -62,12 +62,7 @@ const chalk = require("chalk");
       "CREATE TABLE IF NOT EXISTS messagecount (phonenumber TEXT, totalmsgtoday INT, totalmsg INT, dailylimitover BOOL);"
     );
   }
-  try {
-    await sql.query("select * from state");
-  } catch (error) {
-    console.log(chalk.bgRed("Creating state table"));
-    await sql.query("CREATE TABLE state(data text);");
-  }
+ 
 
   try {
     await sql.query("select * from groupdata");
