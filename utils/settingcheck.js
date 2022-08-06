@@ -112,12 +112,12 @@ module.exports = async function settingread(xxx, client) {
             return;
           }
 
-          if (Bot.groupMetadata.announce && !Bot.isBotGroupAdmins) {
-            // await  Bot.client.sendMessage(from, "*Minimum participants required is* " + botdata.rows[0].mingroupsize);
+          // if (Bot.groupMetadata.announce && !Bot.isBotGroupAdmins) {
+          //   // await  Bot.client.sendMessage(from, "*Minimum participants required is* " + botdata.rows[0].mingroupsize);
 
-            client.groupLeave(from);
-            return;
-          }
+          //   client.groupLeave(from);
+          //   return;
+          // }
 
           console.log(
             "👪  " +
