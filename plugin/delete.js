@@ -1,7 +1,7 @@
 module.exports = {
   name: "delete",
   usage: "delete",
-  desc: "The bot will delete the tagged message.",
+  desc: "The bot will delete its own message that is tagged.",
   eg: ["delete"],
   group: false,
   owner: false,

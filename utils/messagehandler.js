@@ -85,7 +85,7 @@ exports.messagehandler = async (Bot) => {
       )
     )
       return;
-
+    console.log(Bot.isMedia, "--", Bot.groupdata.autosticker);
     /* This line checks the following-
       (is the message sent in a group?) and
       (is the user sending the message banned in that group to use the bot?)

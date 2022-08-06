@@ -10,7 +10,7 @@ module.exports = {
   async handle(Bot) {
     const arg = Bot.arg;
     if (arg.length === 1) {
-      Bot.wrongCommand();
+      return Bot.wrongCommand();
     }
     axios
       .get("https://api.wazirx.com/api/v2/trades?market=" + arg[1] + "inr")

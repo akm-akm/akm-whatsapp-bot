@@ -134,7 +134,14 @@ module.exports = {
           });
       })
       .catch((e) => {
-         Bot.errorlog(e);
+        if (e.response.status == 429) {
+          Bot.noapi();
+          return;
+        } else if (e.response.status == 404) {
+          Bot.errorlog("retrying ss");
+          this.handle(Bot);
+          return;
+        } else Bot.errorlog(e);
       });
   }
 };

@@ -159,7 +159,9 @@ module.exports = async function settingread(xxx, client) {
         : type == "extendedTextMessage"
         ? xxx.message.extendedTextMessage.text
         : "";
-
+    if (arg == undefined || arg == null) {
+      arg = "";
+    }
     Bot.isMedia = type === "imageMessage" || type === "videoMessage";
     Bot.arg = Bot.isGroup
       ? data1.rows[0].useprefix

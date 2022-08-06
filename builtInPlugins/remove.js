@@ -11,7 +11,7 @@ module.exports = {
         Bot.replytext(Bot.mess.only.Badmin);
         return;
       }
-      if (arg.length == 1) {
+      if (Bot.arg.length == 1) {
         Bot.wrongCommand();
         return;
       }

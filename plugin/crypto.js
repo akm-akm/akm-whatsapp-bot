@@ -40,7 +40,7 @@ module.exports = {
       return;
     }
     if (!coins.includes(arg[1].toUpperCase())) {
-      Bot.replytext("🤖 ```Not in coinmarketcap.```");
+      Bot.replytext("🤖 ```Coin not found in coinmarketcap.```");
     } else {
       axios(requestOptions)
         .then(function (response) {
