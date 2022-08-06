@@ -6,6 +6,7 @@ const chalk = require("chalk");
 const sql = require(path.join(__dirname, "./ps"));
 const commandHandler = new Map();
 const plugins = fs.readdirSync(path.join(__dirname, "../plugin"));
+
 for (let file of plugins) {
   try {
     const command = require(path.join(__dirname, "../plugin/", `${file}`));
@@ -24,9 +25,11 @@ for (let file of plugins) {
     console.log(error);
   }
 }
+
 const builtInPlugins = fs.readdirSync(
   path.join(__dirname, "../builtInPlugins")
 );
+
 for (let file of builtInPlugins) {
   try {
     const command = require(path.join(
@@ -152,6 +155,7 @@ exports.messagehandler = async (Bot) => {
         Bot.botdata.dailylimit +
         "*";
       Bot.replytext(x);
+      //  Bot.client.sendMessage(Bot.sender, x);
       return;
     }
 
@@ -186,6 +190,8 @@ exports.messagehandler = async (Bot) => {
       Bot.arg == "hi" ||
       Bot.arg == "hey" ||
       Bot.arg == "hello" ||
+      Bot.arg == "hello" ||
+      Bot.arg == "heloo" ||
       Bot.arg == "helloo" ||
       Bot.arg == "hellooo" ||
       Bot.arg == "hii" ||

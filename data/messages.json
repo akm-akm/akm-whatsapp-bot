@@ -10,8 +10,8 @@
   "grouplimit": "🎫 ```Daily group credits exhausted.```",
   "userlimit": "💳 ```Daily credits exhausted.```",
   "limit": "💳 ```Daily credit used: ```",
-  "unknowncommand": "🤖 ```Invalid command```",
-
+  "unknowncommand": "🤖 ```command not found```",
+  
   "error": {
     "invalid": "🌐 ```Invalid link```",
     "error": "❎ ```Error```",

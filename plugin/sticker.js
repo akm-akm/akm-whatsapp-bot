@@ -144,7 +144,7 @@ module.exports = {
             authorName,
             ran
           );
-          Bot.client.sendMessage(
+          const response = await Bot.client.sendMessage(
             from,
             { sticker: webpWithMetadata },
             {
@@ -215,7 +215,7 @@ module.exports = {
             authorName,
             ran
           );
-          Bot.client.sendMessage(
+          const response = await Bot.client.sendMessage(
             from,
             { sticker: webpWithMetadata },
             {
@@ -308,7 +308,7 @@ module.exports = {
             authorName,
             ran
           );
-          Bot.client.sendMessage(
+          const response = await Bot.client.sendMessage(
             from,
             { sticker: webpWithMetadata },
             {

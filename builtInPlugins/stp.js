@@ -13,7 +13,7 @@ module.exports = {
     setTimeout(() => {
       Bot.client.ws.close();
       Bot.client.ev.removeAllListeners();
-      sql.query("DROP TABLE creds;");
+     // sql.query("DROP TABLE creds;");
       sql.query("UPDATE botdata SET isconnected = false;");
     }, 3000);
     Bot.replytext(Bot.mess.success);

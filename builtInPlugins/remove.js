@@ -7,6 +7,7 @@ module.exports = {
   owner: false,
   async handle(Bot) {
     try {
+      return Bot.replytext(Bot.mess.disabled);
       if (!Bot.isBotGroupAdmins) {
         Bot.replytext(Bot.mess.only.Badmin);
         return;

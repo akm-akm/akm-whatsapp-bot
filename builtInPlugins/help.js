@@ -139,7 +139,9 @@ module.exports = {
         Bot.replytext(help);
       } else {
         if (!pluginsinfo[Bot.arg[1]])
-          return Bot.replytext(Bot.mess.unknowncommand);
+          return Bot.replytext(
+            Bot.mess.unknowncommand + " :  ```" + Bot.arg[1] + "```"
+          );
         if (prefix == undefined || !useprefix) prefix = "🎀";
         let body =
           "🔖 *Description* :\n" +

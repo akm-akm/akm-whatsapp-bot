@@ -31,7 +31,7 @@ Array.prototype.detecta = function () {
     }
     data3.words.indexOf(hash) != -1 ? returnarray.push(this[index]) : null;
   });
-  return returnarray;
+  return new Set(returnarray);
 };
 const getGroupAdmins = (participants) => {
   const admins = [];
@@ -102,13 +102,23 @@ module.exports = async function settingread(xxx, client) {
           if (
             Bot.groupMetadata.participants.length < botdata.rows[0].mingroupsize
           ) {
-            await Bot.text(
-              "*Minimum participants required is* " +
+            await client.sendMessage(from, {
+              text:
+                "*Minimum participants required is* " +
                 botdata.rows[0].mingroupsize
-            );
+            });
+
             client.groupLeave(from);
             return;
           }
+
+          if (Bot.groupMetadata.announce && !Bot.isBotGroupAdmins) {
+            // await  Bot.client.sendMessage(from, "*Minimum participants required is* " + botdata.rows[0].mingroupsize);
+
+            client.groupLeave(from);
+            return;
+          }
+
           console.log(
             "👪  " +
               chalk.bgCyan(
@@ -116,7 +126,7 @@ module.exports = async function settingread(xxx, client) {
               )
           );
           newgroup(from, client, random);
-          sql.query(
+          await sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
           );
           return settingread(xxx, client);

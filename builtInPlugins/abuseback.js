@@ -4,7 +4,7 @@ const sql = require(path.join(__dirname, "../utils/ps"));
 module.exports = {
   name: "abuseback",
   usage: "abuseback <condition>",
-  desc: "If turned on, the bot will search for cuss words in the command and reply back with the same word!",
+  desc: "If set to on, the bot will search for abuses in any given command and reply back with the same word.",
   eg: ["abuseback on", "abuseback off"],
   group: true,
   owner: false,

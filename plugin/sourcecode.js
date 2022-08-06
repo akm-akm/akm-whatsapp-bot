@@ -1,13 +1,10 @@
 const axios = require("axios");
-const path = require("path");
-const logo = path.join(__dirname, "../docs/images/akmlogo.mp4");
-const thumb = path.join(__dirname, "../docs/images/akmlogo.png");
 
 module.exports = {
-  name: "sourcecode",
-  usage: "sourcecode",
-  desc: "Provids the source code of the bot.",
-  eg: ["sourcecode"],
+  name: "git",
+  usage: "git",
+  desc: "Provids the sourcecode of the bot.",
+  eg: ["git"],
   group: false,
   owner: false,
   async handle(Bot) {
@@ -16,16 +13,16 @@ module.exports = {
         index: 1,
         urlButton: {
           displayText: "Project Link",
-          url: "https://github.com/akm-akm/akm-whatsapp-bot/",
-        },
+          url: "https://github.com/akm-akm/akm-whatsapp-bot/"
+        }
       },
       {
         index: 2,
         urlButton: {
           displayText: "Contact Me",
-          url: "https://github.com/akm-akm/akm-whatsapp-bot/issues",
-        },
-      },
+          url: "https://github.com/akm-akm/akm-whatsapp-bot/issues"
+        }
+      }
     ];
 
     axios
@@ -66,6 +63,8 @@ module.exports = {
           text: msg,
           footer: "Bot made by Aditya K Mandal",
           templateButtons: templateButtons,
+
+          quoted: Bot.reply
         };
         Bot.client.sendMessage(Bot.from, templateMessage);
       })
@@ -73,5 +72,5 @@ module.exports = {
       .catch((e) => {
         Bot.errorlog(e);
       });
-  },
+  }
 };

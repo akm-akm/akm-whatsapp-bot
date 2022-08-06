@@ -134,10 +134,10 @@ module.exports = {
           });
       })
       .catch((e) => {
-        if (e.response.status == 429) {
+        if (e.message.includes('429')) {
           Bot.noapi();
           return;
-        } else if (e.response.status == 404) {
+        } else if (e.message.includes("thumbnailUrl")) {
           Bot.errorlog("retrying ss");
           this.handle(Bot);
           return;

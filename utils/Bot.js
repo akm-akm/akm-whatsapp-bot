@@ -80,7 +80,7 @@ module.exports = class BotClass {
    * @param {String} input The text message you want to send
    */
   async replytext(input) {
-    await this.client.sendMessage(
+    const response = await this.client.sendMessage(
       this.from,
       {
         text: input
@@ -90,14 +90,15 @@ module.exports = class BotClass {
         detectLinks: false
       }
     );
+    return response;
   }
 
   /**
    * This function is used to send a text message without tagging the command.
    * @param {String} input The text message you want to send
    */
-  text(input) {
-    this.client.sendMessage(
+  async text(input) {
+    const response = await this.client.sendMessage(
       this.from,
       {
         text: input
@@ -106,6 +107,7 @@ module.exports = class BotClass {
         detectLinks: false
       }
     );
+    return response;
   }
 
   /**
@@ -113,7 +115,7 @@ module.exports = class BotClass {
    * @param {String} path The absolute sticker path
    */
   async replysticker(path) {
-    await this.client.sendMessage(
+    const response = await this.client.sendMessage(
       this.from,
       {
         sticker: fs.readFileSync(path)
@@ -122,6 +124,7 @@ module.exports = class BotClass {
         quoted: this.reply
       }
     );
+    return response;
   }
 
   /**
@@ -130,7 +133,7 @@ module.exports = class BotClass {
    * @param {String} caption The caption of the image if any.
    */
   async replyimage(path, caption = "") {
-    await this.client.sendMessage(
+    const response = await this.client.sendMessage(
       this.from,
       {
         image: fs.readFileSync(path),
@@ -142,6 +145,7 @@ module.exports = class BotClass {
       }
     );
     fs.unlinkSync(path);
+    return response;
   }
 
   /**
@@ -152,7 +156,7 @@ module.exports = class BotClass {
    */
   async replyvideo(path, caption, thumb) {
     if (thumb != null) {
-      await this.client.sendMessage(this.from, {
+      const response = await this.client.sendMessage(this.from, {
         video: fs.readFileSync(path),
         quoted: this.reply,
         caption: caption,
@@ -161,8 +165,9 @@ module.exports = class BotClass {
       });
       fs.unlinkSync(path);
       fs.unlinkSync(thumb);
+      return response;
     } else {
-      await this.client.sendMessage(this.from, {
+      const response = await this.client.sendMessage(this.from, {
         video: fs.readFileSync(path),
         quoted: this.reply,
         caption: caption,
@@ -170,14 +175,16 @@ module.exports = class BotClass {
         thumbnail: fs.readFileSync(thumb)
       });
       fs.unlinkSync(path);
+      fs.unlinkSync(thumb);
+      return response;
     }
   }
 
-  errorlog(error) {
+  async errorlog(error) {
     if (process.env.NODE_ENV !== "production") {
       console.log(chalk.red.bold(error));
     } else {
-      this.replytext(mess.error.intenalError);
+      const response = await this.replytext(mess.error.intenalError);
       const e = "🤖 Error log for the tagged message \n\n```" + error + "```";
       this.client.sendMessage(
         `${process.env.OWNER_NUMBER}@s.whatsapp.net`,
@@ -189,6 +196,7 @@ module.exports = class BotClass {
           detectLinks: false
         }
       );
+      return response;
     }
   }
 
