@@ -31,7 +31,7 @@ Array.prototype.detecta = function () {
     }
     data3.words.indexOf(hash) != -1 ? returnarray.push(this[index]) : null;
   });
-  return new Set(returnarray);
+  return returnarray;
 };
 const getGroupAdmins = (participants) => {
   const admins = [];

@@ -131,7 +131,7 @@ exports.messagehandler = async (Bot) => {
       (Is the daily limit over?)
       If yes then return true
       */
-    if (Bot.dailylimitover === true) return;
+    if (Bot.dailylimitover) return;
 
     if (
       Bot.isGroup &&
