@@ -61,10 +61,7 @@ exports.messagehandler = async (Bot) => {
      */
     const place = Bot.isGroup ? Bot.groupName : "inbox";
 
-    if (process.env.NODE_ENV == "development" && !Bot.isOwner) {
-      console.log("--");
-      return;
-    }
+    if (process.env.NODE_ENV == "development" && !Bot.isOwner) return;
 
     if (process.env.NODE_ENV == "development") {
       // console.log(Bot);

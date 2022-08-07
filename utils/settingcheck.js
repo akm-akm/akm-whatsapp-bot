@@ -104,7 +104,7 @@ module.exports = async function settingread(xxx, client) {
           ) {
             await client.sendMessage(from, {
               text:
-                "*Minimum participants required is* " +
+                "```Minimum participants required is``` " +
                 botdata.rows[0].mingroupsize
             });
 
@@ -131,7 +131,7 @@ module.exports = async function settingread(xxx, client) {
           );
           return settingread(xxx, client);
         }
-      }
+      } 
     }
 
     const number = Bot.isGroup ? Bot.sender.split("@")[0] : from.split("@")[0];

@@ -8,6 +8,8 @@ module.exports = {
   async handle(Bot) {
     try {
       const arg = Bot.arg;
+      return Bot.replytext(Bot.mess.disabled);
+
       if (!Bot.isBotGroupAdmins) {
         Bot.replytext(Bot.mess.only.Badmin);
 
@@ -17,7 +19,6 @@ module.exports = {
         Bot.wrongCommand();
         return;
       }
-      
 
       const mentioned = Bot.taggedUser;
 

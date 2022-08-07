@@ -1,7 +1,7 @@
 module.exports = {
   name: "delete",
   usage: "delete",
-  desc: "The bot will delete its own message that is tagged.",
+  desc: "The bot will delete any tagged message. To delete other's message, it needs to be admin.",
   eg: ["delete"],
   group: false,
   owner: false,
@@ -10,18 +10,19 @@ module.exports = {
       if (!Bot.stanzaId) {
         return Bot.wrongCommand();
       }
-      const options = {
-        // remoteJid: Bot.from,
-        fromMe: true,
-        id: Bot.stanzaId
+
+      const key = {
+        id: Bot.stanzaId,
+        remoteJid: Bot.from,
+        participant:
+          Bot.reply.message.extendedTextMessage.contextInfo.participant,
+        fromMe: false
       };
-      //   console.log(Bot.reply.message.extendedTextMessage.contextInfo);
       await Bot.client.sendMessage(Bot.from, {
-        delete: options
+        delete: key
       });
     } catch (error) {
-      // Bot.replytext(Bot.mess.only.Badmin);
-      Bot.replytext(Bot.mess.error.error);
+      Bot.replytext(Bot.mess.only.Badmin);
     }
   }
 };
