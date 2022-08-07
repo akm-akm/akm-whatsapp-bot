@@ -10,19 +10,34 @@ module.exports = {
       if (!Bot.stanzaId) {
         return Bot.wrongCommand();
       }
+      let key;
+      if (
+        Bot.reply.message.extendedTextMessage.contextInfo.participant.split(
+          "@"
+        )[0] != Bot.botNumber
+      ) {
+        if (!Bot.isBotGroupAdmins) {
+          return Bot.replytext(Bot.mess.only.Badmin);
+        }
+        key = {
+          id: Bot.stanzaId,
+          remoteJid: Bot.from,
+          fromMe: false,
+          participant:
+            Bot.reply.message.extendedTextMessage.contextInfo.participant
+        };
+      } else {
+        key = {
+          fromMe: true,
+          id: Bot.stanzaId
+        };
+      }
 
-      const key = {
-        id: Bot.stanzaId,
-        remoteJid: Bot.from,
-        participant:
-          Bot.reply.message.extendedTextMessage.contextInfo.participant,
-        fromMe: false
-      };
       await Bot.client.sendMessage(Bot.from, {
         delete: key
       });
     } catch (error) {
-      Bot.replytext(Bot.mess.only.Badmin);
+      Bot.replytext(Bot.mess.error.error);
     }
   }
 };
