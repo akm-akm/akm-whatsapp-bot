@@ -112,7 +112,7 @@ module.exports = {
           Bot.number === process.env.OWNER_NUMBER ? ownerCommands : "";
 
         let help =
-          "🤖🤖🤖  *AKM 🤖 BOT*  🤖🤖🤖\n\n💡 *Prefix:*  " +
+          "🇮🇳🇮🇳🇮🇳  *AKM 🇮🇳 BOT*  🇮🇳🇮🇳🇮🇳\n\n💡 *Prefix:*  " +
           c +
           "\n\n" +
           userCommands +
