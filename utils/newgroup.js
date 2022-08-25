@@ -1,10 +1,8 @@
 const newgroup = (from, client, random) => {
   let newmsg =
     "🤖🤖🤖  *AKM 🤖 BOT*  🤖🤖🤖\n\n" +
-    "🚨 *The bot will only listen to commands starting with* " +
-    random +
-    "\n\n" +
-    "🚨 ```Type``` " +
+    
+    "\n🚨 ```Type``` " +
     "```" +
     random +
     "```" +

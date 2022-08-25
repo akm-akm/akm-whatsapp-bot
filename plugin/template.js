@@ -46,7 +46,7 @@ module.exports = {
        */
       const arg = Bot.arg;
 
-      Bot.repytext(
+      Bot.replytext(
         "This function only takes text as input and replies to the user who called this."
       );
       /**

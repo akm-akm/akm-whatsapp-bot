@@ -131,9 +131,6 @@ module.exports = {
           "help sticker\n" +
           prefix +
           "help run```\n" +
-          "\n📃 *Bot News* :" +
-          "\n‼️ _Multi device added_" +
-          "\n‼️ _ Bot can delete anyone's message_" +
           "\n\n⚙️ *Bot version* : " +
           version;
         Bot.replytext(help);
