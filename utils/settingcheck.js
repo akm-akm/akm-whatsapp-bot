@@ -125,7 +125,7 @@ module.exports = async function settingread(xxx, client) {
                 `Prefix assigned is '${random}' for group ` + Bot.groupName
               )
           );
-        //  newgroup(from, client, random);
+         newgroup(from, client, random);
           await sql.query(
             `INSERT INTO groupdata VALUES ('${from}','true','${random}','false','true', '{''}',0,0,false,true);`
           );
