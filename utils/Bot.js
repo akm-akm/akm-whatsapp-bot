@@ -7,6 +7,7 @@ const mess = JSON.parse(
 const sql = require(path.join(__dirname, "./ps"));
 
 const pluginsinfo = require(path.join(__dirname, "./pluginInfo"));
+
 class BotClass {
   constructor(
     isQuotedSticker,
