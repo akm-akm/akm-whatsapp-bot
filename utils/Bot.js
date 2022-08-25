@@ -4,8 +4,10 @@ const path = require("path");
 const mess = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data/messages.json"))
 );
+const sql = require(path.join(__dirname, "./ps"));
+
 const pluginsinfo = require(path.join(__dirname, "./pluginInfo"));
-module.exports = class BotClass {
+class BotClass {
   constructor(
     isQuotedSticker,
     botNumber,
@@ -218,4 +220,10 @@ module.exports = class BotClass {
     });
     this.replytext(body);
   }
+}
+
+BotClass.prototype.query = async function (text, params) {
+  return await sql.query(text, params);
 };
+
+module.exports = BotClass;

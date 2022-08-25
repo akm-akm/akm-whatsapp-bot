@@ -16,9 +16,10 @@ module.exports = {
           "@"
         )[0] != Bot.botNumber
       ) {
-        if (!Bot.isBotGroupAdmins) {
-          return Bot.replytext(Bot.mess.only.Badmin);
-        }
+        if (!Bot.isGroup)
+          return Bot.replytext("```I can't delete your message in inbox.```");
+        if (!Bot.isBotGroupAdmins) return Bot.replytext(Bot.mess.only.Badmin);
+
         key = {
           id: Bot.stanzaId,
           remoteJid: Bot.from,
