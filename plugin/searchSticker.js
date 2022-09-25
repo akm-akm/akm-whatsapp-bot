@@ -62,7 +62,7 @@ module.exports = {
 
     try {
       const images = await gis(searchthis);
-      const n = images.slice(0, 100);
+      const n = images.slice(0, 30);
       const random = Math.floor(Math.random() * n.length);
       const packName = searchthis;
       const imageurl = images[random].url;
