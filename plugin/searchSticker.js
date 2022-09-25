@@ -3,6 +3,8 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs");
+const gis = require("async-g-i-s");
+
 const axios = require("axios").default;
 
 module.exports = {
@@ -19,19 +21,17 @@ module.exports = {
       .slice(1)
       .filter((z) => z !== "crop")
       .join(" ");
+
     if (searchthis.length == 0) {
       Bot.wrongCommand();
       return;
     }
-    if (!process.env.SEARCH_STICKER) {
-      Bot.noapi();
-      return;
-    }
+
     const getRandom = (ext) => {
       return `${Math.floor(Math.random() * 10000)}${ext}`;
     };
 
-    const authorName = "AKM WHATSAPP BOT";
+    const authorName = "BOT";
     outputOptions = [
       `-vcodec`,
       `libwebp`,
@@ -60,88 +60,64 @@ module.exports = {
       ];
     }
 
-    const options = {
-      method: "GET",
-      url: "https://bing-image-search1.p.rapidapi.com/images/search",
-      params: { q: searchthis, count: "100", mkt: "en-IN" },
-      headers: {
-        "x-rapidapi-host": "bing-image-search1.p.rapidapi.com",
-        "x-rapidapi-key": process.env.SEARCH_STICKER
-      }
-    };
+    try {
+      const images = await gis(searchthis);
+      const n = images.slice(0, 100);
+      const random = Math.floor(Math.random() * n.length);
+      const packName = searchthis;
+      const imageurl = images[random].url;
+      const media = getRandom(".jpg");
+      const file = fs.createWriteStream(media);
+      axios
+        .request({
+          url: imageurl,
+          method: "GET",
+          responseType: "stream"
+        })
+        .then((response) => {
+          response.data.pipe(file);
+          file.on("finish", () => {
+            file.close(async () => {
+              const ran = getRandom(".webp");
 
-    axios
-      .request(options)
-      .then(async (response1) => {
-        const random = Math.floor(
-          Math.random() *
-            (response1.data.value.length >= 20
-              ? 19
-              : response1.data.value.length)
-        );
-        const packName = searchthis;
-        const imageurl = response1.data.value[random].thumbnailUrl;
-        const media = getRandom(".jpg");
-        const file = fs.createWriteStream(media);
-
-        axios
-          .request({
-            url: imageurl,
-            method: "GET",
-            responseType: "stream"
-          })
-          .then((response) => {
-            response.data.pipe(file);
-            file.on("finish", () => {
-              file.close(async () => {
-                const ran = getRandom(".webp");
-
-                ffmpeg(`./${media}`)
-                  .input(media)
-                  .on("error", function (err) {
-                    fs.unlinkSync(media);
-                    Bot.errorlog(err);
-                    fs.unlinkSync(ran);
-                    return;
-                  })
-                  .on("end", function () {
-                    buildSticker();
-                  })
-                  .addOutputOptions(outputOptions)
-                  .toFormat("webp")
-                  .save(ran);
-
-                async function buildSticker() {
-                  const webpWithMetadata = await WSF.setMetadata(
-                    packName,
-                    authorName,
-                    ran
-                  );
-                  Bot.client.sendMessage(
-                    from,
-                    { sticker: webpWithMetadata },
-                    {
-                      quoted: Bot.reply
-                    }
-                  );
-
+              ffmpeg(`./${media}`)
+                .input(media)
+                .on("error", function (err) {
                   fs.unlinkSync(media);
+                  Bot.errorlog(err);
                   fs.unlinkSync(ran);
                   return;
-                }
-              });
+                })
+                .on("end", function () {
+                  buildSticker();
+                })
+                .addOutputOptions(outputOptions)
+                .toFormat("webp")
+                .save(ran);
+
+              async function buildSticker() {
+                const webpWithMetadata = await WSF.setMetadata(
+                  packName,
+                  authorName,
+                  ran
+                );
+                Bot.client.sendMessage(
+                  from,
+                  { sticker: webpWithMetadata },
+                  {
+                    quoted: Bot.reply
+                  }
+                );
+
+                fs.unlinkSync(media);
+                fs.unlinkSync(ran);
+                return;
+              }
             });
           });
-      })
-      .catch((e) => {
-        if (e.message.includes('429')) {
-          Bot.noapi();
-          return;
-        } else if (e.message.includes("thumbnailUrl")) {
-          Bot.errorlog("retrying ss");
-          this.handle(Bot);
-          return;
-        } else Bot.errorlog(e);
-      });
+        });
+    } catch (err) {
+      Bot.errorlog(err);
+    }
   }
 };

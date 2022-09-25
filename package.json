@@ -30,6 +30,7 @@
     "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "any-shell-escape": "^0.1.1",
+    "async-g-i-s": "^1.2.0",
     "axios": "^0.21.1",
     "chalk": "^4.1.2",
     "deepai": "^1.0.17",
