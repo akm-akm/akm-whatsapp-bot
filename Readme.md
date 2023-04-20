@@ -1,3 +1,5 @@
+<h1 align="center">🤖 No Longer Maintained!🤖</h1>
+
 <h1 align="center">🤖 AKM WHATSAPP BOT 🤖</h1>
 
 <p align="center">
